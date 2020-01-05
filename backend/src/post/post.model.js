@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
-const User = require('../user/user.model');
 const { Schema } = mongoose;
 
 const Post = new Schema({
-    title: String,
+    seq: Number,
+    title: {
+        type: String,
+        required: '제목을 입력해주세요.'
+    },
     body: String,
     thumbnail: String,
     tags: [String],
@@ -15,7 +18,11 @@ const Post = new Schema({
         type: Date,
         default: new Date(),
     },
-    user: User,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: '회원정보가 없습니다.'
+    },
 });
 
 module.exports = mongoose.model('Post', Post);
