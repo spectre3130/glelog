@@ -1,22 +1,26 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 const { Schema } = mongoose;
+const validator = require('validator');
 
 const User = new Schema({
+    seq: Number,
     email: {
         type: String,
         unique: true,
-        required: '이메일을 입력해주세요.'
-    },
-    password: {
-        type: String,
-        required: '비밀번호를 입력해주세요'
+        required: '이메일을 입력해주세요.',
+        validate: [validator.isEmail]
     },
     username: {
         type: String,
         unique: true,
         required: '별명을 입력해주세요.'
     },
-    thumbnail: String,
+    name: {
+        type: String,
+        required: '별명을 입력해주세요.'
+    },
+    avatar: String,
     description: String,
     created_at: {
         type: Date,
@@ -27,5 +31,7 @@ const User = new Schema({
         default: new Date(),
     },
 });
+
+User.plugin(passportLocalMongoose)
 
 module.exports = mongoose.model('User', User);

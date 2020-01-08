@@ -13,4 +13,13 @@ const Tag = new Schema({
     }
 });
 
+Tag.statics.collectTag = async function(tags) {
+    tags.forEach(async name => {
+        const tag = await this.findOne({ name });
+        if(!tag) {
+            await this.create({ name });
+        }
+    });
+}
+
 module.exports = mongoose.model('Tag', Tag);

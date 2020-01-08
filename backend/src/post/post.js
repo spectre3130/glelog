@@ -2,14 +2,13 @@ const createError = require('http-errors');
 const Post = require('./post.model');
 const User = require('../user/user.model');
 const Tag = require('../tag/tag.model');
-const counter = require('../counter/counter');
 const PER_PAGE = 2;
 
 exports.getPosts = async (req, res, next) => {
     try {
         const { page } = req.params;
         if(page < 1) {
-            throw '페이지를 찾을 수 없습니다.';
+            throw '잘못된 페이지 요청입니다.';
         }
         const posts = await Post.find()
                                 .populate('user', 'username thumbnail')
@@ -27,7 +26,7 @@ exports.getUserPosts = async (req, res, next) => {
     try {
         const { username, page } = req.params;
         if(page < 1) {
-            throw '페이지를 찾을 수 없습니다.';
+            throw '잘못된 페이지 요청입니다.';
         }
         const user = await User.findOne({ username: username });
         if(!user) {
@@ -61,16 +60,9 @@ exports.getPost = async (req, res, next) => {
 exports.create = async (req, res, next) => {
     try {
         const post = new Post(req.body);
-        // for(let i = 0 ; i < 4; i++) {
-        //     const post = new Post({
-        //         seq: await counter.getNextSequence('post'),
-        //         title: `${i+1}번째 spectre`,
-        //         body: `${i+1}번째 spectre 작성`,
-        //         user: user._id,
-        //     });
-        //     await post.save();
-        // }
-        res.status(200).send('success');
+        Post.collectTag(post.tags);
+        post.save();
+        res.status(200).json(post);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
@@ -79,7 +71,18 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        
+        const { seq, title, body, thumbnail, tags } = req.body;
+        const post = findOne({ seq });
+        if(req.user.email !== post.user.email) {
+            throw '해당글을 변경할 수 없습니다.';
+        }
+        post.title = title;
+        post.body = body;
+        post.thumbnail = thumbnail,
+        post.tags = tags;
+        post.save();
+        Post.collectTag(post.tags);
+        res.status(200).json(post);
     } catch(e) {
         console.error(e);
         next(createError(404, e));
@@ -88,7 +91,11 @@ exports.update = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
     try {
-    
+        const post = findOne({ seq }).populate('user');
+        if(req.user.email !== post.user.email) {
+            throw '해당글을 삭제할 수 없습니다.';
+        }
+        res.redirect(`${process.env.NODE_ENV === 'prod'? process.env.DOMAIN : 'http://localhost:3000'}/${req.user.username}`);
     } catch(e) {
         console.error(e);
         next(createError(404, e));
