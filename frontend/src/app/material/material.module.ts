@@ -6,3 +6,4 @@ import { NgModule } from '@angular/core';
   exports: []
 })
 export class MaterialModule { }
+  
