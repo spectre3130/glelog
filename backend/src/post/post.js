@@ -85,7 +85,7 @@ exports.update = async (req, res, next) => {
         res.status(200).json(post);
     } catch(e) {
         console.error(e);
-        next(createError(404, e));
+        next(createError(400, e));
     }
 };
 
@@ -95,9 +95,10 @@ exports.delete = async (req, res, next) => {
         if(req.user.email !== post.user.email) {
             throw '해당글을 삭제할 수 없습니다.';
         }
-        res.redirect(`${process.env.NODE_ENV === 'prod'? process.env.DOMAIN : 'http://localhost:3000'}/${req.user.username}`);
+        post.remove();
+        res.status(204);
     } catch(e) {
         console.error(e);
-        next(createError(404, e));
+        next(createError(400, e));
     }
 };

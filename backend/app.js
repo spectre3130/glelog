@@ -1,13 +1,8 @@
 const express = require('express');
-const http = require('http');
-const https = require('https');
 const createError = require('http-errors');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const cors = require('cors');
-const passport = require('passport');
-const morgan = require('morgan');
+const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
 const db = require('./src/config/db');
@@ -17,12 +12,16 @@ const apiRouter = require('./src/route');
 
 dotenv.config();
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors({
+  origin: process.env.DOMAIN,
+  credentials: true,
+}));
 app.use('/api', jwtProvider.authenticate);
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);

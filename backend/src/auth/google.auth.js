@@ -16,7 +16,6 @@ passport.use(new GoogleStrategy({
             const email = profile.emails[0].value;
             const user = await User.findOne({ email });
             if(user) {
-                user.avatar = profile.photos[0].value;
                 return done(null, user);
             } else {
                 const seq = await Counter.getNextSequence('user');

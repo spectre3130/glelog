@@ -17,7 +17,7 @@ Tag.statics.collectTag = async function(tags) {
     tags.forEach(async name => {
         const tag = await this.findOne({ name });
         if(!tag) {
-            await this.create({ name });
+            this.create({ name });
         }
     });
 }
