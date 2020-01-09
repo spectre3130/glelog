@@ -1,0 +1,34 @@
+.main-footer {
+    padding: 12px;
+    margin-top: 40px;
+    color: white;
+    background-color: #673ab7;
+}
+
+.footer-list {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 8px;
+}
+
+.footer-logo {
+    font-weight: 500;
+    font-size:20px;
+    flex:1;
+}
+
+.footer-link {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+.footer-copyright {
+    display: flex;
+    flex:1;
+    flex-direction: column;
+    text-align:end;
+    font-size:12px;
+}

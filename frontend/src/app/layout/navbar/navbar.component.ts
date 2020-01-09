@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'glelog-navbar',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  
+  faBookOpen = faBookOpen;
 
   constructor() { }
 
