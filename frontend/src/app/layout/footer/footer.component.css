@@ -1,3 +1,7 @@
+a { color: white; background-color: transparent; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+
 .main-footer {
     padding: 12px;
     margin-top: 40px;
@@ -28,7 +32,6 @@
 .footer-copyright {
     display: flex;
     flex:1;
-    flex-direction: column;
-    text-align:end;
+    justify-content: flex-end;
     font-size:12px;
 }

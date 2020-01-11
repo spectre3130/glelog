@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: 'glelog-navbar',
+  selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

@@ -2,3 +2,20 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+a:link { color: #0366d6; text-decoration: none; }
+
+glelog-app {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 54px;
+    bottom: 0;    
+    left: 0;
+    right: 0;
+}
+
+@media (max-width: 720px) {
+    glelog-app {
+        top: 90px;
+    }
+}

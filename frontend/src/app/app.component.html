@@ -1,3 +1,9 @@
-<glelog-navbar></glelog-navbar>
-<div class="contents"></div>
-<glelog-footer></glelog-footer>
+
+<app-navbar></app-navbar>
+<div class="app-container">
+    <app-progress-bar></app-progress-bar>
+    <section class="main-contents">
+        <router-outlet></router-outlet>
+    </section>
+    <app-footer></app-footer>
+</div>
