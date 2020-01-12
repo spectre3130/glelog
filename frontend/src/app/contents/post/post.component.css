@@ -1,17 +1,92 @@
 .contents-post {
-    width:auto;
-    max-width:768px;
 }
 
 .post {
-    font-size: 18px;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: white;
-    display: inline-block;
-    margin: 10px;
-    vertical-align: top;
+    max-width:978px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    /* letter-spacing: -.3px; */
 }
 
 markdown {
-    line-height: 2;
+    font-size: 18px;
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.6;
+    word-break: break-all;
+}
+
+code[class*="language-"], pre[class*="language-"]  {
+    font-size: 14px;
+}
+
+.post-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px;
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    height:100px;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.user {
+    margin-left: 1.2rem;
+}
+
+.user-post-time {
+    color: #7a7a7a;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.user-avatar {
+    background-image: url(https://material.angular.io/assets/img/examples/shiba1.jpg);
+    background-size: cover;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.user-spacer {
+    flex-grow: 1;
+}
+
+.user-sns-small {
+    display: none;
+}
+
+fa-icon {
+    color: #535353;
+    margin: 0.4rem;
+}
+
+@media (max-width: 720px) {
+    :host(app-post) {
+        width: 100%;
+    }
+    markdown {
+        font-size: 16px;
+    }
+    .post {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .post-user {
+        margin-bottom: 0rem;
+    }
+    .user-sns {
+        display: none;
+    }
+    .user-sns-small {
+        display: block;
+        margin-bottom: 5rem;
+    }
 }

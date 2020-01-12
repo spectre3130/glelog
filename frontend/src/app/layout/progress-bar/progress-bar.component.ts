@@ -18,11 +18,10 @@ export class ProgressBarComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationStart) {
-        console.log("TCL: AppComponent -> ngOnInit -> event", event)
         clearTimeout(this.fetchingTimer);
         this.fetchingTimer = setTimeout(() => this.isFetching = true, 0);
       } else if(event instanceof NavigationEnd) {
-        setTimeout(() => this.isFetching = false, 1000);
+        this.fetchingTimer = setTimeout(() => this.isFetching = false, 1000);
       }
     });
   }

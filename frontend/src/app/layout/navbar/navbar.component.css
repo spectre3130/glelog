@@ -36,6 +36,15 @@
     display:none;
 }
 
+.user-avatar {
+    display:flex;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
 @media (max-width: 720px) {
     .nav-small-show {
         display:flex;

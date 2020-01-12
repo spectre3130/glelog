@@ -1,3 +1,7 @@
+a { color: white; background-color: transparent; }
+
 .example-section {
-    height: 5px;
+    position: relative;
+    height: 0px;
+    z-index: 2;
 }

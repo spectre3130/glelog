@@ -1,5 +1,4 @@
 .app-container {
-    /* background-color: #f1f1f1; */
     overflow: auto;
 }
 
@@ -7,4 +6,5 @@
     display: flex;
     justify-content: center;
     min-height: 817px;
+    flex-wrap: wrap;
 }

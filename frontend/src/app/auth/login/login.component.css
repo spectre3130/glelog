@@ -1,0 +1,31 @@
+a {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+h3 {
+    font-family: 'Noto Sans KR', sans-serif;
+    display: block;
+    margin-bottom: 16px;
+    color: rgb(68, 68, 68);
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+p {
+    line-height: 22px;
+    text-align: center;
+    color: #7a7a7a;
+    font-size: 14.5px;
+}
+
+.login-icon {
+    float: left;
+}
+
+.btn-group {
+    margin-top: 3rem;
+}
+

@@ -4,12 +4,15 @@
             <fa-icon [icon]="faBookOpen" size="lg"></fa-icon> gleLog
         </a>
         <a routerLink="/" mat-button class="nav-small-hide">글목록</a>
-        <a mat-button class="nav-small-hide">태그목록</a>
+        <a routerLink="/tags" mat-button class="nav-small-hide">태그목록</a>
         <div class="nav-spacer"></div>
-        <a mat-button>로그인</a>
+        <a *ngIf="!user"(click)="openDialog()" mat-button>로그인</a>
+        <a *ngIf="user" routerLink="/username">
+            <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+        </a>
     </div>
     <div class="sub-nav nav-small-show">
-        <a mat-button class="nav-link">글목록</a>
-        <a mat-button class="nav-link">태그목록</a>
+        <a routerLink="/" mat-button class="nav-link">글목록</a>
+        <a routerLink="/tags" mat-button class="nav-link">태그목록</a>
     </div>
 </nav>

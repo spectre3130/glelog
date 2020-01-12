@@ -1,5 +1,26 @@
 <div class="contents-post">
     <div class="post">
+        <h1 class="post-title">알고리즘이란 무엇인가?</h1>
+        <div class="post-user">
+            <a routerLink="/username">
+                <div class="user-avatar"></div>
+            </a>
+            <div class="user">
+                <a routerLink="/username" class="username">시바견</a>
+                <div class="user-post-time">2020년 1월 10일 작성됨</div>
+            </div>
+            <div class="user-spacer"></div>
+            <div class="user-sns">
+                <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
+                <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
+                <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+            </div>
+        </div>
+        <div class="user-sns-small">
+            <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
+            <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
+            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+        </div>
         <markdown ngPreserveWhitespaces [data]="markdown">
         </markdown>
     </div>

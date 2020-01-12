@@ -13,8 +13,16 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PostComponent } from './contents/post/post.component';
 import { PostsComponent } from './contents/posts/posts.component';
 import { ProgressBarComponent } from './layout/progress-bar/progress-bar.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './auth/login/login.component';
+import { UserComponent } from './contents/user/user.component';
+import { SettingComponent } from './contents/setting/setting.component';
+import { WritingComponent } from './contents/writing/writing.component';
+import { TagsComponent } from './contents/tags/tags.component';
+import { ContentsHeaderComponent } from './layout/contents-header/contents-header.component';
 
+import { CorsInterceptor } from './shared/cors.interceptor'
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -24,6 +32,12 @@ import { HttpClientModule } from '@angular/common/http';
     PostComponent,
     PostsComponent,
     ProgressBarComponent,
+    UserComponent,
+    SettingComponent,
+    WritingComponent,
+    TagsComponent,
+    LoginComponent,
+    ContentsHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -32,22 +46,19 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     MaterialModule,
     FontAwesomeModule,
-    MarkdownModule.forRoot({
-      markedOptions: {
-        provide: MarkedOptions,
-        useValue: {
-          gfm: true,
-          tables: true,
-          breaks: false,
-          pedantic: false,
-          sanitize: false,
-          smartLists: true,
-          smartypants: false,
-        },
-      },
-    })
+    MarkdownModule.forRoot()
   ],
-  providers: [],
+  entryComponents: [
+    LoginComponent
+  ],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS,
+      useClass: CorsInterceptor,
+      multi: true,
+    },
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
