@@ -9,7 +9,7 @@ dotenv.config();
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: `${process.env.NODE_ENV === 'prod'? process.env.DOMAIN : 'http://localhost:3000'}/auth/google/callback`
+        callbackURL: `${'http://127.0.0.1:3000'}/auth/google/callback`
     },
     async (accessToken, refreshToken, profile, done) => {
         try {
@@ -24,6 +24,7 @@ passport.use(new GoogleStrategy({
                     email,
                     username: 'anonymous#'+seq,
                     name: profile.displayName,
+                    avatar: profile.photos[0].value,
                 });
                 return done(null, newUser);
             }

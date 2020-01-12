@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const verifyToken = (token) => {
+exports.verifyToken = (token) => {
     if(!token) {
         throw '유효하지 않은 토큰입니다';
     }
@@ -33,8 +33,8 @@ exports.generateToken = (payload, options) => {
 
 exports.authenticate = async (req, res, next) => {
     try {
-        const token = req.cookies['_GID'];
-        const decodedToken = await verifyToken(token);
+        const token = req.cookies['GID_AUT'];
+        const decodedToken = await this.verifyToken(token);
         req.user = decodedToken.user;
         req.tokenExp = decodedToken.exp;
         next();
