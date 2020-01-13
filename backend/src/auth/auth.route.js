@@ -10,10 +10,13 @@ dotenv.config();
 
 router.get('/check', async (req, res, next) => {
     try {
-        if(!req.user) {
-            throw '허가되지 않은 사용자 입니다.';
+        const token = req.cookies['gleid'];
+        if(token) {
+            const decodedToken = await jwtProvider.verifyToken(token);    
+            res.status(200).json(decodedToken.user);
+        } else {
+            res.status(200).json('');
         }
-        res.send(200).json(req.user);
     } catch(e) {
         console.error(e);
         next(createError(401, e));
@@ -23,14 +26,22 @@ router.get('/check', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const token = req.body.token
-        const decoded = await jwtProvider.verifyToken(token);
-        console.log("TCL: decoded", decoded)
-        res.cookie('GID_AUT', token, {
+        const { user } = await jwtProvider.verifyToken(token);
+        res.cookie('gleid', token, {
             domain: process.env.NODE_ENV === 'prod' ? process.env.DOMAIN : '',
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24 * 3,
         });
-        res.status(200).json(decoded.user);
+        res.status(200).json(user);
+    } catch(e) {
+        next(createError(401, e));
+    }
+});
+
+router.get('/logout', async (req, res, next) => {
+    try {
+        res.clearCookie('gleid');
+        res.status(200).json();
     } catch(e) {
         next(createError(401, e));
     }

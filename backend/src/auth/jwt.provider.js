@@ -33,7 +33,7 @@ exports.generateToken = (payload, options) => {
 
 exports.authenticate = async (req, res, next) => {
     try {
-        const token = req.cookies['GID_AUT'];
+        const token = req.cookies['gleid'];
         const decodedToken = await this.verifyToken(token);
         req.user = decodedToken.user;
         req.tokenExp = decodedToken.exp;
