@@ -19,10 +19,9 @@ export class PostComponent implements OnInit {
 
   ngOnInit() {
     this.http.get('assets/markdown2.text', {responseType: 'text' })
-              .subscribe(content => {
-                this.markdown = content;
-                console.log(this.markdown);
-              });
+    .subscribe(content => {
+      this.markdown = content;
+    });
   }
 
 

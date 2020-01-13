@@ -1,0 +1,15 @@
+.write-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 8px 16px;
+    height: 38px;
+}
+
+.nav-spacer {
+    flex-grow: 1;
+}
+
+.menu-name {
+    margin-left: 10px;
+}

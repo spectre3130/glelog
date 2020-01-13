@@ -1,0 +1,20 @@
+.user-info {
+    display:flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.user-avatar {
+    margin-right:10px;
+    margin-left:10px;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.menu-name {
+    margin-left: 10px;
+}

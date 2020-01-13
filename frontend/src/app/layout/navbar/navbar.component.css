@@ -1,55 +1,10 @@
 .navbar {
+    font-family: 'Noto Sans KR', sans-serif;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 2;
-}
-
-.main-nav {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 8px 16px;
     color: white;
     background-color: #673ab7;
-}
-
-.sub-nav {
-    color: white;
-    background-color: #673ab7;
-}
-
-.nav-logo {
-    font-size: 20px;
-}
-
-.nav-link {
-    flex: 1;
-}
-
-.nav-spacer {
-    flex-grow: 1;
-}
-
-.nav-small-show {
-    display:none;
-}
-
-.user-avatar {
-    display:flex;
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
-}
-
-@media (max-width: 720px) {
-    .nav-small-show {
-        display:flex;
-    }   
-    .nav-small-hide {
-        display:none;
-    }
 }

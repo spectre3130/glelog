@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from './contents/user/use.model';
+import { User } from './shared/app.model';
 import { AuthService } from './auth/auth.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'glelog-app',
@@ -18,14 +17,11 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {  
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams
+    .subscribe(params => {
       if(params.token) {
-        this.authService.login(params.token).subscribe(user => {
-          this.authService.successLogin(user);
-        });
-      }
+        this.authService.login(params.token);
+      } 
     });
   }
-  
-  
 }

@@ -19,9 +19,9 @@ export class ProgressBarComponent implements OnInit {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationStart) {
         clearTimeout(this.fetchingTimer);
-        this.fetchingTimer = setTimeout(() => this.isFetching = true, 0);
+        this.fetchingTimer = setTimeout(() => this.isFetching = true, 200);
       } else if(event instanceof NavigationEnd) {
-        this.fetchingTimer = setTimeout(() => this.isFetching = false, 1000);
+        this.fetchingTimer = setTimeout(() => this.isFetching = false, 500);
       }
     });
   }

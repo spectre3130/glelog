@@ -1,9 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import { LoginComponent } from 'src/app/auth/login/login.component';
-import { MatDialog } from '@angular/material/dialog';
-import { User } from 'src/app/contents/user/use.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { Component, OnInit} from '@angular/core';
+import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
+import { Observable, pipe } from 'rxjs';
+import { map, take, first } from 'rxjs/operators';
+import { NavbarService } from './navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,27 +11,17 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   
-  user: User;
-  faBookOpen = faBookOpen;
+  isWriteMode: boolean;
 
   constructor(
-    private authService: AuthService,
-    private dialog: MatDialog,
-  ) { }
-
-  ngOnInit() {
-    this.authService.loginState.subscribe(user => {
-      this.user = user;
-    });
+    private navbarService: NavbarService
+  ) {  
+    
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(LoginComponent, {
-      width: '400px',
-    });
-    dialogRef.afterClosed().subscribe(data => {
-     
-    });
+  ngOnInit() {
+    this.navbarService.writeEvent
+    .subscribe(val => this.isWriteMode = val);
   }
 
 }

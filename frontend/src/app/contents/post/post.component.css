@@ -1,10 +1,12 @@
 .contents-post {
+    
 }
 
 .post {
-    max-width:978px;
+    width:768px;
     padding-left: 2rem;
     padding-right: 2rem;
+    padding-bottom: 2rem;
     /* letter-spacing: -.3px; */
 }
 
@@ -88,5 +90,11 @@ fa-icon {
     .user-sns-small {
         display: block;
         margin-bottom: 5rem;
+    }
+}
+
+@media (max-width: 832px) {
+    .post {
+        width: inherit;
     }
 }

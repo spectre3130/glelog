@@ -1,0 +1,22 @@
+<a *ngIf="!user" (click)="openDialog()" mat-button>
+    <fa-icon [icon]="faUser" size="lg"></fa-icon>
+    <span class="menu-name">로그인</span>
+</a>
+<div class="user-info" *ngIf="user" [matMenuTriggerFor]="menu">
+    <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+    <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
+</div>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/username">
+        <span class="menu-name">내 블로그</span>
+    </button>
+    <button mat-menu-item routerLink="/write">
+        <span class="menu-name">글쓰기</span>
+    </button>
+    <button mat-menu-item routerLink="/setting">
+        <span class="menu-name">설정</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+        <span class="menu-name">로그아웃</span>
+    </button>
+</mat-menu>

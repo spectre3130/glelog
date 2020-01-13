@@ -3,13 +3,17 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   exports: [
     MatButtonModule,
     MatCardModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule,
+    MatInputModule
   ]
 })
 export class MaterialModule { }
