@@ -19,7 +19,7 @@ exports.verifyToken = (token) => {
 exports.generateToken = (payload, options) => {
     const jwtOptions = {
         algorithm: 'HS256',
-        issuer: 'glelog.com',
+        issuer: 'glelog.dev',
         expiresIn: '3d',
         ...options
     }

@@ -1,3 +1,4 @@
+
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
@@ -5,6 +6,9 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
+
+const prod = process.env.NODE_ENV === 'prod';
+const app = express();
 const db = require('./src/config/db');
 const jwtProvider = require('./src/auth/jwt.provider');
 const authRouter = require('./src/auth/auth.route');
@@ -12,14 +16,13 @@ const apiRouter = require('./src/route');
 
 dotenv.config();
 
-const app = express();
-
-app.use(logger('dev'));
+app.use(helmet());
+app.use( prod ? logger('combined') : logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
-  origin: process.env.NODE_ENV === 'prod' ? process.env.DOMAIN : process.env.DEV,
+  origin: prod ? process.env.ROOT : true,
   credentials: true,
 }));
 
