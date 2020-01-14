@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../shared/app.model';
 import { Observable } from 'rxjs';
 import { take, timeout, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -15,13 +16,13 @@ export class AuthService {
   { }
   
   login(token: string): void {
-    this.http.post<any>(`http://localhost:3000/auth/login`, { token })
+    this.http.post<any>(`${environment.resource}/auth/login`, { token })
     .pipe(tap((user:User) => this.user = user))
     .subscribe((user:User) => this.loginEvent.emit(user));
   }
 
   logout(): Observable<User> {
-    return this.http.get<User>(`http://localhost:3000/auth/logout`)
+    return this.http.get<User>(`${environment.resource}/auth/logout`)
             .pipe(tap((user:User) => this.user = user))
   }
 
@@ -31,7 +32,7 @@ export class AuthService {
 
   loadUser() {
     return new Promise((resovle) => {
-      this.http.get<User>(`http://localhost:3000/auth/check`)
+      this.http.get<User>(`${environment.resource}/auth/check`)
       .pipe(
         take(1),
       )

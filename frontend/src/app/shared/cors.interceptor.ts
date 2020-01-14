@@ -10,7 +10,7 @@ export class CorsInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = request.clone({
-        headers: new HttpHeaders({ 'Access-Control-Allow-Origin': 'localhost:4200'}),
+        headers: new HttpHeaders({ 'Access-Control-Allow-Origin': environment.root}),
         withCredentials: true,
     });
     return next.handle(request);
