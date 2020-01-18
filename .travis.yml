@@ -31,7 +31,7 @@ after_success:
   - mkdir -p build/backend
   - mkdir -p build/frontend
   - mv $BUILDROOT/backend/* build/backend
-  - mv $BUILDROOT/frontend/dist/frontend/* build/frontend
+  - mv $BUILDROOT/frontend/dist/glelog/* build/frontend
   - mv $BUILDROOT/appspec.yml build
   - cd build
   - zip -r glelog *
@@ -40,27 +40,27 @@ after_success:
 
 deploy: 
   - provider: s3
-    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: glelog # S3 버킷
-    region: ap-northeast-2 #리전
-    skip_cleanup: true #클린업 건너뛰기
-    acl: public_read #s3 파일권한 ?
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: glelog
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
     wait-until-deployed: true
     local_dir: deploy
     upload_dir: build
     on:
-      repo: spectre3130/gleLog #Github 주소
+      repo: spectre3130/gleLog
       branch: master
       
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
-    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: glelog # S3 버킷
-    key: build/glelog.zip # S3 버킷에 저장된 springboot-webservice.zip 파일을 EC2로 배포
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: glelog
+    key: build/glelog.zip
     bundle_type: zip
-    application: glelog-deploy # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
-    deployment_group: glelog-deploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    application: glelog-deploy
+    deployment_group: glelog-deploy-group
     region: ap-northeast-2
     wait-until-deployed: true
     on:
