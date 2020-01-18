@@ -29,7 +29,9 @@ router.post('/login', async (req, res, next) => {
         const token = req.body.token
         const { user } = await jwtProvider.verifyToken(token);
         res.cookie('gleid', token, {
+            domain:'.glelog.dev',
             httpOnly: true,
+            secure: true,
             maxAge: 1000 * 60 * 60 * 24 * 3,
         });
         res.status(200).json(user);
@@ -40,7 +42,9 @@ router.post('/login', async (req, res, next) => {
 
 router.get('/logout', async (req, res, next) => {
     try {
-        res.clearCookie('gleid');
+        res.clearCookie('gleid', {
+            domain:'.glelog.dev'
+        });
         res.status(200).json();
     } catch(e) {
         next(createError(401, e));

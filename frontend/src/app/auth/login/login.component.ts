@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment'
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(provider) {
-    window.location.replace(`http://localhost:3000/auth/${provider}`);
+    window.location.replace(`${environment.resource}/auth/${provider}`);
   }
 
   onClose(): void {
