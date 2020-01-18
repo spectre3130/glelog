@@ -7,7 +7,7 @@ branches: #브랜치
   only:
     - master
 env: 
-  BUILDROOT="/home/travis/build/spectre3130/travis_ci_test"
+  BUILDROOT="/home/travis/build/spectre3130/gleLog"
 
 cache:
     directories:
@@ -50,7 +50,7 @@ deploy:
     local_dir: deploy
     upload_dir: build
     on:
-      repo: spectre3130/travis_ci_test #Github 주소
+      repo: spectre3130/gleLog #Github 주소
       branch: master
       
   - provider: codedeploy
@@ -64,5 +64,5 @@ deploy:
     region: ap-northeast-2
     wait-until-deployed: true
     on:
-      repo: spectre3130/travis_ci_test
+      repo: spectre3130/gleLog
       branch: master
