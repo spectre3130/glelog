@@ -1,4 +1,4 @@
-const prod = process.env.NODE_ENV !== 'prod';
+const prod = process.env.NODE_ENV === 'prod';
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
