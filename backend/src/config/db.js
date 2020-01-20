@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
 const db = mongoose.connection;
 const prod = process.env.NODE_ENV === 'prod';
-
-dotenv.config();
 
 mongoose.connect(prod ? process.env.DB_HOST : 'mongodb://localhost:27017/glelog', { 
     useCreateIndex: true, 

@@ -1,8 +1,5 @@
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 exports.verifyToken = (token) => {
     if(!token) {

@@ -2,12 +2,9 @@
 const express = require('express');
 const router = express.Router();
 const createError = require('http-errors');
-const dotenv = require('dotenv');
 const passportGoogle = require('../auth/google.auth');
 const jwtProvider = require('./jwt.provider');
 const prod = process.env.NODE_ENV === 'prod';
-
-dotenv.config();
 
 router.get('/check', async (req, res, next) => {
     try {

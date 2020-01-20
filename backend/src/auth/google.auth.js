@@ -2,10 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const User = require('../user/user.model');
 const Counter = require('../util/counter');
-const dotenv = require('dotenv');
 const prod = process.env.NODE_ENV === 'prod';
-
-dotenv.config();
 
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
