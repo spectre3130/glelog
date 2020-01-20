@@ -6,7 +6,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
 
-dotenv.config();
+if(prod) {
+  dotenv.config();
+} else {
+  dotenv.config({ path: path.join(__dirname, '/home/ubuntu/application/glelog/.env') });
+}
 
 const prod = process.env.NODE_ENV === 'prod';
 const app = express();
