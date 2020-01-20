@@ -1,5 +1,4 @@
 const prod = process.env.NODE_ENV === 'prod';
-console.log("TCL: prod", prod)
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
@@ -17,8 +16,6 @@ const jwtProvider = require('./src/auth/jwt.provider');
 const authRouter = require('./src/auth/auth.route');
 const apiRouter = require('./src/route');
 
-
-
 app.use(helmet());
 app.use( prod ? logger('combined') : logger('dev'));
 app.use(express.json());
@@ -35,7 +32,7 @@ app.use('/auth', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
-  next(createError(404));
+  next(createError(404, '페이지를 찾을 수 없습니다.'));
 });
 
 // error handler
