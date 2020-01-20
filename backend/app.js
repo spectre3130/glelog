@@ -1,3 +1,4 @@
+const prod = process.env.NODE_ENV === 'prod';
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
@@ -7,12 +8,11 @@ const helmet = require('helmet');
 const dotenv = require('dotenv');
 
 if(prod) {
-  dotenv.config();
-} else {
   dotenv.config({ path: path.join(__dirname, '/home/ubuntu/application/config/.env') });
+} else {
+  dotenv.config();
 }
 
-const prod = process.env.NODE_ENV === 'prod';
 const app = express();
 const db = require('./src/config/db');
 const jwtProvider = require('./src/auth/jwt.provider');
