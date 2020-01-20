@@ -1,4 +1,5 @@
 const prod = process.env.NODE_ENV === 'prod';
+console.log("TCL: prod", prod)
 const express = require('express');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
@@ -6,14 +7,17 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
+
+if(prod) dotenv.config({ path: '/home/ubuntu/application/config/.env' });
+else dotenv.config();
+
 const app = express();
 const db = require('./src/config/db');
 const jwtProvider = require('./src/auth/jwt.provider');
 const authRouter = require('./src/auth/auth.route');
 const apiRouter = require('./src/route');
 
-if(prod) dotenv.config({ path: '/home/ubuntu/application/config/.env' });
-else dotenv.config();
+
 
 app.use(helmet());
 app.use( prod ? logger('combined') : logger('dev'));
