@@ -9,7 +9,7 @@ const dotenv = require('dotenv');
 if(prod) {
   dotenv.config();
 } else {
-  dotenv.config({ path: path.join(__dirname, '/home/ubuntu/application/glelog/.env') });
+  dotenv.config({ path: path.join(__dirname, '/home/ubuntu/application/config/.env') });
 }
 
 const prod = process.env.NODE_ENV === 'prod';

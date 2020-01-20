@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ubuntu/application/glelog/build
+    destination: /home/ubuntu/application/glelog
 permissions:
-  - object: /home/ubuntu/application/glelog/build
+  - object: /home/ubuntu/application
     owner: ubuntu
     group: ubuntu
     mode: 775
