@@ -26,9 +26,9 @@ router.post('/login', async (req, res, next) => {
         const token = req.body.token
         const { user } = await jwtProvider.verifyToken(token);
         res.cookie('gleid', token, {
-            domain:'.glelog.dev',
+            domain: prod ? '.glelog.dev' : '',
             httpOnly: true,
-            secure: true,
+            secure: prod ? true : false,
             maxAge: 1000 * 60 * 60 * 24 * 3,
         });
         res.status(200).json(user);
@@ -40,7 +40,7 @@ router.post('/login', async (req, res, next) => {
 router.get('/logout', async (req, res, next) => {
     try {
         res.clearCookie('gleid', {
-            domain:'.glelog.dev'
+            domain: prod ? '.glelog.dev' : '',
         });
         res.status(200).json();
     } catch(e) {
@@ -58,7 +58,7 @@ router.get('/google/callback', passportGoogle.authenticate('google', { session: 
         const { email, username, avatar } = req.user;
         const user = { email, username, avatar };
         const token = await jwtProvider.generateToken({ user: user});
-        res.redirect(`${prod ? proecess.env.ROOT : 'http://localhost:4200'}?token=${token}`);
+        res.redirect(`${prod ? process.env.ROOT : 'http://localhost:4200'}?token=${token}`);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
