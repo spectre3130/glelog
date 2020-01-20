@@ -4,9 +4,10 @@ files:
   - source:  /
     destination: /home/ubuntu/application/glelog/
 permissions:
-  - object: /home/ubuntu/application/glelog
+  - object: /home/ubuntu/application/
     owner: ubuntu
     group: ubuntu
+    mode: 775
 hooks:
   AfterInstall: 
     - location: run-deploy.sh
