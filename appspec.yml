@@ -5,5 +5,9 @@ files:
     destination: /home/ubuntu/application/glelog/
 permissions:
   - object: /home/ubuntu/application/glelog/
-    pattern: 775
-
+    owner: ubuntu
+    group: ubuntu
+hooks:
+  AfterInstall: 
+    - location: run-deploy.sh
+      timeout: 60
