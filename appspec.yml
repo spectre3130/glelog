@@ -3,8 +3,3 @@ os: linux
 files:
   - source:  /
     destination: /home/ubuntu/application/glelog/
-
-hooks:
-  AfterInstall: 
-    - location: run-deploy.sh
-      timeout: 60
