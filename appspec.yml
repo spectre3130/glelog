@@ -3,3 +3,7 @@ os: linux
 files:
   - source:  /
     destination: /home/ubuntu/application/glelog/
+permissions:
+  - object: /home/ubuntu/application/glelog/
+    pattern: 775
+

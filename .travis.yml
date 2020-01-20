@@ -33,6 +33,7 @@ after_success:
   - mv $BUILDROOT/backend/* build/backend
   - mv $BUILDROOT/frontend/dist/glelog/* build/frontend
   - mv $BUILDROOT/appspec.yml build
+  - mv $BUILDROOT/run-deploy.sh build
   - cd build
   - zip -r glelog *
   - mkdir -p deploy
