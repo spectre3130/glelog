@@ -39,15 +39,16 @@ export class EditorComponent implements OnInit {
     }
   }
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
+  add(e: MatChipInputEvent): void {
+    const input = e.input;
+    const value = e.value;
     if ((value || '').trim()) {
       this.tags.push({name: '#' + value.trim()});
     }
     if (input) {
       input.value = '';
     }
+    this.changeTextAreaHeight();
   }
 
   remove(tag: Tag): void {
@@ -55,5 +56,12 @@ export class EditorComponent implements OnInit {
     if (index >= 0) {
       this.tags.splice(index, 1);
     }
+    this.changeTextAreaHeight();
+  }
+
+  changeTextAreaHeight() {
+    const tagWrapper = document.querySelector<HTMLDivElement>('.mat-chip-list-wrapper');
+    document.querySelector<HTMLDivElement>('.body-input').style.minHeight = (803 - tagWrapper.offsetHeight) + 'px'
+    // console.log("TCL: EditorComponent -> changeTextAreaHeight -> wrapper", tagWrapper.offsetHeight);
   }
 }

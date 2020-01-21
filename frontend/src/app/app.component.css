@@ -1,10 +1,6 @@
-.app-container {
-    /* overflow: auto; */
-}
-
 .main-contents {
     display: flex;
     justify-content: center;
-    min-height: 817px;
+    min-height: 883px;
     flex-wrap: wrap;
 }

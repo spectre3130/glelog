@@ -1,0 +1,81 @@
+.md-editor {
+  overflow: hidden;
+}
+
+.editor-write,
+.editor-preview {
+  display: inline-block;
+  width: 50%;
+  height: 879px;
+  z-index: 2;
+  padding: 10px 5px 10px 20px;
+  vertical-align: top;
+  box-sizing: border-box;
+  border-right: 1px solid #ccc;
+}
+
+.editor-preview {
+  overflow-y: auto;
+}
+
+.editor-write {
+  background-color: #f6f6f6;
+}
+
+.title-input,
+.body-input {
+  width: 100%;
+  outline: none;
+  border: none;
+  border-top:0px; 
+  border-left:0px; 
+  border-bottom:0px;
+  border-right: 0px;
+  background-color: inherit;
+}
+
+.title-input,
+.title-view {
+  height:60px;
+}
+
+.title-input {
+  font-size: 20px;
+}
+
+.title-view {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 34px;
+}
+
+.tag-input input {
+  outline: none;
+  border: none;
+  border-top:0px; 
+  border-left:0px; 
+  border-bottom:0px;
+  padding: 7px;
+  box-sizing: border-box;
+  font-size: 16px;
+  background-color: #f6f6f6;
+}
+
+.body-input {
+  margin-top: 10px;
+  min-height: 763px;
+  resize: none;
+  font-size: 16px;
+}
+
+.body-view {
+  font-size: 18px;
+  font-family: 'Noto Serif KR', serif;
+  line-height: 1.6;
+  word-break: break-all;
+}
+/* ---------------------------------------------------------------------------------------------------- */
+
+
+@media (max-width: 1000px) {
+ 
+}
