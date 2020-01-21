@@ -1,0 +1,23 @@
+<div class="md-editor">
+    <div class="editor-write">
+        <input type="text" class="title-input" placeholder="제목을 입력해주세요." (keyup)="onTitleChange($event)">
+        <div class="tag-input">
+            <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip *ngFor="let tag of tags"[selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+                    {{ tag.name }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input type="text" placeholder="태그를 입력해주세요. ( '콤마' 또는 '엔터'로 구분 )"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </div>
+        <textarea class="body-input" [placeholder]="placeHolder" (keyup)="onBodyChange($event)"></textarea>
+    </div>
+    <div class="editor-preview">
+        <h1 class="title-view">{{ title }}</h1>
+        <markdown class="body-view" ngPreserveWhitespaces [data]="compiled"></markdown>
+    </div>
+</div>

@@ -5,6 +5,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   exports: [
@@ -13,7 +16,9 @@ import { MatInputModule } from '@angular/material/input';
     MatProgressBarModule,
     MatDialogModule,
     MatMenuModule,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }

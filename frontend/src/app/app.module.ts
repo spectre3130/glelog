@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
+
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MainNavComponent } from './layout/navbar/main-nav/main-nav.component';
@@ -18,7 +20,7 @@ import { PostsComponent } from './contents/posts/posts.component';
 import { ProgressBarComponent } from './layout/progress-bar/progress-bar.component';
 import { LoginComponent } from './auth/login/login.component';
 import { WriteComponent } from './contents/write/write.component';
-import { EditorComponent } from './layout/editor/editor.component';
+import { EditorComponent } from './contents/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 
 import { SettingComponent } from './contents/setting/setting.component';
@@ -29,7 +31,7 @@ import { CorsInterceptor } from './shared/cors.interceptor'
 
 import { AuthService } from './auth/auth.service';
 import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
-import { NavbarService } from './layout/navbar/navbar.service';
+import { WriteService } from './contents/write/write.service';
 
 
 export function loadUser(authService: AuthService) {
@@ -65,13 +67,14 @@ export function loadUser(authService: AuthService) {
     HttpClientModule,
     MaterialModule,
     FontAwesomeModule,
+    TextareaAutosizeModule,
     MarkdownModule.forRoot(),
   ],
   providers: [
     AuthService,
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
-    NavbarService,
+    WriteService,
   ],
   bootstrap: [AppComponent]
 })

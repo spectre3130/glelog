@@ -10,6 +10,23 @@
     flex-grow: 1;
 }
 
-.menu-name {
+.nav-small-show {
+    display:none;
+}
+
+.menu-name { 
     margin-left: 10px;
+}
+
+.nav-link {
+    flex: 1;
+}
+
+@media (max-width: 1000px) {
+    .nav-small-show {
+        display:flex;
+    }   
+    .nav-small-hide {
+        display:none;
+    }
 }

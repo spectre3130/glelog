@@ -1,7 +1,7 @@
-<a *ngIf="!user" (click)="openDialog()" mat-button>
+<button *ngIf="!user" (click)="openDialog()" mat-button>
     <fa-icon [icon]="faUser" size="lg"></fa-icon>
     <span class="menu-name">로그인</span>
-</a>
+</button>
 <div class="user-info" *ngIf="user" [matMenuTriggerFor]="menu">
     <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
     <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
