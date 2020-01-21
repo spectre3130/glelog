@@ -1,8 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
-import { Observable, pipe } from 'rxjs';
-import { map, take, first } from 'rxjs/operators';
-import { NavbarService } from './navbar.service';
+import { WriteService } from '../../contents/write/write.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +11,13 @@ export class NavbarComponent implements OnInit {
   isWriteMode: boolean;
 
   constructor(
-    private navbarService: NavbarService
+    private writeService: WriteService
   ) {  
     
   }
 
   ngOnInit() {
-    this.navbarService.writeEvent
+    this.writeService.writeEvent
     .subscribe(val => this.isWriteMode = val);
   }
 

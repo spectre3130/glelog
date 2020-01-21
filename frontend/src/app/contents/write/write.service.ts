@@ -1,7 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable()
-export class NavbarService {
+export class WriteService {
 
   writeEvent:EventEmitter<boolean> = new EventEmitter<boolean>();
 

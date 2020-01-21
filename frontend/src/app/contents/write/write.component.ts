@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as marked from 'marked';
-import { NavbarService } from 'src/app/layout/navbar/navbar.service';
+import { WriteService } from 'src/app/contents/write/write.service';
 
 @Component({
   selector: 'app-write',
@@ -14,21 +13,21 @@ export class WriteComponent implements OnInit, OnDestroy{
   startingValue = '';
 
   constructor(
-    private navbarService: NavbarService
+    private writeService: WriteService
   ) {
   }
 
   ngOnInit() {
-    this.navbarService.changeWriteMode(true);
+    this.writeService.changeWriteMode(true);
     this.startingValue = this.getPlaceHolder();
     this.compiledMarkdown = this.compileMarkdown(this.startingValue);
   }
 
   ngOnDestroy() {
-    this.navbarService.changeWriteMode(false);
+    this.writeService.changeWriteMode(false);
   }
 
-  onValueChanged(value: string) {
+  onBodyChanged(value: string) {
     this.compiledMarkdown = this.compileMarkdown(value);
   }
 
@@ -50,11 +49,10 @@ export class WriteComponent implements OnInit, OnDestroy{
       'inline `code`\n\n' +
 
       '### code block\n' +
-      '```\n' +
-      `const foo = () => {
-        return 1;
-      }\n` +
-
+      '```javascript\n' +
+      'const foo = () => {\n' +
+      '    return 1\n' +
+      '}\n' +
       '```\n\n' +
 
       '### unorderd list\n' +

@@ -29,7 +29,7 @@ import { CorsInterceptor } from './shared/cors.interceptor'
 
 import { AuthService } from './auth/auth.service';
 import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
-import { NavbarService } from './layout/navbar/navbar.service';
+import { WriteService } from './contents/write/write.service';
 
 
 export function loadUser(authService: AuthService) {
@@ -71,7 +71,7 @@ export function loadUser(authService: AuthService) {
     AuthService,
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
-    NavbarService,
+    WriteService,
   ],
   bootstrap: [AppComponent]
 })

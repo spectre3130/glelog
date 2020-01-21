@@ -11,6 +11,10 @@ markdown a{
     text-decoration: none; 
 }
 
+pre[class*="language-"] {
+    font-size: 14px !important;
+} 
+
 glelog-app {
     display: flex;
     flex-direction: column;
@@ -21,14 +25,14 @@ glelog-app {
     right: 0;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 1000px) {
     glelog-app {
         top: 90px;
     }
 }
 
 .mat-sidenav-content::-webkit-scrollbar, 
-.editor-input::-webkit-scrollbar, 
+.editor-body-input::-webkit-scrollbar, 
 body::-webkit-scrollbar, 
 mat-sidenav.sidenav::-webkit-scrollbar {
     height: 6px;
@@ -36,7 +40,7 @@ mat-sidenav.sidenav::-webkit-scrollbar {
 }
 
 .mat-sidenav-content::-webkit-scrollbar-thumb, 
-.editor-input::-webkit-scrollbar-thumb,
+.editor-body-input::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb, 
 mat-sidenav.sidenav::-webkit-scrollbar-thumb {
     background-color: #6e6e6e;
@@ -44,7 +48,7 @@ mat-sidenav.sidenav::-webkit-scrollbar-thumb {
 }
 
 .mat-sidenav-content::-webkit-scrollbar-track,
-.editor-input::-webkit-scrollbar-track, 
+.editor-body-input::-webkit-scrollbar-track, 
 body::-webkit-scrollbar-track, 
 mat-sidenav.sidenav::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
