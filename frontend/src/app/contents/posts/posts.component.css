@@ -3,44 +3,8 @@
     max-width:1500px;
 }
 
-.example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-}
-
-
 .posts-item {
-    display: inline-block;
-    margin: 30px 10px 30px 10px;
-    vertical-align: top;
+    padding: 30px 10px 30px 10px;
 }
 
-.example-card {
-    /* width:100% */
-}
-
-
-@media (max-width: 1920px) {
-    .posts-item {
-        width: calc(25% - 1.25rem);
-    }
-}
-
-@media (max-width: 1520px) {
-    .posts-item {
-        width: calc(33.333% - 1.25rem);
-    }
-}
-
-@media (max-width: 1120px) {
-    .posts-item {
-        width: calc(50% - 1.25rem);
-    }
-}
-
-@media (max-width: 720px) {
-    .posts-item {
-        width: calc(100% - 1.25rem);
-    }
-}
 

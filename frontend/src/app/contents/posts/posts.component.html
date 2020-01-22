@@ -1,25 +1,5 @@
 <div class="contents-posts">
-    <div class="posts-item" *ngFor="let item of items">
-        <mat-card class="example-card mat-elevation-z0" >
-            <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
-            <a routerLink="/1" >
-                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-            </a>
-            <mat-card-content>
-                <h2><a routerLink="/1" >제목</a></h2>
-                <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                    A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                    bred for hunting.
-                </p>
-            </mat-card-content>
-            <a routerLink="/username">
-                <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                </mat-card-header>
-            </a>
-        </mat-card>
+    <div class="posts-item" *ngFor="let post of posts">
+        <app-preview *ngIf="post" [post]=post></app-preview>
     </div>
 </div>

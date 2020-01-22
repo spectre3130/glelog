@@ -1,7 +1,3 @@
-.contents-post {
-    
-}
-
 .post {
     width:768px;
     padding-left: 2rem;
@@ -48,8 +44,6 @@ code[class*="language-"], pre[class*="language-"]  {
 }
 
 .user-avatar {
-    background-image: url(https://material.angular.io/assets/img/examples/shiba1.jpg);
-    background-size: cover;
     height: 60px;
     width: 60px;
     border-radius: 50%;

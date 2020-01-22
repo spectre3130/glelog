@@ -4,7 +4,7 @@
         <div class="tag-input">
             <mat-chip-list #chipList aria-label="Tag selection">
                 <mat-chip *ngFor="let tag of tags"[selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
-                    {{ tag.name }}
+                    {{ tag }}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
                 <input type="text" placeholder="태그를 입력해주세요. ( '콤마' 또는 '엔터'로 구분 )"
@@ -16,8 +16,9 @@
         </div>
         <textarea class="body-input" [placeholder]="placeHolder" (keyup)="onBodyChange($event)"></textarea>
     </div>
+    <div class="editor-spacer"></div>
     <div class="editor-preview">
         <h1 class="title-view">{{ title }}</h1>
-        <markdown class="body-view" ngPreserveWhitespaces [data]="compiled"></markdown>
+        <markdown class="body-view" ngPreserveWhitespaces [(data)]="body"></markdown>
     </div>
 </div>

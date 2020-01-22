@@ -32,7 +32,12 @@ import { CorsInterceptor } from './shared/cors.interceptor'
 import { AuthService } from './auth/auth.service';
 import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
 import { WriteService } from './contents/write/write.service';
+import { EditorService } from './contents/editor/editor.service';
+import { PostService } from './contents/post/post.service';
+import { PreviewComponent } from './contents/posts/preview/preview.component';
+import { PostsService } from './contents/posts/posts.service';
 
+import { WriteDatePipe } from './shared/write-date.pipe';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -55,7 +60,9 @@ export function loadUser(authService: AuthService) {
     WriteComponent,
     EditorComponent,
     UserHomeComponent,
-    WriteNavComponent
+    WriteNavComponent,
+    PreviewComponent,
+    WriteDatePipe
   ],
   entryComponents: [
     LoginComponent
@@ -75,6 +82,9 @@ export function loadUser(authService: AuthService) {
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     WriteService,
+    EditorService,
+    PostService,
+    PostsService,
   ],
   bootstrap: [AppComponent]
 })

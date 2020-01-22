@@ -1,25 +1,27 @@
 .md-editor {
-  overflow: hidden;
+  display: flex;
+  flex-direction: row;
 }
 
 .editor-write,
+.editor-spacer,
 .editor-preview {
-  display: inline-block;
+  display: flex;
   width: 50%;
-  height: 879px;
-  z-index: 2;
+  flex-direction: column;
   padding: 10px 5px 10px 20px;
   vertical-align: top;
   box-sizing: border-box;
-  border-right: 1px solid #ccc;
-}
-
-.editor-preview {
-  overflow-y: auto;
 }
 
 .editor-write {
+  position: fixed;
+  border-right: 1px solid #ccc;
   background-color: #f6f6f6;
+}
+
+.editor-preview {
+  justify-content: flex-end;
 }
 
 .title-input,

@@ -4,12 +4,12 @@
         <span class="menu-name">뒤로가기</span>
     </button>
     <button mat-button class="nav-small-hide">이미지</button>
-    <button mat-button class="nav-small-hide">작성하기</button>
+    <button mat-button class="nav-small-hide" (click)="createPost()">작성하기</button>
     <div class="nav-spacer"></div>
     <app-user-nav></app-user-nav>
 </div>
 <div class="nav-small-show">
     <button mat-button class="nav-link">이미지</button>
     <button mat-button class="nav-link">미리보기</button>
-    <button mat-button class="nav-link">작성하기</button>
+    <button mat-button class="nav-link" (click)="createPost()">작성하기</button>
 </div>
