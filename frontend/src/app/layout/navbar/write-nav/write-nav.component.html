@@ -1,13 +1,15 @@
 <div class="write-nav">
-    <a routerLink="/" mat-button class="nav-small-hide">
+    <button mat-button routerLink="/">
         <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
         <span class="menu-name">뒤로가기</span>
-    </a>
-    <a mat-button class="nav-small-hide">
-        <fa-icon [icon]="faImage" size="lg"></fa-icon>
-        <span class="menu-name">이미지</span>
-    </a>
+    </button>
+    <button mat-button class="nav-small-hide">이미지</button>
+    <button mat-button class="nav-small-hide" (click)="createPost()">작성하기</button>
     <div class="nav-spacer"></div>
     <app-user-nav></app-user-nav>
 </div>
-
+<div class="nav-small-show">
+    <button mat-button class="nav-link">이미지</button>
+    <button mat-button class="nav-link">미리보기</button>
+    <button mat-button class="nav-link" (click)="createPost()">작성하기</button>
+</div>

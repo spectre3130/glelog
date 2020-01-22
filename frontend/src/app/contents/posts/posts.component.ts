@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Post } from 'src/app/shared/app.model';
+import { PostsService } from './posts.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts',
@@ -7,16 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  items = [];
+  posts: Array<Post>
 
-  constructor() { 
-    for(let i = 0; i < 10; i++) {
-      this.items.push(i);
-    }
-  }
+  constructor(
+    private postsService: PostsService
+  ) { }
 
   ngOnInit() {
-
+    this.postsService.getPosts()
+    .pipe(take(1))
+    .subscribe(posts => { 
+      this.posts = posts
+    });
   }
 
 }

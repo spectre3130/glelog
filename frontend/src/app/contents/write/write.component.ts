@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as marked from 'marked';
-import { NavbarService } from 'src/app/layout/navbar/navbar.service';
+import { WriteService } from 'src/app/contents/write/write.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-write',
@@ -10,61 +10,17 @@ import { NavbarService } from 'src/app/layout/navbar/navbar.service';
 })
 export class WriteComponent implements OnInit, OnDestroy{
 
-  compiledMarkdown: string;
-  startingValue = '';
-
   constructor(
-    private navbarService: NavbarService
+    private writeService: WriteService
   ) {
   }
 
   ngOnInit() {
-    this.navbarService.changeWriteMode(true);
-    this.startingValue = this.getPlaceHolder();
-    this.compiledMarkdown = this.compileMarkdown(this.startingValue);
+    this.writeService.changeWriteMode(true);
   }
 
   ngOnDestroy() {
-    this.navbarService.changeWriteMode(false);
-  }
-
-  onValueChanged(value: string) {
-    this.compiledMarkdown = this.compileMarkdown(value);
-  }
-
-  private compileMarkdown(value: string): string {
-    return marked.parser(marked.lexer(value));
-  }
-
-  private getPlaceHolder() {
-    return (
-      '# Title \n' +
-      '## Title\n' +
-      '### Title\n' +
-      '#### Title\n\n' +
-
-      '**bold**\n\n' +
-
-      '*italic*\n\n' +
-
-      'inline `code`\n\n' +
-
-      '### code block\n' +
-      '```\n' +
-      `const foo = () => {
-        return 1;
-      }\n` +
-
-      '```\n\n' +
-
-      '### unorderd list\n' +
-      '- item 1\n' +
-      '* item 2\n\n' +
-
-      '### orderd list\n\n' +
-      '1. item a\n' +
-      '2. item b'
-    );
+    this.writeService.changeWriteMode(false);
   }
 
 

@@ -1,12 +1,12 @@
-<footer class="main-footer">
+<footer *ngIf="!isWriteMode" class="main-footer">
     <div class="footer-list">
         <div class="footer-logo">
             <a routerLink="/"><fa-icon [icon]="faBookOpen" size="lg"></fa-icon> gleLog</a>
         </div>
         <div class="footer-link">
-            <a mat-button href="https://github.com/spectre3130/glelog">
+            <button mat-button href="https://github.com/spectre3130/glelog">
                 <fa-icon [icon]="faGithub" size="lg"></fa-icon>
-            </a>
+            </button>
         </div>
         <div class="footer-copyright">
             <span>© 2020 gleLog</span>

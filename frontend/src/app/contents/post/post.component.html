@@ -1,13 +1,13 @@
-<div class="contents-post">
+<ng-container *ngIf="post">
     <div class="post">
-        <h1 class="post-title">알고리즘이란 무엇인가?</h1>
+        <h1 class="post-title">{{ post.title }}</h1>
         <div class="post-user">
             <a routerLink="/username">
-                <div class="user-avatar"></div>
+                <img class="user-avatar" src="{{ post.user.avatar }}">
             </a>
             <div class="user">
-                <a routerLink="/username" class="username">시바견</a>
-                <div class="user-post-time">2020년 1월 10일 작성됨</div>
+                <a routerLink="/username" class="username">{{ post.user.username }}</a>
+                <div class="user-post-time">{{ post.created_at | writeDate }}</div>
             </div>
             <div class="user-spacer"></div>
             <div class="user-sns">
@@ -21,7 +21,7 @@
             <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
             <fa-icon [icon]="faGithub" size="2x"></fa-icon>
         </div>
-        <markdown ngPreserveWhitespaces [data]="markdown">
+        <markdown ngPreserveWhitespaces [data]="post.body">
         </markdown>
     </div>
-</div>
+</ng-container>
