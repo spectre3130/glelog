@@ -1,27 +1,26 @@
-<ng-container *ngIf="post">
-    <div class="post">
-        <h1 class="post-title">{{ post.title }}</h1>
-        <div class="post-user">
-            <a routerLink="/username">
-                <img class="user-avatar" src="{{ post.user.avatar }}">
-            </a>
-            <div class="user">
-                <a routerLink="/username" class="username">{{ post.user.username }}</a>
-                <div class="user-post-time">{{ post.created_at | writeDate }}</div>
-            </div>
-            <div class="user-spacer"></div>
-            <div class="user-sns">
-                <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
-                <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
-                <fa-icon [icon]="faGithub" size="2x"></fa-icon>
-            </div>
+<div class="post" *ngIf="post">
+    asdasd
+    <!-- <h1 class="post-title">{{ post.title }}</h1> -->
+    <!-- <div class="post-user">
+        <a [routerLink]="['', post.user.username]">
+            <img class="user-avatar" src="{{ post.user.avatar }}">
+        </a>
+        <div class="user">
+            <a [routerLink]="['', post.user.username]" class="username">{{ post.user.username }}</a>
+            <div class="user-post-time">{{ post.created_at | writeDate }}</div>
         </div>
-        <div class="user-sns-small">
-            <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
-            <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
-            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+        <div class="user-spacer"></div>
+        <div class="user-sns">
+            <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
+            <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
+            <fa-icon [icon]="faGithub" size="lg"></fa-icon>
         </div>
-        <markdown ngPreserveWhitespaces [data]="post.body">
-        </markdown>
     </div>
-</ng-container>
+    <div class="user-sns-small">
+        <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
+        <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
+        <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+    </div> -->
+    <!-- <markdown ngPreserveWhitespaces [data]="post.body">
+    </markdown> -->
+</div>

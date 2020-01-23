@@ -1,6 +1,5 @@
 .main-contents {
     display: flex;
     justify-content: center;
-    min-height: 883px;
     flex-wrap: wrap;
 }

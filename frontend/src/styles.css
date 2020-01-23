@@ -11,9 +11,24 @@ markdown a{
     text-decoration: none; 
 }
 
-pre[class*="language-"] {
+markdown img {
+    max-width: 100%;
+}
+
+markdown {
+    font-size: 18px;
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.6;
+    word-break: break-all;
+}
+  
+code[class*="language-"], pre[class*="language-"]  {
     font-size: 14px !important;
-} 
+}
+
+/* pre[class*="language-"] {
+    font-size: 14px !important;
+}  */
 
 glelog-app {
     display: flex;

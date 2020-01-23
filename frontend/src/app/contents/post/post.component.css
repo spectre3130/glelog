@@ -1,20 +1,9 @@
 .post {
     width:768px;
-    padding-left: 2rem;
+    /* padding-left: 2rem;
     padding-right: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 2rem; */
     /* letter-spacing: -.3px; */
-}
-
-markdown {
-    font-size: 18px;
-    font-family: 'Noto Serif KR', serif;
-    line-height: 1.6;
-    word-break: break-all;
-}
-
-code[class*="language-"], pre[class*="language-"]  {
-    font-size: 14px;
 }
 
 .post-title {
@@ -25,9 +14,9 @@ code[class*="language-"], pre[class*="language-"]  {
 .post-user {
     display: flex;
     align-items: center;
-    height:100px;
+    height:80px;
     margin-top: 3rem;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
 }
 
 .user {
@@ -35,17 +24,18 @@ code[class*="language-"], pre[class*="language-"]  {
 }
 
 .user-post-time {
+    font-size: 14px;
     color: #7a7a7a;
 }
 
 .username {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .user-avatar {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     flex-shrink: 0;
     object-fit: cover;

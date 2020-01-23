@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
-
+import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MainNavComponent } from './layout/navbar/main-nav/main-nav.component';
@@ -23,7 +24,7 @@ import { WriteComponent } from './contents/write/write.component';
 import { EditorComponent } from './contents/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 
-import { SettingComponent } from './contents/setting/setting.component';
+import { SettingsComponent } from './contents/settings/settings.component';
 import { TagsComponent } from './contents/tags/tags.component';
 import { ContentsHeaderComponent } from './layout/contents-header/contents-header.component';
 
@@ -38,6 +39,8 @@ import { PreviewComponent } from './contents/posts/preview/preview.component';
 import { PostsService } from './contents/posts/posts.service';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
+import { UrlSerializer } from '@angular/router';
+import { CustomUrlSerializer } from './shared/custom-url-serializer';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -53,7 +56,7 @@ export function loadUser(authService: AuthService) {
     ProgressBarComponent,
     PostComponent,
     PostsComponent,
-    SettingComponent,
+    SettingsComponent,
     TagsComponent,
     LoginComponent,
     ContentsHeaderComponent,
@@ -75,12 +78,16 @@ export function loadUser(authService: AuthService) {
     MaterialModule,
     FontAwesomeModule,
     TextareaAutosizeModule,
+    ScrollingModule,
+    ScrollDispatchModule,
+    InfiniteScrollModule,
     MarkdownModule.forRoot(),
   ],
   providers: [
     AuthService,
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
+    { provide: UrlSerializer, useClass: CustomUrlSerializer },
     WriteService,
     EditorService,
     PostService,

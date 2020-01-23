@@ -7,13 +7,13 @@
     <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
 </div>
 <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="/username">
+    <button mat-menu-item [routerLink]="['/', user.username]">
         <span class="menu-name">내 블로그</span>
     </button>
     <button mat-menu-item routerLink="/write">
         <span class="menu-name">글쓰기</span>
     </button>
-    <button mat-menu-item routerLink="/setting">
+    <button mat-menu-item routerLink="/me/settings">
         <span class="menu-name">설정</span>
     </button>
     <button mat-menu-item (click)="logout()">
