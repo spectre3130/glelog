@@ -11,7 +11,7 @@ export class PostsService {
     private http: HttpClient
   ) { }
 
-  getPosts(): Observable<Array<Post>> {
-    return this.http.get<Array<Post>>(`${environment.resource}/api/post?page=1`);
+  getPosts(page: number): Observable<Array<Post>> {
+    return this.http.get<Array<Post>>(`${environment.resource}/api/post?page=${page}`);
   }
 }

@@ -1,6 +1,10 @@
-.main-contents {
+.app-container {
     display: flex;
     justify-content: center;
-    min-height: 883px;
     flex-wrap: wrap;
+}
+
+.app-container::after {
+    content: "";
+    min-height: 1000px;
 }

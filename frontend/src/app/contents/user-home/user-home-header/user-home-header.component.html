@@ -1,0 +1,16 @@
+<div class="user-home-header">
+    <div class="user-home-info">
+        <div class="username">
+            {{ user.username }}
+        </div>
+        <div class="description">
+            테스트중 입니다 테스트중입니다. 테스트중입니다.
+        </div>
+        <div class="sns">
+            <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
+            <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
+            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+        </div>
+    </div>
+    <img class="user-home-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+</div>

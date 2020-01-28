@@ -3,6 +3,7 @@ import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-
 import { PostService } from './post.service';
 import { Post } from 'src/app/shared/app.model';
 import { take } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -17,23 +18,20 @@ export class PostComponent implements OnInit {
   post: Post;
 
   constructor(
-    private postService: PostService
+    private postService: PostService,
+    private route: ActivatedRoute
   ) { 
     
   }
 
   ngOnInit() {
-    // this.http.get('assets/markdown2.text', {responseType: 'text' })
-    // .subscribe(content => {
-    //   this.markdown = content;
-    // });
-    this.postService.getPost(1)
-    .pipe(take(1))
-    .subscribe(post => {
-    console.log("TCL: PostComponent -> ngOnInit -> post", post)
-      this.post = post
+    this.route.params.subscribe(params => {
+      this.postService.getPost(params.seq)
+      .pipe(take(1))
+      .subscribe(post => {
+        this.post = post
+      });
     });
-  
   }
 
 

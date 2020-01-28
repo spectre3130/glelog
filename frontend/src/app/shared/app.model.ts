@@ -3,6 +3,7 @@ export declare interface User {
     username: string,
     name: string,
     avatar: string,
+    description: string
 };
 
 export declare interface Tag {
@@ -18,4 +19,9 @@ export declare interface Post {
     created_at?: Date
     updated_at?: Date
     user: User
+}
+
+export declare interface Confirm {
+    name: string,
+    message: string,
 }

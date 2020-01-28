@@ -29,19 +29,16 @@ export class EditorComponent implements OnInit {
   }
 
   onTitleChange(e): void {
-    const title = e.target.value;
-    if(title) {
-      this.title = title;
-      this.editorService.setTitle(title);
-    }
+    const title: string = e.target.value;
+    this.title = title;
+    this.editorService.setTitle(title);
   }
 
   onBodyChange(e): void {
-    const body: string = e.target.value;
-    if (body) {
-      this.body = body;
-      this.editorService.setBody(body);
-    } 
+    const body = e.target.value 
+    if(body) this.body = body;
+    else this.body = this.placeHolder;
+    this.editorService.setBody(body);
   }
 
   add(e: MatChipInputEvent): void {
@@ -74,6 +71,7 @@ export class EditorComponent implements OnInit {
   
   private getPlaceHolder(): string {
     return (
+      // '임시저장 ctrl + shift + s \n\n' +
       '# Title \n' +
       '## Title\n' +
       '### Title\n' +
@@ -94,6 +92,8 @@ export class EditorComponent implements OnInit {
 
       '### unorderd list\n' +
       '- item 1\n' +
+      '- item 2\n\n' +
+      '* item 1\n' +
       '* item 2\n\n' +
 
       '### orderd list\n\n' +

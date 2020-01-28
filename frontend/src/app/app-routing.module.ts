@@ -4,21 +4,21 @@ import { PostComponent } from './contents/post/post.component';
 import { PostsComponent } from './contents/posts/posts.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 import { TagsComponent } from './contents/tags/tags.component';
-import { SettingComponent } from './contents/setting/setting.component';
+import { SettingsComponent } from './contents/settings/settings.component';
 import { WriteComponent } from './contents/write/write.component';
 
 const routes: Routes = [
   { path: '', component: PostsComponent },
-  { path: '1', component: PostComponent },
-  { path: 'username', component: UserHomeComponent},
-  { path: 'tags', component: TagsComponent},
-  { path: 'write', component: WriteComponent},
-  { path: 'setting', component: SettingComponent},
+  { path: 'tags', component: TagsComponent },
+  { path: 'write', component: WriteComponent },
+  { path: 'me/settings', component: SettingsComponent },
+  { path: ':username', component: UserHomeComponent },
+  { path: 'post/:seq', component: PostComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled',
+    scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule]
 })

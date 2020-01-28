@@ -1,7 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import * as marked from 'marked';
 import { WriteService } from 'src/app/contents/write/write.service';
-import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-write',
@@ -9,6 +7,9 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./write.component.css']
 })
 export class WriteComponent implements OnInit, OnDestroy{
+
+  animal: string;
+  name: string;
 
   constructor(
     private writeService: WriteService
@@ -22,7 +23,4 @@ export class WriteComponent implements OnInit, OnDestroy{
   ngOnDestroy() {
     this.writeService.changeWriteMode(false);
   }
-
-
-
 }
