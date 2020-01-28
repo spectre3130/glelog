@@ -2,11 +2,11 @@
     <fa-icon [icon]="faUser" size="lg"></fa-icon>
     <span class="menu-name">로그인</span>
 </button>
-<div class="user-info" *ngIf="user" [matMenuTriggerFor]="menu">
-    <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
-    <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
-</div>
 <ng-container *ngIf="user">
+    <div class="user-info" *ngIf="user" [matMenuTriggerFor]="menu">
+        <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+        <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
+    </div>
     <mat-menu #menu="matMenu">
         <button mat-menu-item [routerLink]="['/', user.username]">
             <span class="menu-name">내 블로그</span>
