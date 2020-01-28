@@ -6,17 +6,19 @@
     <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
     <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
 </div>
-<mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/', user.username]">
-        <span class="menu-name">내 블로그</span>
-    </button>
-    <button mat-menu-item routerLink="/write">
-        <span class="menu-name">글쓰기</span>
-    </button>
-    <button mat-menu-item routerLink="/me/settings">
-        <span class="menu-name">설정</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-        <span class="menu-name">로그아웃</span>
-    </button>
-</mat-menu>
+<ng-container *ngIf="user">
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/', user.username]">
+            <span class="menu-name">내 블로그</span>
+        </button>
+        <button mat-menu-item routerLink="/write">
+            <span class="menu-name">글쓰기</span>
+        </button>
+        <button mat-menu-item routerLink="/me/settings">
+            <span class="menu-name">설정</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <span class="menu-name">로그아웃</span>
+        </button>
+    </mat-menu>
+</ng-container>
