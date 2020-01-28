@@ -15,6 +15,20 @@ exports.getUser = async (req, res, next) => {
     }
 }; 
 
+exports.getUserByUsername = async (req, res, next) => {
+    try {
+        const { username } = req.params;
+        const user = await User.findOne({ username });
+        if(!user) {
+            throw '존재하지 않는 회원입니다.';
+        }
+        res.status(200).json(user);
+    } catch(e) {
+        console.error(e);
+        next(createError(404, e));
+    }
+}
+
 exports.update = async (req, res, next) => {
     try {
         const { email, username, description } = req.body;

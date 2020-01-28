@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { EditorService } from '../editor/editor.service';
 import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class WriteService {
@@ -13,6 +14,7 @@ export class WriteService {
 
   constructor(
     private http: HttpClient,
+    private router: Router,
     private editorService: EditorService,
   ) { }
 
@@ -24,6 +26,8 @@ export class WriteService {
     const post:Post = this.editorService.getPost();
     this.http.post<Post>(`${environment.resource}/api/post`, post)
     .pipe(take(1))
-    .subscribe(res => console.log(res));
+    .subscribe(post => {
+      this.router.navigate(['post', post.seq]);
+    });
   }
 }

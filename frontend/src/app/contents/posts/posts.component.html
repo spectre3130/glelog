@@ -1,5 +1,11 @@
 <div class="contents-posts">
-    <div class="posts-item" *ngFor="let post of posts">
-        <app-preview *ngIf="post" [post]=post></app-preview>
+    <div class="posts-item"
+        infiniteScroll
+        [infiniteScrollDistance]="0"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="getPosts()">
+        <ng-container *ngFor="let post of posts">
+            <app-preview [post]=post></app-preview>
+        </ng-container>
     </div>
 </div>

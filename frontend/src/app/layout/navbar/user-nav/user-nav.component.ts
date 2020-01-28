@@ -39,7 +39,7 @@ export class UserNavComponent implements OnInit {
     authEvent.pipe(take(1))
     .subscribe(res => {
       this.user = res;
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
     });
   } 
 
