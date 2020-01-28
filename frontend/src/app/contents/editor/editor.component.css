@@ -12,6 +12,7 @@
   padding: 10px 5px 0px 20px;
   vertical-align: top;
   box-sizing: border-box;
+  height: 100%;
 }
 
 .editor-write {

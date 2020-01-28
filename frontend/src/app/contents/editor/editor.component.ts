@@ -71,6 +71,7 @@ export class EditorComponent implements OnInit {
   
   private getPlaceHolder(): string {
     return (
+      // '임시저장 ctrl + shift + s \n\n' +
       '# Title \n' +
       '## Title\n' +
       '### Title\n' +
@@ -91,6 +92,8 @@ export class EditorComponent implements OnInit {
 
       '### unorderd list\n' +
       '- item 1\n' +
+      '- item 2\n\n' +
+      '* item 1\n' +
       '* item 2\n\n' +
 
       '### orderd list\n\n' +

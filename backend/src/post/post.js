@@ -16,9 +16,6 @@ exports.getPosts = async (req, res, next) => {
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
-        for(let i = 0; i < 15; i ++) {
-            posts.push(posts[0]);
-        }
         res.status(200).json(posts);
     } catch(e) {
         console.error(e);
@@ -41,6 +38,9 @@ exports.getUserPosts = async (req, res, next) => {
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
+        for(let i = 0; i < 15; i ++) {
+            posts.push(posts[0]);
+        }
         res.status(200).json(posts);
     } catch(e) {
         console.error(e);

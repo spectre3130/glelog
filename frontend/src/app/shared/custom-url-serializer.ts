@@ -3,7 +3,7 @@ import {UrlSerializer, UrlTree, DefaultUrlSerializer} from '@angular/router';
 export class CustomUrlSerializer implements UrlSerializer {
     parse(url: any): UrlTree {
         const defaultUrlSerializer = new DefaultUrlSerializer();
-        return defaultUrlSerializer.parse(url);
+        return defaultUrlSerializer.parse(url.replace(/#/g, '%23'));
     }
 
     serialize(tree: UrlTree): any {

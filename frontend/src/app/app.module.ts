@@ -23,24 +23,25 @@ import { LoginComponent } from './auth/login/login.component';
 import { WriteComponent } from './contents/write/write.component';
 import { EditorComponent } from './contents/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
-
+import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
+import { ConfirmComponent } from './layout/confirm/confirm.component';
+import { PreviewComponent } from './contents/posts/preview/preview.component';
 import { SettingsComponent } from './contents/settings/settings.component';
 import { TagsComponent } from './contents/tags/tags.component';
-import { ContentsHeaderComponent } from './layout/contents-header/contents-header.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 
 import { AuthService } from './auth/auth.service';
-import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
 import { WriteService } from './contents/write/write.service';
 import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
-import { PreviewComponent } from './contents/posts/preview/preview.component';
 import { PostsService } from './contents/posts/posts.service';
+import { UserHomeService } from './contents/user-home/user-home.service';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
+import { UserHomeHeaderComponent } from './contents/user-home/user-home-header/user-home-header.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -59,16 +60,18 @@ export function loadUser(authService: AuthService) {
     SettingsComponent,
     TagsComponent,
     LoginComponent,
-    ContentsHeaderComponent,
     WriteComponent,
     EditorComponent,
     UserHomeComponent,
     WriteNavComponent,
     PreviewComponent,
-    WriteDatePipe
+    WriteDatePipe,
+    ConfirmComponent,
+    UserHomeHeaderComponent,
   ],
   entryComponents: [
-    LoginComponent
+    LoginComponent,
+    ConfirmComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,6 +95,7 @@ export function loadUser(authService: AuthService) {
     EditorService,
     PostService,
     PostsService,
+    UserHomeService
   ],
   bootstrap: [AppComponent]
 })

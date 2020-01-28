@@ -1,16 +1,16 @@
 <article *ngIf="post" class="post-preview">
     <div class="post">
-        <a [routerLink]="['post', post.seq]">
+        <a [routerLink]="['/post', post.seq]">
             <h1 class="post-title">
                 {{ post.title }}
             </h1>
         </a>
         <div class="post-user">
-            <a [routerLink]="['', post.user.username]">
+            <a [routerLink]="['/', post.user.username]">
                 <img class="avatar" src="{{ post.user.avatar }}">
             </a>
             <div class=info>
-                <a [routerLink]="['', post.user.username]"><div class="user-name">{{ post.user.username }}</div></a>
+                <a [routerLink]="['/', post.user.username]"><div class="user-name">{{ post.user.username }}</div></a>
                 <div class="post-time">{{ post.created_at | writeDate }}</div>
             </div>
         </div>

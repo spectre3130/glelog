@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
 import { User } from './shared/app.model';
 import { AuthService } from './auth/auth.service';
 import { take } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-
+  
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService) {

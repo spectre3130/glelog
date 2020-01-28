@@ -15,6 +15,10 @@ markdown img {
     max-width: 100%;
 }
 
+markdown h1 {
+    font-size: 1.7em
+}
+
 markdown {
     font-size: 18px;
     font-family: 'Noto Serif KR', serif;

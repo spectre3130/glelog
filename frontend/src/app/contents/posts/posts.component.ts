@@ -13,6 +13,8 @@ import { Subscription } from 'rxjs';
 export class PostsComponent implements OnInit {
 
   posts: Array<Post> = [];
+  page: number = 1;
+  isLoaded: boolean = true;
 
   constructor(
     private postsService: PostsService
@@ -22,16 +24,17 @@ export class PostsComponent implements OnInit {
     this.getPosts();
   }
 
-  onScroll() {
-    this.getPosts();
-  }
-
   getPosts() {
-    this.postsService.getPosts()
-    .pipe(take(1))
-    .subscribe(posts => { 
-      this.posts = this.posts.concat(posts);
-    });
+    if(this.isLoaded) {
+      this.isLoaded = false;
+      this.postsService.getPosts(this.page)
+      .pipe(take(1))
+      .subscribe(posts => { 
+        this.posts = this.posts.concat(posts);
+        this.isLoaded = true;
+        this.page++;
+      });
+    }
   }
 
 }

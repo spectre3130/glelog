@@ -1,0 +1,7 @@
+.mat-dialog-actions {
+    justify-content: center;
+}
+
+button {
+    flex: 1;
+}

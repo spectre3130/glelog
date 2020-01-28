@@ -5,7 +5,8 @@ const jwtProvider = require('../auth/jwt.provider');
 
 router.put('/', jwtProvider.authenticate, user.update);
 router.delete('/', jwtProvider.authenticate, user.delete);
-router.get('/:username', user.getUser);
+router.get('/:username', user.getUserByUsername);
+
 
 module.exports = router;
 

@@ -1,0 +1,8 @@
+:host(app-user-home) {
+    width: 100%;
+}
+
+app-posts {
+    display: flex;
+    justify-content: center;
+}
