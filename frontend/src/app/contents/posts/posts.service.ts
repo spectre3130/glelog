@@ -12,6 +12,6 @@ export class PostsService {
   ) { }
 
   getPosts(page: number): Observable<Array<Post>> {
-    return this.http.get<Array<Post>>(`${environment.resource}/api/post?page=${page}`);
+    return this.http.get<Array<Post>>(`${environment.resource}/api/posts?page=${page}`);
   }
 }

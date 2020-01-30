@@ -25,7 +25,6 @@ app.use(cors({
   credentials: true,
 }));
 
-// app.use('/api', jwtProvider.authenticate);
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 

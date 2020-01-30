@@ -1,0 +1,61 @@
+.settings-container {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: rgba(0,0,0,.84);
+}
+
+.user-settings {
+    width: 720px;
+}
+
+.settings-header {
+    font-size: 26px;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    padding: 40px 0 10px;
+}
+
+.settings-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    list-style-image: none;
+}
+
+:host ::ng-deep .list-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+    list-style: none;
+    padding: 20px 0 20px;
+}
+
+:host ::ng-deep .item-right {
+    flex: 1 1 auto;
+}
+
+:host ::ng-deep .item-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+:host ::ng-deep .settings-btn-set {
+    display:none;
+}
+
+:host ::ng-deep .settings-input {
+    background: #ffffff !important;
+    display: block;
+    outline: 0;
+    cursor: default;
+    font-size: 16px;
+    border: none;
+    padding: 0;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-style: normal;
+    width: 400px;
+}

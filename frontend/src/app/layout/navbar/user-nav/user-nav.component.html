@@ -3,8 +3,8 @@
     <span class="menu-name">로그인</span>
 </button>
 <ng-container *ngIf="user">
-    <div class="user-info" *ngIf="user" [matMenuTriggerFor]="menu">
-        <img class="user-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+    <div class="user-info" [matMenuTriggerFor]="menu">
+        <img class="user-avatar" [src]=user.avatar [alt]=user.username>
         <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
     </div>
     <mat-menu #menu="matMenu">

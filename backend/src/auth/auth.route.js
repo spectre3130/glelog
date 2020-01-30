@@ -4,13 +4,14 @@ const router = express.Router();
 const createError = require('http-errors');
 const passportGoogle = require('../auth/google.auth');
 const jwtProvider = require('./jwt.provider');
+const User = require('../user/user.model');
 const prod = process.env.NODE_ENV === 'prod';
 
 router.get('/check', async (req, res, next) => {
     try {
         const token = req.cookies['gleid'];
         if(token) {
-            const decodedToken = await jwtProvider.verifyToken(token);    
+            const decodedToken = await jwtProvider.verifyToken(token);
             res.status(200).json(decodedToken.user);
         } else {
             res.status(200).json('');
@@ -55,8 +56,8 @@ router.get('/google/callback', passportGoogle.authenticate('google', { session: 
         if(!req.user) {
             throw '인증에 실패하였습니다.';
         }
-        const { email, username, avatar } = req.user;
-        const user = { email, username, avatar };
+        const { email, username, name, description,  avatar } = req.user;
+        const user = { email, username, name, description, avatar };
         const token = await jwtProvider.generateToken({ user: user});
         res.redirect(`${prod ? process.env.ROOT : 'http://localhost:4200'}?token=${token}`);
     } catch(e) {

@@ -1,0 +1,9 @@
+.settings-avatar {
+    margin-right:10px;
+    margin-left:10px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}

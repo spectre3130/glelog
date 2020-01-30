@@ -1,1 +1,13 @@
-<p>setting works!</p>
+<div *ngIf="user" class="settings-container">
+    <div class="user-settings">
+        <div class="settings-header">
+            프로필 설정
+        </div>
+        <ul class="settings-list">
+            <app-settings-avatar [avatar]=user.avatar></app-settings-avatar>
+            <app-settings-username [username]=user.username></app-settings-username>
+            <app-settings-name [name]=user.name></app-settings-name>
+            <app-settings-description [description]=user.description></app-settings-description>
+        </ul>
+    </div>
+</div>

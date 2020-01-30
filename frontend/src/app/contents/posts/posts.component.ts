@@ -1,16 +1,14 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Post } from 'src/app/shared/app.model';
 import { PostsService } from './posts.service';
-import { take, filter, tap } from 'rxjs/operators';
-import { CdkVirtualScrollViewport, ScrollDispatcher } from '@angular/cdk/scrolling';
-import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 })
-export class PostsComponent implements OnInit {
+export class PostsComponent implements OnInit, AfterViewInit {
 
   posts: Array<Post> = [];
   page: number = 1;
@@ -21,6 +19,9 @@ export class PostsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
     this.getPosts();
   }
 
@@ -36,5 +37,4 @@ export class PostsComponent implements OnInit {
       });
     }
   }
-
 }

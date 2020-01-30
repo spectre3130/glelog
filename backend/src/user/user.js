@@ -3,7 +3,7 @@ const User = require('./user.model');
 
 exports.getUser = async (req, res, next) => {
     try {
-        const { email } = req.params;
+        const { email } = req.user;
         const user = await User.findOne({ email });
         if(!user) {
             throw '존재하지 않는 회원입니다.';
@@ -54,7 +54,7 @@ exports.delete = async (req, res, next) => {
             throw '탈퇴를 진행할 수 없습니다.';
         }
         user.remove();
-        res.cookie('_GID', '');
+        res.cookie('gleid', '');
         res.status(204);
     } catch(e) {
         console.error(e);

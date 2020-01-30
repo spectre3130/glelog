@@ -1,4 +1,4 @@
-<div class="user-home-header">
+<div *ngIf="user" class="user-home-header">
     <div class="user-home-info">
         <div class="username">
             {{ user.username }}
@@ -12,5 +12,6 @@
             <fa-icon [icon]="faGithub" size="2x"></fa-icon>
         </div>
     </div>
-    <img class="user-home-avatar" src="{{ user.avatar }}" alt="{{ user.username }}">
+    <img class="user-home-avatar" [src]=user.avatar [alt]=user.username>
 </div>
+
