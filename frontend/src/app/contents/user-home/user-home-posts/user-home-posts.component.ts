@@ -23,7 +23,7 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if(changes.user && !changes.user.firstChange) {
+    if(changes.user.currentValue && !changes.user.firstChange) {
       this.getUserPosts();
     }
   }
