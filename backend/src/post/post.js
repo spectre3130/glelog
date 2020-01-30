@@ -12,7 +12,7 @@ exports.getPosts = async (req, res, next) => {
             throw '잘못된 페이지 요청입니다.';
         }
         const posts = await Post.find()
-                                .populate('user', 'id email username name avatar')
+                                .populate('user', 'id email username name avatar description')
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
@@ -25,7 +25,8 @@ exports.getPosts = async (req, res, next) => {
 
 exports.getUserPosts = async (req, res, next) => {
     try {
-        const { username, page } = req.params;
+        const { username } = req.params;
+        const { page } = req.query;
         if(page < 1) {
             throw '잘못된 페이지 요청입니다.';
         }

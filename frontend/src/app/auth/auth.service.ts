@@ -26,10 +26,6 @@ export class AuthService {
             .pipe(tap((user:User) => this.user = user))
   }
 
-  loadedUser(): User {
-    return this.user;
-  }
-
   loadUser() {
     return new Promise((resovle) => {
       this.http.get<User>(`${environment.resource}/auth/check`)
@@ -42,4 +38,13 @@ export class AuthService {
       );
     });
   }
+
+  setUser(user: User) {
+    this.user = user;
+  }
+  
+  loadedUser(): User {
+    return this.user;
+  }
+
 }

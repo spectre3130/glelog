@@ -28,6 +28,13 @@ import { ConfirmComponent } from './layout/confirm/confirm.component';
 import { PreviewComponent } from './contents/posts/preview/preview.component';
 import { SettingsComponent } from './contents/settings/settings.component';
 import { TagsComponent } from './contents/tags/tags.component';
+import { UserHomeHeaderComponent } from './contents/user-home/user-home-header/user-home-header.component';
+import { UserHomePostsComponent } from './contents/user-home/user-home-posts/user-home-posts.component';
+import { UserHomeTagsComponent } from './contents/user-home/user-home-tags/user-home-tags.component';
+import { SettingsDescriptionComponent } from './contents/settings/settings-description/settings-description.component';
+import { SettingsNameComponent } from './contents/settings/settings-name/settings-name.component';
+import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
+import { SettingsAvatarComponent } from './contents/settings/settings-avatar/settings-avatar.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 
@@ -37,11 +44,11 @@ import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
 import { PostsService } from './contents/posts/posts.service';
 import { UserHomeService } from './contents/user-home/user-home.service';
+import { SettingsService } from './contents/settings/settings.service';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
-import { UserHomeHeaderComponent } from './contents/user-home/user-home-header/user-home-header.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -68,6 +75,12 @@ export function loadUser(authService: AuthService) {
     WriteDatePipe,
     ConfirmComponent,
     UserHomeHeaderComponent,
+    UserHomePostsComponent,
+    UserHomeTagsComponent,
+    SettingsDescriptionComponent,
+    SettingsNameComponent,
+    SettingsUsernameComponent,
+    SettingsAvatarComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -95,7 +108,8 @@ export function loadUser(authService: AuthService) {
     EditorService,
     PostService,
     PostsService,
-    UserHomeService
+    UserHomeService,
+    SettingsService,
   ],
   bootstrap: [AppComponent]
 })

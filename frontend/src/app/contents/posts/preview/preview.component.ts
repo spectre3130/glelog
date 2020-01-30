@@ -9,7 +9,7 @@ import { Post } from 'src/app/shared/app.model';
 export class PreviewComponent implements OnInit {
 
   @Input() 
-  post: any;
+  post: Post;
 
   constructor() { }
 

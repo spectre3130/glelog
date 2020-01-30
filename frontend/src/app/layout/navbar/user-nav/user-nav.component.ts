@@ -37,8 +37,8 @@ export class UserNavComponent implements OnInit {
 
   afterAuth(authEvent: Observable<User>) {
     authEvent.pipe(take(1))
-    .subscribe(res => {
-      this.user = res;
+    .subscribe(user => {
+      this.user = user;
       this.router.navigate(['']);
     });
   } 

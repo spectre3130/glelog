@@ -12,7 +12,7 @@ export class UserHomeHeaderComponent implements OnInit {
   faInstagram = faInstagram;
   faFacebook = faFacebook;
   faGithub = faGithub;
-  @Input() user: User
+  @Input() user: User;
 
   constructor(
   ) { }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserHomeService } from './user-home.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/shared/app.model';
 
