@@ -1,9 +1,9 @@
 export declare interface User {
-    email: string,
-    username: string,
-    name: string,
-    avatar: string,
-    description: string
+    email?: string,
+    username?: string,
+    name?: string,
+    avatar?: string,
+    description?: string
 };
 
 export declare interface Tag {

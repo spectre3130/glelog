@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faUser, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/auth/login/login.component';
@@ -6,7 +6,7 @@ import { User } from '../../../shared/app.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 
 @Component({
@@ -14,11 +14,12 @@ import { Observable } from 'rxjs';
   templateUrl: './user-nav.component.html',
   styleUrls: ['./user-nav.component.css']
 })
-export class UserNavComponent implements OnInit {
+export class UserNavComponent implements OnInit, OnDestroy {
 
   user: User;
   faUser = faUser;
   faCaretDown = faCaretDown;
+  changedUserEvent: Subscription;
 
   constructor(
     private router: Router,
@@ -27,21 +28,37 @@ export class UserNavComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.changedUser();
     this.user = this.authService.loadedUser();
-    this.afterAuth(this.authService.loginEvent);
+    if(!this.user) {
+      this.login();
+    }
+  }
+
+  ngOnDestroy() {
+    this.changedUserEvent.unsubscribe();
+  }
+
+  login(): void {
+    this.authService.loginEvent
+    .pipe(take(1))
+    .subscribe((user:User) => this.afterAuthentication(user));
   }
 
   logout(): void {
-    this.afterAuth(this.authService.logout());
+    this.authService.logout()
+    .subscribe((user:User) => this.afterAuthentication(user));
   }
 
-  afterAuth(authEvent: Observable<User>) {
-    authEvent.pipe(take(1))
-    .subscribe(user => {
-      this.user = user;
-      this.router.navigate(['']);
-    });
-  } 
+  afterAuthentication(user: User) {
+    this.user = user;
+    this.router.navigate(['']);
+  }
+
+  changedUser(): void {
+    this.changedUserEvent = this.authService.changedUserEvent
+    .subscribe((user:User) => this.user = user);
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(LoginComponent, {

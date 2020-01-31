@@ -49,6 +49,9 @@ glelog-app {
         top: 90px;
     }
 }
+.input-file {
+    display: none;
+}
 
 .mat-sidenav-content::-webkit-scrollbar, 
 .tag-input::-webkit-scrollbar, 

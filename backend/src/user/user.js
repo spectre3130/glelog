@@ -4,10 +4,7 @@ const User = require('./user.model');
 exports.getUser = async (req, res, next) => {
     try {
         const { email } = req.user;
-        const user = await User.findOne({ email });
-        if(!user) {
-            throw '존재하지 않는 회원입니다.';
-        }
+        const user = await User.findOneElseThrow({ email });
         res.status(200).json(user);
     } catch(e) {
         console.error(e);
@@ -18,7 +15,7 @@ exports.getUser = async (req, res, next) => {
 exports.getUserByUsername = async (req, res, next) => {
     try {
         const { username } = req.params;
-        const user = await User.findOne({ username });
+        const user = await User.findOneElseThrow({ username });
         if(!user) {
             throw '존재하지 않는 회원입니다.';
         }

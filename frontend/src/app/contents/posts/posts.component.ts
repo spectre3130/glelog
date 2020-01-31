@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Post } from 'src/app/shared/app.model';
 import { PostsService } from './posts.service';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-posts',
@@ -29,7 +28,6 @@ export class PostsComponent implements OnInit, AfterViewInit {
     if(this.isLoaded) {
       this.isLoaded = false;
       this.postsService.getPosts(this.page)
-      .pipe(take(1))
       .subscribe(posts => { 
         this.posts = this.posts.concat(posts);
         this.isLoaded = true;

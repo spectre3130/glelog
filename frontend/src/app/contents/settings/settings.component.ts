@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/shared/app.model';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,13 +14,12 @@ export class SettingsComponent implements OnInit {
   user: User;
 
   constructor(
+    private authService: AuthService,
     private settingsService: SettingsService
   ) { }
 
   ngOnInit() {
-    this.settingsService.getUser()
-    .pipe(take(1))
-    .subscribe((user: User) => this.user = user);
+    this.user = this.authService.loadedUser();
   }
 
 }

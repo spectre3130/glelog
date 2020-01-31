@@ -34,4 +34,12 @@ const User = new Schema({
 
 User.plugin(passportLocalMongoose)
 
+User.statics.findOneElseThrow = async function(model) {
+    const user = await this.findOne(model);
+    if(!user) {
+        throw '존재하지 않는 회원입니다.';
+    }
+    return user;
+};
+
 module.exports = mongoose.model('User', User);

@@ -11,8 +11,9 @@ router.get('/check', async (req, res, next) => {
     try {
         const token = req.cookies['gleid'];
         if(token) {
-            const decodedToken = await jwtProvider.verifyToken(token);
-            res.status(200).json(decodedToken.user);
+            const { email } = await jwtProvider.verifyToken(token);
+            const user = await User.findOneElseThrow({ email });
+            res.status(200).json(user);
         } else {
             res.status(200).json('');
         }
@@ -25,7 +26,8 @@ router.get('/check', async (req, res, next) => {
 router.post('/login', async (req, res, next) => {
     try {
         const token = req.body.token
-        const { user } = await jwtProvider.verifyToken(token);
+        const { email } = await jwtProvider.verifyToken(token);
+        const user = await User.findOneElseThrow({ email });
         res.cookie('gleid', token, {
             domain: prod ? '.glelog.dev' : '',
             httpOnly: true,
@@ -56,9 +58,8 @@ router.get('/google/callback', passportGoogle.authenticate('google', { session: 
         if(!req.user) {
             throw '인증에 실패하였습니다.';
         }
-        const { email, username, name, description,  avatar } = req.user;
-        const user = { email, username, name, description, avatar };
-        const token = await jwtProvider.generateToken({ user: user});
+        const { email } = req.user;
+        const token = await jwtProvider.generateToken({ email });
         res.redirect(`${prod ? process.env.ROOT : 'http://localhost:4200'}?token=${token}`);
     } catch(e) {
         console.error(e);

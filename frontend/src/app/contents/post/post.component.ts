@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 import { PostService } from './post.service';
 import { Post } from 'src/app/shared/app.model';
-import { take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -27,7 +26,6 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.postService.getPost(params.seq)
-      .pipe(take(1))
       .subscribe(post => {
         this.post = post
       });

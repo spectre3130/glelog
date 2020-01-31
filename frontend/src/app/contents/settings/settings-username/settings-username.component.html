@@ -3,13 +3,9 @@
         <div class="item-title">
             별명
         </div>
-        <input class="settings-input" [value]=username disabled>
+        <input #inputRef class="settings-input" [value]=username disabled>
     </div>
     <div class="item-left">
-        <button mat-flat-button class="settings-edit">수정</button>
-        <div class="settings-btn-set">
-            <button mat-flat-button color="primary" class="settings-save">저장</button>
-            <button mat-flat-button class="settings-cancel">취소</button>
-        </div>
+        <app-settings-base-btn [prop]="'username'" [inputRef]=inputRef (onSave)=save($event)></app-settings-base-btn>
     </div>
 </li>
