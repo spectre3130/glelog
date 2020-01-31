@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
 import { Post, User } from 'src/app/shared/app.model';
-import { take } from 'rxjs/operators';
 import { UserHomeService } from '../user-home.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { UserHomeService } from '../user-home.service';
 })
 export class UserHomePostsComponent implements OnInit, OnChanges {
 
-  @Input() user: User;
+  @Input() username: string;
   posts: Array<Post> = [];
   page: number = 1;
   isLoaded: boolean = true;
@@ -23,17 +22,14 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    console.log("TCL: UserHomePostsComponent -> ngOnChanges -> changes", changes)
-    if(changes.user.currentValue && !changes.user.firstChange) {
-      this.getUserPosts();
-    }
+    console.log("TCL: UserHomePostsComponent -> ngOnChanges -> changes", changes);
+    this.getUserPosts();
   }
 
   getUserPosts() {
     if(this.isLoaded) {
       this.isLoaded = false;
-      this.userHomeService.getUserPosts(this.user.username, this.page)
-      .pipe(take(1))
+      this.userHomeService.getUserPosts(this.username, this.page)
       .subscribe(posts => { 
         this.posts = this.posts.concat(posts);
         this.isLoaded = true;

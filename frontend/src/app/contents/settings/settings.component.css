@@ -42,10 +42,6 @@
     margin-bottom: 10px;
 }
 
-:host ::ng-deep .settings-btn-set {
-    display:none;
-}
-
 :host ::ng-deep .settings-input {
     background: #ffffff !important;
     display: block;

@@ -6,6 +6,7 @@
         <img class="settings-avatar" [src]=avatar>
     </div>
     <div class="item-left">
-        <button mat-flat-button>수정</button>
+        <input class="input-file" type="file" accept="image/*" #file>
+        <button mat-flat-button (click)=file.click()>수정</button>
     </div>
 </li>

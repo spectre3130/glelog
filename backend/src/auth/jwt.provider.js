@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
+const User = require('../user/user.model');
 
 exports.verifyToken = (token) => {
     if(!token) {
@@ -32,7 +33,8 @@ exports.authenticate = async (req, res, next) => {
     try {
         const token = req.cookies['gleid'];
         const decodedToken = await this.verifyToken(token);
-        req.user = decodedToken.user;
+        const user = await User.findOneElseThrow({ email: decodedToken.email });
+        req.user = user;
         req.tokenExp = decodedToken.exp;
         next();
     } catch(e) {

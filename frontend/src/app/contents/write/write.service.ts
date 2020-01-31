@@ -25,7 +25,6 @@ export class WriteService {
   createPost(): void  {
     const post:Post = this.editorService.getPost();
     this.http.post<Post>(`${environment.resource}/api/post`, post)
-    .pipe(take(1))
     .subscribe(post => {
       this.router.navigate(['post', post.seq]);
     });

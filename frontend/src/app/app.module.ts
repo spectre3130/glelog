@@ -49,6 +49,7 @@ import { SettingsService } from './contents/settings/settings.service';
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
+import { SettingsBaseBtnComponent } from './contents/settings/settings-base-btn/settings-base-btn.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -81,6 +82,7 @@ export function loadUser(authService: AuthService) {
     SettingsNameComponent,
     SettingsUsernameComponent,
     SettingsAvatarComponent,
+    SettingsBaseBtnComponent,
   ],
   entryComponents: [
     LoginComponent,
