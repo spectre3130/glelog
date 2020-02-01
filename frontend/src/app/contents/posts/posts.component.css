@@ -1,7 +1,15 @@
 .contents-posts {
+    display: flex;
+    flex-direction: row;
     width:auto;
 }
 
 .posts-item {
     padding: 15px 10px 15px 10px;
+}
+
+@media(max-width: 1000px) {
+    app-popular-posts {
+        display: none;
+    }
 }

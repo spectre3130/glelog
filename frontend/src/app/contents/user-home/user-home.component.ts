@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserHomeService } from './user-home.service';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/operators';
-import { User } from 'src/app/shared/app.model';
+import { take, tap } from 'rxjs/operators';
+import { User } from 'src/app/app.model';
 
 @Component({
   selector: 'app-user-home',
@@ -24,7 +24,6 @@ export class UserHomeComponent implements OnInit {
     )
     .subscribe(params => {
       this.userHomeService.getUserByUsername(params.username)
-      .pipe(take(1))
       .subscribe((user: User) => this.user = user);
     });
   }

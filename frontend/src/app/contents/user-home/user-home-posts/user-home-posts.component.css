@@ -1,7 +1,17 @@
 .contents-posts {
     width:auto;
+    display: flex;
+    flex-direction: row;
 }
 
 .posts-item {
+    margin-left: 40px;
     padding: 15px 10px 15px 10px;
+}
+
+
+@media(max-width: 1000px) {
+    app-user-home-tags {
+        display: none;
+    }
 }

@@ -10,6 +10,10 @@ const Post = new Schema({
     body: String,
     thumbnail: String,
     tags: [String],
+    count: {
+        type: Number,
+        default: 0,
+    },
     created_at: {
         type: Date,
         default: new Date(),

@@ -1,0 +1,11 @@
+<li class="list-item">
+    <div class="item-right">
+        <div class="item-title">
+            {{ title }}
+        </div>
+        <input #inputRef class="settings-input" [value]=value disabled>
+    </div>
+    <div class="item-left">
+        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef (onSave)=save($event)></app-settings-base-btn>
+    </div>
+</li>

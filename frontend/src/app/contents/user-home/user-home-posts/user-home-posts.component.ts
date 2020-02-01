@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
-import { Post, User } from 'src/app/shared/app.model';
+import { Post, User, Tag } from 'src/app/app.model';
 import { UserHomeService } from '../user-home.service';
+import { tap } from 'rxjs/operators';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-user-home-posts',
@@ -11,22 +13,27 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
 
   @Input() username: string;
   posts: Array<Post> = [];
+  tags: Array<Tag> = [];
   page: number = 1;
   isLoaded: boolean = true;
 
   constructor(
+    private viewportScroller: ViewportScroller,
     private userHomeService: UserHomeService
   ) { }
 
   ngOnInit() {
+    console.log(this.viewportScroller.getScrollPosition());
   }
 
   ngOnChanges(changes) {
-    console.log("TCL: UserHomePostsComponent -> ngOnChanges -> changes", changes);
-    this.getUserPosts();
+    if(changes.username) {
+      this.getUserPosts('');
+      this.getUserTags();
+    }
   }
 
-  getUserPosts() {
+  getUserPosts(tagName: string) {
     if(this.isLoaded) {
       this.isLoaded = false;
       this.userHomeService.getUserPosts(this.username, this.page)
@@ -36,6 +43,12 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
         this.page++;
       });
     }
+  }
+
+  getUserTags() {
+    this.userHomeService.getUserTags(this.username)
+    .pipe(tap((tags: Array<Tag>) => tags.unshift({ name: '전체보기', value: '' })))
+    .subscribe((tags: Array<Tag>) => this.tags = tags);
   }
 
 }

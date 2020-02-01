@@ -5,9 +5,17 @@
         </div>
         <ul class="settings-list">
             <app-settings-avatar [avatar]=user.avatar></app-settings-avatar>
-            <app-settings-username [username]=user.username></app-settings-username>
-            <app-settings-name [name]=user.name></app-settings-name>
-            <app-settings-description [description]=user.description></app-settings-description>
+            <app-settings-input [title]="'별명'" [value]=user.username [prop]="'username'"></app-settings-input>
+            <app-settings-input [title]="'이름'" [value]=user.name [prop]="'name'"></app-settings-input>
+            <app-settings-input [title]="'소개'" [value]=user.description [prop]="'description'"></app-settings-input>
+        </ul>
+        <div class="settings-header">
+            소셜 정보
+        </div>
+        <ul class="settings-list">
+            <app-settings-social-input [prepend]="'instagram.com/'" [icon]=faInstagram [value]=user.instagram [prop]="'instagram'"></app-settings-social-input>
+            <app-settings-social-input [prepend]="'facebook.com/'" [icon]=faFacebook [value]=user.facebook [prop]="'facebook'"></app-settings-social-input>
+            <app-settings-social-input [prepend]="'github.com/'" [icon]=faGithub [value]=user.github [prop]="'github'"></app-settings-social-input>
         </ul>
     </div>
 </div>

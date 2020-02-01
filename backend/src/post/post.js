@@ -12,7 +12,7 @@ exports.getPosts = async (req, res, next) => {
             throw '잘못된 페이지 요청입니다.';
         }
         const posts = await Post.find()
-                                .populate('user', 'id email username name avatar description')
+                                .populate('user', 'id email username avatar')
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
@@ -35,7 +35,7 @@ exports.getUserPosts = async (req, res, next) => {
             throw '존재하지 않는 회원입니다.';
         }
         const posts = await Post.find({ user: user._id })
-                                .populate('user', 'id email username name avatar description')
+                                .populate('user', 'id email username avatar')
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
@@ -53,7 +53,7 @@ exports.getPost = async (req, res, next) => {
     try {
         const { seq } = req.params;
         const post = await Post.findOne({ seq: seq })
-                                .populate('user', 'id email username name avatar description')
+                                .populate('user', 'id email username name avatar description instagram facebook github')
         if(!post) {
             throw '존재하지 않는 포스트입니다.';
         }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { User } from 'src/app/shared/app.model';
+import { User } from 'src/app/app.model';
 
 @Component({
   selector: 'app-user-home-header',
