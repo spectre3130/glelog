@@ -1,5 +1,6 @@
 <ng-container *ngIf="user">
     <app-user-home-header [user]=user></app-user-home-header>
-    <app-user-home-posts [username]=user.username></app-user-home-posts>
+    <div class="user-home-contents">
+        <app-user-home-posts [username]=user.username></app-user-home-posts>
+    </div>
 </ng-container>
-

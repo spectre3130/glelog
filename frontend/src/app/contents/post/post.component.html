@@ -11,15 +11,27 @@
             </div>
             <div class="user-spacer"></div>
             <div class="user-sns">
-                <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
-                <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
-                <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+                <a *ngIf="post.user.instagram" href="https://www.instagram.com/{{ post.user.instagram }}">
+                    <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
+                </a>
+                <a *ngIf="post.user.facebook" href="https://www.facebook.com/{{ post.user.facebook }}">
+                    <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
+                </a>
+                <a *ngIf="post.user.github" href="https://www.github.com/{{ post.user.github }}">
+                    <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+                </a>
             </div>
         </div>
         <div class="user-sns-small">
-            <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
-            <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
-            <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+            <a *ngIf="post.user.instagram" href="https://www.instagram.com/{{ post.user.instagram }}">
+                <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
+            </a>
+            <a *ngIf="post.user.facebook" href="https://www.facebook.com/{{ post.user.facebook }}">
+                <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
+            </a>
+            <a *ngIf="post.user.github" href="https://www.github.com/{{ post.user.github }}">
+                <fa-icon [icon]="faGithub" size="lg"></fa-icon>
+            </a>
         </div>
         <markdown ngPreserveWhitespaces [data]="post.body">
         </markdown>

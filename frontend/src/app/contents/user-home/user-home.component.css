@@ -2,7 +2,7 @@
     width: 100%;
 }
 
-app-user-home-posts {
+.user-home-contents {
     display: flex;
     justify-content: center;
 }

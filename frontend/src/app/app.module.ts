@@ -19,7 +19,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PostComponent } from './contents/post/post.component';
 import { PostsComponent } from './contents/posts/posts.component';
 import { ProgressBarComponent } from './layout/progress-bar/progress-bar.component';
-import { LoginComponent } from './auth/login/login.component';
+import { LoginComponent } from './contents/login/login.component';
 import { WriteComponent } from './contents/write/write.component';
 import { EditorComponent } from './contents/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
@@ -30,15 +30,15 @@ import { SettingsComponent } from './contents/settings/settings.component';
 import { TagsComponent } from './contents/tags/tags.component';
 import { UserHomeHeaderComponent } from './contents/user-home/user-home-header/user-home-header.component';
 import { UserHomePostsComponent } from './contents/user-home/user-home-posts/user-home-posts.component';
-import { UserHomeTagsComponent } from './contents/user-home/user-home-tags/user-home-tags.component';
-import { SettingsDescriptionComponent } from './contents/settings/settings-description/settings-description.component';
-import { SettingsNameComponent } from './contents/settings/settings-name/settings-name.component';
-import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
+import { UserHomeTagsComponent } from './contents/user-home/user-home-posts/user-home-tags/user-home-tags.component';
 import { SettingsAvatarComponent } from './contents/settings/settings-avatar/settings-avatar.component';
+import { SettingsBaseBtnComponent } from './contents/settings/settings-base-btn/settings-base-btn.component';
+import { SettingsInputComponent } from './contents/settings/settings-input/settings-input.component';
+import { SettingsSocialInputComponent } from './contents/settings/settings-social-input/settings-social-input.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './shared/auth.service';
 import { WriteService } from './contents/write/write.service';
 import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
@@ -49,7 +49,7 @@ import { SettingsService } from './contents/settings/settings.service';
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
-import { SettingsBaseBtnComponent } from './contents/settings/settings-base-btn/settings-base-btn.component';
+import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -78,11 +78,11 @@ export function loadUser(authService: AuthService) {
     UserHomeHeaderComponent,
     UserHomePostsComponent,
     UserHomeTagsComponent,
-    SettingsDescriptionComponent,
-    SettingsNameComponent,
-    SettingsUsernameComponent,
     SettingsAvatarComponent,
     SettingsBaseBtnComponent,
+    SettingsInputComponent,
+    SettingsSocialInputComponent,
+    PopularPostsComponent,
   ],
   entryComponents: [
     LoginComponent,

@@ -18,10 +18,28 @@ const User = new Schema({
     },
     name: {
         type: String,
-        required: '별명을 입력해주세요.'
+        default: '',
     },
-    avatar: String,
-    description: String,
+    avatar: {
+        type: String,
+        default: '',
+    },
+    description: {
+        type: String,
+        default: '',
+    },
+    instagram: {
+        type: String,
+        default: '',
+    },
+    facebook: {
+        type: String,
+        default: '',
+    },
+    github: {
+        type: String,
+        default: '',
+    },
     created_at: {
         type: Date,
         default: new Date(),

@@ -28,13 +28,17 @@ exports.getUserByUsername = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        const { email, username, description } = req.body;
+        const { email, username, name, description, instagram, facebook, github } = req.body;
         const user = await User.findOne({ email });
         if(req.user.email !== user.email) {
             throw '회원정보를 변경할 수 없습니다.';
         }
         user.username = username;
         user.description = description;
+        user.name = name;
+        user.instagram = instagram;
+        user.facebook = facebook;
+        user.github = github;
         user.save();
         res.status(200).json(user);
     } catch(e) {

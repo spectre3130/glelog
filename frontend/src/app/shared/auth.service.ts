@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter, } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../shared/app.model';
+import { User } from '../app.model';
 import { Observable } from 'rxjs';
 import { take, timeout, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';

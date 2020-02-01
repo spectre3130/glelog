@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Post } from 'src/app/shared/app.model';
+import { Post } from 'src/app/app.model';
 import { PostsService } from './posts.service';
 
 @Component({

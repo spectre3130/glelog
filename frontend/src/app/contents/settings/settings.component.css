@@ -42,16 +42,9 @@
     margin-bottom: 10px;
 }
 
-:host ::ng-deep .settings-input {
-    background: #ffffff !important;
-    display: block;
-    outline: 0;
-    cursor: default;
-    font-size: 16px;
-    border: none;
-    padding: 0;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-    width: 400px;
+
+@media(max-width:768px) {
+    .user-settings {
+        width:320px;
+    }
 }

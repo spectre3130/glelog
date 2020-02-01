@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Post } from 'src/app/shared/app.model';
+import { Post } from 'src/app/app.model';
 
 @Component({
   selector: 'app-preview',

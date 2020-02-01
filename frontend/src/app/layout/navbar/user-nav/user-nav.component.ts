@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { faUser, faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { LoginComponent } from 'src/app/auth/login/login.component';
-import { User } from '../../../shared/app.model';
-import { AuthService } from 'src/app/auth/auth.service';
+import { LoginComponent } from 'src/app/contents/login/login.component';
+import { User } from '../../../app.model';
+import { AuthService } from 'src/app/shared/auth.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';

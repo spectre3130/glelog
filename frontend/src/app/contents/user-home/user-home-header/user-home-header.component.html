@@ -7,9 +7,15 @@
             {{ user.description }}
         </div>
         <div class="sns">
-            <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
-            <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
-            <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+            <a *ngIf="user.instagram" href="https://www.instagram.com/{{ user.instagram }}">
+                <fa-icon [icon]="faInstagram" size="2x"></fa-icon>
+            </a>
+            <a *ngIf="user.facebook" href="https://www.facebook.com/{{ user.facebook }}">
+                <fa-icon [icon]="faFacebook" size="2x"></fa-icon>
+            </a>
+            <a *ngIf="user.github" href="https://www.github.com/{{ user.github }}">
+                <fa-icon [icon]="faGithub" size="2x"></fa-icon>
+            </a>
         </div>
     </div>
     <img class="user-home-avatar" [src]=user.avatar [alt]=user.username>
