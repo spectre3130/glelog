@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
-import { Post, User, Tag } from 'src/app/app.model';
+import { Post, Tag } from 'src/app/app.model';
 import { UserHomeService } from '../user-home.service';
 import { tap } from 'rxjs/operators';
-import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-user-home-posts',
@@ -18,22 +17,20 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
   isLoaded: boolean = true;
 
   constructor(
-    private viewportScroller: ViewportScroller,
     private userHomeService: UserHomeService
   ) { }
 
   ngOnInit() {
-    console.log(this.viewportScroller.getScrollPosition());
   }
 
   ngOnChanges(changes) {
     if(changes.username) {
-      this.getUserPosts('');
+      this.getUserPosts();
       this.getUserTags();
     }
   }
 
-  getUserPosts(tagName: string) {
+  getUserPosts() {
     if(this.isLoaded) {
       this.isLoaded = false;
       this.userHomeService.getUserPosts(this.username, this.page)
