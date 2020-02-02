@@ -38,7 +38,7 @@ import { SettingsSocialInputComponent } from './contents/settings/settings-socia
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './auth/auth.service';
 import { WriteService } from './contents/write/write.service';
 import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
@@ -50,6 +50,7 @@ import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
+import { AuthGardService } from './auth/auth-gard.service';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -103,6 +104,7 @@ export function loadUser(authService: AuthService) {
   ],
   providers: [
     AuthService,
+    AuthGardService,
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: UrlSerializer, useClass: CustomUrlSerializer },

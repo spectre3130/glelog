@@ -10,6 +10,7 @@ const prod = process.env.NODE_ENV === 'prod';
 router.get('/check', async (req, res, next) => {
     try {
         const token = req.cookies['gleid'];
+        res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
         if(token) {
             const { email } = await jwtProvider.verifyToken(token);
             const user = await User.findOneElseThrow({ email });

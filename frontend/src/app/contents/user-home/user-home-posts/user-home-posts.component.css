@@ -5,6 +5,7 @@
 }
 
 .posts-item {
+    min-width: 700px;;
     margin-left: 40px;
     padding: 15px 10px 15px 10px;
 }
@@ -13,5 +14,9 @@
 @media(max-width: 1000px) {
     app-user-home-tags {
         display: none;
+    }
+
+    .posts-item {
+        min-width: 350px;
     }
 }

@@ -3,10 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { faUser, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import { LoginComponent } from 'src/app/contents/login/login.component';
 import { User } from '../../../app.model';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -42,17 +43,18 @@ export class UserNavComponent implements OnInit, OnDestroy {
   login(): void {
     this.authService.loginEvent
     .pipe(take(1))
-    .subscribe((user:User) => this.afterAuthentication(user));
+    .subscribe((user:User) => {
+      this.user = user;
+      this.router.navigate(['']);
+    });
   }
 
   logout(): void {
     this.authService.logout()
-    .subscribe((user:User) => this.afterAuthentication(user));
-  }
-
-  afterAuthentication(user: User) {
-    this.user = user;
-    this.router.navigate(['']);
+    .subscribe((user:User) => {
+      this.user = user; 
+      window.location.replace(environment.root);
+    });
   }
 
   changedUser(): void {

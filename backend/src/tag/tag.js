@@ -10,7 +10,7 @@ exports.aggregateTags = async (req, res, next) => {
             { $unwind: '$tags' },
             { $group: { _id: '$tags', count: { $sum: 1 } } },
             { $project: { _id: 0, name: "$_id", count: 1 } },
-            { $sort: { count: -1 } }
+            { $sort: { count: -1, name: -1 } }
         ]);
         res.status(200).json(tags);
     } catch(e) {
@@ -32,7 +32,7 @@ exports.aggregateUserTags = async (req, res, next) => {
             { $unwind: '$tags' },
             { $group: { _id: '$tags', count: { $sum: 1 } } },
             { $project: { _id: 0, name: "$_id", value: "$_id", count: 1 } },
-            { $sort: { count: -1 } }
+            { $sort: { count: -1, name: -1 } }
         ]);
         res.status(200).json(tags);
     } catch(e) {

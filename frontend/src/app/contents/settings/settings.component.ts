@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingsService } from './settings.service';
 import { User } from 'src/app/app.model';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 @Component({

@@ -4,7 +4,7 @@
 }
 .user-tags {
     width: 150px;
-    position: fixed;
+    /* position: fixed; */
 }
 
 .tags-title {
