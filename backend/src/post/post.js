@@ -26,7 +26,7 @@ exports.getPosts = async (req, res, next) => {
 exports.getUserPosts = async (req, res, next) => {
     try {
         const { username } = req.params;
-        const { page } = req.query;
+        const { page, tag } = req.query;
         if(page < 1) {
             throw '잘못된 페이지 요청입니다.';
         }
@@ -34,7 +34,10 @@ exports.getUserPosts = async (req, res, next) => {
         if(!user) {
             throw '존재하지 않는 회원입니다.';
         }
-        const posts = await Post.find({ user: user._id })
+        const find = { user: user._id };
+        if(tag) find.tags = tag;
+        console.log("TCL: exports.getUserPosts -> find", find)
+        const posts = await Post.find(find)
                                 .populate('user', 'id email username avatar')
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)

@@ -15,9 +15,12 @@ export class UserHomeService {
     return this.http.get<User>(`${environment.resource}/api/user/${encodeURIComponent(username)}`);
   }
 
-  getUserPosts(username: string, page: number): Observable<Array<Post>> {
+  getUserPosts(username: string, page: number, tagName?: string): Observable<Array<Post>> {
     page = 1;
-    return this.http.get<Array<Post>>(`${environment.resource}/api/posts/${encodeURIComponent(username)}?page=${page}`);
+    let tagQuery; 
+    if(tagName) tagQuery = `&tag=${encodeURIComponent(tagName)}`;
+    else tagQuery = '';
+    return this.http.get<Array<Post>>(`${environment.resource}/api/posts/${encodeURIComponent(username)}?page=${page}${tagQuery}`);
   }
 
   getUserTags(username: string):Observable<Array<Tag>> {

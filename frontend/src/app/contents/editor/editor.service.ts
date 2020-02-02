@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Post } from 'src/app/app.model';
-import { AuthService } from 'src/app/shared/auth.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Injectable()
 export class EditorService {

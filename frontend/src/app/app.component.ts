@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular/router';
-import { AuthService } from './shared/auth.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'glelog-app',

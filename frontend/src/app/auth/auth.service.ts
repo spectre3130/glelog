@@ -1,15 +1,16 @@
 import { Injectable, EventEmitter, } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../app.model';
 import { Observable } from 'rxjs';
 import { take, timeout, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { SettingsService } from '../contents/settings/settings.service';
+import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable()
 export class AuthService {
 
-  user: User;
+  private user: User;
   changedUserEvent: EventEmitter<User> = new EventEmitter<User>();
   loginEvent: EventEmitter<User> = new EventEmitter<User>();
 
@@ -35,8 +36,8 @@ export class AuthService {
     return new Promise((resovle) => {
       this.http.get<User>(`${environment.resource}/auth/check`)
       .subscribe(
-        (user:User) => { this.user = user;  resovle() },
-        err => resovle(),
+        (user:User) => { this.user = user; resovle(); },
+        err => { resovle() },
       );
     });
   }

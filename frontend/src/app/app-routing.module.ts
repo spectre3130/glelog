@@ -6,13 +6,15 @@ import { UserHomeComponent } from './contents/user-home/user-home.component';
 import { TagsComponent } from './contents/tags/tags.component';
 import { SettingsComponent } from './contents/settings/settings.component';
 import { WriteComponent } from './contents/write/write.component';
+import { AuthGardService } from './auth/auth-gard.service';
 
 const routes: Routes = [
   { path: '', component: PostsComponent },
   { path: 'tags', component: TagsComponent },
-  { path: 'write', component: WriteComponent },
-  { path: 'me/settings', component: SettingsComponent },
+  { path: 'write', canActivate: [ AuthGardService ], component: WriteComponent },
+  { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
   { path: ':username', component: UserHomeComponent },
+  { path: ':username/tag/:tag', component: UserHomeComponent },
   { path: 'post/:seq', component: PostComponent },
 ];
 

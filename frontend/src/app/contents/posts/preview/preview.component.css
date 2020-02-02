@@ -4,6 +4,7 @@
     align-items: center;
     width: 700px;
     height: 120px;
+    padding: 15px 0 15px 0;
 }
 
 .post-thumb {
@@ -44,7 +45,12 @@
     font-size: 14px;
     color: #6f6f6f;
 }
-
+.post-tags {
+    padding: 5px 0 5px 0;
+}
+.mat-chip {
+    min-height: 25px !important;
+}
 @media (max-width: 1000px) {
     .post-preview {
         width:350px;
