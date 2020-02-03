@@ -7,16 +7,21 @@ const PER_PAGE = 15;
 
 exports.getPosts = async (req, res, next) => {
     try {
-        const { page } = req.query;
+        const { page, tag } = req.query;
         if(page < 1) {
             throw '잘못된 페이지 요청입니다.';
         }
-        const posts = await Post.find()
+        const find = {};
+        if(tag) find.tags = tag;
+        const posts = await Post.find(find)
                                 .populate('user', 'id email username avatar')
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
         res.status(200).json(posts);
+        for(let i = 0; i < 15; i ++) {
+            posts.push(posts[0]);
+        }
     } catch(e) {
         console.error(e);
         next(createError(404, e));
@@ -36,7 +41,6 @@ exports.getUserPosts = async (req, res, next) => {
         }
         const find = { user: user._id };
         if(tag) find.tags = tag;
-        console.log("TCL: exports.getUserPosts -> find", find)
         const posts = await Post.find(find)
                                 .populate('user', 'id email username avatar')
                                 .sort({ seq: -1 })

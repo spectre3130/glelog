@@ -6,10 +6,15 @@
 
 .posts-item {
     padding: 15px 10px 15px 10px;
+    width: 700px;
 }
 
 @media(max-width: 1000px) {
     app-popular-posts {
         display: none;
+    }
+
+    .posts-item {
+        width: 350px;
     }
 }

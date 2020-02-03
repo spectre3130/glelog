@@ -45,12 +45,16 @@
     font-size: 14px;
     color: #6f6f6f;
 }
+
 .post-tags {
     padding: 5px 0 5px 0;
 }
+
 .mat-chip {
+    padding: 7px !important;
     min-height: 25px !important;
 }
+
 @media (max-width: 1000px) {
     .post-preview {
         width:350px;

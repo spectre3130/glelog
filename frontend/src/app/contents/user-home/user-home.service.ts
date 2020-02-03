@@ -17,9 +17,8 @@ export class UserHomeService {
 
   getUserPosts(username: string, page: number, tagName?: string): Observable<Array<Post>> {
     page = 1;
-    let tagQuery; 
+    let tagQuery = ''; 
     if(tagName) tagQuery = `&tag=${encodeURIComponent(tagName)}`;
-    else tagQuery = '';
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts/${encodeURIComponent(username)}?page=${page}${tagQuery}`);
   }
 

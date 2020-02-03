@@ -11,7 +11,10 @@ export class PostsService {
     private http: HttpClient
   ) { }
 
-  getPosts(page: number): Observable<Array<Post>> {
-    return this.http.get<Array<Post>>(`${environment.resource}/api/posts?page=${page}`);
+  getPosts(page: number, tagName: string): Observable<Array<Post>> {
+    page = 1;
+    let tagQuery = ''
+    if(tagName) tagQuery = `&tag=${encodeURIComponent(tagName)}`;
+    return this.http.get<Array<Post>>(`${environment.resource}/api/posts?page=${page}${tagQuery}`);
   }
 }

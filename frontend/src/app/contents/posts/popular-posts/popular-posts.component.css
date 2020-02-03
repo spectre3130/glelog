@@ -1,7 +1,30 @@
-div {
-    width: 200px;
+.popular-posts-container {
+    width: 300px;
 }
 
-p {
+
+.popular-posts {
+    padding-top: 5px;
     position: fixed;
+}
+
+.popular-contents {
+    padding: 0 5px 0 10px;
+}
+
+.popular-title {
+    font-size: 26px;
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    width:330px;
+    padding: 20px 0 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.popular-subject {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    padding: 15px 0px 0px 0px;
 }

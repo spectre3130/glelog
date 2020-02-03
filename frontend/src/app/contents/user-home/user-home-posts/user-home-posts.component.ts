@@ -29,13 +29,8 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes) {
     if(changes.username) {
-      this.route.params.pipe(
-        take(1),
-      ).subscribe((params) => {
-        console.log(params);
-        this.getUserPosts();
-        this.getUserTags();
-      });
+      this.getUserPosts();
+      this.getUserTags();
     }
   }
 
@@ -62,7 +57,6 @@ export class UserHomePostsComponent implements OnInit, OnChanges {
   }
 
   getUserPostsByTagName(tagName: string) {
-    console.log("TCL: UserHomePostsComponent -> getUserPostsByTagName -> tagName", tagName)
     this.posts = [];
     this.page = 1;
     this.tagName = tagName;

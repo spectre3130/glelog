@@ -15,6 +15,7 @@ const db = require('./src/config/db');
 const authRouter = require('./src/auth/auth.route');
 const apiRouter = require('./src/route');
 
+app.disabled('x-powered-by');
 app.use(helmet());
 app.use( prod ? logger('combined') : logger('dev'));
 app.use(express.json());

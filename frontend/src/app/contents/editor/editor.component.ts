@@ -69,36 +69,34 @@ export class EditorComponent implements OnInit {
 
   
   private getPlaceHolder(): string {
-    return (
-      // '임시저장 ctrl + shift + s \n\n' +
-      '# Title \n' +
-      '## Title\n' +
-      '### Title\n' +
-      '#### Title\n\n' +
+    return `  # Title 
+  ## Title
+  ### Title
+  #### Title
 
-      '**bold**\n\n' +
+  **bold**
 
-      '*italic*\n\n' +
+  *italic*
 
-      'inline `code`\n\n' +
+  inline \`code\`
 
-      '### code block\n' +
-      '```javascript\n' +
-      'const foo = () => {\n' +
-      '    return 1\n' +
-      '}\n' +
-      '```\n\n' +
+  ### code block
+  \`\`\`javascript
+  const foo = () => {
+      return 1
+  }
+  \`\`\`
 
-      '### unorderd list\n' +
-      '- item 1\n' +
-      '- item 2\n\n' +
-      '* item 1\n' +
-      '* item 2\n\n' +
+  ### unorderd list
+  - item 1
+  - item 2
 
-      '### orderd list\n\n' +
-      '1. item a\n' +
-      '2. item b'
-    );
+  * item 1
+  * item 2
+
+  ### orderd list
+  1. item a
+  2. item b`;
   }
 
 }

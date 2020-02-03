@@ -51,6 +51,8 @@ import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 import { AuthGardService } from './auth/auth-gard.service';
+import { TagsService } from './contents/tags/tags.service';
+import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -84,6 +86,7 @@ export function loadUser(authService: AuthService) {
     SettingsInputComponent,
     SettingsSocialInputComponent,
     PopularPostsComponent,
+    PopularPreviewComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -112,6 +115,7 @@ export function loadUser(authService: AuthService) {
     EditorService,
     PostService,
     PostsService,
+    TagsService,
     UserHomeService,
     SettingsService,
   ],
