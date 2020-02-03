@@ -1,0 +1,48 @@
+.popuplar-preview {
+    display: flex;
+    flex-direction: row;
+    padding: 15px 0 0 0;
+}
+
+.popular-rank {
+    width: 35px;
+    font-size:26px;
+    color: rgba(0,0,0,.3);
+    fill: rgba(0,0,0,.3);
+}
+
+.post-title {
+    font-size:18px;
+    font-weight: 600;
+}
+
+.post-user {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+.avatar {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: 600;
+}
+.post-time {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #6f6f6f;
+}

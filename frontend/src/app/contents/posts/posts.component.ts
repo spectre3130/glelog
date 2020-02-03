@@ -1,33 +1,36 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { PostsService } from './posts.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.css'],
 })
-export class PostsComponent implements OnInit, AfterViewInit {
+export class PostsComponent implements OnInit {
 
   posts: Array<Post> = [];
   page: number = 1;
+  tagName: string;
   isLoaded: boolean = true;
 
   constructor(
+    private route: ActivatedRoute,
     private postsService: PostsService
   ) { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
-    this.getPosts();
+    this.route.params.subscribe(params => {
+      if(params.tag) this.tagName = '#' + params.tag;
+      this.getPosts();
+    });
   }
 
   getPosts() {
     if(this.isLoaded) {
       this.isLoaded = false;
-      this.postsService.getPosts(this.page)
+      this.postsService.getPosts(this.page, this.tagName)
       .subscribe(posts => { 
         this.posts = this.posts.concat(posts);
         this.isLoaded = true;

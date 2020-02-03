@@ -1,0 +1,22 @@
+.tags-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.tags {
+    padding: 20px 10px 20px 10px;
+    max-width: 1000px;
+}
+
+.tag-count{
+    font-size: 12px;
+    margin-left: 10px;
+    color: gray;
+}
+
+mat-chip {
+    margin: 7px !important
+}

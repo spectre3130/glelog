@@ -30,3 +30,9 @@
     justify-content: flex-end;
     font-size:12px;
 }
+
+@media(max-width: 1000px) {
+    .main-footer {
+        display: none;
+    }
+}

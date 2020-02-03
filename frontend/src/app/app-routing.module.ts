@@ -10,6 +10,7 @@ import { AuthGardService } from './auth/auth-gard.service';
 
 const routes: Routes = [
   { path: '', component: PostsComponent },
+  { path: 'tag/:tag', component: PostsComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'write', canActivate: [ AuthGardService ], component: WriteComponent },
   { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
