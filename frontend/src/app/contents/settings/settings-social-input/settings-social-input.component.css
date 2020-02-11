@@ -50,9 +50,13 @@
 
 @media(max-width:768px) {
     .settings-input {
+        margin-left: 10px;
         width:160px;
     }
     .input-group .settings-input{
         width:100px;
+    }
+    .prepend {
+        display:none;
     }
 }

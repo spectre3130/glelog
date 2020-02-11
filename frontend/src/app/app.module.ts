@@ -11,6 +11,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MainNavComponent } from './layout/navbar/main-nav/main-nav.component';
@@ -35,24 +36,25 @@ import { SettingsAvatarComponent } from './contents/settings/settings-avatar/set
 import { SettingsBaseBtnComponent } from './contents/settings/settings-base-btn/settings-base-btn.component';
 import { SettingsInputComponent } from './contents/settings/settings-input/settings-input.component';
 import { SettingsSocialInputComponent } from './contents/settings/settings-social-input/settings-social-input.component';
+import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
+import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 
 import { AuthService } from './auth/auth.service';
+import { AuthGardService } from './auth/auth-gard.service';
 import { WriteService } from './contents/write/write.service';
 import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
 import { PostsService } from './contents/posts/posts.service';
 import { UserHomeService } from './contents/user-home/user-home.service';
 import { SettingsService } from './contents/settings/settings.service';
+import { TagsService } from './contents/tags/tags.service';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
-import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
-import { AuthGardService } from './auth/auth-gard.service';
-import { TagsService } from './contents/tags/tags.service';
-import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
+import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -87,6 +89,7 @@ export function loadUser(authService: AuthService) {
     SettingsSocialInputComponent,
     PopularPostsComponent,
     PopularPreviewComponent,
+    LoadingPostsComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -103,6 +106,7 @@ export function loadUser(authService: AuthService) {
     ScrollingModule,
     ScrollDispatchModule,
     InfiniteScrollModule,
+    LazyLoadImageModule,
     MarkdownModule.forRoot(),
   ],
   providers: [

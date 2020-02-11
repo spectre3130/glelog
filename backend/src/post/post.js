@@ -18,10 +18,10 @@ exports.getPosts = async (req, res, next) => {
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
-        res.status(200).json(posts);
         for(let i = 0; i < 15; i ++) {
             posts.push(posts[0]);
         }
+        res.status(200).json(posts);
     } catch(e) {
         console.error(e);
         next(createError(404, e));
@@ -73,15 +73,11 @@ exports.getPost = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
     try {
-        const user = await User.findOne({ email: req.body.user.email });
-        if(!user) {
-            throw '존재하지 않는 회원입니다.';
-        }
         const post = new Post(req.body);
         const seq = await Counter.getNextSequence('post');
         Tag.collectTag(post.tags);
         post.seq = seq;
-        post.user = user.id;
+        post.user = req.user.id;
         post.save();
         res.status(200).json(post);
     } catch(e) {

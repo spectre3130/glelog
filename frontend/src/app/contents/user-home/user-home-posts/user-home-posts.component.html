@@ -2,11 +2,12 @@
     <app-user-home-tags [username]=username [tags]=tags (onSelected)=getUserPostsByTagName($event)></app-user-home-tags>
     <div class="posts-item"
         infiniteScroll
-        [infiniteScrollDistance]=0
-        [infiniteScrollThrottle]=50
+        [infiniteScrollDistance]="0"
+        [infiniteScrollThrottle]="100"
         (scrolled)=onScroll()>
         <ng-container *ngFor="let post of posts">
             <app-preview [post]=post></app-preview>
         </ng-container>
+        <app-loading-posts *ngIf="!isLoaded"></app-loading-posts>
     </div>
 </div>
