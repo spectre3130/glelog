@@ -3,10 +3,18 @@
         <div class="item-title">
             프로필 사진
         </div>
-        <img class="settings-avatar" [src]=avatar>
+        <div>
+            <img *ngIf="avatar" class="settings-avatar" [src]=avatar>
+            <div *ngIf="!avatar" class="loading-avatar">
+                <mat-spinner
+                    [color]="'accent'"
+                    [diameter]=105>
+                </mat-spinner>
+            </div>
+        </div>
     </div>
     <div class="item-left">
-        <input class="input-file" type="file" accept="image/*" #file>
-        <button mat-flat-button (click)=file.click()>수정</button>
+        <input class="input-file" type="file" accept="image/*" #avatarInput (change)=onChangeAvatar(avatarInput.files)>
+        <button mat-flat-button (click)=avatarInput.click()>수정</button>
     </div>
 </li>

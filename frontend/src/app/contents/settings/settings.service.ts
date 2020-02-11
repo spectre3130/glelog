@@ -4,11 +4,13 @@ import { User } from 'src/app/app.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
+import * as axios from 'axios';
 
 @Injectable()
 export class SettingsService {
 
   changeUserEvent: EventEmitter<User> = new EventEmitter<User>();
+  changeAvatarEvent: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private http: HttpClient
@@ -22,6 +24,18 @@ export class SettingsService {
     return this.http.put<User>(`${environment.resource}/api/user`, user)
     .pipe(
       tap((user: User) => this.changeUserEvent.emit(user))
+    )
+  }
+
+  updateAvatar(username:string, formData: FormData) {
+    this.changeAvatarEvent.emit();
+    return this.http.post<User>(`${environment.resource}/api/user/${username}/avatar`, formData)
+    .pipe(
+      tap((user: User) => {
+          axios.default.get(user.avatar);
+          this.changeUserEvent.emit(user)
+        }
+      ),
     )
   }
 }

@@ -4,7 +4,13 @@
 </button>
 <ng-container *ngIf="user">
     <div class="user-info" [matMenuTriggerFor]="menu">
-        <img class="user-avatar" [src]=user.avatar [alt]=user.username>
+        <img *ngIf="avatar" class="user-avatar" [src]=avatar [alt]=user.username>
+        <div *ngIf="!avatar" class="loading-avatar">
+            <mat-spinner
+                [color]="'accent'"
+                [diameter]=32>
+            </mat-spinner>
+        </div>
         <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
     </div>
     <mat-menu #menu="matMenu">

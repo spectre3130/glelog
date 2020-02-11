@@ -8,7 +8,7 @@ const Post = new Schema({
         required: '제목을 입력해주세요.'
     },
     body: String,
-    thumbnail: String,
+    thumb: String,
     tags: [String],
     count: {
         type: Number,
