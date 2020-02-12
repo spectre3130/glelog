@@ -15,7 +15,7 @@ export class SettingsSocialInputComponent implements OnInit {
   @Input() value: string;
   @Input() prop: string;
   @Input() color: string;
-  @ViewChild('inputRef', { static: false }) inputRef: ElementRef<HTMLInputElement>;
+  @ViewChild('inputRef') inputRef: ElementRef<HTMLInputElement>;
 
   constructor(
     private settingsService: SettingsService
