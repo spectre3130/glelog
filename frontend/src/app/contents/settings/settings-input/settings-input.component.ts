@@ -12,7 +12,7 @@ export class SettingsInputComponent implements OnInit {
   @Input() title: string;
   @Input() value: string;
   @Input() prop: string;
-  @ViewChild('inputRef', { static: false }) inputRef: ElementRef<HTMLInputElement>;
+  @ViewChild('inputRef') inputRef: ElementRef<HTMLInputElement>;
 
   constructor(
     private settingsService: SettingsService
