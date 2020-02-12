@@ -34,13 +34,13 @@ export class UserNavComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.changedUser();
+    this.changeAvatarEvent = this.settingsService.changeAvatarEvent
+    .subscribe(() => this.avatar = '');
     this.user = this.authService.loadedUser();
     this.avatar = this.user.avatar;
     if(!this.user) {
       this.login();
     }
-    this.changeAvatarEvent = this.settingsService.changeAvatarEvent
-    .subscribe(() => this.avatar = '');
   }
 
   ngOnDestroy() {
@@ -53,6 +53,7 @@ export class UserNavComponent implements OnInit, OnDestroy {
     .pipe(take(1))
     .subscribe((user:User) => {
       this.user = user;
+      this.avatar = user.avatar;
       this.router.navigate(['']);
     });
   }
@@ -69,7 +70,6 @@ export class UserNavComponent implements OnInit, OnDestroy {
     this.changedUserEvent = this.authService.changedUserEvent
     .subscribe((user:User) => {
       this.user = user
-      // this.avatar = '';
       this.avatar = user.avatar;
     });
   }

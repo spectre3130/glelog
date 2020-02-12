@@ -67,6 +67,27 @@ exports.changeAvatar = async (req, res, next) => {
         res.status(200).json(req.user);
     } catch(e) {
         console.error(e);
-        next(createError(404, e));
+        next(createError(400, e));
+    }
+}
+
+exports.checkUsername = async (req, res, next) => {
+    try {
+        const { username } = req.params;
+        const user = await User.findOne({ username });
+        if(user) {
+            res.status(200).json({
+                result: false,
+                message: '이미 사용중인 별명입니다.'
+            });
+        } else {
+            res.status(200).json({
+                result: true,
+                message: '사용가능한 별명 입니다.'
+            });
+        }
+    } catch(e) {
+        console.error(e);
+        next(createError(400, e));
     }
 }

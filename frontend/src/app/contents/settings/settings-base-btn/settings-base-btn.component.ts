@@ -14,6 +14,7 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
   @Input() inputRef: HTMLInputElement;
   @Input() prop: string;
   @Output() onSave: EventEmitter<User> = new EventEmitter<User>();
+  @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
   cache: string;
   editMode:boolean = false;
   afterChangeEvent: Subscription;
@@ -50,6 +51,7 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
     this.inputRef.disabled = true;
     this.inputRef.value = this.cache;
     this.editMode = false;
+    this.onCancel.emit();
   }
 
 }

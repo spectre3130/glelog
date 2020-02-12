@@ -14,7 +14,7 @@ export class UserHomeTagsComponent implements OnInit, OnDestroy {
   @Input() username: string;
   @Input() tags: Array<Tag>;
   @Output() onSelected: EventEmitter<string> = new EventEmitter<string>();
-  @ViewChild('userTags', { static: false }) userTags: ElementRef;
+  @ViewChild('userTags') userTags: ElementRef;
   scrollEvent: Subscription;
   constructor(
   ) { }
