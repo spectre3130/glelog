@@ -10,7 +10,7 @@ export class LoadingPostsComponent implements OnInit {
   repeat: Array<number>;
 
   constructor() { 
-    this.repeat = Array(1).fill(0).map((x,i)=>i);
+    this.repeat = Array(6).fill(0).map((x,i)=>i);
   }
 
   ngOnInit() {

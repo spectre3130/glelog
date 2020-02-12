@@ -55,6 +55,9 @@ import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
+import { LoaderService } from './shared/loader.service';
+import { LoaderInterceptor } from './shared/loader.interceptor';
+import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -90,6 +93,7 @@ export function loadUser(authService: AuthService) {
     PopularPostsComponent,
     PopularPreviewComponent,
     LoadingPostsComponent,
+    SettingsUsernameComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -113,6 +117,7 @@ export function loadUser(authService: AuthService) {
     AuthService,
     AuthGardService,
     { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: UrlSerializer, useClass: CustomUrlSerializer },
     WriteService,
@@ -122,6 +127,7 @@ export function loadUser(authService: AuthService) {
     TagsService,
     UserHomeService,
     SettingsService,
+    LoaderService
   ],
   bootstrap: [AppComponent]
 })

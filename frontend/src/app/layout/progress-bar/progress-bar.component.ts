@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd } from '@angular/router';
+import { LoaderService } from 'src/app/shared/loader.service';
 
 @Component({
   selector: 'app-progress-bar',
@@ -8,19 +9,18 @@ import { Router, NavigationStart, NavigationEnd } from '@angular/router';
 })
 export class ProgressBarComponent implements OnInit {
 
-  currentPath: string;
   isFetching:boolean = false;
   fetchingTimer: any;
   constructor(
-    private router: Router) {
+    private loaderService: LoaderService) {
   }
 
   ngOnInit() {
-    this.router.events.subscribe(event => {
-      if(event instanceof NavigationStart) {
+    this.loaderService.fetchEvent.subscribe(isFetched => {
+      if(isFetched) {
         clearTimeout(this.fetchingTimer);
         this.fetchingTimer = setTimeout(() => this.isFetching = true, 200);
-      } else if(event instanceof NavigationEnd) {
+      } else {
         this.fetchingTimer = setTimeout(() => this.isFetching = false, 500);
       }
     });

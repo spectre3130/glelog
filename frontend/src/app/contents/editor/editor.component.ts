@@ -69,34 +69,35 @@ export class EditorComponent implements OnInit {
 
   
   private getPlaceHolder(): string {
-    return `  # Title 
-  ## Title
-  ### Title
-  #### Title
+    return `마크다운 작성법 : https://ko.wikipedia.org/wiki/마크다운`;
+  //   return `  # Title 
+  // ## Title
+  // ### Title
+  // #### Title
 
-  **bold**
+  // **bold**
 
-  *italic*
+  // *italic*
 
-  inline \`code\`
+  // inline \`code\`
 
-  ### code block
-  \`\`\`javascript
-  const foo = () => {
-      return 1
-  }
-  \`\`\`
+  // ### code block
+  // \`\`\`javascript
+  // const foo = () => {
+  //     return 1
+  // }
+  // \`\`\`
 
-  ### unorderd list
-  - item 1
-  - item 2
+  // ### unorderd list
+  // - item 1
+  // - item 2
 
-  * item 1
-  * item 2
+  // * item 1
+  // * item 2
 
-  ### orderd list
-  1. item a
-  2. item b`;
+  // ### orderd list
+  // 1. item a
+  // 2. item b`;
   }
 
 }

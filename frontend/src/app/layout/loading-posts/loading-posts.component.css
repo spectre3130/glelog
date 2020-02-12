@@ -100,55 +100,29 @@
     top: 90px;
     left: 0;
     width: 580px;
-    height: 5px;
+    height: 8px;
 }
 
 .background-masker.content-first {
-    top: 95px;
-    left: 400px;
-    width: 180px;
-    height: 12px;
+    top: 98px;
+    left: 300px;
+    width: 280px;
+    height: 16px;
 }
 
 .background-masker.content-first-line {
-    top: 107px;
+    top: 114px;
     left: 0px;
     width: 580px;
-    height: 2px;
+    height: 5px;
 }
 
 .background-masker.content-second {
-    top: 109px;
-    left: 500px;
-    width: 80px;
-    height: 12px;
+    top: 119px;
+    left: 400px;
+    width: 180px;
+    height: 16px;
 }
-
-.background-masker.content-second-line {
-    top: 121px;
-    left: 0px;
-    width: 580px;
-    height: 2px;
-}
-
-.background-masker.content-third {
-    top: 123px;
-    left: 300px;
-    width: 280px;
-    height: 12px;
-}
-/* .background-masker.content-first-line,
-.background-masker.content-second-line,
-.background-masker.content-third-line {
-    top: 94px;
-}
-
-.background-masker.content-first-line {
-    top: 94px;
-    left: 150px;
-    height: 4px;
-    width: auto;
-} */
 
 .background-masker.bottom-padding {
     top: 135px;
@@ -157,4 +131,120 @@
     height: 15px;
 }
 
+@media(max-width: 1000px) {
+    @keyframes placeHolderShimmer{
+        0%{
+            background-position: -350px 0
+        }
+        100%{
+            background-position: 350px 0
+        }
+    }
+    .animated-background {
+        background-size: 350px;
+    }
+    .background-masker.top-padding {
+        top: 0;
+        left: 0;
+        width: 350px;
+        height: 15px;
+    }
+    
+    .background-masker.title {
+        top: 15px;
+        left: 280px;
+        width: 70px;
+        height: 30px;
+    }
+    
+    .background-masker.title-line {
+        top: 45px;
+        left: 0;
+        height: 5px;
+        width: 350px;
+    }
+    
+    .background-masker.round-thumb {
+        top: 50px;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, #fff);
+    }
+    
+    .background-masker.username-left,
+    .background-masker.username-right {
+        top: 50px;
+        height: 18px;
+    }
+    
+    .background-masker.username-left {
+        left: 40px;
+        width: 10px;
+    }
+    
+    .background-masker.username-right {
+        left: 130px;
+        width: 220px;
+    }
+    
+    .background-masker.username-line {
+        top: 68px;
+        left: 40px;
+        width: 310px;
+        height: 4px;
+    }
+    
+    .background-masker.time-left,
+    .background-masker.time-right {
+        top: 72px;
+        height: 18px;
+    }
+    .background-masker.time-left {
+        top: 72px;
+        left: 40px;
+        width: 10px;
+        height: 18px;
+    }
+    
+    .background-masker.time-right {
+        left: 150px;
+        width: 200px;
+    }
+    
+    .background-masker.time-line {
+        top: 90px;
+        left: 0;
+        width: 350px;
+        height: 8px;
+    }
+    
+    .background-masker.content-first {
+        top: 98px;
+        left: 300px;
+        width: 50px;
+        height: 16px;
+    }
+    
+    .background-masker.content-first-line {
+        top: 114px;
+        left: 0px;
+        width: 350px;
+        height: 5px;
+    }
+    
+    .background-masker.content-second {
+        top: 119px;
+        left: 350px;
+        width: 0px;
+        height: 16px;
+    }
+    
+    .background-masker.bottom-padding {
+        top: 135px;
+        left: 0;
+        width: 350px;
+        height: 15px;
+    }
+}
 

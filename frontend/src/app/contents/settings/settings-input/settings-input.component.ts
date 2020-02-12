@@ -21,7 +21,7 @@ export class SettingsInputComponent implements OnInit {
   ngOnInit() {
   }
 
-  save(user: User) {
+  save(user: User): void {
     this.settingsService.updateUser(user)
     .subscribe((user: User) => {
       this.value = user[this.prop];

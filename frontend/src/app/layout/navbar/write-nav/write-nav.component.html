@@ -3,13 +3,14 @@
         <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
         <span class="menu-name">뒤로가기</span>
     </button>
+    <button mat-button class="nav-small-hide">썸네일</button>
     <button mat-button class="nav-small-hide">이미지</button>
     <button mat-button class="nav-small-hide" (click)="writeConfirm()">작성하기</button>
     <div class="nav-spacer"></div>
     <app-user-nav></app-user-nav>
 </div>
 <div class="nav-small-show">
+    <button mat-button class="nav-link">썸네일</button>
     <button mat-button class="nav-link">이미지</button>
-    <button mat-button class="nav-link">미리보기</button>
     <button mat-button class="nav-link" (click)="writeConfirm()">작성하기</button>
 </div>

@@ -11,11 +11,22 @@ exports.avatar = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'glelog/avatar',
-        // cacheControl: 'no-store',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
             cb(null, String(req.user._id));
+        }
+    }),
+});
+
+exports.post = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'glelog/post',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key: (req, file, cb) => {
+            // cb(null, String(req.post._id));
         }
     }),
 });

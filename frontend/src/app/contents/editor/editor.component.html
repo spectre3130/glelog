@@ -14,7 +14,7 @@
                     (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
         </div>
-        <textarea class="body-input" [placeholder]="placeHolder" (keyup)="onBodyChange($event)"></textarea>
+        <textarea class="body-input" [value]="placeHolder" (keyup)="onBodyChange($event)"></textarea>
     </div>
     <div class="editor-spacer"></div>
     <div class="editor-preview">

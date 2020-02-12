@@ -21,6 +21,9 @@ export class SettingsAvatarComponent implements OnInit {
   }
 
   onChangeAvatar(files: FileList):void {
+    if(!files) {
+      return;
+    }
     const formData:FormData = new FormData();
     const user:User = this.authService.loadedUser();
     formData.append('avatar', files[0]);
