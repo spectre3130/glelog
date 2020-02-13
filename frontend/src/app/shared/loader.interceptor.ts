@@ -6,9 +6,9 @@ import {
   HttpInterceptor,
   HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, onErrorResumeNext } from 'rxjs';
 import { LoaderService } from './loader.service';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
@@ -23,10 +23,12 @@ export class LoaderInterceptor implements HttpInterceptor {
       tap(event => {
         if(event instanceof HttpResponse) {
           this.loaderService.emit(event);
-        } else if(event.type === 0) {
-          this.loaderService.emit(false);
         }
+      }),
+      catchError(err => {
+        this.loaderService.emit(false);
+        throw err;
       })
-    );
+    )
   }
 }

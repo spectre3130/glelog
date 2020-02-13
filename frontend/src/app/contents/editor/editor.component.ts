@@ -24,7 +24,6 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     this.placeHolder = this.getPlaceHolder();
-    this.body = this.placeHolder;
   }
 
   onTitleChange(e): void {
@@ -36,7 +35,7 @@ export class EditorComponent implements OnInit {
   onBodyChange(e): void {
     const body = e.target.value 
     if(body) this.body = body;
-    else this.body = this.placeHolder;
+    else this.body = '';
     this.editorService.setBody(body);
   }
 
@@ -69,35 +68,6 @@ export class EditorComponent implements OnInit {
 
   
   private getPlaceHolder(): string {
-    return `마크다운 작성법 : https://ko.wikipedia.org/wiki/마크다운`;
-  //   return `  # Title 
-  // ## Title
-  // ### Title
-  // #### Title
-
-  // **bold**
-
-  // *italic*
-
-  // inline \`code\`
-
-  // ### code block
-  // \`\`\`javascript
-  // const foo = () => {
-  //     return 1
-  // }
-  // \`\`\`
-
-  // ### unorderd list
-  // - item 1
-  // - item 2
-
-  // * item 1
-  // * item 2
-
-  // ### orderd list
-  // 1. item a
-  // 2. item b`;
+    return '본문을 입력해주세요.';
   }
-
 }

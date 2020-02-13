@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnChanges, OnDestroy } from '@angular/core';
 import { User } from 'src/app/app.model';
 import { SettingsService } from '../settings.service';
-import { fromEvent, of, Subject, Subscription } from 'rxjs';
-import { map, debounceTime, switchMap, distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { map, debounceTime, switchMap, filter } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-settings-username',
@@ -17,28 +18,25 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
   @ViewChild('inputRef') inputRef: ElementRef<HTMLInputElement>;
   searchTerms: Subject<string> = new Subject<string>();
   searchEvent: Subscription;
-  message: string = '';
-  isValid: boolean;
+  isValid: boolean = false;
 
   constructor(
+    private _snackBar: MatSnackBar,
     private settingsService: SettingsService
   ) { }
 
   ngOnInit() { 
     this.searchEvent = this.searchTerms.pipe(
-      tap(username => {
-        if(this.value === username) this.isValid = true
-      }),
-      filter(username => username.length > 2 && this.value !== username),
-      map(username => username.replace(/^\s+|\s+$/gm,'')),
-      debounceTime(500),
-      distinctUntilChanged(),
+      debounceTime(300),
       switchMap(username => this.settingsService.checkUsername(username)),
-      tap(res => this.isValid = res.result),
-    ).subscribe(res => {
-      if(res.result) this.message = '';
-      else this.message = res.message;
-    });
+      filter(res => this.value !== res.username)
+    ).subscribe(
+      res => {
+        this.isValid = res.result;
+        if(!res.result) this._snackBar.open(res.message, null);
+      },
+      err => console.log(err)
+    );
   }
 
   ngOnDestroy() {
@@ -46,7 +44,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
   }
 
   save(user: User): void {
-    if(this.checkValid()) {
+    if(this.isValid) {
       this.settingsService.updateUser(user)
       .subscribe((user: User) => {
         this.value = user[this.prop];
@@ -55,20 +53,17 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
     }
   }
 
-  cancel() {
-    this.message = '';
-  }
-
   checkUsername(username: string): void {
-    this.searchTerms.next(username);
-  }
-
-  checkValid() {
-    if(this.isValid) {
-      return true;
+    this.isValid = false;
+    if(username.match(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi)) {
+      this._snackBar.open('공백, 특수문자는 불가능합니다.', null);
+    } else if(username.length < 2){
+      this._snackBar.open('두글자 이상 입력하십시오.', null);
     } else {
-      return false;
+      this._snackBar.dismiss();
+      this.searchTerms.next(username);
     }
   }
+
 
 }

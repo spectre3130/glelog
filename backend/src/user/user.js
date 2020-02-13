@@ -59,18 +59,6 @@ exports.delete = async (req, res, next) => {
     }
 };
 
-exports.changeAvatar = async (req, res, next) => {
-    try {
-        const avatar = req.file.location;
-        req.user.avatar = avatar;
-        req.user.save();
-        res.status(200).json(req.user);
-    } catch(e) {
-        console.error(e);
-        next(createError(400, e));
-    }
-}
-
 exports.checkUsername = async (req, res, next) => {
     try {
         const { username } = req.params;
@@ -78,11 +66,13 @@ exports.checkUsername = async (req, res, next) => {
         if(user) {
             res.status(200).json({
                 result: false,
+                username: username,
                 message: '이미 사용중인 별명입니다.'
             });
         } else {
             res.status(200).json({
                 result: true,
+                username: username,
                 message: '사용가능한 별명 입니다.'
             });
         }

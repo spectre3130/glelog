@@ -38,8 +38,11 @@ import { SettingsInputComponent } from './contents/settings/settings-input/setti
 import { SettingsSocialInputComponent } from './contents/settings/settings-social-input/settings-social-input.component';
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
+import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
+import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
+import { LoaderInterceptor } from './shared/loader.interceptor';
 
 import { AuthService } from './auth/auth.service';
 import { AuthGardService } from './auth/auth-gard.service';
@@ -50,14 +53,11 @@ import { PostsService } from './contents/posts/posts.service';
 import { UserHomeService } from './contents/user-home/user-home.service';
 import { SettingsService } from './contents/settings/settings.service';
 import { TagsService } from './contents/tags/tags.service';
+import { LoaderService } from './shared/loader.service';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
-import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
-import { LoaderService } from './shared/loader.service';
-import { LoaderInterceptor } from './shared/loader.interceptor';
-import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();

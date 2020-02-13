@@ -29,7 +29,7 @@ export class EditorService {
     return {
       title: this.title,
       body: this.body,
-      thumbnail: '',
+      thumb: '',
       tags: this.tags,
       user: this.authService.loadedUser()
     }

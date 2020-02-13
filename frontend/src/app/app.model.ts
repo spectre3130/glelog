@@ -19,12 +19,20 @@ export declare interface Post {
     seq?: number,
     title: string
     body: string,
-    thumbnail?: string,
+    thumb?: string,
     tags: Array<string>,
-    count?: number,
     created_at?: Date
     updated_at?: Date
     user: User
+}
+
+export declare interface PopularPost {
+    seq?: Number,
+    title: string,
+    thumb?: string,
+    created_at?: Date
+    updated_at?: Date
+    user: User,
 }
 
 export declare interface Confirm {

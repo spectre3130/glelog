@@ -1,5 +1,5 @@
 <button *ngIf="!editMode" mat-flat-button (click)="edit()" class="settings-edit">수정</button>
 <div *ngIf="editMode" class="settings-btn-set">
-    <button mat-flat-button color="primary" (click)="save()" class="settings-save">저장</button>
+    <button mat-flat-button color="primary" (click)="save()" class="settings-save" [disabled]=!isValid>저장</button>
     <button mat-flat-button (click)="cancel()" class="settings-cancel">취소</button>
 </div>

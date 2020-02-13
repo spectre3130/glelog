@@ -19,6 +19,8 @@
     "helmet": "^3.21.2",
     "http-errors": "~1.6.3",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.27",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.3",
     "morgan": "~1.9.1",

@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SettingsService } from '../settings.service';
 import { User } from 'src/app/app.model';
 import { AuthService } from 'src/app/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-settings-avatar',
@@ -11,9 +13,10 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class SettingsAvatarComponent implements OnInit {
 
   @Input() avatar: string;
+  cache: string;
   
   constructor(
-    private authService: AuthService,
+    private _snackBar: MatSnackBar,
     private settingsService: SettingsService
   ) { }
 
@@ -25,12 +28,22 @@ export class SettingsAvatarComponent implements OnInit {
       return;
     }
     const formData:FormData = new FormData();
-    const user:User = this.authService.loadedUser();
     formData.append('avatar', files[0]);
+    this.cache = this.avatar;
     this.avatar = '';
-    this.settingsService.updateAvatar(user.username, formData)
-    .subscribe((user: User) => {
-      this.avatar = user.avatar;
-    });
+    this.settingsService.emitAvatarEvent(this.avatar);
+    this.settingsService.updateAvatar(formData)
+    .pipe(
+      catchError(err => { throw '업로드 실패! 잠시 후에 시도해주세요.' })
+    )
+    .subscribe(
+      (user: User) => this.avatar = user.avatar, 
+      err => {
+        this._snackBar.open(err, '닫기', {
+          duration: 5000,
+        });
+        this.avatar = this.cache;
+        this.settingsService.emitAvatarEvent(this.avatar);
+      });
   }
 }

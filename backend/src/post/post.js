@@ -3,7 +3,10 @@ const Post = require('./post.model');
 const User = require('../user/user.model');
 const Tag = require('../tag/tag.model');
 const Counter = require('../util/counter');
-const PER_PAGE = 15;
+const Views = require('../logs/views.model');
+const logs = require('../logs/logs');
+const moment = require('../config/moment');
+const PER_PAGE = 10;
 
 exports.getPosts = async (req, res, next) => {
     try {
@@ -18,7 +21,7 @@ exports.getPosts = async (req, res, next) => {
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
-        for(let i = 0; i < 15; i ++) {
+        for(let i = 0; i < 10; i ++) {
             posts.push(posts[0]);
         }
         res.status(200).json(posts);
@@ -46,7 +49,7 @@ exports.getUserPosts = async (req, res, next) => {
                                 .sort({ seq: -1 })
                                 .skip((page - 1) * PER_PAGE)
                                 .limit(PER_PAGE);
-        for(let i = 0; i < 15; i ++) {
+        for(let i = 0; i < 10; i ++) {
             posts.push(posts[0]);
         }
         res.status(200).json(posts);
@@ -56,6 +59,24 @@ exports.getUserPosts = async (req, res, next) => {
     }
 };
 
+exports.getTodayPosts = async (req, res, nex) => {
+    try {
+        const views = await logs.findTodayTopFiveViews();
+        const posts = await Promise.all(
+            views.map(async (id) => {
+                return await Post.findOne({_id: id})
+                                 .select('seq title thumb user created_at updated_at')
+                                 .populate('user', 'username avatar');
+            })
+        );
+        // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
+        res.status(200).json(posts);
+    } catch (e) {
+        console.error(e);
+        next(createError(500, e));
+    }
+}
+
 exports.getPost = async (req, res, next) => {
     try {
         const { seq } = req.params;
@@ -64,6 +85,7 @@ exports.getPost = async (req, res, next) => {
         if(!post) {
             throw '존재하지 않는 포스트입니다.';
         }
+        Views.create({ post_id: post._id, post_seq: post.seq });
         res.status(200).json(post);
     } catch(e) {
         console.error(e);
@@ -88,14 +110,14 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        const { seq, title, body, thumbnail, tags } = req.body;
+        const { seq, title, body, thumb, tags } = req.body;
         const post = findOne({ seq });
         if(req.user.email !== post.user.email) {
             throw '해당글을 변경할 수 없습니다.';
         }
         post.title = title;
         post.body = body;
-        post.thumbnail = thumbnail,
+        post.thumb = thumb,
         post.tags = tags;
         post.save();
         Tag.collectTag(post.tags);

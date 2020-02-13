@@ -44,4 +44,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ code, message: err.message });
 });
 
+console.log(Date.now());
+
 module.exports = app;
