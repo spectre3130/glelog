@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PopularPost } from 'src/app/app.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-popular-posts',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopularPostsComponent implements OnInit {
 
-  constructor() { }
+  views: Array<PopularPost>;
+
+  constructor(
+    private postsService: PostsService
+  ) { }
 
   ngOnInit() {
+    this.postsService.getViewsPosts()
+    .subscribe(posts => {
+      console.log(posts)
+      this.views = posts}
+    );
   }
 
 }

@@ -33,9 +33,12 @@ export class UserNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    
     this.changedUser();
+    
     this.changeAvatarEvent = this.settingsService.changeAvatarEvent
-    .subscribe(() => this.avatar = '');
+    .subscribe((avatar) => this.avatar = avatar);
+
     this.user = this.authService.loadedUser();
     this.avatar = this.user.avatar;
     if(!this.user) {
@@ -69,7 +72,7 @@ export class UserNavComponent implements OnInit, OnDestroy {
   changedUser(): void {
     this.changedUserEvent = this.authService.changedUserEvent
     .subscribe((user:User) => {
-      this.user = user
+      this.user = user;
       this.avatar = user.avatar;
     });
   }

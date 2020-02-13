@@ -9,6 +9,7 @@ const Post = new Schema({
     },
     body: String,
     thumb: String,
+    posted: Boolean,
     tags: [String],
     count: {
         type: Number,
@@ -16,11 +17,11 @@ const Post = new Schema({
     },
     created_at: {
         type: Date,
-        default: new Date(),
+        default: Date.now,
     },
     updated_at: {
         type: Date,
-        default: new Date(),
+        default: Date.now,
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

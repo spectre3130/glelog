@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { PopularPost } from 'src/app/app.model';
+import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-popular-preview',
@@ -7,13 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopularPreviewComponent implements OnInit {
 
-  posts = [];
+  @Input() posts: Array<PopularPost>;
+
   constructor() { }
 
   ngOnInit() {
-    for(let i = 0; i < 5; i++) {
-      this.posts.push(i);
-    }
+  
   }
 
 }

@@ -1,12 +1,13 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
+moment.tz.setDefault('Asia/Seoul');
 
 @Pipe({
   name: 'writeDate'
 })
 export class WriteDatePipe implements PipeTransform {
 
-  transform(value: any, ...args: any[]): any {
+  transform(value: any, ...args: any[]): any {  
     const now = moment(new Date(), 'YYYY/MM/DD h:mm');
     const created = moment(new Date(value), 'YYYY/MM/DD h:mm');
     const minuteDiff = now.diff(created, 'minutes');

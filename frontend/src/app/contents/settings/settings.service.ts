@@ -27,9 +27,12 @@ export class SettingsService {
     )
   }
 
-  updateAvatar(username:string, formData: FormData) {
-    this.changeAvatarEvent.emit();
-    return this.http.post<User>(`${environment.resource}/api/user/${username}/avatar`, formData)
+  emitAvatarEvent(avatar: string) {
+    this.changeAvatarEvent.emit(avatar);
+  }
+
+  updateAvatar(formData: FormData) {
+    return this.http.post<User>(`${environment.resource}/api/upload/avatar`, formData)
     .pipe(
       tap((user: User) => {
           axios.default.get(user.avatar);
@@ -42,4 +45,6 @@ export class SettingsService {
   checkUsername(username: string): Observable<any> {
     return this.http.get<any>(`${environment.resource}/api/user/${username}/check`);
   }
+
+
 }

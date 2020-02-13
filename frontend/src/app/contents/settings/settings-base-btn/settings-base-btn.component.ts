@@ -16,7 +16,8 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
   @Output() onSave: EventEmitter<User> = new EventEmitter<User>();
   @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
   cache: string;
-  editMode:boolean = false;
+  editMode: boolean = false;
+  @Input() isValid: boolean = true;
   afterChangeEvent: Subscription;
 
   constructor(

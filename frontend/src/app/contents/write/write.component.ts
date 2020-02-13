@@ -8,9 +8,6 @@ import { WriteService } from 'src/app/contents/write/write.service';
 })
 export class WriteComponent implements OnInit, OnDestroy{
 
-  animal: string;
-  name: string;
-
   constructor(
     private writeService: WriteService
   ) {
