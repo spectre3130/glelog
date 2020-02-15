@@ -9,7 +9,7 @@ import { PostsService } from '../posts.service';
 })
 export class PopularPostsComponent implements OnInit {
 
-  views: Array<PopularPost>;
+  posts: Array<PopularPost>;
 
   constructor(
     private postsService: PostsService
@@ -18,9 +18,9 @@ export class PopularPostsComponent implements OnInit {
   ngOnInit() {
     this.postsService.getViewsPosts()
     .subscribe(posts => {
-      console.log(posts)
-      this.views = posts}
-    );
+      console.log(posts);
+      this.posts = posts
+    });
   }
 
 }

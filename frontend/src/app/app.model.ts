@@ -16,10 +16,14 @@ export declare interface Tag {
 };
 
 export declare interface Post {
+    _id?: string,
     seq?: number,
     title: string
     body: string,
     thumb?: string,
+    posted?: boolean,
+    open?: boolean,
+    description?: string,
     tags: Array<string>,
     created_at?: Date
     updated_at?: Date
@@ -38,4 +42,9 @@ export declare interface PopularPost {
 export declare interface Confirm {
     name: string,
     message: string,
+}
+
+export declare interface UploadImage {
+    _id: string,
+    markdown: string,
 }

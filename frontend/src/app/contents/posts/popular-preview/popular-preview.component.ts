@@ -14,7 +14,6 @@ export class PopularPreviewComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  
   }
 
 }

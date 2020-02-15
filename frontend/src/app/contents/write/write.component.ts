@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WriteService } from 'src/app/contents/write/write.service';
+import { EditorService } from '../editor/editor.service';
 
 @Component({
   selector: 'app-write',

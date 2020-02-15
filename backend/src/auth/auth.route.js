@@ -59,7 +59,7 @@ router.get('/google/callback', passportGoogle.authenticate('google', { session: 
         if(!req.user) {
             throw '인증에 실패하였습니다.';
         }
-        const { email } = req.user;
+        const { email, username } = req.user;
         const token = await jwtProvider.generateToken({ email });
         res.redirect(`${prod ? process.env.ROOT : 'http://localhost:4200'}?token=${token}`);
     } catch(e) {

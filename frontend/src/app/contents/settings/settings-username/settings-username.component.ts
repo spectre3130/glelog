@@ -29,11 +29,11 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
     this.searchEvent = this.searchTerms.pipe(
       debounceTime(300),
       switchMap(username => this.settingsService.checkUsername(username)),
-      filter(res => this.value !== res.username)
     ).subscribe(
       res => {
         this.isValid = res.result;
-        if(!res.result) this._snackBar.open(res.message, null);
+        if(res.result) this._snackBar.dismiss();
+        else if(res.message) this._snackBar.open(res.message, null);
       },
       err => console.log(err)
     );
@@ -41,6 +41,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.searchEvent.unsubscribe();
+    this._snackBar.dismiss();
   }
 
   save(user: User): void {
@@ -55,14 +56,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
 
   checkUsername(username: string): void {
     this.isValid = false;
-    if(username.match(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi)) {
-      this._snackBar.open('공백, 특수문자는 불가능합니다.', null);
-    } else if(username.length < 2){
-      this._snackBar.open('두글자 이상 입력하십시오.', null);
-    } else {
-      this._snackBar.dismiss();
-      this.searchTerms.next(username);
-    }
+    this.searchTerms.next(username);
   }
 
 
