@@ -6,6 +6,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
+const moment = require('./src/config/moment');
 
 if(prod) dotenv.config({ path: '/home/ubuntu/application/config/.env' });
 else dotenv.config();
@@ -43,7 +44,5 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500).json({ code, message: err.message });
 });
-
-console.log(Date.now());
 
 module.exports = app;

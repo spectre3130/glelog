@@ -3,20 +3,8 @@ const User = require('./user.model');
 
 exports.getUser = async (req, res, next) => {
     try {
-        res.status(200).json(req.user);
-    } catch(e) {
-        console.error(e);
-        next(createError(404, e));
-    }
-}; 
-
-exports.getUserByUsername = async (req, res, next) => {
-    try {
-        const { username } = req.params;
+        const { username } = req.query;
         const user = await User.findOneElseThrow({ username });
-        if(!user) {
-            throw '존재하지 않는 회원입니다.';
-        }
         res.status(200).json(user);
     } catch(e) {
         console.error(e);
@@ -36,7 +24,7 @@ exports.update = async (req, res, next) => {
         req.user.instagram = instagram;
         req.user.facebook = facebook;
         req.user.github = github;
-        req.user.save();
+        await req.user.save();
         res.status(200).json(req.user);
     } catch(e) {
         console.error(e);
@@ -61,18 +49,41 @@ exports.delete = async (req, res, next) => {
 
 exports.checkUsername = async (req, res, next) => {
     try {
-        const { username } = req.params;
-        const user = await User.findOne({ username });
-        if(user) {
+        const { username } = req.query;
+        if(username.match(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi)) {
             res.status(200).json({
                 result: false,
-                username: username,
+                message: '공백, 특수문자는 불가능합니다.'
+            });
+            return;
+        } else if(username.length < 2) {
+            res.status(200).json({
+                result: false,
+                message: '두글자 이상 입력해주세요.'
+            });
+            return;
+        } else if(username.length > 15) {
+            res.status(200).json({
+                result: false,
+                message: '최대 15자 미만입니다.'
+            });
+            return;
+        } else if(username === req.user.username) {
+            res.status(200).json({
+                result: false,
+                message: ''
+            });
+            return;
+        }
+
+        if(await User.findOne({ username })) {
+            res.status(200).json({
+                result: false,
                 message: '이미 사용중인 별명입니다.'
             });
         } else {
             res.status(200).json({
                 result: true,
-                username: username,
                 message: '사용가능한 별명 입니다.'
             });
         }

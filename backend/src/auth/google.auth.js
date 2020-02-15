@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
                 return done(null, user);
             } else {
                 const seq = await Counter.getNextSequence('user');
-                const newUser = User.create({
+                const newUser = await User.create({
                     seq,
                     email,
                     username: 'anonymous#'+seq,

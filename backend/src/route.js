@@ -1,15 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const user = require('./user/user.route');
-const post = require('./post/post.route');
-const posts = require('./post/posts.route');
-const tag = require('./tag/tag.route');
-const upload = require('./upload/upload.route');
+const userRoute = require('./user/user.route');
+const postRoute = require('./post/post.route');
+const postsRoute = require('./post/posts.route');
+const tagRoute = require('./tag/tag.route');
+const uploadRoute = require('./upload/upload.route');
 
-router.use('/user', user);
-router.use('/post', post);
-router.use('/posts', posts);
-router.use('/tag', tag);
-router.use('/upload', upload);
+router.use('/user', userRoute);
+router.use('/post', postRoute);
+router.use('/posts', postsRoute);
+router.use('/tag', tagRoute);
+router.use('/upload', uploadRoute);
 
 module.exports = router;

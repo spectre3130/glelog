@@ -9,12 +9,15 @@ const Post = new Schema({
     },
     body: String,
     thumb: String,
-    posted: Boolean,
-    tags: [String],
-    count: {
-        type: Number,
-        default: 0,
+    posted: {
+        type: Boolean,
+        default: false
     },
+    open: {
+        type: Boolean,
+        default: true
+    },
+    tags: [String],
     created_at: {
         type: Date,
         default: Date.now,

@@ -24,7 +24,7 @@ export class SettingsAvatarComponent implements OnInit {
   }
 
   onChangeAvatar(files: FileList):void {
-    if(!files) {
+    if(!files.length) {
       return;
     }
     const formData:FormData = new FormData();

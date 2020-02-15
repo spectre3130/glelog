@@ -32,13 +32,15 @@ exports.generateToken = (payload, options) => {
 exports.authenticate = async (req, res, next) => {
     try {
         const token = req.cookies['gleid'];
-        const decodedToken = await this.verifyToken(token);
-        const user = await User.findOneElseThrow({ email: decodedToken.email });
-        if(!user) {
-            throw '존재하지 않는 회원입니다.';
+        if(token) {
+            const decodedToken = await this.verifyToken(token);
+            const user = await User.findOneElseThrow({ email: decodedToken.email });
+            if(!user) {
+                throw '존재하지 않는 회원입니다.';
+            }
+            req.user = user;
+            req.tokenExp = decodedToken.exp;
         }
-        req.user = user;
-        req.tokenExp = decodedToken.exp;
         next();
     } catch(e) {
         console.error(e);

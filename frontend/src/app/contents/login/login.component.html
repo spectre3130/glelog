@@ -7,23 +7,23 @@
     시간은 금이라구 친구!!!
 </p>
 <div class="btn-group">
-    <a mat-flat-button color="primary" (click)="login('google')">
+    <button mat-flat-button color="primary" (click)="login('google')">
         <div class="login-icon">
             <fa-icon [icon]="faGoogle" size="lg"></fa-icon>
         </div>
         구글로 시작하기
-    </a>
-    <a mat-flat-button color="primary" (click)="login('facebook')">
+    </button>
+    <button mat-flat-button color="primary" (click)="login('facebook')" disabled>
         <div class="login-icon">
             <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
         </div>
         페이스북으로 시작하기
-    </a>
-    <a mat-flat-button color="primary" (click)="login('github')">
+    </button>
+    <button mat-flat-button color="primary" (click)="login('github')" disabled>
         <div class="login-icon">
             <fa-icon [icon]="faGithub" size="lg" ></fa-icon>
         </div>
         깃허브로 시작하기
-    </a>
+    </button>
 </div>
 

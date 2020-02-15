@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+    
+</div>
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" [disabled]=disabled [mat-dialog-close]="post">{{ post.title }}</button>
+    <button mat-flat-button color="primary" (click)="onNoClick()">취소</button>
+</div>

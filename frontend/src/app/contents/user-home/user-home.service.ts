@@ -12,7 +12,7 @@ export class UserHomeService {
   ) { }
 
   getUserByUsername(username: string): Observable<User> {
-    return this.http.get<User>(`${environment.resource}/api/user/${encodeURIComponent(username)}`);
+    return this.http.get<User>(`${environment.resource}/api/user?username=${encodeURIComponent(username)}`);
   }
 
   getUserPosts(username: string, page: number, tagName?: string): Observable<Array<Post>> {

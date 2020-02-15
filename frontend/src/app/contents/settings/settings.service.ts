@@ -43,7 +43,7 @@ export class SettingsService {
   }
 
   checkUsername(username: string): Observable<any> {
-    return this.http.get<any>(`${environment.resource}/api/user/${username}/check`);
+    return this.http.get<any>(`${environment.resource}/api/user/check?username=${encodeURIComponent(username)}`);
   }
 
 

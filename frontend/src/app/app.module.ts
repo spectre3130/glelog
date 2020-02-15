@@ -40,6 +40,7 @@ import { PopularPostsComponent } from './contents/posts/popular-posts/popular-po
 import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
 import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
 import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
+import { PublishComponent } from './contents/publish/publish.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 import { LoaderInterceptor } from './shared/loader.interceptor';
@@ -94,10 +95,12 @@ export function loadUser(authService: AuthService) {
     PopularPreviewComponent,
     LoadingPostsComponent,
     SettingsUsernameComponent,
+    PublishComponent,
   ],
   entryComponents: [
     LoginComponent,
     ConfirmComponent,
+    PublishComponent
   ],
   imports: [
     BrowserModule,

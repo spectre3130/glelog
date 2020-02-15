@@ -26,7 +26,8 @@ exports.post = multer({
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
-            // cb(null, String(req.post._id));
+            const { _id } = req.query;
+            cb(null, `${_id}/${file.originalname}`);
         }
     }),
 });

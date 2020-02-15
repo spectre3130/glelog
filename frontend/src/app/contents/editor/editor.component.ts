@@ -1,29 +1,42 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { EditorService } from './editor.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
-  title: string;
+  title: string = '';
   tags: Array<string> = [];
-  body: string;
+  body: string = '';
   placeHolder: string;
   visible: boolean = true;
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = true;
   readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
+  changePostEvent: Subscription;
   
-  constructor(private editorService: EditorService) { }
+  constructor(
+    private editorService: EditorService) { }
 
   ngOnInit() {
     this.placeHolder = this.getPlaceHolder();
+    this.changePostEvent = this.editorService.chagePostEvent
+    .subscribe(post => {
+      this.title = post.title;
+      this.body = post.body;
+    })
+  }
+
+  ngOnDestroy() {
+    this.changePostEvent.unsubscribe();
+    this.editorService.clear();
   }
 
   onTitleChange(e): void {
@@ -51,6 +64,7 @@ export class EditorComponent implements OnInit {
     }
     this.changeTextAreaHeight();
   }
+
 
   remove(tag: string): void {
     const index: number = this.tags.indexOf(tag);

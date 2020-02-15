@@ -1,5 +1,5 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Post } from 'src/app/app.model';
+import { Post, UploadImage } from 'src/app/app.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
@@ -14,19 +14,27 @@ export class WriteService {
 
   constructor(
     private http: HttpClient,
-    private router: Router,
-    private editorService: EditorService,
   ) { }
 
   changeWriteMode(isWriteMode: boolean) {
     this.writeEvent.emit(isWriteMode);
   }
 
-  createPost(): void  {
-    const post:Post = this.editorService.getPost();
-    this.http.post<Post>(`${environment.resource}/api/post`, post)
-    .subscribe(post => {
-      this.router.navigate(['post', post.seq]);
-    });
+  doTempSave(post: Post): Observable<Post> {
+    return this.http.post<Post>(`${environment.resource}/api/post/tempsave`, post);
   }
+
+  publishPost(post: Post): Observable<Post>  {
+    return this.http.post<Post>(`${environment.resource}/api/post`, post)
+  }
+
+  updatePost(post): Observable<Post>  {
+    return this.http.put<Post>(`${environment.resource}/api/post`, post);
+  }
+
+  savePostImage(_id: string, formData: FormData): Observable<string> {
+    return this.http.post<string>(`${environment.resource}/api/upload/postimage?_id=${_id}`, formData);
+  }
+
+  
 }

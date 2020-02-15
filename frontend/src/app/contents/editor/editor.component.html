@@ -1,6 +1,6 @@
 <div class="md-editor">
     <div class="editor-write">
-        <input type="text" class="title-input" placeholder="제목을 입력해주세요." (keyup)="onTitleChange($event)">
+        <input type="text" class="title-input" placeholder="제목을 입력해주세요." [value]="title" (keyup)="onTitleChange($event)">
         <div class="tag-input">
             <mat-chip-list #chipList aria-label="Tag selection">
                 <mat-chip *ngFor="let tag of tags"[selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
@@ -14,7 +14,7 @@
                     (matChipInputTokenEnd)="add($event)">
             </mat-chip-list>
         </div>
-        <textarea class="body-input" [placeholder]="placeHolder" (keyup)="onBodyChange($event)"></textarea>
+        <textarea class="body-input" [placeholder]="placeHolder" [value]="body" (keyup)="onBodyChange($event)"></textarea>
     </div>
     <div class="editor-spacer"></div>
     <div class="editor-preview">
