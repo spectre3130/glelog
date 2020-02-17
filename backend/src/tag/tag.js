@@ -6,7 +6,7 @@ const Tag = require('../tag/tag.model');
 exports.aggregateTags = async (req, res, next) => {
     try {
         const tags = await Post.aggregate([
-            { $match: { postsed: true, open: true } }, 
+            { $match: { posted: true, open: true } }, 
             { $project: { _id: 0, tags: 1 } },
             { $unwind: '$tags' },
             { $group: { _id: '$tags', count: { $sum: 1 } } },
@@ -27,7 +27,7 @@ exports.aggregateUserTags = async (req, res, next) => {
         if(!user) {
             throw '존재하지 않는 회원입니다.';
         }
-        const match = { user: user._id, postsed: true, open: true };
+        const match = { user: user._id, posted: true, open: true };
         if(user.email === req.user.email) delete match.open;
         const tags = await Post.aggregate([
             { $match: match }, 

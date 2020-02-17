@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { WriteService } from '../../contents/write/write.service';
+import { WriteStore } from 'src/app/contents/write/write.store';
 
 @Component({
   selector: 'app-navbar',
@@ -11,13 +11,13 @@ export class NavbarComponent implements OnInit {
   isWriteMode: boolean;
 
   constructor(
-    private writeService: WriteService
+    private writeStore: WriteStore
   ) {  
     
   }
 
   ngOnInit() {
-    this.writeService.writeEvent
+    this.writeStore.writeEvent
     .subscribe(val => this.isWriteMode = val);
   }
 

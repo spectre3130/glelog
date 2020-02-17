@@ -48,13 +48,14 @@ import { LoaderInterceptor } from './shared/loader.interceptor';
 import { AuthService } from './auth/auth.service';
 import { AuthGardService } from './auth/auth-gard.service';
 import { WriteService } from './contents/write/write.service';
-import { EditorService } from './contents/editor/editor.service';
 import { PostService } from './contents/post/post.service';
 import { PostsService } from './contents/posts/posts.service';
 import { UserHomeService } from './contents/user-home/user-home.service';
 import { SettingsService } from './contents/settings/settings.service';
 import { TagsService } from './contents/tags/tags.service';
 import { LoaderService } from './shared/loader.service';
+
+import { WriteStore } from './contents/write/write.store';
 
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
@@ -123,8 +124,8 @@ export function loadUser(authService: AuthService) {
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: UrlSerializer, useClass: CustomUrlSerializer },
+    WriteStore,
     WriteService,
-    EditorService,
     PostService,
     PostsService,
     TagsService,

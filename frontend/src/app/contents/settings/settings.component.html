@@ -5,7 +5,7 @@
         </div>
         <ul class="settings-list">
             <app-settings-avatar [avatar]=user.avatar></app-settings-avatar>
-            <app-settings-username [title]="'별명'" [value]=user.username [prop]="'username'"></app-settings-username>
+            <app-settings-username [title]="'별명'" [username]=user.username></app-settings-username>
             <app-settings-input [title]="'이름'" [value]=user.name [prop]="'name'"></app-settings-input>
             <app-settings-input [title]="'소개'" [value]=user.description [prop]="'description'"></app-settings-input>
         </ul>

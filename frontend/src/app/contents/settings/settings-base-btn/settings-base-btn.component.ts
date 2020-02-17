@@ -35,10 +35,15 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
   }
 
   edit(): void {
+    this.isValid = false;
     this.inputRef.disabled = false;
-    this.inputRef.focus();
     this.cache = this.inputRef.value;
     this.editMode = true;
+
+    const defaultLen = this.cache.length;
+    this.inputRef.selectionStart = defaultLen;
+    this.inputRef.selectionEnd = defaultLen;
+    this.inputRef.focus();
   }
 
   save(): void {

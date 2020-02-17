@@ -13,8 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SettingsUsernameComponent implements OnInit, OnDestroy {
 
   @Input() title: string;
-  @Input() value: string;
-  @Input() prop: string;
+  @Input() username: string;
   @ViewChild('inputRef') inputRef: ElementRef<HTMLInputElement>;
   searchTerms: Subject<string> = new Subject<string>();
   searchEvent: Subscription;
@@ -32,8 +31,11 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
     ).subscribe(
       res => {
         this.isValid = res.result;
-        if(res.result) this._snackBar.dismiss();
-        else if(res.message) this._snackBar.open(res.message, null);
+        if(res.result || !res.message) this._snackBar.dismiss();
+        if(res.message) this._snackBar.open(res.message, null, {
+          duration: 3000,
+          verticalPosition: 'top'
+        });
       },
       err => console.log(err)
     );
@@ -45,13 +47,16 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
   }
 
   save(user: User): void {
-    if(this.isValid) {
-      this.settingsService.updateUser(user)
-      .subscribe((user: User) => {
-        this.value = user[this.prop];
-        this.inputRef.nativeElement.disabled = true;
-      });
-    }
+    this.settingsService.updateUser(user)
+    .subscribe((user: User) => {
+      this.username = user.username;
+      this.inputRef.nativeElement.disabled = true;
+      this._snackBar.dismiss();
+    });
+  }
+
+  cancel(): void {
+    this._snackBar.dismiss();
   }
 
   checkUsername(username: string): void {

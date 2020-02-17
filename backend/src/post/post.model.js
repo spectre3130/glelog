@@ -9,6 +9,7 @@ const Post = new Schema({
     },
     body: String,
     thumb: String,
+    description: String,
     posted: {
         type: Boolean,
         default: false
