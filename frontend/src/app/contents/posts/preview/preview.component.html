@@ -22,6 +22,5 @@
             </mat-chip-list>
         </div>
     </div>
-    <div *ngIf="post.thumb" class="post-thumb">
-    </div>
+    <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
 </article>

@@ -84,7 +84,7 @@ exports.checkUsername = async (req, res, next) => {
         } else {
             res.status(200).json({
                 result: true,
-                message: '사용가능한 별명 입니다.'
+                message: '사용 가능한 별명 입니다.'
             });
         }
     } catch(e) {

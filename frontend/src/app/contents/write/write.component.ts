@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WriteService } from 'src/app/contents/write/write.service';
-import { EditorService } from '../editor/editor.service';
+import { WriteStore } from './write.store';
 
 @Component({
   selector: 'app-write',
@@ -10,15 +9,15 @@ import { EditorService } from '../editor/editor.service';
 export class WriteComponent implements OnInit, OnDestroy{
 
   constructor(
-    private writeService: WriteService
+    private writeStore: WriteStore
   ) {
   }
 
   ngOnInit() {
-    this.writeService.changeWriteMode(true);
+    this.writeStore.changeWriteMode(true);
   }
 
   ngOnDestroy() {
-    this.writeService.changeWriteMode(false);
+    this.writeStore.changeWriteMode(false);
   }
 }

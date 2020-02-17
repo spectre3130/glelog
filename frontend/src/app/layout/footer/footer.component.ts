@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { Router, NavigationEnd, ActivatedRoute, ActivationEnd } from '@angular/router';
-import { filter, map } from 'rxjs/operators';
+import { Router, NavigationEnd, ActivatedRoute, ActivationEnd, ActivationStart, NavigationStart } from '@angular/router';
+import { filter, map, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -23,6 +23,9 @@ export class FooterComponent implements OnInit {
     // this.route.paramMap.subscribe(paramMap => console.log(paramMap))
     this.router.events
     .pipe(
+      tap(event => {
+        if(event instanceof NavigationStart) this.display = false
+      }),
       filter(event => event instanceof ActivationEnd),
       map((event:ActivationEnd) => event.snapshot.routeConfig.path.split('/')[0])
     )
@@ -31,6 +34,7 @@ export class FooterComponent implements OnInit {
       else this.display = true;
     });
   }
+  
 
   matchRouterPath(path: string): boolean {
     const displayOffPath = ['', 'write', ':username', 'tag'];

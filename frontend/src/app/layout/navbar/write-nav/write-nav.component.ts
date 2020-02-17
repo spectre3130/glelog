@@ -3,13 +3,13 @@ import { faArrowLeft, faImage, faSave } from '@fortawesome/free-solid-svg-icons'
 import { WriteService } from 'src/app/contents/write/write.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
-import { EditorService } from 'src/app/contents/editor/editor.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
-import { catchError, filter, switchMap, tap } from 'rxjs/operators';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Post } from 'src/app/app.model';
-import { Router } from '@angular/router';
 import { PublishComponent } from 'src/app/contents/publish/publish.component';
+import { WriteStore } from 'src/app/contents/write/write.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-write-nav',
@@ -27,8 +27,8 @@ export class WriteNavComponent implements OnInit {
     private location: Location,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private editorService: EditorService,
     private writeService: WriteService,
+    private writeStore: WriteStore,
   ) { }
 
   ngOnInit() {
@@ -36,13 +36,13 @@ export class WriteNavComponent implements OnInit {
 
   writeConfirm(): void {
     if(this.checkValidation()) {
-      const post = this.editorService.getPost();
+      const post = this.writeStore.getPost();
       if(post._id) {
         this.openPublishPage(post);
       } else {
         this.writeService.doTempSave(post)
         .subscribe(tempsave => {
-          this.editorService.setPost(tempsave);
+          this.writeStore.setPost(tempsave);
           this.openPublishPage(tempsave);
         });
       }
@@ -50,20 +50,17 @@ export class WriteNavComponent implements OnInit {
   }
 
   checkValidation(): boolean {
-    const post = this.editorService.getPost();
+    const post = this.writeStore.getPost();
     if(!post.title) {
       this._snackBar.open('제목을 입력해주세요.', '닫기',{
-        duration: 5000
-      });
-      return false;
-    } else if(!post.tags || !post.tags.length) {
-      this._snackBar.open('태그를 입력해주세요.', '닫기', {
-        duration: 5000
+        duration: 5000,
+        verticalPosition: 'top'
       });
       return false;
     } else if(!post.body) {
       this._snackBar.open('본문을 입력해주세요.', '닫기', {
-        duration: 5000
+        duration: 5000,
+        verticalPosition: 'top'
       });
       return false;
     } 
@@ -75,7 +72,7 @@ export class WriteNavComponent implements OnInit {
       return;
     }
     const formData:FormData = new FormData();
-    const post = this.editorService.getPost();
+    const post = this.writeStore.getPost();
     formData.append('postImage', files[0]);
     if(post._id) {
       this.startSavePostImage(post, formData);
@@ -92,7 +89,7 @@ export class WriteNavComponent implements OnInit {
       catchError(err => { throw '잠시 후에 시도해주세요.' })
     )
     .subscribe(
-      post => this.editorService.setPost(post),
+      post => this.writeStore.setPost(post),
       err => this._snackBar.open(err, '닫기', {
         duration: 5000,
       })
@@ -113,7 +110,7 @@ export class WriteNavComponent implements OnInit {
       catchError(err => { throw '잠시 후에 시도해주세요.' })
     )
     .subscribe(
-      post => this.editorService.setPost(post),
+      post => this.writeStore.setPost(post),
       err => this._snackBar.open(err, '닫기', {
         duration: 5000,
       })
@@ -122,13 +119,15 @@ export class WriteNavComponent implements OnInit {
 
   openPublishPage(post: Post): void {
     const dialogRef = this.dialog.open(PublishComponent, {
-      width: '250px',
+      width: '1000px',
+      height: '500px',
       data: post
     });
 
-    dialogRef.afterClosed().subscribe(publishPost => {
-      if(publishPost) {
-        this.writeService.publishPost(publishPost)
+    dialogRef.afterClosed().subscribe(post => {
+      this.writeStore.setPost(post);
+      if(post.posted) {
+        this.writeService.publishPost(post)
         .subscribe(post => {
           this.router.navigate(['post', post.seq]);
         });

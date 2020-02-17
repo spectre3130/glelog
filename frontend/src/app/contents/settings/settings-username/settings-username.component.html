@@ -3,9 +3,9 @@
         <div class="item-title">
             {{ title }}
         </div>
-        <input #inputRef class="settings-input" [value]=value (input)=checkUsername(inputRef.value) disabled>
+        <input #inputRef class="settings-input" [value]=username (input)=checkUsername(inputRef.value) disabled>
     </div>
     <div class="item-left">
-        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef [isValid]=isValid (onSave)=save($event)></app-settings-base-btn>
+        <app-settings-base-btn [prop]="'username'" [inputRef]=inputRef [isValid]=isValid (onSave)=save($event) (onCancel)=cancel()></app-settings-base-btn>
     </div>
 </li>

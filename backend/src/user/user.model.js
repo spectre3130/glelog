@@ -48,6 +48,10 @@ const User = new Schema({
         type: Date,
         default: Date.now,
     },
+    master: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 User.plugin(passportLocalMongoose)

@@ -1,7 +1,41 @@
-<div mat-dialog-content>
-    
-</div>
-<div mat-dialog-actions>
-    <button mat-flat-button color="primary" [disabled]=disabled [mat-dialog-close]="post">{{ post.title }}</button>
-    <button mat-flat-button color="primary" (click)="onNoClick()">취소</button>
+<div mat-dialog-content class="publish-content">
+    <div class="content-left">
+        <p class="title">포스트 미리보기</p>
+        <div *ngIf="!post.thumb" class="preview-image">
+            <div class="image-description">사진을 업로드 해주세요.</div>
+        </div>
+        <img *ngIf="post.thumb" class="thumb" [src]=post.thumb>
+        <div class="post-thumb-submit">
+            <input class="input-file" type="file" accept="image/*" #postImageInput (change)=saveThumb(postImageInput.files)>
+            <button mat-button color="primary" (click)=postImageInput.click() class="btn-upload">업로드</button>
+            <button mat-button class="btn-remove">제거</button>
+        </div>
+        <p class="post-title">{{ post.title }}</p>
+        <p class="post-description">{{ post.description }}</p>
+    </div>
+    <div class="content-right">
+        <p class="title">태그</p>
+        <div class="tag-input">
+            <mat-chip-list #chipList aria-label="Tag selection">
+                <mat-chip *ngFor="let tag of post.tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+                    {{ tag }}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input #inputRef type="text"
+                    [matChipInputFor]="chipList"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </div>
+        <p class="title margin-top">포스트 공개여부</p>
+        <mat-radio-group color="primary" [value]=post.open aria-label="Select an option" (change)=onRadioChange($event)>
+            <mat-radio-button [value]=true>공개</mat-radio-button>
+            <mat-radio-button [value]=false>비공개</mat-radio-button>
+          </mat-radio-group>
+        <div mat-dialog-actions>
+            <button mat-flat-button color="primary" [disabled]=disabled (click)="onSubmit()">작성하기</button>
+            <button mat-flat-button (click)="onNoClick()">취소</button>
+        </div>
+    </div>
 </div>

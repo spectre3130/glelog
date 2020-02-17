@@ -41,6 +41,7 @@ export class SettingsAvatarComponent implements OnInit {
       err => {
         this._snackBar.open(err, '닫기', {
           duration: 5000,
+          verticalPosition: 'top'
         });
         this.avatar = this.cache;
         this.settingsService.emitAvatarEvent(this.avatar);

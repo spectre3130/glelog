@@ -31,3 +31,16 @@ exports.post = multer({
         }
     }),
 });
+
+exports.thumb = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'glelog/post',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key: (req, file, cb) => {
+            const { _id } = req.query;
+            cb(null, `${_id}/thumb`);
+        }
+    }),
+});
