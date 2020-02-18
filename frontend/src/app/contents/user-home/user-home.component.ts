@@ -18,7 +18,7 @@ export class UserHomeComponent implements OnInit {
     private userHomeService: UserHomeService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.pipe(
       take(1)
     )
@@ -27,9 +27,4 @@ export class UserHomeComponent implements OnInit {
       .subscribe((user: User) => this.user = user);
     });
   }
-
-  ngOnDestroy() {
-    
-  }
-
 }

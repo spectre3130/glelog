@@ -1,20 +1,18 @@
-<ng-container *ngIf="posts">
-    <div class="popuplar-preview" *ngFor="let post of posts; let i = index;">
-        <span class="popular-rank">
-            {{ i + 1 }}.
-        </span>
-        <div class="popular-post">
-            <a [routerLink]="['/post', post.seq]">
-                <span class="post-title">
-                    {{ post.title }}
-                </span>
-            </a>
-            <div class="post-user">
-                <div class=info>
-                    <a [routerLink]="['/', post.user.username]"><div class="user-name">{{ post.user.username }}</div></a>
-                    <div class="post-time">{{ post.created_at | writeDate }}</div>
-                </div>
+<div class="popuplar-preview" *ngFor="let post of posts; let i = index;">
+    <span class="popular-rank">
+        {{ i + 1 }}.
+    </span>
+    <div class="popular-post">
+        <a [routerLink]="['/post', post.seq]">
+            <span class="post-title">
+                {{ post.title }}
+            </span>
+        </a>
+        <div class="post-user">
+            <div class=info>
+                <a [routerLink]="['/', post.user.username]"><div class="user-name">{{ post.user.username }}</div></a>
+                <div class="post-time">{{ post.created_at | writeDate }}</div>
             </div>
         </div>
     </div>
-</ng-container>
+</div>

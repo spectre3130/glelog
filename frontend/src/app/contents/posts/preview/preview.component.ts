@@ -13,7 +13,7 @@ export class PreviewComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   
   }
 

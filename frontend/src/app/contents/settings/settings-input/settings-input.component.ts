@@ -18,7 +18,7 @@ export class SettingsInputComponent implements OnInit {
     private settingsService: SettingsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   save(user: User): void {

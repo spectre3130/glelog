@@ -15,7 +15,7 @@ export class PopularPostsComponent implements OnInit {
     private postsService: PostsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.postsService.getViewsPosts()
     .subscribe(posts => {
       this.posts = posts

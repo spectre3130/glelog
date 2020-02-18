@@ -50,7 +50,14 @@ exports.delete = async (req, res, next) => {
 exports.checkUsername = async (req, res, next) => {
     try {
         const { username } = req.query;
-        if(username.match(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi)) {
+        const except = [ 'me', 'write', 'writing', 'admin' ];
+        if(except.indexOf(username) !== -1){
+            res.status(200).json({
+                result: false,
+                message: '사용 불가능한 별명입니다.'
+            });
+            return;
+        } else if(username.match(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi)) {
             res.status(200).json({
                 result: false,
                 message: '공백, 특수문자는 불가능합니다.'

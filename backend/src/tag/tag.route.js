@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const tag = require('./tag');
-const jwt = require('../auth/jwt.provider');
+const jwtProvider = require('../auth/jwt.provider');
 
 router.get('/', tag.aggregateTags);
-router.get('/:username', jwt.authenticate, tag.aggregateUserTags);
+router.get('/:username', tag.aggregateUserTags);
 
 module.exports = router;

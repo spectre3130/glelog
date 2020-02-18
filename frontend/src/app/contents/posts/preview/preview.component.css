@@ -1,19 +1,20 @@
 .post-preview {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
     width: 700px;
-    height: 120px;
     padding: 15px 0 15px 0;
 }
 
 .post {
     width:580px;
+    height: 100%;
+    padding-right: 20px;
 }
 
 .post-thumb {
-    width: 120px;
-    height: 100%;
+    width: 140px;
+    height: 135px;
     object-fit: cover;
 }
 
@@ -28,8 +29,11 @@
     align-items: center;
 }
 
+.post-description {
+    padding: 8px 0 8px 0;
+    font-size: 14px;
+}
 .avatar {
-    height: 40px;
     width: 40px;
     border-radius: 50%;
     object-fit: cover;
@@ -65,6 +69,8 @@
     }
 
     .post-thumb {
-        display: none;
+        width:80px;
+        height:75px;
+        /* display: none; */
     }
 }

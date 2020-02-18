@@ -12,6 +12,7 @@ import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { MyWritingModule } from './contents/my-writing/my-writing.module';
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MainNavComponent } from './layout/navbar/main-nav/main-nav.component';
@@ -38,9 +39,12 @@ import { SettingsInputComponent } from './contents/settings/settings-input/setti
 import { SettingsSocialInputComponent } from './contents/settings/settings-social-input/settings-social-input.component';
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
-import { LoadingPostsComponent } from './layout/loading-posts/loading-posts.component';
+import { LoadingPostsComponent } from './layout/loading/loading-posts/loading-posts.component';
 import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
 import { PublishComponent } from './contents/publish/publish.component';
+import { LoadingPopularComponent } from './layout/loading/loading-popular/loading-popular.component';
+import { LoadingTagsComponent } from './layout/loading/loading-tags/loading-tags.component';
+import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
 import { CorsInterceptor } from './shared/cors.interceptor'
 import { LoaderInterceptor } from './shared/loader.interceptor';
@@ -60,6 +64,8 @@ import { WriteStore } from './contents/write/write.store';
 import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
+import { SharedModule } from './shared/shared.module';
+
 
 export function loadUser(authService: AuthService) {
   return () => authService.loadUser();
@@ -83,7 +89,6 @@ export function loadUser(authService: AuthService) {
     UserHomeComponent,
     WriteNavComponent,
     PreviewComponent,
-    WriteDatePipe,
     ConfirmComponent,
     UserHomeHeaderComponent,
     UserHomePostsComponent,
@@ -97,6 +102,9 @@ export function loadUser(authService: AuthService) {
     LoadingPostsComponent,
     SettingsUsernameComponent,
     PublishComponent,
+    LoadingPopularComponent,
+    LoadingTagsComponent,
+    PageNotFoundComponent,
   ],
   entryComponents: [
     LoginComponent,
@@ -108,14 +116,16 @@ export function loadUser(authService: AuthService) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MaterialModule,
-    FontAwesomeModule,
     TextareaAutosizeModule,
     ScrollingModule,
     ScrollDispatchModule,
-    InfiniteScrollModule,
     LazyLoadImageModule,
+    MyWritingModule,
+    SharedModule,
     MarkdownModule.forRoot(),
+  ],
+  exports: [
+    WriteDatePipe,
   ],
   providers: [
     AuthService,

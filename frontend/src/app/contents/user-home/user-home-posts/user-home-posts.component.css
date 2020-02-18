@@ -9,9 +9,24 @@
     padding: 15px 10px 15px 10px;
 }
 
+.user-tags-container {
+    margin: 40px 40px 0 0;
+    width: 150px;
+}
+.user-tags {
+    width: 150px;
+    /* position: fixed; */
+}
+
+.tags-title {
+    padding-bottom: 10px;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
 
 @media(max-width: 1000px) {
-    app-user-home-tags {
+    .user-tags-container {
         display: none;
     }
 

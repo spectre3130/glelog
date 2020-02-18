@@ -1,0 +1,34 @@
+@keyframes placeHolderShimmerForTags{
+    0%{
+        background-position: -150px 0
+    }
+    100%{
+        background-position: 150px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmerForTags;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 33%, #eeeeee 66%);
+    background-size: 150px 25px;
+    height: 25px;
+    position: relative;
+}
+
+.background-masker {
+    background: #fff;
+    position: absolute;
+}
+
+.background-masker.top-padding {
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 7px;
+}
+

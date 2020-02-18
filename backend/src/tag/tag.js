@@ -28,7 +28,6 @@ exports.aggregateUserTags = async (req, res, next) => {
             throw '존재하지 않는 회원입니다.';
         }
         const match = { user: user._id, posted: true, open: true };
-        if(user.email === req.user.email) delete match.open;
         const tags = await Post.aggregate([
             { $match: match }, 
             { $project: { _id: 0, tags: 1 } },

@@ -20,14 +20,14 @@ export class PostsComponent implements OnInit {
     private postsService: PostsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       if(params.tag) this.tagName = '#' + params.tag;
       this.getPosts();
     });
   }
 
-  getPosts() {
+  getPosts(): void {
     if(this.isLoaded) {
       this.isLoaded = false;
       this.postsService.getPosts(this.page, this.tagName)

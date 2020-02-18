@@ -19,15 +19,17 @@ export class FooterComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-    // this.route.paramMap.subscribe(paramMap => console.log(paramMap))
+  ngOnInit(): void {
     this.router.events
     .pipe(
       tap(event => {
         if(event instanceof NavigationStart) this.display = false
       }),
       filter(event => event instanceof ActivationEnd),
-      map((event:ActivationEnd) => event.snapshot.routeConfig.path.split('/')[0])
+      map((event:ActivationEnd) => {
+        const path = event.snapshot.routeConfig.path.split('/');
+        return path[0] !== 'me' ? path[0] : path[1];
+      })
     )
     .subscribe(path => {
       if(this.matchRouterPath(path)) this.display = false;
@@ -37,7 +39,7 @@ export class FooterComponent implements OnInit {
   
 
   matchRouterPath(path: string): boolean {
-    const displayOffPath = ['', 'write', ':username', 'tag'];
+    const displayOffPath = ['', 'write', ':username', 'tag', 'writing'];
     return displayOffPath.find(el => path === el) || !path ? true : false;
   }
 

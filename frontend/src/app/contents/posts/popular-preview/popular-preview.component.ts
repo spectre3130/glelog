@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PopularPost } from 'src/app/app.model';
-import { PostsService } from '../posts.service';
 
 @Component({
   selector: 'app-popular-preview',
@@ -13,7 +12,7 @@ export class PopularPreviewComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

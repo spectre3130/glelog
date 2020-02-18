@@ -31,5 +31,9 @@ export class WriteService {
     return this.http.post<string>(`${environment.resource}/api/upload/thumb?_id=${_id}`, formData);
   }
 
+  deletePost(post: Post): Observable<any> {
+    return this.http.delete<Post>(`${environment.resource}/api/post?_id=${post._id}`);
+  }
+
   
 }

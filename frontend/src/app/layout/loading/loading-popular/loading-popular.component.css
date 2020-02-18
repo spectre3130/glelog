@@ -1,0 +1,63 @@
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -330px 0
+    }
+    100%{
+        background-position: 330px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 330px 60px;
+    height: 60px;
+    position: relative;
+}
+
+.background-masker {
+    background: #fff;
+    position: absolute;
+}
+
+.background-masker.top-padding {
+    top: 0;
+    left: 0;
+    width: 330px;
+    height: 15px;
+}
+
+.background-masker.title {
+    top: 15px;
+    left: 280px;
+    width: 50px;
+    height: 26px;
+}
+
+.background-masker.title-line {
+    top: 41px;
+    left: 0;
+    height: 5px;
+    width: 330px;
+}
+
+.background-masker.username-left,
+.background-masker.username-right {
+    top: 46px;
+    height: 14px;
+}
+
+.background-masker.username-left {
+    left: 40px;
+    width: 10px;
+}
+
+.background-masker.username-right {
+    left: 130px;
+    width: 450px;
+}
