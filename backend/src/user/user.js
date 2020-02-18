@@ -4,8 +4,10 @@ const User = require('./user.model');
 exports.getUser = async (req, res, next) => {
     try {
         const { username } = req.query;
-        const user = await User.findOneElseThrow({ username });
-        res.status(200).json(user);
+        const { name, description, avatar, instagram, facebook, github } = await User.findOneElseThrow({ username });
+        res.status(200).json({
+            username, name, description, avatar, instagram, facebook, github
+        });
     } catch(e) {
         console.error(e);
         next(createError(404, e));

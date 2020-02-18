@@ -56,14 +56,15 @@ exports.getTodayPosts = async (req, res, next) => {
     try {
         const views = await logs.findTodayTopFiveViews();
         const posts = await Promise.all(
-            views.map(async (_id) => {
-                return await Post.findOne({ _id })
-                                 .select('seq title thumb user created_at updated_at')
-                                 .populate('user', 'username avatar');
+            views.map(async(_id) => {
+                return await Post.findOne({ _id, open: true })
+                    .select('seq title thumb user created_at updated_at')
+                    .populate('user', 'username avatar');
             })
-        );
+        )
+        console.log("TCL: exports.getTodayPosts -> posts", posts)
         // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
-        res.status(200).json(posts);
+        res.status(200).json(posts.filter(post => post !== null));
     } catch (e) {
         console.error(e);
         next(createError(500, e));

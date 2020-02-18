@@ -36,7 +36,7 @@ export class WritingComponent implements OnInit {
   delete(post: Post): void {
     const dialogRef = this.dialog.open(ConfirmComponent, {
       width: '250px',
-      data: { name: '취소', message: '해당글을 삭제하시겠습니까?' }
+      data: { name: '삭제', message: '해당글을 삭제하시겠습니까?' }
     });
 
     dialogRef.afterClosed().subscribe(result => {
