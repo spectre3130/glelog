@@ -21,7 +21,7 @@ export class SettingsComponent implements OnInit {
     private settingsService: SettingsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.user = this.authService.loadedUser();
   }
 

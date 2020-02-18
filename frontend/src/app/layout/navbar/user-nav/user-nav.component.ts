@@ -32,7 +32,7 @@ export class UserNavComponent implements OnInit, OnDestroy {
     private settingsService: SettingsService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     
     this.changedUser();
     
@@ -46,7 +46,7 @@ export class UserNavComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.changedUserEvent.unsubscribe();
     this.changeAvatarEvent.unsubscribe();
   }

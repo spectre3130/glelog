@@ -50,6 +50,10 @@ export class WriteStore {
     this.chagePostEvent.emit(post);
   }
 
+  setEdit(post: Post): void {
+    this.setPost(post);
+  }
+
   getPost(): Post {
     return {
       _id: this._id,
@@ -74,7 +78,7 @@ export class WriteStore {
     this.open = true;
   }
 
-  changeWriteMode(isWriteMode: boolean) {
+  changeWriteMode(isWriteMode: boolean): void {
     this.writeEvent.emit(isWriteMode);
   }
 

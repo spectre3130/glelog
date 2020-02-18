@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const PER_PAGE = 10;
 
 const Post = new Schema({
     seq: Number,
@@ -23,6 +24,7 @@ const Post = new Schema({
         type: Date,
         default: Date.now,
     },
+    published_at: Date,
     updated_at: {
         type: Date,
         default: Date.now,
@@ -33,5 +35,14 @@ const Post = new Schema({
         required: '회원정보가 없습니다.'
     },
 });
+
+
+Post.statics.findPostsWithUser  = async function(match, page, sort = { created_at: -1 }) {
+    return await this.find(match)
+        .populate('user', 'id email username avatar')
+        .sort(sort)
+        .skip((page - 1) * PER_PAGE)
+        .limit(PER_PAGE); 
+};
 
 module.exports = mongoose.model('Post', Post);

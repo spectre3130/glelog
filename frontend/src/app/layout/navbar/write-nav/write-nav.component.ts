@@ -38,7 +38,11 @@ export class WriteNavComponent implements OnInit {
     if(this.checkValidation()) {
       const post = this.writeStore.getPost();
       if(post._id) {
-        this.openPublishPage(post);
+        this.writeService.updatePost(post)
+        .subscribe(post => {
+          this.writeStore.setPost(post);
+          this.openPublishPage(post);
+        });
       } else {
         this.writeService.doTempSave(post)
         .subscribe(tempsave => {
@@ -124,15 +128,26 @@ export class WriteNavComponent implements OnInit {
       data: post
     });
 
-    dialogRef.afterClosed().subscribe(post => {
-      this.writeStore.setPost(post);
-      if(post.posted) {
-        this.writeService.publishPost(post)
-        .subscribe(post => {
-          this.router.navigate(['post', post.seq]);
-        });
+    dialogRef.afterClosed().subscribe(result => {
+      this.writeStore.setPost(result.post);
+      if(result.next) {
+        this.nextStep(post);
       }
     });
+  }
+
+  nextStep(post: Post): void {
+    if(post.posted) {
+      this.writeService.updatePost(post)
+      .subscribe(post => {
+        this.router.navigate(['post', post.seq]);
+      });
+    } else {
+      this.writeService.publishPost(post)
+      .subscribe(post => {
+        this.router.navigate(['post', post.seq]);
+      });
+    }
   }
 
   cancelConfirm(): void {

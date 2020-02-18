@@ -25,17 +25,17 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
     private authService: AuthService,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if(this.afterChangeEvent) {
       this.afterChangeEvent.unsubscribe();
     }
   }
 
   edit(): void {
-    this.isValid = false;
+    if(this.prop === 'username') this.isValid = false;
     this.inputRef.disabled = false;
     this.cache = this.inputRef.value;
     this.editMode = true;

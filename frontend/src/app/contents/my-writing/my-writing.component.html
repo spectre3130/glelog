@@ -1,0 +1,12 @@
+<div class="my-writing-container">
+    <div class="my-writing-header">
+        내 글 모음
+    </div>
+    <nav mat-tab-nav-bar>
+        <a mat-tab-link *ngFor="let route of tabsRoutes"
+            [routerLink]="['/me/writing', route.path]"
+            (click)="activeLink = route.path"
+            [active]="activeLink === route.path"> {{ route.label }} </a>
+    </nav>  
+    <router-outlet></router-outlet>
+</div>

@@ -27,11 +27,11 @@ export class SettingsService {
     )
   }
 
-  emitAvatarEvent(avatar: string) {
+  emitAvatarEvent(avatar: string): void {
     this.changeAvatarEvent.emit(avatar);
   }
 
-  updateAvatar(formData: FormData) {
+  updateAvatar(formData: FormData): Observable<User> {
     return this.http.post<User>(`${environment.resource}/api/upload/avatar`, formData)
     .pipe(
       tap((user: User) => {

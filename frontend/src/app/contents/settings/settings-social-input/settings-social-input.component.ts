@@ -21,7 +21,7 @@ export class SettingsSocialInputComponent implements OnInit {
     private settingsService: SettingsService
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   save(user: User) {

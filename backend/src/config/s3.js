@@ -4,7 +4,7 @@ const AWS = require('aws-sdk');
 const s3 = new AWS.S3({
     accessKeyId: process.env.AWS_ACCESS_KEY,
     secretAccessKey: process.env.AWS_SECRET_KEY,
-    region : 'ap-northeast-2'
+    region: 'ap-northeast-2'
 });
 
 exports.avatar = multer({
@@ -44,3 +44,24 @@ exports.thumb = multer({
         }
     }),
 });
+
+exports.deleteS3Dir = async (_id) => {
+    const params = {
+        Bucket: 'glelog',
+        Prefix: `post/${_id}`
+    }
+    const s3Objects = await s3.listObjectsV2(params).promise();
+
+    if (s3Objects.Contents.length === 0) {
+        return true;
+    }
+
+    await s3.deleteObjects({
+        Bucket: params.Bucket,
+        Delete: { 
+            Objects: s3Objects.Contents.map(({ Key }) => { return { Key } }) 
+        }
+    }).promise();
+    
+    return true;
+}

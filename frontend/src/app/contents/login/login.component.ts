@@ -19,13 +19,12 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private dialogRef: MatDialogRef<LoginComponent>, 
-    private http: HttpClient
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  login(provider) {
+  login(provider): void {
     window.location.replace(`${environment.resource}/auth/${provider}`);
   }
 

@@ -13,6 +13,6 @@ export class MainNavComponent implements OnInit {
   constructor(
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 }

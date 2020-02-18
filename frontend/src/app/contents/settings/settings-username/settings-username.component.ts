@@ -24,7 +24,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
     private settingsService: SettingsService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit(): void { 
     this.searchEvent = this.searchTerms.pipe(
       debounceTime(300),
       switchMap(username => this.settingsService.checkUsername(username)),
@@ -41,7 +41,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.searchEvent.unsubscribe();
     this._snackBar.dismiss();
   }

@@ -14,6 +14,9 @@
                 <div class="post-time">{{ post.created_at | writeDate }}</div>
             </div>
         </div>
+        <div class="post-description">
+            {{ post.description }}
+        </div>
         <div class="post-tags">
             <mat-chip-list>
                 <mat-chip *ngFor="let tag of post.tags">

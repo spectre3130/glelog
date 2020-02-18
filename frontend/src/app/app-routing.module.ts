@@ -14,15 +14,21 @@ const routes: Routes = [
   { path: 'tags', component: TagsComponent },
   { path: 'write', canActivate: [ AuthGardService ], component: WriteComponent },
   { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
-  { path: ':username', component: UserHomeComponent },
-  { path: ':username/tag/:tag', component: UserHomeComponent },
+  { 
+    path: ':username', component: UserHomeComponent,
+    children: [
+      { path: 'tag/:tag', component: UserHomeComponent}
+    ]
+  },
   { path: 'post/:seq', component: PostComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    scrollPositionRestoration: 'enabled'
-  })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled'
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

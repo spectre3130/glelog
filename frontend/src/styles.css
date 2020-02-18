@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif, 'Noto Sans KR'; }
+body { margin: 0; font-family: Roboto, 'Noto Sans KR', sans-serif; }
 a { color: inherit; background-color: transparent; text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
@@ -24,6 +24,10 @@ markdown {
     font-family: 'Noto Serif KR', serif;
     line-height: 1.6;
     word-break: break-all;
+}
+
+textarea {
+    font-family: Roboto, 'Noto Sans KR', sans-serif;
 }
   
 code[class*="language-"], pre[class*="language-"]  {

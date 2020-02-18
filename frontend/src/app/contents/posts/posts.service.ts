@@ -13,7 +13,6 @@ export class PostsService {
   ) { }
 
   getPosts(page: number, tagName: string): Observable<Array<Post>> {
-    page = 1;
     let tagQuery = ''
     if(tagName) tagQuery = `&tag=${encodeURIComponent(tagName)}`;
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts?page=${page}${tagQuery}`);

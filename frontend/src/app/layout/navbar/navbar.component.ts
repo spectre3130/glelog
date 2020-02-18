@@ -16,7 +16,7 @@ export class NavbarComponent implements OnInit {
     
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.writeStore.writeEvent
     .subscribe(val => this.isWriteMode = val);
   }

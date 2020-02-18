@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WriteStore } from '../write/write.store';
 
@@ -9,8 +9,8 @@ import { WriteStore } from '../write/write.store';
 })
 export class EditorComponent implements OnInit, OnDestroy {
 
-  title: string = '';
-  body: string = '';
+  @Input() title: string;
+  @Input() body: string;
   placeHolder: string;
   visible: boolean = true;
   changePostEvent: Subscription;
@@ -18,7 +18,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   constructor(
     private writeStore: WriteStore) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.placeHolder = this.getPlaceHolder();
     this.changePostEvent = this.writeStore.chagePostEvent
     .subscribe(post => {
@@ -27,9 +27,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     })
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.changePostEvent.unsubscribe();
-    this.writeStore.clear();
   }
 
   onTitleChange(e): void {

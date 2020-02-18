@@ -17,7 +17,7 @@ export class UserHomeHeaderComponent implements OnInit {
   constructor(
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

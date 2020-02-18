@@ -26,7 +26,7 @@ export class PublishComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public post: Post,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   onSubmit(): void {
@@ -37,13 +37,17 @@ export class PublishComponent implements OnInit {
       });
       return;
     }
-    this.post.posted = true;
-    this.dialogRef.close(this.post);
+    this.dialogRef.close({
+      post: this.post,
+      next: true,
+    });
   }
 
   onNoClick(): void {
-    this.post.posted = false;
-    this.dialogRef.close(this.post);
+    this.dialogRef.close({
+      post: this.post,
+      next: false
+    });
   }
 
   onRadioChange(event): void {
@@ -62,25 +66,9 @@ export class PublishComponent implements OnInit {
 
   add(e: MatChipInputEvent): void {
     const input: HTMLInputElement = e.input;
-    if(this.post.tags.length === 5) {
-      this._snackBar.open('태그는 최대 5개 입니다.', '닫기', {
-        duration: 3000,
-        verticalPosition: 'top'
-      });
-      return;
-    }
     const value: string = e.value;
-    if(this.post.tags.indexOf('#' + value) !== -1) {
-      this._snackBar.open('동일한 태그는 입력할 수 없습니다.', '닫기', {
-        duration: 3000,
-        verticalPosition: 'top'
-      });
-      return;
-    }
-    if ((value || '').trim()) {
+    if(this.checkValidation(value)) {
       this.post.tags.push('#' + value.trim());
-    }
-    if (input) {
       input.value = '';
     }
   }
@@ -90,5 +78,26 @@ export class PublishComponent implements OnInit {
     if (index !== -1) {
       this.post.tags.splice(index, 1);
     }
+  }
+
+  checkValidation(value: string): boolean {
+    if(this.post.tags.length === 5) {
+      this._snackBar.open('태그는 최대 5개 입니다.', '닫기', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
+      return false
+    }
+    if(this.post.tags.indexOf('#' + value) !== -1) {
+      this._snackBar.open('동일한 태그는 입력할 수 없습니다.', '닫기', {
+        duration: 3000,
+        verticalPosition: 'top'
+      });
+      return false
+    }
+    if(!(value || '').trim()) {
+      return false
+    }
+    return true;
   }
 }

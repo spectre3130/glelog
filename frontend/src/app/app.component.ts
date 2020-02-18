@@ -14,7 +14,7 @@ export class AppComponent implements OnInit{
     private authService: AuthService) {
   }
 
-  ngOnInit() {  
+  ngOnInit(): void {  
     this.route.queryParams
     .subscribe(params => {
       if(params.token) {

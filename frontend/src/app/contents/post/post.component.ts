@@ -23,7 +23,7 @@ export class PostComponent implements OnInit {
     
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.postService.getPost(params.seq)
       .subscribe(post => {
