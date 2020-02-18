@@ -4,7 +4,12 @@ const User = require('./user.model');
 exports.getUser = async (req, res, next) => {
     try {
         const { username } = req.query;
-        const user = await User.findOneElseThrow({ username });
+        const user = await User.findOne({ username })
+                                .select('username name description avatar instagram facebook github')
+        if(!user) {
+            throw '존재하지 않는 회원입니다.';
+        }
+        delete user._id;
         res.status(200).json(user);
     } catch(e) {
         console.error(e);
