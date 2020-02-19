@@ -12,17 +12,14 @@ export class MyWritingService {
   ) { }
 
   getTempsavePosts(page): Observable<Array<Post>> {
-    page = 1;
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts/writing/tempsave?page=${page}`);
   }
 
   getPublicPosts(page): Observable<Array<Post>> {
-    page = 1;
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts/writing/public?page=${page}`);
   }
 
   getPrivatePosts(page): Observable<Array<Post>> {
-    page = 1;
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts/writing/private?page=${page}`);
   }
 }

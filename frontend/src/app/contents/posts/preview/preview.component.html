@@ -25,5 +25,7 @@
             </mat-chip-list>
         </div>
     </div>
-    <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
+    <a *ngIf="post.thumb" [routerLink]="['/post', post.seq]" class="thumb-wrapper">
+        <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
+    </a>
 </article>
