@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Post } from 'src/app/app.model';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-preview',
@@ -8,8 +9,8 @@ import { Post } from 'src/app/app.model';
 })
 export class PreviewComponent implements OnInit {
 
-  @Input() 
-  post: Post;
+  @Input() post: Post;
+  faLock = faLock;
 
   constructor() { }
 

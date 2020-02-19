@@ -16,8 +16,8 @@ export class ProgressBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loaderService.fetchEvent.subscribe(isFetched => {
-      if(isFetched) {
+    this.loaderService.fetchEvent.subscribe(isStartFetch => {
+      if(isStartFetch) {
         clearTimeout(this.fetchingTimer);
         this.fetchingTimer = setTimeout(() => this.isFetching = true, 200);
       } else {

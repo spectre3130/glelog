@@ -1,0 +1,23 @@
+:host(app-page-not-found) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh
+}
+
+.page-not-found h1{
+    font-size: 30px;
+    display: block;
+    padding-right: 12px;
+    color: #888;
+    margin: 0;
+}
+
+.page-not-found h1:nth-last-child(1) {
+    animation: type .5s alternate infinite;
+}
+
+@keyframes type{
+    from{box-shadow: inset -3px 0px 0px #888;}
+    to{box-shadow: inset -3px 0px 0px transparent;}
+}

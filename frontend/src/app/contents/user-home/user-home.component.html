@@ -1,6 +1,7 @@
-<ng-container *ngIf="user">
+<div *ngIf="user" class="user-home-container">
     <app-user-home-header [user]=user></app-user-home-header>
     <div class="user-home-contents">
         <app-user-home-posts [username]=user.username></app-user-home-posts>
     </div>
-</ng-container>
+</div>
+<app-page-not-found *ngIf="isNotFound"></app-page-not-found>
