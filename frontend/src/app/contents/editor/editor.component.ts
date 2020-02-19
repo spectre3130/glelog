@@ -14,6 +14,11 @@ export class EditorComponent implements OnInit, OnDestroy {
   placeHolder: string;
   visible: boolean = true;
   changePostEvent: Subscription;
+  codeMirrorOptions = {
+    theme: '3024-day',
+    mode: 'markdown',
+    lineWrapping: true
+  };
   
   constructor(
     private writeStore: WriteStore) { }
@@ -37,8 +42,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.writeStore.setTitle(title);
   }
 
-  onBodyChange(e): void {
-    const body = e.target.value 
+  onBodyChange(body: string): void {
     if(body) this.body = body;
     else this.body = '';
     this.writeStore.setBody(body);

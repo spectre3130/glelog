@@ -5,12 +5,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
 import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { MyWritingModule } from './contents/my-writing/my-writing.module';
 
@@ -65,6 +62,7 @@ import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 
 export function loadUser(authService: AuthService) {
@@ -122,6 +120,7 @@ export function loadUser(authService: AuthService) {
     LazyLoadImageModule,
     MyWritingModule,
     SharedModule,
+    FormsModule,
     MarkdownModule.forRoot(),
   ],
   exports: [

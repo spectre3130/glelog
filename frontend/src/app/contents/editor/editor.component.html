@@ -3,15 +3,24 @@
         <div class="title-input-wrapper">
             <input type="text" class="title-input" placeholder="제목" [value]="title" (keyup)="onTitleChange($event)">
         </div>
-        <textarea 
+        <ngx-codemirror
+            [ngModel]=body
+            (ngModelChange)=onBodyChange($event)
+            [autoFocus]="true"
+            [options]=codeMirrorOptions>
+        </ngx-codemirror>
+        <!-- <textarea 
             [placeholder]="placeHolder" 
             [value]="body" 
             (keyup)="onBodyChange($event)"
-            class="body-input"></textarea>
+            class="body-input">
+        </textarea> -->
     </div>
     <div class="editor-spacer"></div>
     <div class="editor-preview">
         <h1 class="title-view">{{ title }}</h1>
-        <markdown class="body-view" ngPreserveWhitespaces [(data)]="body"></markdown>
+        <markdown class="body-view" 
+            ngPreserveWhitespaces [data]="body">
+        </markdown>
     </div>
 </div>

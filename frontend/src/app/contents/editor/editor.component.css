@@ -6,10 +6,7 @@
 .editor-write,
 .editor-spacer,
 .editor-preview {
-  display: flex;
   width: 50%;
-  padding: 10px;
-  flex-direction: column;
   vertical-align: top;
   box-sizing: border-box;
   height: 100%;
@@ -17,13 +14,20 @@
 
 .editor-write {
   position: fixed;
-  padding-right: 0;
+  padding: 0 0 0 10px;
   border-right: 1px solid #ccc;
   background-color: #f6f6f6;
 }
 
-.title-input,
-.body-input {
+.editor-preview {
+  padding: 0 20px 0 20px;
+}
+
+.title-input-wrapper {
+  padding: 17px 0 17px 5px;
+}
+
+.title-input {
   width: 100%;
   outline: none;
   border: none;
@@ -32,6 +36,7 @@
   border-bottom:0px;
   border-right: 0px;
   background-color: inherit;
+  font-size: 20px;
 }
 
 .title-view {
@@ -40,40 +45,36 @@
   font-size: 34px;
 }
 
-.title-input-wrapper {
-  padding: 17px 0 17px 0;
-}
-
-.title-input {
-  font-size: 20px;
-}
-
-.body-input {
-  margin-top: 10px;
-  padding: 0px;
-  min-height: 800px;
-  resize: none;
+:host ::ng-deep .CodeMirror {
+  height: calc(100vh - 113px);
   font-size: 16px;
 }
 
+:host ::ng-deep .CodeMirror span {
+  color: black !important;
+}
+
+
 /* ---------------------------------------------------------------------------------------------------- */
 
-
 @media (max-width: 1024px) {
+  :host ::ng-deep .CodeMirror {
+    height: calc(100vh - 160px);
+    font-size: 16px;
+  }
+
   .editor-write {
     width:100%;
   }
-  .body-input {
-    min-height: 642px;
-  }
-  .body-view {
+
+  .editor-preview {
     display:none;
   }
 }
 
-@media (max-height: 768px) {
+@media (max-height: 812px) {
   .body-input {
-    min-height: 590px;
+    min-height: 490px;
   }
 }
 /* 

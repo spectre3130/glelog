@@ -59,13 +59,21 @@
 }
 
 .mat-chip {
-    padding: 7px !important;
-    min-height: 25px !important;
+    padding: 8px !important;
+    min-height: 26px !important;
+}
+
+.thumb-wrapper {
+    margin-top: 10px;
 }
 
 @media (max-width: 1000px) {
     .post-preview {
         width:350px;
+    }
+
+    .post {
+        width: 270px;
     }
 
     .post-thumb {

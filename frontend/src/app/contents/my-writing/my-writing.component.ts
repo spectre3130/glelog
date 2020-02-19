@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ActivationEnd } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TabsRoute } from 'src/app/app.model';
-import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-writing',
@@ -18,11 +17,13 @@ export class MyWritingComponent implements OnInit {
   activeLink: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+  }
+
+  changeActiveLink(e): void {
     this.activeLink = this.route.snapshot.children[0].routeConfig.path;
   }
 

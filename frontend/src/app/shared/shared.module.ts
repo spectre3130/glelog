@@ -3,7 +3,7 @@ import { WriteDatePipe } from './write-date.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from '../material/material.module';
-
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 
 @NgModule({
@@ -15,6 +15,7 @@ import { MaterialModule } from '../material/material.module';
     FontAwesomeModule,
     InfiniteScrollModule,
     MaterialModule,
+    CodemirrorModule
   ]
 })
 export class SharedModule { }

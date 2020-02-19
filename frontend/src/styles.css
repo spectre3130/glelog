@@ -1,10 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, 'Noto Sans KR', sans-serif; }
+body { margin: 0; font-family: Roboto, 'Noto Sans KR', sans-serif; -webkit-font-smoothing: antialiased; }
 a { color: inherit; background-color: transparent; text-decoration: none; }
 a:visited { text-decoration: none; }
 a:hover { text-decoration: none; }
+
+glelog-app {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 54px;
+    bottom: 0;    
+    left: 0;
+    right: 0;
+}
 
 markdown a{
     color: #673BB7; 
@@ -21,31 +31,73 @@ markdown h1 {
 
 markdown {
     font-size: 18px;
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Noto Serif KR', sans-serif;
     line-height: 1.6;
     word-break: break-all;
+}
+
+markdown blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+
+markdown blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 2em;
+    line-height: 0.1em;
+    margin-right: 0.1em;
+    vertical-align: -0.4em;
+}
+
+markdown blockquote p {
+    display: inline;
+}
+
+markdown table {
+    border-collapse: collapse;
+    padding: 0; }
+    markdown table tr {
+        border-top: 1px solid #cccccc;
+        background-color: white;
+        margin: 0;
+        padding: 0; }
+    markdown table tr:nth-child(2n) {
+        background-color: #f8f8f8; }
+    markdown  table tr th {
+        font-weight: bold;
+        border: 1px solid #cccccc;
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px; }
+    markdown table tr td {
+        border: 1px solid #cccccc;
+        text-align: left;
+        margin: 0;
+        padding: 6px 13px; }
+    markdown table tr th :first-child, markdown table tr td :first-child {
+        margin-top: 0; }
+    markdown table tr th :last-child, markdown table tr td :last-child {
+        margin-bottom: 0; }
+  
+markdown code[class*="language-"], 
+markdown pre[class*="language-"]  {
+    font-size: 14px !important;
+}
+
+markdown .toolbar{
+    font-family: Roboto, 'Noto Sans KR', sans-serif !important;
 }
 
 textarea {
     font-family: Roboto, 'Noto Sans KR', sans-serif;
 }
-  
-code[class*="language-"], pre[class*="language-"]  {
-    font-size: 14px !important;
-}
 
-/* pre[class*="language-"] {
-    font-size: 14px !important;
-}  */
-
-glelog-app {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 54px;
-    bottom: 0;    
-    left: 0;
-    right: 0;
+.input-file {
+    display: none;
 }
 
 @media (max-width: 1000px) {
@@ -54,13 +106,8 @@ glelog-app {
     }
 }
 
-.input-file {
-    display: none;
-}
-
 .mat-sidenav-content::-webkit-scrollbar, 
-.tag-input::-webkit-scrollbar, 
-.body-input::-webkit-scrollbar, 
+.CodeMirror-vscrollbar::-webkit-scrollbar, 
 .editor-preview::-webkit-scrollbar, 
 body::-webkit-scrollbar, 
 mat-sidenav.sidenav::-webkit-scrollbar {
@@ -69,8 +116,7 @@ mat-sidenav.sidenav::-webkit-scrollbar {
 }
 
 .mat-sidenav-content::-webkit-scrollbar-thumb, 
-.tag-input::-webkit-scrollbar-thumb,
-.body-input::-webkit-scrollbar-thumb,
+.CodeMirror-vscrollbar::-webkit-scrollbar-thumb,
 .editor-preview::-webkit-scrollbar-thumb,
 body::-webkit-scrollbar-thumb, 
 mat-sidenav.sidenav::-webkit-scrollbar-thumb {
@@ -79,14 +125,9 @@ mat-sidenav.sidenav::-webkit-scrollbar-thumb {
 }
 
 .mat-sidenav-content::-webkit-scrollbar-track,
-.tag-input::-webkit-scrollbar-track, 
-.body-input::-webkit-scrollbar-track, 
+.CodeMirror-vscrollbar::-webkit-scrollbar-track, 
 .editor-preview::-webkit-scrollbar-track, 
 body::-webkit-scrollbar-track, 
 mat-sidenav.sidenav::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-}
-
-body {
-    -webkit-font-smoothing: antialiased;   
+    box-shadow: inset 0 0 6px rgba(0,0,0,.3);
 }

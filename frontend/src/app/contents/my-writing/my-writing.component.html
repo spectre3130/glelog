@@ -8,5 +8,5 @@
             (click)="activeLink = route.path"
             [active]="activeLink === route.path"> {{ route.label }} </a>
     </nav>  
-    <router-outlet></router-outlet>
+    <router-outlet (activate)=changeActiveLink($event)></router-outlet>
 </div>
