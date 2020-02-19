@@ -1,6 +1,4 @@
-const createError = require('http-errors');
 const jwt = require('jsonwebtoken');
-const User = require('../user/user.model');
 
 exports.verifyToken = (token) => {
     if(!token) {
@@ -17,7 +15,7 @@ exports.verifyToken = (token) => {
 exports.generateToken = (payload, options) => {
     const jwtOptions = {
         algorithm: 'HS256',
-        issuer: 'glelog.dev',
+        issuer: 'www.glelog.dev',
         expiresIn: '3d',
         ...options
     }
@@ -29,22 +27,6 @@ exports.generateToken = (payload, options) => {
     });
 };
 
-exports.authenticate = async (req, res, next) => {
-    try {
-        const token = req.cookies['gleid'];
-        const decodedToken = await this.verifyToken(token);
-        const user = await User.findOneElseThrow({ email: decodedToken.email });
-        if(!user) {
-            throw '존재하지 않는 회원입니다.';
-        }
-        req.user = user;
-        req.tokenExp = decodedToken.exp;
-        next();
-    } catch(e) {
-        console.error(e);
-        next(createError(401, e));
-    }
-};
 
 
 

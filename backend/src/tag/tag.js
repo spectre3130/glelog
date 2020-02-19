@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const User = require('../user/user.model');
 const Post = require('../post/post.model');
-const Tag = require('../tag/tag.model');
+const auth = require('../auth/auth');
 
 exports.aggregateTags = async (req, res, next) => {
     try {
@@ -28,6 +28,9 @@ exports.aggregateUserTags = async (req, res, next) => {
             throw '존재하지 않는 회원입니다.';
         }
         const match = { user: user._id, posted: true, open: true };
+        if(await auth.isWriter(req, user)) {
+            delete match.open;
+        }
         const tags = await Post.aggregate([
             { $match: match }, 
             { $project: { _id: 0, tags: 1 } },

@@ -40,13 +40,11 @@ export class WriteNavComponent implements OnInit {
       if(post._id) {
         this.writeService.updatePost(post)
         .subscribe(post => {
-          this.writeStore.setPost(post);
           this.openPublishPage(post);
         });
       } else {
         this.writeService.doTempSave(post)
         .subscribe(tempsave => {
-          this.writeStore.setPost(tempsave);
           this.openPublishPage(tempsave);
         });
       }
@@ -122,6 +120,9 @@ export class WriteNavComponent implements OnInit {
   }
 
   openPublishPage(post: Post): void {
+
+    this.writeStore.setPost(post);
+
     const dialogRef = this.dialog.open(PublishComponent, {
       width: '1000px',
       height: '500px',

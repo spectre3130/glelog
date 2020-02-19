@@ -51,7 +51,11 @@
 }
 
 :host ::ng-deep .CodeMirror span {
-  color: black !important;
+  color: #000000 !important;
+}
+
+:host ::ng-deep .CodeMirror-placeholder {
+  color: #757575 !important;
 }
 
 

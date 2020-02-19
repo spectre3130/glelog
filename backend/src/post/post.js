@@ -6,8 +6,8 @@ const Counter = require('../util/counter');
 const Views = require('../logs/views.model');
 const logs = require('../logs/logs');
 const moment = require('../config/moment');
-const jwtProvider = require('../auth/jwt.provider');
 const s3 = require('../config/s3');
+const auth = require('../auth/auth');
 
 exports.checkPage = async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ exports.checkPage = async (req, res, next) => {
         console.error(e);
         next(createError(500, e));
     }
-}
+};
 
 exports.getPosts = async (req, res, next) => {
     try {
@@ -43,6 +43,9 @@ exports.getUserPosts = async (req, res, next) => {
             throw '존재하지 않는 회원입니다.';
         }
         const match = { user: user._id, posted: true, open: true };
+        if(await auth.isWriter(req, user)) {
+            delete match.open;
+        }
         if(tag) match.tags = tag;
         const posts = await Post.findPostsWithUser(match, page);
         res.status(200).json(posts);
@@ -62,7 +65,6 @@ exports.getTodayPosts = async (req, res, next) => {
                     .populate('user', 'username avatar');
             })
         )
-        console.log("TCL: exports.getTodayPosts -> posts", posts)
         // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
         res.status(200).json(posts.filter(post => post !== null));
     } catch (e) {
@@ -99,7 +101,7 @@ exports.getPublicPosts = async (req, res, next) => {
         console.error(e);
         next(createError(500, e));
     }
-}
+};
 
 exports.getPrivatePosts = async (req, res, next) => {
     try {
@@ -111,7 +113,7 @@ exports.getPrivatePosts = async (req, res, next) => {
         console.error(e);
         next(createError(500, e));
     }
-}
+};
 
 exports.getPost = async (req, res, next) => {
     try {
@@ -122,7 +124,7 @@ exports.getPost = async (req, res, next) => {
             throw '존재하지 않는 포스트입니다.';
         }
 
-        if(await isWriter(req, post) || post.open) {
+        if(await auth.isWriter(req, post.user) || post.open) {
             await Views.create({ post_id: post._id, post_seq: post.seq });
             res.status(200).json(post);
         } else {
@@ -172,7 +174,7 @@ exports.doPublising = async (req, res, next) => {
         console.error(e);
         next(createError(400, e));
     }
-}
+};
 
 exports.update = async (req, res, next) => {
     try {
@@ -215,12 +217,3 @@ exports.delete = async (req, res, next) => {
         next(createError(400, e));
     }
 };
-
-isWriter = async(req, post) => {
-    const token = req.cookies['gleid'];
-    const decodedToken = await jwtProvider.verifyToken(token);
-    if(decodedToken.email === post.user.email) {
-        return true;
-    }
-    return false;
-}

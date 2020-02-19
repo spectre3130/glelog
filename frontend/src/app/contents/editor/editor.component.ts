@@ -17,7 +17,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   codeMirrorOptions = {
     theme: '3024-day',
     mode: 'markdown',
-    lineWrapping: true
+    lineWrapping: true,
+    placeholder: '본문'
   };
   
   constructor(
@@ -29,7 +30,7 @@ export class EditorComponent implements OnInit, OnDestroy {
     .subscribe(post => {
       this.title = post.title;
       this.body = post.body;
-    })
+    });
   }
 
   ngOnDestroy(): void {

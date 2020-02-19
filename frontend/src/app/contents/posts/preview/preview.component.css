@@ -18,6 +18,17 @@
     object-fit: cover;
 }
 
+.post-title-wrapper {
+    display:flex;
+}
+
+fa-icon {
+    margin: 0 10px 0 10px;
+    display:flex;
+    align-items: center;
+    color: rgba(0,0,0,0.5);
+}
+
 .post-title {
     margin: 5px 0px 5px 0px;
     font-size: 26px;

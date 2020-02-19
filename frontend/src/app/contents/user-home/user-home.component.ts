@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserHomeService } from './user-home.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { User } from 'src/app/app.model';
 
@@ -12,8 +12,10 @@ import { User } from 'src/app/app.model';
 export class UserHomeComponent implements OnInit {
 
   user: User;
+  isNotFound: boolean = false;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private userHomeService: UserHomeService
   ) { }
@@ -24,7 +26,10 @@ export class UserHomeComponent implements OnInit {
     )
     .subscribe(params => {
       this.userHomeService.getUserByUsername(params.username)
-      .subscribe((user: User) => this.user = user);
+      .subscribe(
+        (user: User) => this.user = user,
+        (err) => this.isNotFound = true
+      );
     });
   }
 }
