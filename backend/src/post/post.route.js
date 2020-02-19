@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const post = require('./post');
-const jwtProvider = require('../auth/jwt.provider');
+const auth = require('../auth/auth');
 
-router.post('/', jwtProvider.authenticate, post.doPublising);
-router.put('/', jwtProvider.authenticate, post.update);
-router.delete('/', jwtProvider.authenticate, post.delete);
+router.post('/', auth.authenticate, post.doPublising);
+router.put('/', auth.authenticate, post.update);
+router.delete('/', auth.authenticate, post.delete);
 router.get('/:seq', post.getPost);
-router.post('/tempsave', jwtProvider.authenticate, post.doTempSave);
+router.post('/tempsave', auth.authenticate, post.doTempSave);
 
 module.exports = router;
 
