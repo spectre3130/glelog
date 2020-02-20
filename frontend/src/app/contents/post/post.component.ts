@@ -15,6 +15,7 @@ export class PostComponent implements OnInit {
   faFacebook = faFacebook;
   faGithub = faGithub;
   post: Post;
+  isNotFound: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -26,9 +27,10 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.postService.getPost(params.seq)
-      .subscribe(post => {
-        this.post = post
-      });
+      .subscribe(
+        (post) => this.post = post,
+        (err) => this.isNotFound = true
+      );
     });
   }
 

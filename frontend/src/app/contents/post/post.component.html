@@ -1,20 +1,20 @@
-<div class="post-container">
+<div class="container">
     <div *ngIf="post" class="post">
         <h1 class="post-title">{{ post.title }}</h1>
         <div class="post-user">
             <a [routerLink]="['', post.user.username]">
-                <img class="user-avatar" src="{{ post.user.avatar }}">
+                <img class="post-user-avatar" src="{{ post.user.avatar }}">
             </a>
-            <div class="user">
-                <a [routerLink]="['', post.user.username]" class="username">{{ post.user.username }}</a>
-                <div class="user-post-time">{{ post.created_at | writeDate }}</div>
+            <div class="post-user-info">
+                <a [routerLink]="['', post.user.username]" class="post-username">{{ post.user.username }}</a>
+                <div class="post-time">{{ post.created_at | writeDate }}</div>
             </div>
-            <div class="user-spacer"></div>
-            <div class="user-sns">
-                <a *ngIf="post.user.instagram" href="https://www.instagram.com/{{ post.user.instagram }}">
+            <div class="post-user-spacer"></div>
+            <div class="post-user-sns">
+                <a *ngIf="!post.user.instagram" href="https://www.instagram.com/{{ post.user.instagram }}">
                     <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
                 </a>
-                <a *ngIf="post.user.facebook" href="https://www.facebook.com/{{ post.user.facebook }}">
+                <a *ngIf="!post.user.facebook" href="https://www.facebook.com/{{ post.user.facebook }}">
                     <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
                 </a>
                 <a *ngIf="post.user.github" href="https://www.github.com/{{ post.user.github }}">
@@ -22,18 +22,26 @@
                 </a>
             </div>
         </div>
-        <div class="user-sns-small">
-            <a *ngIf="post.user.instagram" href="https://www.instagram.com/{{ post.user.instagram }}">
-                <fa-icon [icon]="faInstagram" size="lg"></fa-icon>
-            </a>
-            <a *ngIf="post.user.facebook" href="https://www.facebook.com/{{ post.user.facebook }}">
-                <fa-icon [icon]="faFacebook" size="lg"></fa-icon>
-            </a>
-            <a *ngIf="post.user.github" href="https://www.github.com/{{ post.user.github }}">
-                <fa-icon [icon]="faGithub" size="lg"></fa-icon>
-            </a>
+        <div class="post-body">
+            <markdown ngPreserveWhitespaces [data]="post.body">
+            </markdown>
         </div>
-        <markdown ngPreserveWhitespaces [data]="post.body">
-        </markdown>
+        <div class="post-tags">
+            <mat-chip-list>
+                <a mat-chip *ngFor="let tag of post.tags" [routerLink]="['/tag', tag.replace('#', '')]">
+                    <span class="tag-name">{{ tag }}</span>
+                </a>
+            </mat-chip-list>
+        </div>
+    </div>
+    <div *ngIf="post" class="user">
+        <a [routerLink]="['', post.user.username]">
+            <img class="user-avatar" src="{{ post.user.avatar }}">
+        </a>
+        <div class="user-info">
+            <a [routerLink]="['', post.user.username]" class="username">{{ post.user.username }}</a>
+            <p class="description">{{ post.user.description }}</p>
+        </div>
     </div>
 </div>
+<app-page-not-found *ngIf="isNotFound"></app-page-not-found>

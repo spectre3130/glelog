@@ -62,9 +62,9 @@ export class WriteStore {
       body: this.body,
       thumb: this.thumb,
       open: this.open,
-      description: (this.body && this.body.length > 100) 
-      ? (removeMd(this.body).substr(0, 96) + '...').replace(/\r?\n|\r/g, '')
-      : removeMd(this.body).substr(0, 99).replace(/\r?\n|\r/g, ''),
+      description: removeMd(this.body).substr(0, 149)
+                                      .replace(/\r?\n|\r/g, ' ')
+                                      .replace(/<|>/g, ''),
       user: this.authService.loadedUser()
     }
   }

@@ -124,7 +124,7 @@ export class WriteNavComponent implements OnInit {
     this.writeStore.setPost(post);
 
     const dialogRef = this.dialog.open(PublishComponent, {
-      width: '1000px',
+      width: '800px',
       height: '500px',
       data: post
     });

@@ -17,18 +17,16 @@
                 <div class="post-time">{{ post.created_at | writeDate }}</div>
             </div>
         </div>
-        <div class="post-description">
-            {{ post.description }}
-        </div>
+        <div class="post-description">{{ post.description }}</div>
         <div class="post-tags">
             <mat-chip-list>
-                <mat-chip *ngFor="let tag of post.tags">
-                    {{ tag }}
-                </mat-chip>
+                <a mat-chip *ngFor="let tag of post.tags" [routerLink]="['/tag', tag.replace('#', '')]">
+                    <span class="tag-name">{{ tag }}</span>
+                </a>
             </mat-chip-list>
         </div>
     </div>
-    <a *ngIf="post.thumb" [routerLink]="['/post', post.seq]" class="thumb-wrapper">
+    <a *ngIf="post.thumb" [routerLink]="['/post', post.seq]" class="thumb-link">
         <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
     </a>
 </article>
