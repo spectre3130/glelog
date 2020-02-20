@@ -32,8 +32,8 @@ export class PostsComponent implements OnInit {
       this.isLoaded = false;
       this.postsService.getPosts(this.page, this.tagName)
       .subscribe(posts => { 
-        this.posts = this.posts.concat(posts);
         this.isLoaded = true;
+        this.posts = this.posts.concat(posts);
         this.page++;
       });
     }

@@ -34,8 +34,8 @@ export class UserHomePostsComponent implements OnInit, OnChanges, OnDestroy {
       map((doc: HTMLDocument) => doc.documentElement.scrollTop > 240 ? true : false),
       distinctUntilChanged()
     )
-    .subscribe((result) => {
-      if(result) {
+    .subscribe((isUnder) => {
+      if(isUnder) {
         this.userTags.nativeElement.style.position = 'fixed';
         this.userTags.nativeElement.style.top = '90px';
       } else {
@@ -67,8 +67,8 @@ export class UserHomePostsComponent implements OnInit, OnChanges, OnDestroy {
       this.isLoaded = false;
       this.userHomeService.getUserPosts(this.username, this.page, this.tagName)
       .subscribe(posts => { 
-        this.posts = this.posts.concat(posts);
         this.isLoaded = true;
+        this.posts = this.posts.concat(posts);
         this.page++;
       });
     }
