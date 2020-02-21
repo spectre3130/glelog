@@ -37,6 +37,7 @@ export class WriteNavComponent implements OnInit {
 
   writeConfirm(): void {
     if(this.checkValidation()) {
+      this.disabled = true;
       const post = this.writeStore.getPost();
       if(post._id) {
         this.writeService.updatePost(post)
@@ -122,7 +123,6 @@ export class WriteNavComponent implements OnInit {
 
   openPublishPage(post: Post): void {
 
-    this.disabled = true;
     this.writeStore.setPost(post);
     
     const dialogRef = this.dialog.open(PublishComponent, {
