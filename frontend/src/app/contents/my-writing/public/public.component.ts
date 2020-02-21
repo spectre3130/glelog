@@ -38,7 +38,6 @@ export class PublicComponent implements OnInit {
   }
 
   refresh($event): void {
-  console.log("TCL: PublicComponent -> event", $event)
       this.posts = [];
       this.isLoaded = true;
       this.page = 1;

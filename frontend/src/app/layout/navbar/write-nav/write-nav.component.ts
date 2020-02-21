@@ -21,6 +21,7 @@ export class WriteNavComponent implements OnInit {
   faArrowLeft = faArrowLeft;
   faImage = faImage;
   faSave = faSave;
+  disabled = false;
 
   constructor(
     private router: Router,
@@ -121,8 +122,9 @@ export class WriteNavComponent implements OnInit {
 
   openPublishPage(post: Post): void {
 
+    this.disabled = true;
     this.writeStore.setPost(post);
-
+    
     const dialogRef = this.dialog.open(PublishComponent, {
       width: '800px',
       height: '500px',
@@ -130,6 +132,7 @@ export class WriteNavComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      this.disabled = false;
       this.writeStore.setPost(result.post);
       if(result.next) {
         this.nextStep(post);

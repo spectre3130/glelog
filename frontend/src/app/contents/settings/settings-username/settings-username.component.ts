@@ -37,7 +37,7 @@ export class SettingsUsernameComponent implements OnInit, OnDestroy {
           verticalPosition: 'top'
         });
       },
-      err => console.log(err)
+      err => this._snackBar.dismiss()
     );
   }
 

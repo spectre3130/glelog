@@ -11,7 +11,6 @@ export class AuthGardService {
   ) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-  console.log("TCL: AuthGardService -> route", route)
     const user = this.authService.loadedUser();
     if(user) {
       return true;

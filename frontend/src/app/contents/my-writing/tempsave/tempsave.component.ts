@@ -30,8 +30,8 @@ export class TempsaveComponent implements OnInit {
       this.isLoaded = false;
       this.myWritingService.getTempsavePosts(this.page)
       .subscribe(posts => {
-        this.posts = this.posts.concat(posts);
         this.isLoaded = true;
+        this.posts = this.posts.concat(posts);
         this.page++;
       });
     }
