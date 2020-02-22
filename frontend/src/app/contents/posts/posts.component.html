@@ -7,7 +7,7 @@
         <ng-container *ngFor="let post of posts">
             <app-preview [post]=post></app-preview>
         </ng-container>
-        <app-loading-posts *ngIf="!isLoaded"></app-loading-posts>
+        <app-ph-posts *ngIf="!isLoaded"></app-ph-posts>
     </div>
     <app-popular-posts></app-popular-posts>
 </div>

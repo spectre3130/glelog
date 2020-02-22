@@ -1,13 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { MyWritingService } from '../my-writing.service';
 import { Post } from 'src/app/app.model';
-import { WriteStore } from '../../write/write.store';
+import { WriteStore } from 'src/app/shared/service/write.store';
+import { MyWritingService } from 'src/app/shared/service/my-writing.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-private',
   templateUrl: './private.component.html',
-  styleUrls: ['./private.component.css']
+  styleUrls: ['./private.component.scss']
 })
 export class PrivateComponent implements OnInit {
 

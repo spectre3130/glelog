@@ -64,9 +64,9 @@ exports.getTodayPosts = async (req, res, next) => {
                     .select('seq title thumb user created_at updated_at')
                     .populate('user', 'username avatar');
             })
-        )
+        ).then(posts => posts.filter(post => post !== null));
         // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
-        res.status(200).json(posts.filter(post => post !== null));
+        res.status(200).json(posts);
     } catch (e) {
         console.error(e);
         next(createError(500, e));

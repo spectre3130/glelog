@@ -6,15 +6,15 @@ import { User } from '../../../app.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { SettingsService } from 'src/app/contents/settings/settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 
 
 @Component({
   selector: 'app-user-nav',
   templateUrl: './user-nav.component.html',
-  styleUrls: ['./user-nav.component.css']
+  styleUrls: ['./user-nav.component.scss']
 })
 export class UserNavComponent implements OnInit, OnDestroy {
 

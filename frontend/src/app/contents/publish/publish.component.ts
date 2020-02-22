@@ -4,12 +4,12 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Post } from 'src/app/app.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WriteService } from '../write/write.service';
+import { WriteService } from 'src/app/shared/service/write.service';
 
 @Component({
   selector: 'app-publish',
   templateUrl: './publish.component.html',
-  styleUrls: ['./publish.component.css']
+  styleUrls: ['./publish.component.scss']
 })
 export class PublishComponent implements OnInit {
 

@@ -1,18 +1,16 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { WriteStore } from '../write/write.store';
+import { WriteStore } from 'src/app/shared/service/write.store';
 
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
-  styleUrls: ['./editor.component.css']
+  styleUrls: ['./editor.component.scss']
 })
 export class EditorComponent implements OnInit, OnDestroy {
 
   @Input() title: string;
   @Input() body: string;
-  placeHolder: string;
-  visible: boolean = true;
   changePostEvent: Subscription;
   codeMirrorOptions = {
     theme: '3024-day',
@@ -22,10 +20,10 @@ export class EditorComponent implements OnInit, OnDestroy {
   };
   
   constructor(
-    private writeStore: WriteStore) { }
+    private writeStore: WriteStore
+  ) { }
 
   ngOnInit(): void {
-    this.placeHolder = this.getPlaceHolder();
     this.changePostEvent = this.writeStore.chagePostEvent
     .subscribe(post => {
       this.title = post.title;
@@ -47,9 +45,5 @@ export class EditorComponent implements OnInit, OnDestroy {
     if(body) this.body = body;
     else this.body = '';
     this.writeStore.setBody(body);
-  }
-  
-  private getPlaceHolder(): string {
-    return '본문';
   }
 }

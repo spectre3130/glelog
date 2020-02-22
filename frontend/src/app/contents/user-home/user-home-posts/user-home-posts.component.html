@@ -5,7 +5,7 @@
                 태그 목록
             </div>
             <app-user-home-tags *ngIf="tags"[username]=username [tags]=tags (onSelected)=getUserPostsByTagName($event)></app-user-home-tags>
-            <app-loading-tags *ngIf="!tags"></app-loading-tags>
+            <app-ph-tags *ngIf="!tags"></app-ph-tags>
         </div>
     </div>    
     <div class="posts-item"
@@ -16,6 +16,6 @@
         <ng-container *ngFor="let post of posts">
             <app-preview [post]=post></app-preview>
         </ng-container>
-        <app-loading-posts *ngIf="!isLoaded"></app-loading-posts>
+        <app-ph-posts *ngIf="!isLoaded"></app-ph-posts>
     </div>
 </div>

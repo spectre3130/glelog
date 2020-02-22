@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter, OnChanges, OnDestroy } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 import { Subject, Subscription } from 'rxjs';
 import { map, debounceTime, switchMap, filter } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-settings-username',
   templateUrl: './settings-username.component.html',
-  styleUrls: ['./settings-username.component.css']
+  styleUrls: ['./settings-username.component.scss']
 })
 export class SettingsUsernameComponent implements OnInit, OnDestroy {
 

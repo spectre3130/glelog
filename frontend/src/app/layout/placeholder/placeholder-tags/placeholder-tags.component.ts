@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-loading-tags',
-  templateUrl: './loading-tags.component.html',
-  styleUrls: ['./loading-tags.component.css']
+  selector: 'app-ph-tags',
+  templateUrl: './placeholder-tags.component.html',
+  styleUrls: ['./placeholder-tags.component.scss']
 })
-export class LoadingTagsComponent implements OnInit {
+export class PlaceholderTagsComponent implements OnInit {
 
   repeat: Array<number>;
   

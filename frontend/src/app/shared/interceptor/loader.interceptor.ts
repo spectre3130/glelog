@@ -6,9 +6,9 @@ import {
   HttpInterceptor,
   HttpResponse
 } from '@angular/common/http';
-import { Observable, onErrorResumeNext } from 'rxjs';
-import { LoaderService } from './loader.service';
+import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { LoaderService } from 'src/app/shared/service/loader.service';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {

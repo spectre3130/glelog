@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import { WriteStore } from '../../write/write.store';
 import { Router } from '@angular/router';
-import { WriteService } from '../../write/write.service';
+import { WriteStore } from 'src/app/shared/service/write.store';
+import { WriteService } from 'src/app/shared/service/write.service';
 import { ConfirmComponent } from 'src/app/layout/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-writing',
-  templateUrl: './writing.component.html',
-  styleUrls: ['./writing.component.css']
+  selector: 'app-writing-preview',
+  templateUrl: './writing-preview.component.html',
+  styleUrls: ['./writing-preview.component.scss']
 })
-export class WritingComponent implements OnInit {
+export class WritingPreviewComponent implements OnInit {
 
   faCaretDown = faCaretDown;
   @Input() post: Post;

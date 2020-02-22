@@ -4,7 +4,7 @@ import { Tag } from 'src/app/app.model';
 @Component({
   selector: 'app-user-home-tags',
   templateUrl: './user-home-tags.component.html',
-  styleUrls: ['./user-home-tags.component.css']
+  styleUrls: ['./user-home-tags.component.scss']
 })
 export class UserHomeTagsComponent implements OnInit {
 

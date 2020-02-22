@@ -5,7 +5,7 @@ import { PostsService } from '../posts.service';
 @Component({
   selector: 'app-popular-posts',
   templateUrl: './popular-posts.component.html',
-  styleUrls: ['./popular-posts.component.css']
+  styleUrls: ['./popular-posts.component.scss']
 })
 export class PopularPostsComponent implements OnInit {
 

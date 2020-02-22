@@ -15,6 +15,22 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
+  imports: [  
+    MatButtonModule,
+    MatCardModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatListModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    MatTabsModule
+  ],
   exports: [
     MatButtonModule,
     MatCardModule,
@@ -33,4 +49,4 @@ import { MatTabsModule } from '@angular/material/tabs';
   ]
 })
 export class MaterialModule { }
-  
+

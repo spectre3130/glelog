@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WriteStore } from './write.store';
 import { Post } from 'src/app/app.model';
+import { WriteStore } from 'src/app/shared/service/write.store';
 
 @Component({
   selector: 'app-write',
   templateUrl: './write.component.html',
-  styleUrls: ['./write.component.css']
+  styleUrls: ['./write.component.scss']
 })
 export class WriteComponent implements OnInit, OnDestroy{
 

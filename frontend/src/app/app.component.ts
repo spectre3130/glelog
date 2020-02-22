@@ -3,9 +3,9 @@ import { ActivatedRoute, Router, NavigationStart, NavigationEnd } from '@angular
 import { AuthService } from './auth/auth.service';
 
 @Component({
-  selector: 'glelog-app',
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
   

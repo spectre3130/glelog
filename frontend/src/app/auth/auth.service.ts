@@ -4,7 +4,7 @@ import { User } from '../app.model';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { SettingsService } from '../contents/settings/settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 
 @Injectable()
 export class AuthService {

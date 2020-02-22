@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faArrowLeft, faImage, faSave } from '@fortawesome/free-solid-svg-icons';
-import { WriteService } from 'src/app/contents/write/write.service';
+import { WriteService } from 'src/app/shared/service/write.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,13 +8,13 @@ import { Location } from '@angular/common';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Post } from 'src/app/app.model';
 import { PublishComponent } from 'src/app/contents/publish/publish.component';
-import { WriteStore } from 'src/app/contents/write/write.store';
+import { WriteStore } from 'src/app/shared/service/write.store';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-write-nav',
   templateUrl: './write-nav.component.html',
-  styleUrls: ['./write-nav.component.css']
+  styleUrls: ['./write-nav.component.scss']
 })
 export class WriteNavComponent implements OnInit {
 

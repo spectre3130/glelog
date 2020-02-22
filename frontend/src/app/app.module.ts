@@ -5,11 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
-import { TextareaAutosizeModule } from 'ngx-textarea-autosize';
-import { ScrollingModule, ScrollDispatchModule } from '@angular/cdk/scrolling';
-import { LazyLoadImageModule } from 'ng-lazyload-image';
-import { MyWritingModule } from './contents/my-writing/my-writing.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { MainNavComponent } from './layout/navbar/main-nav/main-nav.component';
@@ -20,7 +16,7 @@ import { PostsComponent } from './contents/posts/posts.component';
 import { ProgressBarComponent } from './layout/progress-bar/progress-bar.component';
 import { LoginComponent } from './contents/login/login.component';
 import { WriteComponent } from './contents/write/write.component';
-import { EditorComponent } from './contents/editor/editor.component';
+import { EditorComponent } from './contents/write/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
 import { ConfirmComponent } from './layout/confirm/confirm.component';
@@ -36,38 +32,31 @@ import { SettingsInputComponent } from './contents/settings/settings-input/setti
 import { SettingsSocialInputComponent } from './contents/settings/settings-social-input/settings-social-input.component';
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
-import { LoadingPostsComponent } from './layout/loading/loading-posts/loading-posts.component';
 import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
 import { PublishComponent } from './contents/publish/publish.component';
-import { LoadingPopularComponent } from './layout/loading/loading-popular/loading-popular.component';
-import { LoadingTagsComponent } from './layout/loading/loading-tags/loading-tags.component';
+import { PlaceholderPostsComponent } from './layout/placeholder/placeholder-posts/placeholder-posts.component';
+import { PlaceholderPopularComponent } from './layout/placeholder/placeholder-popular/placeholder-popular.component';
+import { PlaceholderTagsComponent } from './layout/placeholder/placeholder-tags/placeholder-tags.component';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
-import { CorsInterceptor } from './shared/cors.interceptor'
-import { LoaderInterceptor } from './shared/loader.interceptor';
+import { CorsInterceptor } from './shared/interceptor/cors.interceptor'
+import { LoaderInterceptor } from './shared/interceptor/loader.interceptor';
 
 import { AuthService } from './auth/auth.service';
 import { AuthGardService } from './auth/auth-gard.service';
-import { WriteService } from './contents/write/write.service';
-import { PostService } from './contents/post/post.service';
+import { WriteService } from './shared/service/write.service';
+import { PostService } from './shared/service/post.service';
 import { PostsService } from './contents/posts/posts.service';
-import { UserHomeService } from './contents/user-home/user-home.service';
-import { SettingsService } from './contents/settings/settings.service';
-import { TagsService } from './contents/tags/tags.service';
-import { LoaderService } from './shared/loader.service';
+import { UserHomeService } from './shared/service/user-home.service';
+import { SettingsService } from './shared/service/settings.service';
+import { TagsService } from './shared/service/tags.service';
+import { LoaderService } from './shared/service/loader.service';
 
-import { WriteStore } from './contents/write/write.store';
+import { WriteStore } from './shared/service/write.store';
 
-import { WriteDatePipe } from './shared/write-date.pipe';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { SharedModule } from './shared/shared.module';
-import { FormsModule } from '@angular/forms';
-
-
-export function loadUser(authService: AuthService) {
-  return () => authService.loadUser();
-}
 
 @NgModule({
   declarations: [
@@ -97,11 +86,11 @@ export function loadUser(authService: AuthService) {
     SettingsSocialInputComponent,
     PopularPostsComponent,
     PopularPreviewComponent,
-    LoadingPostsComponent,
+    PlaceholderPostsComponent,
     SettingsUsernameComponent,
     PublishComponent,
-    LoadingPopularComponent,
-    LoadingTagsComponent,
+    PlaceholderPopularComponent,
+    PlaceholderTagsComponent,
     PageNotFoundComponent,
   ],
   entryComponents: [
@@ -114,22 +103,18 @@ export function loadUser(authService: AuthService) {
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    TextareaAutosizeModule,
-    ScrollingModule,
-    ScrollDispatchModule,
-    LazyLoadImageModule,
-    MyWritingModule,
     SharedModule,
-    FormsModule,
     MarkdownModule.forRoot(),
-  ],
-  exports: [
-    WriteDatePipe,
   ],
   providers: [
     AuthService,
     AuthGardService,
-    { provide: APP_INITIALIZER, useFactory: loadUser, deps: [AuthService], multi: true },
+    { 
+      provide: APP_INITIALIZER, 
+      useFactory: (authService: AuthService) => () => authService.loadUser(), 
+      deps: [AuthService], 
+      multi: true 
+    },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: UrlSerializer, useClass: CustomUrlSerializer },

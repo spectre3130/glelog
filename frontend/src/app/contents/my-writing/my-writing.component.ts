@@ -5,7 +5,7 @@ import { TabsRoute } from 'src/app/app.model';
 @Component({
   selector: 'app-my-writing',
   templateUrl: './my-writing.component.html',
-  styleUrls: ['./my-writing.component.css']
+  styleUrls: ['./my-writing.component.scss']
 })
 export class MyWritingComponent implements OnInit {
 

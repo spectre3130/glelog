@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/app.model';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings-base-btn',
   templateUrl: './settings-base-btn.component.html',
-  styleUrls: ['./settings-base-btn.component.css']
+  styleUrls: ['./settings-base-btn.component.scss']
 })
 export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
 

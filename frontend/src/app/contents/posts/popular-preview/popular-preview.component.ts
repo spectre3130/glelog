@@ -4,7 +4,7 @@ import { PopularPost } from 'src/app/app.model';
 @Component({
   selector: 'app-popular-preview',
   templateUrl: './popular-preview.component.html',
-  styleUrls: ['./popular-preview.component.css']
+  styleUrls: ['./popular-preview.component.scss']
 })
 export class PopularPreviewComponent implements OnInit {
 

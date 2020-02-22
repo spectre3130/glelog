@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MyWritingService } from '../my-writing.service';
 import { Post } from 'src/app/app.model';
-import { WriteStore } from '../../write/write.store';
+import { WriteStore } from 'src/app/shared/service/write.store';
+import { MyWritingService } from 'src/app/shared/service/my-writing.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tempsave',
   templateUrl: './tempsave.component.html',
-  styleUrls: ['./tempsave.component.css']
+  styleUrls: ['./tempsave.component.scss']
 })
 export class TempsaveComponent implements OnInit {
 
@@ -17,8 +17,6 @@ export class TempsaveComponent implements OnInit {
 
   constructor(
     private myWritingService: MyWritingService,
-    private WriteStore: WriteStore,
-    private router: Router
   ) { }
 
   ngOnInit(): void {

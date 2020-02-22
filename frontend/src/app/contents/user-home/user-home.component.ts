@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { UserHomeService } from './user-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, tap } from 'rxjs/operators';
 import { User } from 'src/app/app.model';
+import { UserHomeService } from 'src/app/shared/service/user-home.service';
 
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  styleUrls: ['./user-home.component.scss']
 })
 export class UserHomeComponent implements OnInit {
 

@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Post, Tag } from 'src/app/app.model';
-import { UserHomeService } from '../user-home.service';
 import { tap, take, map, distinctUntilChanged } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, fromEvent } from 'rxjs';
+import { UserHomeService } from 'src/app/shared/service/user-home.service';
 
 
 @Component({
   selector: 'app-user-home-posts',
   templateUrl: './user-home-posts.component.html',
-  styleUrls: ['./user-home-posts.component.css']
+  styleUrls: ['./user-home-posts.component.scss']
 })
 export class UserHomePostsComponent implements OnInit, OnChanges, OnDestroy {
 

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { WriteDatePipe } from './write-date.pipe';
+import { WriteDatePipe } from './pipe/write-date.pipe';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MaterialModule } from '../material/material.module';
 import { CodemirrorModule } from '@ctrl/ngx-codemirror';
-
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,10 +12,11 @@ import { CodemirrorModule } from '@ctrl/ngx-codemirror';
   ],
   exports: [
     WriteDatePipe,
+    FormsModule,
     FontAwesomeModule,
     InfiniteScrollModule,
+    CodemirrorModule,
     MaterialModule,
-    CodemirrorModule
   ]
 })
 export class SharedModule { }
