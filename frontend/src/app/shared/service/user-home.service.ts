@@ -21,7 +21,7 @@ export class UserHomeService {
     return this.http.get<Array<Post>>(`${environment.resource}/api/posts/${encodeURIComponent(username)}?page=${page}${tagQuery}`);
   }
 
-  getUserTags(username: string):Observable<Array<Tag>> {
+  getUserTags(username: string):Observable<Tag[]> {
     return this.http.get<Array<Tag>>(`${environment.resource}/api/tag/${encodeURIComponent(username)}`);
   }
   

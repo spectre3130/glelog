@@ -50,7 +50,7 @@ export interface UploadImage {
     markdown: string
 }
 
-export interface TabsRoute {
+export interface TabsItem {
     path: string
-    label: string
+    name: string
 }

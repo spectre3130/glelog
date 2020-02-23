@@ -179,6 +179,7 @@ exports.doPublising = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const { _id, title, body, tags, description, open } = req.body;
+        console.log("TCL: exports.update -> body", body)
         const post = await Post.findOne({ _id }).populate('user', 'email');
         if(req.user.email !== post.user.email) {
             throw '해당글을 변경할 수 없습니다.';

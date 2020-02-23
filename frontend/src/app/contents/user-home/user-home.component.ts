@@ -15,7 +15,6 @@ export class UserHomeComponent implements OnInit {
   isNotFound: boolean = false;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private userHomeService: UserHomeService
   ) { }
@@ -25,6 +24,7 @@ export class UserHomeComponent implements OnInit {
       take(1)
     )
     .subscribe(params => {
+    console.log("TCL: UserHomeComponent -> params", params)
       this.userHomeService.getUserByUsername(params.username)
       .subscribe(
         (user: User) => this.user = user,

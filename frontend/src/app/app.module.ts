@@ -46,7 +46,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthGardService } from './auth/auth-gard.service';
 import { WriteService } from './shared/service/write.service';
 import { PostService } from './shared/service/post.service';
-import { PostsService } from './contents/posts/posts.service';
+import { PostsService } from './shared/service/posts.service';
 import { UserHomeService } from './shared/service/user-home.service';
 import { SettingsService } from './shared/service/settings.service';
 import { TagsService } from './shared/service/tags.service';
@@ -57,6 +57,7 @@ import { WriteStore } from './shared/service/write.store';
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { SharedModule } from './shared/shared.module';
+import { ApiService } from './shared/service/api.service';
 
 @NgModule({
   declarations: [
@@ -106,9 +107,13 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     MarkdownModule.forRoot(),
   ],
+  exports: [
+    BrowserAnimationsModule,
+  ],
   providers: [
     AuthService,
     AuthGardService,
+    ApiService,
     { 
       provide: APP_INITIALIZER, 
       useFactory: (authService: AuthService) => () => authService.loadUser(), 

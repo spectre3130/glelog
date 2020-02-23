@@ -1,0 +1,56 @@
+markdown {
+    font-size: 18px;
+    font-family: 'Noto Serif KR', sans-serif;
+    line-height: 1.6;
+    word-break: break-all;
+    a { color: #673BB7; }
+    img { max-width: 100%; }
+    h1 { font-size: 1.7em; }
+    blockquote {
+        background: #f9f9f9;
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+        &:before {
+            color: #ccc;
+            content: open-quote;
+            font-size: 2em;
+            line-height: 0.1em;
+            margin-right: 0.1em;
+            vertical-align: -0.4em;    
+        }
+        p { display: inline; }
+    }
+    table {
+        border-collapse: collapse;
+        padding: 0; 
+        tr {
+            border-top: 1px solid #cccccc;
+            background-color: white;
+            margin: 0;
+            padding: 0; 
+            &:nth-child(2n) { background-color: #f8f8f8; }
+            td {
+                border: 1px solid #cccccc;
+                text-align: left;
+                margin: 0;
+                padding: 6px 13px; 
+                &:first-child { margin-top: 0; }
+                &:last-child { margin-bottom: 0; } 
+            }
+            th {
+                @extend td;
+                font-weight: bold;
+            }
+            
+        }
+    }
+    code[class*="language-"],
+    pre[class*="language-"] {
+        font-size: 14px !important;
+    }
+    .toolbar{
+        font-family: Roboto, 'Noto Sans KR', sans-serif !important;
+    }
+}

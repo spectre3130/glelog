@@ -3,10 +3,12 @@
         내 글 모음
     </div>
     <nav mat-tab-nav-bar>
-        <a mat-tab-link *ngFor="let route of tabsRoutes"
-            [routerLink]="['/me/writing', route.path]"
-            (click)="activeLink = route.path"
-            [active]="activeLink === route.path"> {{ route.label }} </a>
+        <a mat-tab-link *ngFor="let tabsItem of tabsItems"
+            [routerLink]="['/me/writing', tabsItem.path]"
+            (click)="activeLink = tabsItem.path"
+            [active]="activeLink === tabsItem.path"> 
+            {{ tabsItem.name }}
+        </a>
     </nav>  
-    <router-outlet (activate)=changeActiveLink($event)></router-outlet>
+    <router-outlet (activate)=onActivate($event)></router-outlet>
 </div>

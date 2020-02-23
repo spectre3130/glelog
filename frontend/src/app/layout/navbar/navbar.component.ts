@@ -12,9 +12,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private writeStore: WriteStore
-  ) {  
-    
-  }
+  ) { }
 
   ngOnInit(): void {
     this.writeStore.writeEvent

@@ -1,26 +1,22 @@
-h3 {
-    cursor: pointer;
-    margin: 0;
-}
-
-.writing {
+.my-writing-item {
     padding: 20px 0 20px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.writing-description {
-    padding: 8px 0 8px 0;
-    font-size: 14px;
-}
-
-.writing-info {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #6f6f6f;
-}
-
-.btn-menu {
-    cursor: pointer;
-    padding: 0 10px 0 10px;
+    &-title {
+        cursor: pointer;
+        margin: 0;    
+    }
+    &-description {
+        padding: 8px 0 8px 0;
+        font-size: 14px;    
+    }
+    &-info {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #6f6f6f;
+    }
+    &-btn {
+        cursor: pointer;
+        padding: 0 10px 0 10px;
+    }
 }

@@ -1,22 +1,27 @@
-<ng-container *ngIf="post">
-    <div class="writing">
-        <h3 (click)="edit(post)" class="writing-title">
-            {{ post.title }}
-        </h3>
-        <div class="writing-description">
-            {{ post.description }}
-        </div>
-        <div class="writing-info">
-            <div class="update-time">{{ post.updated_at | writeDate }} 마지막으로 편집</div>
-            <fa-icon [icon]="faCaretDown" [matMenuTriggerFor]="menu" size="lg" class="btn-menu"></fa-icon>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="edit(post)">
-                    <span>편집</span>
-                </button>
-                <button mat-menu-item (click)="delete(post)">
-                    <span>삭제</span>
-                </button>
-            </mat-menu>
-        </div>
+<div *ngIf="post" class="my-writing-item">
+    <h3 (click)="onEdit(post)" class="my-writing-item-title">
+        {{ post.title }}
+    </h3>
+    <div class="my-writing-item-description">
+        {{ post.description }}
     </div>
-</ng-container>
+    <div class="my-writing-item-info">
+        <div class="my-writing-item-update-time">
+            {{ post.updated_at | writeDate }} 마지막으로 편집
+        </div>
+        <fa-icon 
+            [icon]="faCaretDown" 
+            [matMenuTriggerFor]="menu" 
+            size="lg" 
+            class="my-writing-item-btn">
+        </fa-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onEdit(post)">
+                <span>편집</span>
+            </button>
+            <button mat-menu-item (click)="onDelete(post)">
+                <span>삭제</span>
+            </button>
+        </mat-menu>
+    </div>
+</div>

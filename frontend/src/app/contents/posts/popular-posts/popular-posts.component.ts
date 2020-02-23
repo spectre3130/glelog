@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopularPost } from 'src/app/app.model';
-import { PostsService } from '../posts.service';
+import { PostsService } from 'src/app/shared/service/posts.service';
 
 @Component({
   selector: 'app-popular-posts',

@@ -12,11 +12,11 @@ import { FormsModule } from '@angular/forms';
   ],
   exports: [
     WriteDatePipe,
+    MaterialModule,
     FormsModule,
     FontAwesomeModule,
     InfiniteScrollModule,
     CodemirrorModule,
-    MaterialModule,
   ]
 })
 export class SharedModule { }
