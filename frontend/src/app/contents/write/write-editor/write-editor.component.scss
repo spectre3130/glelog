@@ -1,0 +1,14 @@
+.write-title {
+    padding: 17px 0 17px 5px;
+    &-input {
+        width: 100%;
+        outline: none;
+        border: none;
+        border-top:0px; 
+        border-left:0px; 
+        border-bottom:0px;
+        border-right: 0px;
+        background-color: inherit;
+        font-size: 20px;
+    }
+}

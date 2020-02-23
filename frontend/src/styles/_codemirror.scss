@@ -1,0 +1,13 @@
+ngx-codemirror .CodeMirror {
+    height: calc(100vh - 113px);
+    font-size: 16px;
+    span { color: #000000 !important; }
+    .CodeMirror-placeholder { color: #757575 !important; }
+}
+  
+@media(max-width: 1000px) {
+    ngx-codemirror .CodeMirror {
+        height: calc(100vh - 160px);
+        font-size: 16px;
+    }
+}

@@ -2,17 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { faCaretDown, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { WriteStore } from 'src/app/shared/service/write.store';
-import { WriteService } from 'src/app/shared/service/write.service';
 import { ConfirmComponent } from 'src/app/layout/confirm/confirm.component';
 import { MatDialog } from '@angular/material/dialog';
+import { PostService } from 'src/app/shared/service/post.service';
 
 @Component({
-  selector: 'app-writing-preview',
-  templateUrl: './writing-preview.component.html',
-  styleUrls: ['./writing-preview.component.scss']
+  selector: 'app-my-writing-preview',
+  templateUrl: './my-writing-preview.component.html',
+  styleUrls: ['./my-writing-preview.component.scss']
 })
-export class WritingPreviewComponent implements OnInit {
+export class MyWritingPreviewComponent implements OnInit {
 
   faCaretDown: IconDefinition = faCaretDown;
   @Input() post: Post;
@@ -20,8 +19,7 @@ export class WritingPreviewComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private writeService: WriteService,
-    private writeStore: WriteStore,
+    private postService: PostService,
     private router: Router
   ) { }
 
@@ -29,8 +27,7 @@ export class WritingPreviewComponent implements OnInit {
   }
 
   onEdit(post: Post): void {
-    this.writeStore.setPost(post);
-    this.router.navigate(['write']);
+    this.router.navigate(['write', post._id]);
   }
 
   onDelete(post: Post): void {
@@ -41,7 +38,7 @@ export class WritingPreviewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.writeService.deletePost(post)
+        this.postService.deletePost(post)
           .subscribe(() => this.delete.emit());
       }
     });

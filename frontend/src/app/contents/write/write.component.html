@@ -1,1 +1,12 @@
-<app-editor [title]="post.title ? post.title : ''" [body]="post.body ? post.body : ''"></app-editor>
+<div class="write">
+    <div class="editor">
+        <div class="editor-fixed">
+            <app-write-editor [post]="post"
+                (changePost)="onChangePost($event)">
+            </app-write-editor>
+        </div>
+    </div>
+    <div class="preview">
+        <app-write-preview [post]="post"></app-write-preview>
+    </div>
+</div>

@@ -4,11 +4,11 @@ import { PostsService } from 'src/app/shared/service/posts.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-writing-list',
-  templateUrl: './writing-list.component.html',
-  styleUrls: ['./writing-list.component.scss']
+  selector: 'app-my-writing-list',
+  templateUrl: './my-writing-list.component.html',
+  styleUrls: ['./my-writing-list.component.scss']
 })
-export class WritingListComponent implements OnInit {
+export class MyWritingListComponent implements OnInit {
 
   posts: Post[] = [];
   path: string;
@@ -23,18 +23,18 @@ export class WritingListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ posts }) => this.bindPosts(posts));
+    this.route.data.subscribe(({ posts }) => this.nextPosts(posts));
   }
 
   getPosts(): void {
     if(this.isLoaded) {
       this.isLoaded = false;
       this.postsService.getWritingPosts(this.path, this.page)
-        .subscribe(posts => this.bindPosts(posts));
+        .subscribe(posts => this.nextPosts(posts));
     }
   }
 
-  bindPosts(posts: Post[]): void {
+  nextPosts(posts: Post[]): void {
     this.isLoaded = true;
     this.posts = this.posts.concat(posts);
     this.page++;

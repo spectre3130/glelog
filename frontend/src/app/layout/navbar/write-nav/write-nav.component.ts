@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { faArrowLeft, faImage, faSave } from '@fortawesome/free-solid-svg-icons';
-import { WriteService } from 'src/app/shared/service/write.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { faArrowLeft, faImage, faSave, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,58 +7,66 @@ import { Location } from '@angular/common';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { Post } from 'src/app/app.model';
 import { PublishComponent } from 'src/app/contents/publish/publish.component';
-import { WriteStore } from 'src/app/shared/service/write.store';
+import * as removeMd from 'remove-markdown';
 import { Router } from '@angular/router';
+import { PostService } from 'src/app/shared/service/post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-write-nav',
   templateUrl: './write-nav.component.html',
   styleUrls: ['./write-nav.component.scss']
 })
-export class WriteNavComponent implements OnInit {
+export class WriteNavComponent implements OnInit, OnDestroy {
 
-  faArrowLeft = faArrowLeft;
-  faImage = faImage;
-  faSave = faSave;
+  faArrowLeft: IconDefinition = faArrowLeft;
+  faImage: IconDefinition = faImage;
+  faSave: IconDefinition = faSave;
+  post: Post;
+  currentPost: Subscription;
 
   constructor(
     private router: Router,
+    private postService: PostService,
     private location: Location,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private writeService: WriteService,
-    private writeStore: WriteStore,
   ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.currentPost = this.postService.currentPost
+      .subscribe(post => this.post = post);
   }
 
-  writeConfirm(): void {
+  ngOnDestroy(): void {
+    this.currentPost.unsubscribe();
+  }
+
+  publish(): void {
     if(this.checkValidation()) {
-      const post = this.writeStore.getPost();
-      if(post._id) {
-        this.writeService.updatePost(post)
-        .subscribe(post => {
-          this.openPublishPage(post);
-        });
+      this.post.description = removeMd(this.post.body)
+        .substr(0, 170)
+        .replace(/\r?\n|\r/g, ' ')
+        .replace(/<|>/g, '');
+
+      if(this.post._id) {
+        this.postService.updatePost(this.post)
+        .subscribe(post => this.openPublishDialog(post));
       } else {
-        this.writeService.doTempSave(post)
-        .subscribe(tempsave => {
-          this.openPublishPage(tempsave);
-        });
+        this.postService.doTempSave(this.post)
+        .subscribe(tempsave => this.openPublishDialog(tempsave));
       }
     }
   }
 
   checkValidation(): boolean {
-    const post = this.writeStore.getPost();
-    if(!post.title) {
+    if(!this.post.title) {
       this._snackBar.open('제목을 입력해주세요.', '닫기',{
         duration: 5000,
         verticalPosition: 'top'
       });
       return false;
-    } else if(!post.body) {
+    } else if(!this.post.body) {
       this._snackBar.open('본문을 입력해주세요.', '닫기', {
         duration: 5000,
         verticalPosition: 'top'
@@ -69,60 +76,8 @@ export class WriteNavComponent implements OnInit {
     return true;
   }
 
-  savePostImage(files: FileList):void {
-    if(!files.length) {
-      return;
-    }
-    const formData:FormData = new FormData();
-    const post = this.writeStore.getPost();
-    formData.append('postImage', files[0]);
-    if(post._id) {
-      this.startSavePostImage(post, formData);
-    } else {
-      this.startTempSave(post, formData);
-    }
-  }
-
-  startSavePostImage(post:Post, formData: FormData): void {
-    this.writeService.savePostImage(post._id, formData)
-    .pipe(
-      tap(markdownImage => post.body += markdownImage),
-      switchMap(markdownImage => this.writeService.updatePost(post)),
-      catchError(err => { throw '잠시 후에 시도해주세요.' })
-    )
-    .subscribe(
-      post => this.writeStore.setPost(post),
-      err => this._snackBar.open(err, '닫기', {
-        duration: 5000,
-      })
-    );
-  }
-
-  startTempSave(post:Post, formData: FormData): void {
-    this.writeService.doTempSave(post)
-    .pipe(
-      tap(tempsave => {
-        post._id = tempsave._id;
-        post.title = tempsave.title;
-        post.body = tempsave.body;
-      }),
-      switchMap(tempsave => this.writeService.savePostImage(tempsave._id, formData)),
-      tap(markdownImage => post.body += markdownImage),
-      switchMap(markdownImage => this.writeService.updatePost(post)),
-      catchError(err => { throw '잠시 후에 시도해주세요.' })
-    )
-    .subscribe(
-      post => this.writeStore.setPost(post),
-      err => this._snackBar.open(err, '닫기', {
-        duration: 5000,
-      })
-    );
-  }
-
-  openPublishPage(post: Post): void {
-
-    this.writeStore.setPost(post);
-
+  openPublishDialog(post: Post): void {
+    this.postService.changePost(post);
     const dialogRef = this.dialog.open(PublishComponent, {
       width: '800px',
       height: '500px',
@@ -130,25 +85,72 @@ export class WriteNavComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.writeStore.setPost(result.post);
-      if(result.next) {
-        this.nextStep(post);
-      }
+      if(result.post) this.postService.changePost(result.post);
+      if(result.next) this.afterClosedAction(result.post);
     });
   }
 
-  nextStep(post: Post): void {
+  afterClosedAction(post: Post): void {
     if(post.posted) {
-      this.writeService.updatePost(post)
-      .subscribe(post => {
-        this.router.navigate(['post', post.seq]);
-      });
+      this.postService.updatePost(post)
+        .subscribe(post => this.router.navigate(['post', post.seq]));
     } else {
-      this.writeService.publishPost(post)
-      .subscribe(post => {
-        this.router.navigate(['post', post.seq]);
-      });
+      this.postService.publishPost(post)
+        .subscribe(post => this.router.navigate(['post', post.seq]));
     }
+  }
+
+  savePostImage(files: FileList):void {
+    if(!files.length) {
+      return;
+    }
+    const formData:FormData = new FormData();
+    formData.append('postImage', files[0]);
+    if(this.post._id) {
+      this.startSavePostImage(this.post, formData);
+    } else {
+      this.startTempSave(this.post, formData);
+    }
+  }
+
+  startSavePostImage(post:Post, formData: FormData): void {
+    this.postService.savePostImage(post._id, formData)
+    .pipe(
+      switchMap(markdownImage => {
+        post.body += markdownImage
+        return this.postService.updatePost(post)
+      }),
+      catchError(err => { throw '잠시 후에 시도해주세요.' })
+    )
+    .subscribe(
+      post => this.postService.changePost(post),
+      err => this._snackBar.open(err, '닫기', {
+        duration: 5000,
+      })
+    );
+  }
+
+  startTempSave(post:Post, formData: FormData): void {
+    this.postService.doTempSave(post)
+    .pipe(
+      tap(tempsave => {
+        post._id = tempsave._id;
+        post.title = tempsave.title;
+        post.body = tempsave.body;
+      }),
+      switchMap(tempsave => this.postService.savePostImage(tempsave._id, formData)),
+      switchMap(markdownImage => {
+        post.body += markdownImage
+        return this.postService.updatePost(post)
+      }),
+      catchError(err => { throw '잠시 후에 시도해주세요.' })
+    )
+    .subscribe(
+      post => this.postService.changePost(post),
+      err => this._snackBar.open(err, '닫기', {
+        duration: 5000,
+      })
+    );
   }
 
   cancelConfirm(): void {

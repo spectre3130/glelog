@@ -117,6 +117,26 @@ exports.getPrivatePosts = async (req, res, next) => {
 
 exports.getPost = async (req, res, next) => {
     try {
+        const { _id } = req.query;
+        const post = await Post.findOne({ _id })
+                                .populate('user', 'id email username name avatar description instagram facebook github')
+        if(!post) {
+            throw '존재하지 않는 포스트입니다.';
+        }
+
+        if(await auth.isWriter(req, post.user)) {
+            res.status(200).json(post);
+        } else {
+            throw '존재하지 않는 포스트입니다.';
+        }
+    } catch(e) {
+        console.error(e);
+        next(createError(404, e));
+    }
+};
+
+exports.getPostBySeq = async (req, res, next) => {
+    try {
         const { seq } = req.params;
         const post = await Post.findOne({ seq, posted: true })
                                 .populate('user', 'id email username name avatar description instagram facebook github')
@@ -179,7 +199,6 @@ exports.doPublising = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     try {
         const { _id, title, body, tags, description, open } = req.body;
-        console.log("TCL: exports.update -> body", body)
         const post = await Post.findOne({ _id }).populate('user', 'email');
         if(req.user.email !== post.user.email) {
             throw '해당글을 변경할 수 없습니다.';

@@ -5,7 +5,6 @@ import { PostsComponent } from './contents/posts/posts.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 import { TagsComponent } from './contents/tags/tags.component';
 import { SettingsComponent } from './contents/settings/settings.component';
-import { WriteComponent } from './contents/write/write.component';
 import { AuthGardService } from './auth/auth-gard.service';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 
@@ -13,7 +12,10 @@ const routes: Routes = [
   { path: '', component: PostsComponent },
   { path: 'tag/:tag', component: PostsComponent },
   { path: 'tags', component: TagsComponent },
-  { path: 'write', canActivate: [ AuthGardService ], component: WriteComponent },
+  { 
+    path: 'write', 
+    loadChildren: () => import('./contents/write/write.module').then(m => m.WriteModule)
+  },
   { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
   { 
     path: 'me/writing', 

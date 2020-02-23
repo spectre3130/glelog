@@ -24,9 +24,8 @@ export interface Post {
     posted?: boolean
     open?: boolean
     description?: string
-    tags: Array<string>
+    tags: string[]
     created_at?: Date
-    published_at?: Date
     updated_at?: Date
     user: User
 }

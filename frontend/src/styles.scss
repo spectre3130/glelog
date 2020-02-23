@@ -1,13 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import './styles/markdown';
-@import './styles/mat-chip';
+@import './styles/material';
 @import './styles/scrollbar';
+@import './styles/webfont';
+@import './styles/codemirror';
 
 html, body { height: 100%; }
 body { 
     margin: 0; 
-    font-family: Roboto, 
-    'Noto Sans KR', sans-serif; 
+    font-family: Roboto, 'Noto Sans KR', sans-serif; 
     overflow-y: scroll;
 }
 a { 

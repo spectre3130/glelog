@@ -1,0 +1,13 @@
+<div class="write-title">
+    <input type="text" 
+        class="write-title-input" 
+        placeholder="제목"
+        [ngModel]="post.title"
+        (keyup)="onChangeTitle($event.target.value)">
+</div>
+<ngx-codemirror
+    [autoFocus]="true"
+    [options]="codeMirrorOptions"
+    [ngModel]="post.body"
+    (ngModelChange)="onChangeBody($event)">
+</ngx-codemirror>

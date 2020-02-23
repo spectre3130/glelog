@@ -1,26 +1,25 @@
-<div *ngIf="post" class="my-writing-item">
-    <h3 (click)="onEdit(post)" class="my-writing-item-title">
+<div *ngIf="post" class="my-writing-preview">
+    <h3 (click)="onEdit(post)" class="title">
         {{ post.title }}
     </h3>
-    <div class="my-writing-item-description">
+    <div class="description">
         {{ post.description }}
     </div>
-    <div class="my-writing-item-info">
-        <div class="my-writing-item-update-time">
+    <div class="info">
+        <div class="update-time">
             {{ post.updated_at | writeDate }} 마지막으로 편집
         </div>
-        <fa-icon 
+        <fa-icon class="btn"
+            size="lg"
             [icon]="faCaretDown" 
-            [matMenuTriggerFor]="menu" 
-            size="lg" 
-            class="my-writing-item-btn">
+            [matMenuTriggerFor]="menu">
         </fa-icon>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onEdit(post)">
                 <span>편집</span>
             </button>
             <button mat-menu-item (click)="onDelete(post)">
-                <span>삭제</span>
+                <span>삭제</span>   
             </button>
         </mat-menu>
     </div>

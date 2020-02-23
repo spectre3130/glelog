@@ -39,7 +39,7 @@ const Post = new Schema({
 
 Post.statics.findPostsWithUser  = async function(match, page, sort = { created_at: -1 }) {
     return await this.find(match)
-        .select('seq title body thumb description slug open tags created_at updated_at user')
+        .select('seq title thumb description slug open tags created_at updated_at user')
         .populate('user', 'id email username avatar')
         .sort(sort)
         .skip((page - 1) * PER_PAGE)

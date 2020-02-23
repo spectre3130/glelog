@@ -14,11 +14,11 @@ export class ApiService {
     return this.http.get<T>(`${environment.resource}/api/${path}`);
   }
 
-  post<T>(path: string, payload: T): Observable<T> {
+  post<T, S = T>(path: string, payload: S): Observable<T> {
     return this.http.post<T>(`${environment.resource}/api/${path}`, payload);
   }
 
-  put<T>(path: string, payload: T): Observable<T> {
+  put<T, S = T>(path: string, payload: S): Observable<T> {
     return this.http.put<T>(`${environment.resource}/api/${path}`, payload);
   }
 

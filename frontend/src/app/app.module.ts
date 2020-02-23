@@ -15,8 +15,6 @@ import { PostComponent } from './contents/post/post.component';
 import { PostsComponent } from './contents/posts/posts.component';
 import { ProgressBarComponent } from './layout/progress-bar/progress-bar.component';
 import { LoginComponent } from './contents/login/login.component';
-import { WriteComponent } from './contents/write/write.component';
-import { EditorComponent } from './contents/write/editor/editor.component';
 import { UserHomeComponent } from './contents/user-home/user-home.component';
 import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component';
 import { ConfirmComponent } from './layout/confirm/confirm.component';
@@ -33,7 +31,6 @@ import { SettingsSocialInputComponent } from './contents/settings/settings-socia
 import { PopularPostsComponent } from './contents/posts/popular-posts/popular-posts.component';
 import { PopularPreviewComponent } from './contents/posts/popular-preview/popular-preview.component';
 import { SettingsUsernameComponent } from './contents/settings/settings-username/settings-username.component';
-import { PublishComponent } from './contents/publish/publish.component';
 import { PlaceholderPostsComponent } from './layout/placeholder/placeholder-posts/placeholder-posts.component';
 import { PlaceholderPopularComponent } from './layout/placeholder/placeholder-popular/placeholder-popular.component';
 import { PlaceholderTagsComponent } from './layout/placeholder/placeholder-tags/placeholder-tags.component';
@@ -44,7 +41,6 @@ import { LoaderInterceptor } from './shared/interceptor/loader.interceptor';
 
 import { AuthService } from './auth/auth.service';
 import { AuthGardService } from './auth/auth-gard.service';
-import { WriteService } from './shared/service/write.service';
 import { PostService } from './shared/service/post.service';
 import { PostsService } from './shared/service/posts.service';
 import { UserHomeService } from './shared/service/user-home.service';
@@ -52,12 +48,12 @@ import { SettingsService } from './shared/service/settings.service';
 import { TagsService } from './shared/service/tags.service';
 import { LoaderService } from './shared/service/loader.service';
 
-import { WriteStore } from './shared/service/write.store';
 
 import { UrlSerializer } from '@angular/router';
 import { CustomUrlSerializer } from './shared/custom-url-serializer';
 import { SharedModule } from './shared/shared.module';
 import { ApiService } from './shared/service/api.service';
+import { PublishComponent } from './contents/publish/publish.component';
 
 @NgModule({
   declarations: [
@@ -72,8 +68,6 @@ import { ApiService } from './shared/service/api.service';
     SettingsComponent,
     TagsComponent,
     LoginComponent,
-    WriteComponent,
-    EditorComponent,
     UserHomeComponent,
     WriteNavComponent,
     PreviewComponent,
@@ -89,10 +83,10 @@ import { ApiService } from './shared/service/api.service';
     PopularPreviewComponent,
     PlaceholderPostsComponent,
     SettingsUsernameComponent,
-    PublishComponent,
     PlaceholderPopularComponent,
     PlaceholderTagsComponent,
     PageNotFoundComponent,
+    PublishComponent
   ],
   entryComponents: [
     LoginComponent,
@@ -123,8 +117,6 @@ import { ApiService } from './shared/service/api.service';
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: UrlSerializer, useClass: CustomUrlSerializer },
-    WriteStore,
-    WriteService,
     PostService,
     PostsService,
     TagsService,

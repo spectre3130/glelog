@@ -5,7 +5,7 @@ import { PostsService } from 'src/app/shared/service/posts.service';
 import { Observable } from 'rxjs';
 
 @Injectable()
-export class WritingListResolverService implements Resolve<Array<Post>> {
+export class MyWritingListResolverService implements Resolve<Post[]> {
 
   constructor(
     private postsService: PostsService
