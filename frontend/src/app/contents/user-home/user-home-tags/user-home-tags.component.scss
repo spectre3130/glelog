@@ -1,20 +1,26 @@
 
 .user-home-tags {
     margin: 40px 40px 0 0;
-    width: 150px;
+    width: 170px;
     &-fixed {
-        width: 150px;
+        width: 170px;
+    }
+    .name {
+        display: -webkit-box;
+        line-height: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
     }
     .title {
         padding-bottom: 10px;
         font-weight: 500;
         border-bottom: 1px solid rgba(0,0,0,.15);
     }
-
     .count {
         padding-left: 5px;
     }
-
     .mat-list-item {
         height: 30px !important;
     }

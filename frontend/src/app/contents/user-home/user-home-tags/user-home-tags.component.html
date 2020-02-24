@@ -8,7 +8,7 @@
             <a mat-list-item (click)="onSelected($event, '')">
                 <span class="name">전체보기</span> 
             </a>
-            <a mat-list-item *ngFor="let tag of tags"
+            <a mat-list-item *ngFor="let tag of tags" [title]="tag.name"
                 (click)="onSelected($event, tag.value)">
                 <span class="name"># {{ tag.name | removeHash }}</span> 
                 <span class="count">({{ tag.count }})</span>
