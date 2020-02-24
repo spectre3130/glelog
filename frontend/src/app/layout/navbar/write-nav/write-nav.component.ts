@@ -44,6 +44,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
 
   publish(): void {
     if(this.checkValidation()) {
+
       this.post.description = removeMd(this.post.body)
         .substr(0, 170)
         .replace(/\r?\n|\r/g, ' ')
@@ -93,10 +94,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   afterClosedAction(post: Post): void {
     if(post.posted) {
       this.postService.updatePost(post)
-        .subscribe(post => this.router.navigate(['post', post.seq]));
+        .subscribe(post => this.router.navigate(['post', post.slug]));
     } else {
       this.postService.publishPost(post)
-        .subscribe(post => this.router.navigate(['post', post.seq]));
+        .subscribe(post => this.router.navigate(['post', post.slug]));
     }
   }
 

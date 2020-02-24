@@ -163,6 +163,7 @@ exports.doTempSave = async (req, res, next) => {
         post.title = post.title ? post.title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
         post.body = post.body ? post.body : '';
         post.description = post.description ? post.description : '';
+        post.slug = `${title.replace(/\s/g , "-")}-${Date.now()}`;
         await post.save();
         res.status(200).json(post);
     } catch(e) {
