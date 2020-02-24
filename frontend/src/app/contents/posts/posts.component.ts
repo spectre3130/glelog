@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from 'src/app/app.model';
-import { PostsService } from './posts.service';
+import { PostsService } from 'src/app/shared/service/posts.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.css'],
+  styleUrls: ['./posts.component.scss'],
 })
 export class PostsComponent implements OnInit {
 
@@ -14,6 +14,7 @@ export class PostsComponent implements OnInit {
   page: number = 1;
   tagName: string;
   isLoaded: boolean = true;
+  placeholderNum: number = 6;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,7 +23,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if(params.tag) this.tagName = '#' + params.tag;
+      if(params.tag) this.tagName = params.tag;
       this.getPosts();
     });
   }
@@ -34,6 +35,7 @@ export class PostsComponent implements OnInit {
       .subscribe(posts => { 
         this.isLoaded = true;
         this.posts = this.posts.concat(posts);
+        if(this.page === 1) this.placeholderNum = 1;
         this.page++;
       });
     }

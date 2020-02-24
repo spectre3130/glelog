@@ -1,0 +1,125 @@
+.container {
+    min-height: 1000px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.post {
+    width:768px;
+}
+
+fa-icon {
+    color: #535353;
+    margin: 0.4rem;
+    font-size: 1.2rem !important;
+}
+
+.post-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 40px;
+}
+
+.post-user {
+    display: flex;
+    align-items: center;
+    height:80px;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.post-user-info {
+    margin-left: 1.2rem;
+}
+
+.post-time {
+    font-size: 14px;
+    color: #7a7a7a;
+}
+
+.post-username {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.post-user-avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-user-spacer {
+    flex-grow: 1;
+}
+
+.post-user-sns-small {
+    display: none;
+}
+
+.post-body {
+    min-height: 800px;
+}
+
+.post-tags {
+    margin-top: 65px;
+}
+
+.user {
+    display: flex;
+    margin-top: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    padding-top: 20px 
+}
+
+.user-avatar {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.username {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.description {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+@media (max-width: 720px) {
+    :host(app-post) {
+        width: 100%;
+    }
+    
+    .post-title {
+        font-size: 30px;
+    }
+
+    .post-user {
+        margin-bottom: 0rem;
+    }
+
+    .user-sns-small {
+        display: block;
+        margin-bottom: 5rem;
+    }
+}
+
+@media (max-width: 832px) {
+    .post,
+    .user {
+        width: inherit;
+    }
+}

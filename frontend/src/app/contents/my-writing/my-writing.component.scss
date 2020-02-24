@@ -1,0 +1,18 @@
+.my-writing {
+    width: 700px;
+    .header {
+        font-size: 26px;
+        font-weight: bold;
+        padding: 40px 0 30px;
+    }
+    .link {
+        min-width: 100px !important;
+        height: 30px !important;    
+    }
+}
+
+@media(max-width: 1000px) {
+    .my-writing {
+        width: 350px;
+    }
+}

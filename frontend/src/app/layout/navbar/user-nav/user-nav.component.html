@@ -14,7 +14,7 @@
         <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
     </div>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item [routerLink]="['/', user.username]">
+        <button mat-menu-item [routerLink]="['/', user.username | at]">
             <span class="menu-name">내 블로그</span>
         </button>
         <button mat-menu-item routerLink="/me/writing">

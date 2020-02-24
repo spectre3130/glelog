@@ -1,94 +1,52 @@
-import { Component, OnInit, Input, AfterViewInit, OnChanges, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, OnDestroy } from '@angular/core';
 import { Post, Tag } from 'src/app/app.model';
-import { UserHomeService } from '../user-home.service';
-import { tap, take, map, distinctUntilChanged } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { PostsService } from 'src/app/shared/service/posts.service';
+import { TagsService } from 'src/app/shared/service/tags.service';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription, fromEvent } from 'rxjs';
 
 
 @Component({
   selector: 'app-user-home-posts',
   templateUrl: './user-home-posts.component.html',
-  styleUrls: ['./user-home-posts.component.css']
+  styleUrls: ['./user-home-posts.component.scss']
 })
-export class UserHomePostsComponent implements OnInit, OnChanges, OnDestroy {
+export class UserHomePostsComponent implements OnInit {
 
-  @Input() username: string;
-  @ViewChild('userTags') userTags: ElementRef;
-  posts: Array<Post> = [];
-  tags: Array<Tag>;
-  page: number = 1;
-  tagName: string = ''
+  username: string;
+  posts: Post[];
+  tags: Tag[];
+  page: number;
+  tag: string;
   isLoaded: boolean = true;
-  scrollEvent: Subscription;
+  placeholderNum: number;
 
   constructor(
     private route: ActivatedRoute,
-    private userHomeService: UserHomeService
+    private postsService: PostsService,
   ) { }
-
-  ngOnInit():void  {
-    this.scrollEvent = fromEvent(document, 'scroll')
-    .pipe(
-      map(e => e.target),
-      map((doc: HTMLDocument) => doc.documentElement.scrollTop > 240 ? true : false),
-      distinctUntilChanged()
-    )
-    .subscribe((isUnder) => {
-      if(isUnder) {
-        this.userTags.nativeElement.style.position = 'fixed';
-        this.userTags.nativeElement.style.top = '90px';
-      } else {
-        this.userTags.nativeElement.style.position = 'relative';
-        this.userTags.nativeElement.style.top = 0;
-      }
-    });
-  }
-
-  ngOnChanges(changes):void  {
-    if(changes.username) {
+  
+  ngOnInit(): void { 
+    this.route.params.subscribe(({ username, tag }) => {
+      this.username = username;
+      this.tag = tag;
+      this.posts = [];
+      this.page = 1;
+      this.placeholderNum = 6;
       this.getUserPosts();
-      this.getUserTags();
-    }
-  }
-
-  ngOnDestroy(): void {
-    if(this.scrollEvent) {
-      this.scrollEvent.unsubscribe();
-    }
-  }
-
-  onScroll():void  {
-    this.getUserPosts();
+    });
   }
 
   getUserPosts(): void  {
     if(this.isLoaded) {
       this.isLoaded = false;
-      this.userHomeService.getUserPosts(this.username, this.page, this.tagName)
+      this.postsService.getUserPosts(this.username, this.page, this.tag)
       .subscribe(posts => { 
         this.isLoaded = true;
         this.posts = this.posts.concat(posts);
+        if(this.page === 1) this.placeholderNum = 1;
         this.page++;
       });
     }
   }
-
-  getUserTags(): void  {
-    this.userHomeService.getUserTags(this.username)
-    .pipe(
-      tap((tags: Array<Tag>) => {
-        tags.unshift({ name: '전체보기', value: '' })
-      })
-    )
-    .subscribe((tags: Array<Tag>) => this.tags = tags);
-  }
-
-  getUserPostsByTagName(tagName: string): void  {
-    this.posts = [];
-    this.page = 1;
-    this.tagName = tagName;
-    this.getUserPosts();
-  }
-
 }

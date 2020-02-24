@@ -33,4 +33,4 @@ import { MatTabsModule } from '@angular/material/tabs';
   ]
 })
 export class MaterialModule { }
-  
+

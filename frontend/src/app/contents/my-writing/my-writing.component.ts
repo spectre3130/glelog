@@ -1,30 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { TabsRoute } from 'src/app/app.model';
+import { TabsItem } from 'src/app/app.model';
 
 @Component({
   selector: 'app-my-writing',
   templateUrl: './my-writing.component.html',
-  styleUrls: ['./my-writing.component.css']
+  styleUrls: ['./my-writing.component.scss']
 })
 export class MyWritingComponent implements OnInit {
 
-  tabsRoutes :Array<TabsRoute> = [
-    { path: 'tempsave', label: '임시저장' },
-    { path: 'public', label: '공개' },
-    { path: 'private', label: '비공개' },
+  tabsItems: TabsItem[] = [
+    { path: 'tempsave', name: '임시저장' },
+    { path: 'public', name: '공개' },
+    { path: 'private', name: '비공개' },
   ];
   activeLink: string;
 
-  constructor(
-    private route: ActivatedRoute
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
-  changeActiveLink(e): void {
-    this.activeLink = this.route.snapshot.children[0].routeConfig.path;
+  onActivate(component): void {
+    this.activeLink = component.path;
   }
 
 }

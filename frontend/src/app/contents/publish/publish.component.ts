@@ -1,15 +1,15 @@
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { COMMA, ENTER, SPACE } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Post } from 'src/app/app.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { WriteService } from '../write/write.service';
+import { PostService } from 'src/app/shared/service/post.service';
 
 @Component({
   selector: 'app-publish',
   templateUrl: './publish.component.html',
-  styleUrls: ['./publish.component.css']
+  styleUrls: ['./publish.component.scss']
 })
 export class PublishComponent implements OnInit {
 
@@ -20,11 +20,12 @@ export class PublishComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
 
   constructor(
-    private writeService: WriteService,
+    private postService: PostService,
     private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<PublishComponent>,
     @Inject(MAT_DIALOG_DATA) public post: Post,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -60,13 +61,13 @@ export class PublishComponent implements OnInit {
     }
     const formData:FormData = new FormData();
     formData.append('thumb', files[0]);
-    this.writeService.saveThumb(this.post._id, formData)
+    this.postService.saveThumb(this.post._id, formData)
     .subscribe(thumb => this.post.thumb = thumb);
   }
 
-  add(e: MatChipInputEvent): void {
-    const input: HTMLInputElement = e.input;
-    const value: string = e.value;
+  add(event: MatChipInputEvent): void {
+    const input: HTMLInputElement = event.input;
+    const value: string = event.value;
     if(this.checkValidation(value)) {
       this.post.tags.push('#' + value.trim());
       input.value = '';

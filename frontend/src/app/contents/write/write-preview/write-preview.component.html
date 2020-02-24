@@ -1,0 +1,9 @@
+<ng-container *ngIf="post">
+    <h1 class="title">
+        {{ post.title }}
+    </h1>
+    <markdown class="body"
+        ngPreserveWhitespaces 
+        [data]="post.body">
+    </markdown>
+</ng-container>

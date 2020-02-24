@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 
 @Component({
   selector: 'app-settings-input',
   templateUrl: './settings-input.component.html',
-  styleUrls: ['./settings-input.component.css']
+  styleUrls: ['./settings-input.component.scss']
 })
 export class SettingsInputComponent implements OnInit {
 

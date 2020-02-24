@@ -1,0 +1,10 @@
+.user-home-posts {
+    min-width: 700px;
+    padding: 15px 10px 15px 10px;
+}
+
+@media(max-width: 1000px) {
+    .user-home-posts {
+        min-width: 350px;
+    }
+}

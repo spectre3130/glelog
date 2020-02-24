@@ -20,11 +20,11 @@ const Post = new Schema({
         default: true
     },
     tags: [String],
+    slug: String,
     created_at: {
         type: Date,
         default: Date.now,
     },
-    published_at: Date,
     updated_at: {
         type: Date,
         default: Date.now,
@@ -39,6 +39,7 @@ const Post = new Schema({
 
 Post.statics.findPostsWithUser  = async function(match, page, sort = { created_at: -1 }) {
     return await this.find(match)
+        .select('seq title thumb description slug open tags created_at updated_at user')
         .populate('user', 'id email username avatar')
         .sort(sort)
         .skip((page - 1) * PER_PAGE)

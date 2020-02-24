@@ -1,0 +1,18 @@
+
+<div class="user-home-tags">
+    <div class="user-home-tags-fixed" #userTags>
+        <div class="title">
+            태그 목록
+        </div>
+        <mat-action-list>
+            <a mat-list-item (click)="onSelected($event, '')">
+                <span class="name">전체보기</span> 
+            </a>
+            <a mat-list-item *ngFor="let tag of tags"
+                (click)="onSelected($event, tag.value)">
+                <span class="name"># {{ tag.name | removeHash }}</span> 
+                <span class="count">({{ tag.count }})</span>
+            </a>
+        </mat-action-list>
+    </div>  
+</div>    

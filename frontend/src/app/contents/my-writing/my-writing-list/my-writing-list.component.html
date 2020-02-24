@@ -1,0 +1,14 @@
+<div class="my-writing-list"
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="100"
+    (scrolled)="getPosts()">
+    <app-my-writing-preview *ngFor="let post of posts" 
+        [post]="post" 
+        (delete)="onDelete()">
+    </app-my-writing-preview>
+    <div class="empty"*ngIf="isLoaded && !posts.length">
+        글이 존재하지 않습니다.
+    </div>
+    <app-ph-my-writing *ngIf="!isLoaded"></app-ph-my-writing>
+</div>

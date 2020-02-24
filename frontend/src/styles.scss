@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import './styles/markdown';
+@import './styles/material';
+@import './styles/scrollbar';
+@import './styles/webfont';
+@import './styles/codemirror';
+
+html, body { height: 100%; }
+body { 
+    margin: 0; 
+    font-family: Roboto, 'Noto Sans KR', sans-serif; 
+    overflow-y: scroll;
+}
+a { 
+    color: inherit; background-color: transparent; text-decoration: none; 
+    &:visited { text-decoration: none; }
+    &:hover { text-decoration: none; }
+}
+input[type="file"] { display: none; }

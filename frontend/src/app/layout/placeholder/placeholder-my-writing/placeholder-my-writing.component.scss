@@ -1,0 +1,248 @@
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -800px 0
+    }
+    100%{
+        background-position: 800px 0
+    }
+}
+
+.animated-background {
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 150px;
+    height: 150px;
+    position: relative;
+}
+
+.background-masker {
+    background: #fff;
+    position: absolute;
+}
+
+.background-masker.top-padding {
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 15px;
+}
+
+.background-masker.title {
+    top: 15px;
+    left: 280px;
+    width: 300px;
+    height: 30px;
+}
+
+.background-masker.title-line {
+    top: 45px;
+    left: 0;
+    height: 5px;
+    width: 580px;
+}
+
+.background-masker.round-thumb {
+    top: 50px;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, #fff);
+}
+
+.background-masker.username-left,
+.background-masker.username-right {
+    top: 50px;
+    height: 18px;
+}
+
+.background-masker.username-left {
+    left: 40px;
+    width: 10px;
+}
+
+.background-masker.username-right {
+    left: 130px;
+    width: 450px;
+}
+
+.background-masker.username-line {
+    top: 68px;
+    left: 40px;
+    width: 540px;
+    height: 4px;
+}
+
+.background-masker.time-left,
+.background-masker.time-right {
+    top: 72px;
+    height: 18px;
+}
+.background-masker.time-left {
+    top: 72px;
+    left: 40px;
+    width: 10px;
+    height: 18px;
+}
+
+.background-masker.time-right {
+    left: 150px;
+    width: 430px;
+}
+
+.background-masker.time-line {
+    top: 90px;
+    left: 0;
+    width: 580px;
+    height: 8px;
+}
+
+.background-masker.content-first {
+    top: 98px;
+    left: 300px;
+    width: 280px;
+    height: 16px;
+}
+
+.background-masker.content-first-line {
+    top: 114px;
+    left: 0px;
+    width: 580px;
+    height: 5px;
+}
+
+.background-masker.content-second {
+    top: 119px;
+    left: 400px;
+    width: 180px;
+    height: 16px;
+}
+
+.background-masker.bottom-padding {
+    top: 135px;
+    left: 0;
+    width: 700px;
+    height: 15px;
+}
+
+@media(max-width: 1000px) {
+    @keyframes placeHolderShimmer{
+        0%{
+            background-position: -350px 0
+        }
+        100%{
+            background-position: 350px 0
+        }
+    }
+    .animated-background {
+        background-size: 350px;
+    }
+    .background-masker.top-padding {
+        top: 0;
+        left: 0;
+        width: 350px;
+        height: 15px;
+    }
+    
+    .background-masker.title {
+        top: 15px;
+        left: 280px;
+        width: 70px;
+        height: 30px;
+    }
+    
+    .background-masker.title-line {
+        top: 45px;
+        left: 0;
+        height: 5px;
+        width: 350px;
+    }
+    
+    .background-masker.round-thumb {
+        top: 50px;
+        left: 0;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle closest-side at center, rgba(0,0,0,0) 100%, #fff);
+    }
+    
+    .background-masker.username-left,
+    .background-masker.username-right {
+        top: 50px;
+        height: 18px;
+    }
+    
+    .background-masker.username-left {
+        left: 40px;
+        width: 10px;
+    }
+    
+    .background-masker.username-right {
+        left: 130px;
+        width: 220px;
+    }
+    
+    .background-masker.username-line {
+        top: 68px;
+        left: 40px;
+        width: 310px;
+        height: 4px;
+    }
+    
+    .background-masker.time-left,
+    .background-masker.time-right {
+        top: 72px;
+        height: 18px;
+    }
+    .background-masker.time-left {
+        top: 72px;
+        left: 40px;
+        width: 10px;
+        height: 18px;
+    }
+    
+    .background-masker.time-right {
+        left: 150px;
+        width: 200px;
+    }
+    
+    .background-masker.time-line {
+        top: 90px;
+        left: 0;
+        width: 350px;
+        height: 8px;
+    }
+    
+    .background-masker.content-first {
+        top: 98px;
+        left: 300px;
+        width: 50px;
+        height: 16px;
+    }
+    
+    .background-masker.content-first-line {
+        top: 114px;
+        left: 0px;
+        width: 350px;
+        height: 5px;
+    }
+    
+    .background-masker.content-second {
+        top: 119px;
+        left: 350px;
+        width: 0px;
+        height: 16px;
+    }
+    
+    .background-masker.bottom-padding {
+        top: 135px;
+        left: 0;
+        width: 350px;
+        height: 15px;
+    }
+}
+

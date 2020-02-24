@@ -1,24 +1,28 @@
 import { Component, OnInit} from '@angular/core';
-import { WriteStore } from 'src/app/contents/write/write.store';
+import { Router, ActivationEnd } from '@angular/router';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
   
-  isWriteMode: boolean;
+  isWrite: boolean;
 
   constructor(
-    private writeStore: WriteStore
-  ) {  
-    
-  }
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
-    this.writeStore.writeEvent
-    .subscribe(val => this.isWriteMode = val);
+    this.router.events.pipe(
+        filter(event => event instanceof ActivationEnd),
+        map((event:ActivationEnd) => event.snapshot.routeConfig.path)
+    ).subscribe(path => {
+      if(path === 'write') this.isWrite = true;
+      else this.isWrite = false;
+    });
   }
 
 }

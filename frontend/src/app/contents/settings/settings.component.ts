@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingsService } from './settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 import { User } from 'src/app/app.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -7,7 +7,7 @@ import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
 
@@ -18,7 +18,6 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private settingsService: SettingsService
   ) { }
 
   ngOnInit(): void {

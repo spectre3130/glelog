@@ -1,35 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { UserHomeService } from './user-home.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take, tap } from 'rxjs/operators';
-import { User } from 'src/app/app.model';
+import { User, Tag } from 'src/app/app.model';
 
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  styleUrls: ['./user-home.component.scss']
 })
 export class UserHomeComponent implements OnInit {
 
   user: User;
+  tags: Tag[];
   isNotFound: boolean = false;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
-    private userHomeService: UserHomeService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(
-      take(1)
-    )
-    .subscribe(params => {
-      this.userHomeService.getUserByUsername(params.username)
-      .subscribe(
-        (user: User) => this.user = user,
-        (err) => this.isNotFound = true
-      );
-    });
+    this.route.data.subscribe(
+      ({ data }) => {
+        if(data) {
+          this.user = data.user;
+          this.tags = data.tags;
+        } else {
+          this.isNotFound = true;
+        }
+      }
+    );
+  }
+
+  onSelected(tag: string): void {
+    if(tag) this.router.navigate(['@' + this.user.username, 'tag', tag.replace('#', '')]);
+    else this.router.navigate(['@' + this.user.username]);
   }
 }

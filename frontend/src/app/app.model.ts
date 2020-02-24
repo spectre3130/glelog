@@ -1,4 +1,4 @@
-export declare interface User {
+export interface User {
     email: string
     username: string
     name?: string
@@ -9,13 +9,13 @@ export declare interface User {
     github?: string
 };
 
-export declare interface Tag {
+export interface Tag {
     name: string
     value?: string
     count?: number
 };
 
-export declare interface Post {
+export interface Post {
     _id?: string
     seq?: number
     title: string
@@ -24,9 +24,9 @@ export declare interface Post {
     posted?: boolean
     open?: boolean
     description?: string
-    tags: Array<string>
+    tags: string[],
+    slug?: string,
     created_at?: Date
-    published_at?: Date
     updated_at?: Date
     user: User
 }
@@ -35,22 +35,23 @@ export declare interface PopularPost {
     seq?: Number
     title: string
     thumb?: string
+    slug?: string,
     created_at?: Date
     updated_at?: Date
     user: User
 }
 
-export declare interface Confirm {
+export interface Confirm {
     name: string
     message: string
 }
 
-export declare interface UploadImage {
+export interface UploadImage {
     _id: string
     markdown: string
 }
 
-export declare interface TabsRoute {
+export interface TabsItem {
     path: string
-    label: string
+    name: string
 }

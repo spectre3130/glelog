@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 
 @Component({
   selector: 'app-settings-social-input',
   templateUrl: './settings-social-input.component.html',
-  styleUrls: ['./settings-social-input.component.css']
+  styleUrls: ['./settings-social-input.component.scss']
 })
 export class SettingsSocialInputComponent implements OnInit {
 

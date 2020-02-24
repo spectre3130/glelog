@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { PostService } from './post.service';
+import { PostService } from 'src/app/shared/service/post.service';
 import { Post } from 'src/app/app.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit {
 
@@ -25,13 +25,10 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.postService.getPost(params.seq)
-      .subscribe(
-        (post) => this.post = post,
-        (err) => this.isNotFound = true
-      );
-    });
+    this.route.data.subscribe(
+      ({ post }) => this.post = post,
+      err => this.isNotFound = true
+    )
   }
 
 

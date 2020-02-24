@@ -1,0 +1,9 @@
+:host(app-user-home) {
+    width: 100%;
+    .contents {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+    
+}

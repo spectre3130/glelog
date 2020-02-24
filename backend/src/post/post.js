@@ -61,12 +61,12 @@ exports.getTodayPosts = async (req, res, next) => {
         const posts = await Promise.all(
             views.map(async(_id) => {
                 return await Post.findOne({ _id, open: true })
-                    .select('seq title thumb user created_at updated_at')
+                    .select('seq title thumb user slug created_at updated_at')
                     .populate('user', 'username avatar');
             })
-        )
+        ).then(posts => posts.filter(post => post !== null));
         // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
-        res.status(200).json(posts.filter(post => post !== null));
+        res.status(200).json(posts);
     } catch (e) {
         console.error(e);
         next(createError(500, e));
@@ -117,8 +117,28 @@ exports.getPrivatePosts = async (req, res, next) => {
 
 exports.getPost = async (req, res, next) => {
     try {
-        const { seq } = req.params;
-        const post = await Post.findOne({ seq, posted: true })
+        const { _id } = req.query;
+        const post = await Post.findOne({ _id })
+                                .populate('user', 'id email username name avatar description instagram facebook github')
+        if(!post) {
+            throw '존재하지 않는 포스트입니다.';
+        }
+
+        if(await auth.isWriter(req, post.user)) {
+            res.status(200).json(post);
+        } else {
+            throw '존재하지 않는 포스트입니다.';
+        }
+    } catch(e) {
+        console.error(e);
+        next(createError(404, e));
+    }
+};
+
+exports.getPostBySlug = async (req, res, next) => {
+    try {
+        const { slug } = req.params;
+        const post = await Post.findOne({ slug, posted: true })
                                 .populate('user', 'id email username name avatar description instagram facebook github')
         if(!post) {
             throw '존재하지 않는 포스트입니다.';
@@ -186,9 +206,10 @@ exports.update = async (req, res, next) => {
         Tag.collectTag(post.tags);
         post.title = title;
         post.body = body;
-        post.tags = tags;
-        post.open = open;
         post.description = description;
+        post.open = open;
+        post.tags = tags;
+        post.slug = `${title.replace(/\s/g , "-")}-${Date.now()}`;
         post.updated_at = Date.now();
         await post.save();
         res.status(200).json(post);

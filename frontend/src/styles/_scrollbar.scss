@@ -1,0 +1,16 @@
+.mat-sidenav-content,
+.CodeMirror-vscrollbar,
+body,
+mat-sidenav.sidenav {
+    &::-webkit-scrollbar {
+        height: 6px;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: #6e6e6e;
+        outline: #444 solid 1px;    
+    }
+    &::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    }
+}

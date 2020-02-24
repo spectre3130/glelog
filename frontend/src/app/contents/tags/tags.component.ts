@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Tag } from 'src/app/app.model';
-import { TagsService } from './tags.service';
+import { TagsService } from 'src/app/shared/service/tags.service';
 
 @Component({
   selector: 'app-tags',
   templateUrl: './tags.component.html',
-  styleUrls: ['./tags.component.css']
+  styleUrls: ['./tags.component.scss']
 })
 export class TagsComponent implements OnInit {
 

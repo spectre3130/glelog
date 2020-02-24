@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SettingsService } from '../settings.service';
+import { SettingsService } from 'src/app/shared/service/settings.service';
 import { User } from 'src/app/app.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-settings-avatar',
   templateUrl: './settings-avatar.component.html',
-  styleUrls: ['./settings-avatar.component.css']
+  styleUrls: ['./settings-avatar.component.scss']
 })
 export class SettingsAvatarComponent implements OnInit {
 

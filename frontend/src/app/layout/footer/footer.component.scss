@@ -1,0 +1,40 @@
+.main-footer {
+    margin-top: 50px;
+    padding: 12px;
+    color: #fff;
+    background-color: #16212A;
+}
+
+.footer-list {
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 20px;
+}
+
+.footer-title {
+    font-family: 'Poor Story';
+    font-size: 32px;
+    flex:1;
+}
+
+.footer-link {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+}
+
+.footer-about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex:1;
+    font-size:12px;
+}
+
+@media(max-width: 1000px) {
+    .main-footer {
+        display: none;
+    }
+}
