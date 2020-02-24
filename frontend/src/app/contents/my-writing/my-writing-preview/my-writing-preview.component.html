@@ -16,9 +16,11 @@
         </fa-icon>
         <mat-menu #menu="matMenu">
             <button mat-menu-item (click)="onEdit(post)">
+                <mat-icon>edit</mat-icon>
                 <span>편집</span>
             </button>
             <button mat-menu-item (click)="onDelete(post)">
+                <mat-icon>delete</mat-icon>
                 <span>삭제</span>   
             </button>
         </mat-menu>
