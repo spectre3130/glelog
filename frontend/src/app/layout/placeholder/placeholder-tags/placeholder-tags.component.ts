@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceholderTagsComponent implements OnInit {
 
-  repeat: Array<number>;
+  repeat: number[];
   
   constructor() { 
     this.repeat = Array(5).fill(0).map((x,i)=>i);

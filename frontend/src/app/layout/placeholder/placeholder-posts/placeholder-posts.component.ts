@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-ph-posts',
@@ -7,13 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlaceholderPostsComponent implements OnInit {
 
-  repeat: Array<number>;
+  @Input() number;
+  repeat: number[];
 
   constructor() { 
-    this.repeat = Array(6).fill(0).map((x,i)=>i);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.repeat = Array(this.number).fill(0).map((x,i)=>i);
   }
-
 }

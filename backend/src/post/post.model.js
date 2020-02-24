@@ -11,7 +11,6 @@ const Post = new Schema({
     body: String,
     thumb: String,
     description: String,
-    slug: String,
     posted: {
         type: Boolean,
         default: false
@@ -21,6 +20,7 @@ const Post = new Schema({
         default: true
     },
     tags: [String],
+    slug: String,
     created_at: {
         type: Date,
         default: Date.now,

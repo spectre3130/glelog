@@ -1,21 +1,10 @@
-<div class="contents-posts">
-    <div class="user-tags-container">
-        <div class="user-tags" #userTags>
-            <div class="tags-title">
-                태그 목록
-            </div>
-            <app-user-home-tags *ngIf="tags"[username]=username [tags]=tags (onSelected)=getUserPostsByTagName($event)></app-user-home-tags>
-            <app-ph-tags *ngIf="!tags"></app-ph-tags>
-        </div>
-    </div>    
-    <div class="posts-item"
-        infiniteScroll
-        [infiniteScrollDistance]="0"
-        [infiniteScrollThrottle]="100"
-        (scrolled)=onScroll()>
-        <ng-container *ngFor="let post of posts">
-            <app-preview [post]=post></app-preview>
-        </ng-container>
-        <app-ph-posts *ngIf="!isLoaded"></app-ph-posts>
-    </div>
+<div class="user-home-posts"
+    infiniteScroll
+    [infiniteScrollDistance]="1"
+    [infiniteScrollThrottle]="100"
+    (scrolled)=getUserPosts()>
+    <ng-container *ngFor="let post of posts">
+        <app-preview [post]=post></app-preview>
+    </ng-container>
+    <app-ph-posts *ngIf="!isLoaded" [number]="placeholderNum"></app-ph-posts>
 </div>

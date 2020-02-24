@@ -24,7 +24,8 @@ export interface Post {
     posted?: boolean
     open?: boolean
     description?: string
-    tags: string[]
+    tags: string[],
+    slug?: string,
     created_at?: Date
     updated_at?: Date
     user: User
@@ -34,6 +35,7 @@ export declare interface PopularPost {
     seq?: Number
     title: string
     thumb?: string
+    slug?: string,
     created_at?: Date
     updated_at?: Date
     user: User

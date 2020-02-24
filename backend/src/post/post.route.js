@@ -7,7 +7,7 @@ router.get('/', auth.authenticate, post.getPost);
 router.post('/', auth.authenticate, post.doPublising);
 router.put('/', auth.authenticate, post.update);
 router.delete('/', auth.authenticate, post.delete);
-router.get('/:seq', post.getPostBySeq);
+router.get('/:slug', post.getPostBySlug);
 router.post('/tempsave', auth.authenticate, post.doTempSave);
 
 module.exports = router;

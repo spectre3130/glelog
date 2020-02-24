@@ -1,0 +1,32 @@
+
+.user-home-tags {
+    margin: 40px 40px 0 0;
+    width: 150px;
+    &-fixed {
+        width: 150px;
+    }
+    .title {
+        padding-bottom: 10px;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(0,0,0,.15);
+    }
+
+    .count {
+        padding-left: 5px;
+    }
+
+    .mat-list-item {
+        height: 30px !important;
+    }
+}
+
+
+:host::ng-deep.mat-list-item-content{
+    padding: 0 !important;
+}
+
+@media(max-width: 1000px) {
+    .user-home-tags {
+        display: none;
+    }
+}

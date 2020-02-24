@@ -30,7 +30,7 @@ fa-icon {
 
 .post-title {
     margin: 0;
-    font-size: 26px;
+    font-size: 24px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -55,6 +55,7 @@ fa-icon {
 
 .avatar {
     width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -66,11 +67,13 @@ fa-icon {
 }
 
 .user-name {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
+    line-height: 20px;
 }
 .post-time {
     font-size: 14px;
+    line-height: 20px;
     color: #6f6f6f;
 }
 
@@ -112,14 +115,11 @@ fa-icon {
     
     .user-name {
         font-size: 14px;
-        line-height: 20px;
         font-weight: 600;
     }
 
     .post-time {
         font-size: 14px;
-        line-height: 20px;
-        color: #6f6f6f;
     }
 
     .post-description {

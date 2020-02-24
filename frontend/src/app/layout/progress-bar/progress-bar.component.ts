@@ -21,7 +21,7 @@ export class ProgressBarComponent implements OnInit {
         clearTimeout(this.fetchingTimer);
         this.fetchingTimer = setTimeout(() => this.isFetching = true, 200);
       } else {
-        this.fetchingTimer = setTimeout(() => this.isFetching = false, 500);
+        this.fetchingTimer = setTimeout(() => this.isFetching = false, 300);
       }
     });
   }

@@ -1,13 +1,13 @@
 <div class="contents-posts">
     <div class="posts-item"
         infiniteScroll
-        [infiniteScrollDistance]="0"
+        [infiniteScrollDistance]="1"
         [infiniteScrollThrottle]="100"
         (scrolled)="getPosts()">
         <ng-container *ngFor="let post of posts">
             <app-preview [post]=post></app-preview>
         </ng-container>
-        <app-ph-posts *ngIf="!isLoaded"></app-ph-posts>
+        <app-ph-posts *ngIf="!isLoaded" [number]="placeholderNum"></app-ph-posts>
     </div>
     <app-popular-posts></app-popular-posts>
 </div>

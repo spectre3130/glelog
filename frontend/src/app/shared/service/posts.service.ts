@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { Post, PopularPost } from 'src/app/app.model';
 import { ApiService } from './api.service';
 
@@ -10,17 +9,22 @@ export class PostsService {
 
   constructor(
     private apiService: ApiService,
-    private http: HttpClient
   ) { }
 
-  getPosts(page: number, tagName: string): Observable<Post[]> {
+  getPosts(page: number, tag: string): Observable<Post[]> {
     let tagQuery = ''
-    if(tagName) tagQuery = `&tag=${encodeURIComponent(tagName)}`;
-    return this.http.get<Post[]>(`${environment.resource}/api/posts?page=${page}${tagQuery}`);
+    if(tag) tagQuery = `&tag=${encodeURIComponent('#' + tag)}`;
+    return this.apiService.get<Post[]>(`posts?page=${page}${tagQuery}`);
   }
 
-  getViewsPosts(): Observable<Array<PopularPost>> {
-    return this.http.get<Array<PopularPost>>(`${environment.resource}/api/posts/top/views`);
+  getUserPosts(username: string, page: number, tag?: string): Observable<Post[]> {
+    let tagQuery = ''; 
+    if(tag) tagQuery = `&tag=${encodeURIComponent('#' + tag)}`;
+    return this.apiService.get<Post[]>(`posts/${encodeURIComponent(username.replace('@', ''))}?page=${page}${tagQuery}`);
+  }
+
+  getViewsPosts(): Observable<PopularPost[]> {
+    return this.apiService.get<PopularPost[]>('posts/top/views');
   }
 
   getWritingPosts(path:string, page:number): Observable<Post[]> {

@@ -7,6 +7,7 @@ import { WriteRoutingModule } from './write-routing.module';
 import { WriteEditorComponent } from './write-editor/write-editor.component';
 import { WriteResolverService } from './write-resolver.service';
 
+
 @NgModule({
   declarations: [
     WriteComponent,

@@ -25,13 +25,10 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.postService.getPostBySeq(params.seq)
-      .subscribe(
-        (post) => this.post = post,
-        (err) => this.isNotFound = true
-      );
-    });
+    this.route.data.subscribe(
+      ({ post }) => this.post = post,
+      err => this.isNotFound = true
+    )
   }
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Post } from 'src/app/app.model';
 import { ApiService } from './api.service';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Injectable()
 export class PostService {
 
+  private DOMAIN = 'post';
   private postSubject = new BehaviorSubject<Post>(this.initPost());
   currentPost = this.postSubject.asObservable();
 
@@ -29,27 +30,28 @@ export class PostService {
   }
 
   getPost(_id: string): Observable<Post> {
-    return this.apiService.get<Post>(`post?_id=${_id}`);
+    return this.apiService.get<Post>(`${this.DOMAIN}?_id=${_id}`);
   }
 
-  getPostBySeq(seq: number): Observable<Post> {
-    return this.apiService.get<Post>(`post/${seq}`);
+  getPostByUsernameAndSlug(slug: string): Observable<Post> {
+    const path = `${this.DOMAIN}/${encodeURIComponent(slug)}`;
+    return this.apiService.get<Post>(path);
   }
 
   doTempSave(post: Post): Observable<Post> {
-    return this.apiService.post<Post>('post/tempsave', post);
+    return this.apiService.post<Post>(`${this.DOMAIN}/tempsave`, post);
   }
 
   publishPost(post: Post): Observable<Post>  {
-    return this.apiService.post<Post>('post', post);
+    return this.apiService.post<Post>(`${this.DOMAIN}`, post);
   }
 
   updatePost(post): Observable<Post>  {
-    return this.apiService.put<Post>('post', post);
+    return this.apiService.put<Post>(`${this.DOMAIN}`, post);
   }
 
   deletePost(post: Post): Observable<any> {
-    return this.apiService.delete<any>(`post?_id=${post._id}`);
+    return this.apiService.delete<any>(`${this.DOMAIN}?_id=${post._id}`);
   }
 
   savePostImage(_id: string, formData: FormData): Observable<string> {

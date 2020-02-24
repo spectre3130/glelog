@@ -1,20 +1,20 @@
 .main-footer {
     margin-top: 50px;
     padding: 12px;
-    color: white;
-    background-color: #673ab7;
+    color: #fff;
+    background-color: #16212A;
 }
 
 .footer-list {
     align-items: center;
     display: flex;
     flex-flow: row wrap;
-    padding: 8px;
+    padding: 20px;
 }
 
-.footer-logo {
-    font-weight: 500;
-    font-size:20px;
+.footer-title {
+    font-family: 'Poor Story';
+    font-size: 32px;
     flex:1;
 }
 
@@ -25,10 +25,11 @@
     flex:1;
 }
 
-.footer-copyright {
+.footer-about {
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex:1;
-    justify-content: flex-end;
     font-size:12px;
 }
 

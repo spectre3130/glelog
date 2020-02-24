@@ -17,7 +17,7 @@ export class LoaderService {
       }
     } else if(event instanceof HttpResponse || !event) {
       this.requests.pop();
-      if(!this.requests.length) {
+      if(!this.requests.length || !event) {
         this.fetchEvent.emit(false);
       }
     }

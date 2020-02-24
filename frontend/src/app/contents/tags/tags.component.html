@@ -1,6 +1,6 @@
 <div class="tags-container">
     <mat-chip-list class="tags">
-        <a mat-chip *ngFor="let tag of tags" [routerLink]="['/tag', tag.name.replace('#', '')]">
+        <a mat-chip *ngFor="let tag of tags" [routerLink]="['/tag', tag.name | removeHash]">
             <span class="tag-name">{{ tag.name }}</span>
             <span class="tag-count">{{ tag.count }}</span>
         </a>

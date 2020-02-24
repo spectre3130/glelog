@@ -1,8 +1,0 @@
-<mat-action-list *ngIf="tags">
-    <mat-list-item 
-        *ngFor="let tag of tags"
-        (click)="onClickTag($event, tag.value)">
-        <span class="name">{{ tag.name }}</span> 
-        <span class="count" *ngIf="tag.count">({{ tag.count }})</span>
-    </mat-list-item>
-</mat-action-list>
