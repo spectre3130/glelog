@@ -1,6 +1,6 @@
 <button *ngIf="!user" (click)="openDialog()" mat-button>
-    <fa-icon [icon]="faUser" size="lg"></fa-icon>
-    <span class="menu-name">로그인</span>
+    <mat-icon>account_circle</mat-icon>
+    <span class="login">로그인</span>
 </button>
 <ng-container *ngIf="user">
     <div class="user-info" [matMenuTriggerFor]="menu">
@@ -11,23 +11,33 @@
                 [diameter]=32>
             </mat-spinner>
         </div>
-        <fa-icon [icon]="faCaretDown" size="lg"></fa-icon>
+        <mat-icon>arrow_drop_down</mat-icon>
     </div>
     <mat-menu #menu="matMenu">
+        <div class="wrapper">
+            <div class="aa">{{ user.username }}님</div>
+            <div class="bb">오늘도 좋은글과 함께해요</div>
+        </div>
         <button mat-menu-item [routerLink]="['/', user.username | at]">
-            <span class="menu-name">내 블로그</span>
+            <mat-icon>home</mat-icon>
+            <span>내 블로그</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item routerLink="/write">
+            <mat-icon>post_add</mat-icon>
+            <span>글쓰기</span>
         </button>
         <button mat-menu-item routerLink="/me/writing">
-            <span class="menu-name">내 글 모음</span>
+            <mat-icon>list</mat-icon>
+            <span>내 글 모음</span>
         </button>
-        <button mat-menu-item routerLink="/write">
-            <span class="menu-name">글쓰기</span>
-        </button>
+        <mat-divider></mat-divider>
         <button mat-menu-item routerLink="/me/settings">
-            <span class="menu-name">설정</span>
+            <mat-icon>settings</mat-icon>
+            <span>설정</span>
         </button>
         <button mat-menu-item (click)="logout()">
-            <span class="menu-name">로그아웃</span>
+            <span>로그아웃</span>
         </button>
     </mat-menu>
 </ng-container>
