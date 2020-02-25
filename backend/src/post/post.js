@@ -9,6 +9,10 @@ const moment = require('../config/moment');
 const s3 = require('../config/s3');
 const auth = require('../auth/auth');
 
+function generateSlug(slug) {
+    return `${slug.replace(/\s/g , "-")}-${Date.now()}`
+}
+
 exports.checkPage = async (req, res, next) => {
     try {
         if(req.query.page < 1) {
@@ -163,7 +167,6 @@ exports.doTempSave = async (req, res, next) => {
         post.title = post.title ? post.title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
         post.body = post.body ? post.body : '';
         post.description = post.description ? post.description : '';
-        post.slug = `${title.replace(/\s/g , "-")}-${Date.now()}`;
         await post.save();
         res.status(200).json(post);
     } catch(e) {
@@ -182,11 +185,12 @@ exports.doPublising = async (req, res, next) => {
         }
         const seq = await Counter.getNextSequence('post');
         Tag.collectTag(tags);
-        post.tags = tags;
-        post.description = description;
         post.seq = seq;
+        post.description = description;
+        post.tags = tags;
         post.open = open;
         post.posted = true;
+        post.slug = generateSlug(post.title);
         post.created_at = Date.now();
         post.updated_at = Date.now();
         await post.save();
@@ -204,15 +208,18 @@ exports.update = async (req, res, next) => {
         if(req.user.email !== post.user.email) {
             throw '해당글을 변경할 수 없습니다.';
         }
+        const slug = post.title === title ? post.slug : generateSlug(title);
         Tag.collectTag(post.tags);
         post.title = title;
         post.body = body;
         post.description = description;
         post.open = open;
         post.tags = tags;
-        post.slug = `${title.replace(/\s/g , "-")}-${Date.now()}`;
+        post.slug = slug;
         post.updated_at = Date.now();
-        await post.save();
+        await post.save({
+
+        });
         res.status(200).json(post);
     } catch(e) {
         console.error(e);
@@ -239,3 +246,4 @@ exports.delete = async (req, res, next) => {
         next(createError(400, e));
     }
 };
+
