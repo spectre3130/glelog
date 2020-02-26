@@ -10,10 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostsComponent implements OnInit {
 
-  posts: Array<Post> = [];
-  page: number = 1;
+  posts: Post[];
+  page: number;
   tagName: string;
-  isLoaded: boolean = true;
+  isLoaded: boolean;
   placeholderNum: number = 6;
 
   constructor(
@@ -24,6 +24,10 @@ export class PostsComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       if(params.tag) this.tagName = params.tag;
+      this.posts = [];
+      this.page = 1;
+      this.isLoaded = true;
+      this.placeholderNum = 6;
       this.getPosts();
     });
   }

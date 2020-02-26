@@ -24,18 +24,24 @@ export interface Post {
     posted?: boolean
     open?: boolean
     description?: string
-    tags: string[],
-    slug?: string,
+    tags: string[]
+    slug?: string
     created_at?: Date
     updated_at?: Date
     user: User
+    changed?: boolean
 }
 
-export declare interface PopularPost {
+export interface Content {
+    title?: string;
+    body?: string;
+}
+
+export interface PopularPost {
     seq?: Number
     title: string
     thumb?: string
-    slug?: string,
+    slug?: string
     created_at?: Date
     updated_at?: Date
     user: User

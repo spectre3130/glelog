@@ -11,7 +11,6 @@
     font-size: 26px;
 }
 
-
 .nav-link {
     flex: 1;
 }
@@ -26,6 +25,11 @@
 
 .menu-name { 
     margin-left: 10px;
+}
+
+.btn {
+    margin-right: 16px;
+    cursor: pointer;
 }
 
 @media (max-width: 1000px) {

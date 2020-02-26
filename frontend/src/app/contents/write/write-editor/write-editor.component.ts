@@ -9,7 +9,7 @@ import { Post } from 'src/app/app.model';
 export class WriteEditorComponent implements OnInit {
 
   @Input() post: Post;
-  @Output() changePost = new EventEmitter<Post>();
+  @Output() changeContent = new EventEmitter<Post>();
   
   codeMirrorOptions = {
     theme: '3024-day',
@@ -25,12 +25,12 @@ export class WriteEditorComponent implements OnInit {
 
   onChangeTitle(title: string): void {
     this.post.title = title;
-    this.changePost.emit(this.post);
+    this.changeContent.emit(this.post);
   }
 
   onChangeBody(body: string) {
     this.post.body = body;
-    this.changePost.emit(this.post);
+    this.changeContent.emit(this.post);
   }
 
 }

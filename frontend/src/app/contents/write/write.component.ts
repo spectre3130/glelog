@@ -3,6 +3,7 @@ import { Post } from 'src/app/app.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/shared/service/post.service';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Component({
   selector: 'app-write',
@@ -11,7 +12,7 @@ import { PostService } from 'src/app/shared/service/post.service';
 })
 export class WriteComponent implements OnInit, OnDestroy {
 
-  post: Post = {} as Post;;
+  post: Post;
   currentPost: Subscription;
   
   constructor(
@@ -22,7 +23,6 @@ export class WriteComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.data.subscribe(({ post }) => {
       if(post) {
-        this.post = post;
         this.postService.changePost(post);
       } else {
         this.postService.changePost(this.postService.initPost());
@@ -38,7 +38,7 @@ export class WriteComponent implements OnInit, OnDestroy {
     this.currentPost.unsubscribe();
   }
 
-  onChangePost(post: Post): void {
-    this.postService.changePost(post);
+  onChangeContent(post: Post): void {
+    this.postService.changeEditPost(post);
   }
 }

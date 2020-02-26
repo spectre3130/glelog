@@ -35,7 +35,6 @@ export class SettingsService {
     return this.http.post<User>(`${environment.resource}/api/upload/avatar`, formData)
     .pipe(
       tap((user: User) => {
-          this.http.get(user.avatar).subscribe();
           this.changeUserEvent.emit(user)
         }
       ),

@@ -18,16 +18,15 @@ export class PostComponent implements OnInit {
   isNotFound: boolean = false;
 
   constructor(
-    private postService: PostService,
     private route: ActivatedRoute
-  ) { 
-    
-  }
+  ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
-      ({ post }) => this.post = post,
-      err => this.isNotFound = true
+      ({ post }) => {
+        if(post) this.post = post;
+        else this.isNotFound = true;
+      }
     )
   }
 

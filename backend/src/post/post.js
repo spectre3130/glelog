@@ -160,13 +160,16 @@ exports.getPostBySlug = async (req, res, next) => {
     }
 };
 
+
 exports.doTempSave = async (req, res, next) => {
     try {
-        const post = new Post(req.body);
+        const { title, body, description } = req.body;
+        const post = new Post();
         post.user = req.user;
-        post.title = post.title ? post.title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
-        post.body = post.body ? post.body : '';
-        post.description = post.description ? post.description : '';
+        post.title = title ? title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
+        post.body = body ? body : '';
+        post.description = description ? description : ''
+        post.slug = generateSlug(post.title)
         await post.save();
         res.status(200).json(post);
     } catch(e) {
@@ -175,14 +178,28 @@ exports.doTempSave = async (req, res, next) => {
     }
 };
 
+exports.doAutoSave = async (req, res, next) => {
+    try {
+        const { title, body, description } = req.body;
+        const { post } = req;
+        post.title = title ? title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
+        console.log("TCL: exports.doAutoSave -> post.title", post.title)
+        post.body = body ? body : '';
+        post.description = description ? description : '';
+        post.slug = generateSlug(post.title);
+        post.updated_at = Date.now();
+        await post.save();
+        res.status(200).json(post);
+    } catch(e) {
+        console.error(e);
+        next(createError(400, e));
+    }
+}
+
 exports.doPublising = async (req, res, next) => {
     try {
-        const { _id, tags, description, open } = req.body;
-        const post = await Post.findOne({ _id })
-                                .populate('user', 'id email username avatar')
-        if(req.user.email !== post.user.email) {    
-            throw '해당글을 변경할 수 없습니다.';
-        }
+        const { description, open, tags } = req.body;
+        const { post } = req;
         const seq = await Counter.getNextSequence('post');
         Tag.collectTag(tags);
         post.seq = seq;
@@ -190,11 +207,10 @@ exports.doPublising = async (req, res, next) => {
         post.tags = tags;
         post.open = open;
         post.posted = true;
-        post.slug = generateSlug(post.title);
         post.created_at = Date.now();
         post.updated_at = Date.now();
         await post.save();
-        res.status(200).json(post);
+        res.status(200).json(post.slug);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
@@ -203,24 +219,15 @@ exports.doPublising = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        const { _id, title, body, tags, description, open } = req.body;
-        const post = await Post.findOne({ _id }).populate('user', 'email');
-        if(req.user.email !== post.user.email) {
-            throw '해당글을 변경할 수 없습니다.';
-        }
-        const slug = post.title === title ? post.slug : generateSlug(title);
-        Tag.collectTag(post.tags);
-        post.title = title;
-        post.body = body;
+        const { description, tags, open } = req.body;
+        const { post } = req;
+        Tag.collectTag(tags);
         post.description = description;
-        post.open = open;
         post.tags = tags;
-        post.slug = slug;
+        post.open = open;
         post.updated_at = Date.now();
-        await post.save({
-
-        });
-        res.status(200).json(post);
+        await post.save();
+        res.status(200).json(post.slug);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
@@ -234,7 +241,7 @@ exports.delete = async (req, res, next) => {
         if(req.user.email !== post.user.email) {
             throw '해당글을 삭제할 수 없습니다.';
         }
-        if(await s3.deleteS3Dir(post._id)) {
+        if(await s3.deleteS3Dir(`post/${post._id}`)) {
             await Views.deleteMany({ post_id: _id })
             await post.remove();
             res.status(204).json(true);

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Post } from 'src/app/app.model';
 import { ApiService } from './api.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Content } from '@angular/compiler/src/render3/r3_ast';
 
 @Injectable()
 export class PostService {
 
   private DOMAIN = 'post';
   private postSubject = new BehaviorSubject<Post>(this.initPost());
+  private editPostSubject = new Subject<Post>();
   currentPost = this.postSubject.asObservable();
+  currentEditPost = this.editPostSubject.asObservable();
 
   constructor(
     private authService: AuthService,
@@ -29,17 +32,25 @@ export class PostService {
     this.postSubject.next(post);
   }
 
+  changeEditPost(post: Post): void {
+    this.editPostSubject.next(post);
+  }
+
   getPost(_id: string): Observable<Post> {
     return this.apiService.get<Post>(`${this.DOMAIN}?_id=${_id}`);
   }
 
-  getPostByUsernameAndSlug(slug: string): Observable<Post> {
-    const path = `${this.DOMAIN}/${encodeURIComponent(slug)}`;
+  getPostBySlug(slug: string): Observable<Post> {
+    const path = `${this.DOMAIN}/title/${encodeURIComponent(slug)}`;
     return this.apiService.get<Post>(path);
   }
 
   doTempSave(post: Post): Observable<Post> {
     return this.apiService.post<Post>(`${this.DOMAIN}/tempsave`, post);
+  }
+
+  doAutoSave(post: Post): Observable<Post> {
+    return this.apiService.post<Post>(`${this.DOMAIN}/autosave`, post);
   }
 
   publishPost(post: Post): Observable<Post>  {

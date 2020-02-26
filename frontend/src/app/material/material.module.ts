@@ -14,6 +14,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   exports: [
@@ -31,7 +32,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonToggleModule,
     MatProgressSpinnerModule,
     MatTabsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatAutocompleteModule
   ]
 })
 export class MaterialModule { }
