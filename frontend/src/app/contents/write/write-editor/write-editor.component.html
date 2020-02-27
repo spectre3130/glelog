@@ -2,6 +2,7 @@
     <input type="text" 
         class="write-title-input" 
         placeholder="제목"
+        maxlength="40"
         [ngModel]="post.title"
         (keyup)="onChangeTitle($event.target.value)">
 </div>

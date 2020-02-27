@@ -29,7 +29,7 @@ export class UserHomePostsComponent implements OnInit {
   ngOnInit(): void { 
     this.route.params.subscribe(({ username, tag }) => {
       this.username = username;
-      this.tag = tag;
+      if(tag) this.tag = '#' + tag;
       this.posts = [];
       this.page = 1;
       this.placeholderNum = 6;
@@ -40,7 +40,10 @@ export class UserHomePostsComponent implements OnInit {
   getUserPosts(): void  {
     if(this.isLoaded) {
       this.isLoaded = false;
-      this.postsService.getUserPosts(this.username, this.page, this.tag)
+      this.postsService.getUserPosts(this.username, {
+        page: this.page,
+        tag: this.tag
+      })
       .subscribe(posts => { 
         this.isLoaded = true;
         this.posts = this.posts.concat(posts);

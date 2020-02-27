@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { Router, NavigationEnd, ActivatedRoute, ActivationEnd, ActivationStart, NavigationStart } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, first } from 'rxjs/operators';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -26,9 +26,14 @@ export class FooterComponent implements OnInit {
         if(event instanceof NavigationStart) this.display = false
       }),
       filter(event => event instanceof ActivationEnd),
+      filter((event:ActivationEnd) => {
+        const path = event.snapshot.routeConfig.path.split('/');
+        if((path[0] === ':username' && path[1]) || path[0] !== ':username') return true;  
+        else return false;
+      }),
       map((event:ActivationEnd) => {
         const path = event.snapshot.routeConfig.path.split('/');
-        return path[0] !== 'me' ? path[0] : path[1];
+        return path[0] !== ('me') ? path[0] : path[1];
       })
     )
     .subscribe(path => {
@@ -39,7 +44,7 @@ export class FooterComponent implements OnInit {
   
 
   matchRouterPath(path: string): boolean {
-    const displayOffPath = ['', 'write', ':username', 'tag', 'writing'];
+    const displayOffPath = ['', 'write', 'tag', 'writing', 'search'];
     return displayOffPath.find(el => path === el) || !path ? true : false;
   }
 

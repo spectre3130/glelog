@@ -5,11 +5,11 @@
     <nav mat-tab-nav-bar>
         <a class="link" 
             mat-tab-link
-            *ngFor="let tabsItem of tabsItems"    
-            [routerLink]="['/me/writing', tabsItem.path]"
-            [active]="activeLink === tabsItem.path"
-            (click)="activeLink = tabsItem.path">
-            {{ tabsItem.name }}
+            *ngFor="let node of nodes"    
+            [routerLink]="['/me/writing', node.action]"
+            [active]="activeLink === node.action"
+            (click)="activeLink = node.action">
+            {{ node.name }}
         </a>
     </nav>  
     <router-outlet (activate)=onActivate($event)></router-outlet>

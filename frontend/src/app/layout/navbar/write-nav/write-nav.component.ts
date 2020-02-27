@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { faArrowLeft, faImage, faSave, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmComponent } from '../../confirm/confirm.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { catchError, switchMap, tap, debounceTime, take } from 'rxjs/operators';
@@ -9,7 +8,7 @@ import { Post } from 'src/app/app.model';
 import { PublishComponent } from 'src/app/contents/publish/publish.component';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/shared/service/post.service';
-import { Subscription } from 'rxjs';
+import { Subscription, SubscriptionLike } from 'rxjs';
 import * as removeMd from 'remove-markdown';
 
 @Component({
@@ -27,6 +26,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   @ViewChild('postImage') postImage: ElementRef;
   post: Post;
   currentEditPost: Subscription;
+  currentLocation: SubscriptionLike;
   disabled: boolean = false;
   fetchingTimer: any;
 
@@ -39,12 +39,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
     //처음 로딩을 위한...
     this.postService.currentPost.pipe(
       take(1),
     ).subscribe(post => this.post = post);
-
     //이후 내용 변경점은 다른 옵저버블에서...
     this.currentEditPost = this.postService.currentEditPost
       .pipe(
@@ -116,10 +114,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   openPublishDialog(post: Post): void {
     const dialogRef = this.dialog.open(PublishComponent, {
       width: '800px',
-      height: '500px',
+      height: '450px',
+      autoFocus: false,
       data: post
     });
-
     dialogRef.afterClosed().subscribe(({ post, next }) => {
       if (next) {
         this.afterClosedAction(post);
@@ -130,10 +128,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   afterClosedAction(post: Post): void {
     if(post.posted) {
       this.postService.updatePost(post)
-        .subscribe(slug => this.router.navigate(['post', slug]));
+        .subscribe(slug => this.router.navigate(['@' + post.user.username, 'post', slug]));
     } else {
       this.postService.publishPost(post)
-        .subscribe(slug => this.router.navigate(['post', slug]));
+        .subscribe(slug => this.router.navigate(['@' + post.user.username, 'post', slug]));
     }
   }
 
@@ -195,15 +193,6 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   }
 
   cancelConfirm(): void {
-    const dialogRef = this.dialog.open(ConfirmComponent, {
-      width: '250px',
-      data: { name: '돌아가기', message: '작성을 중단하시겠습니까?' }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) this.location.back();
-    });
+    this.location.back();  
   }
-  
-
 }

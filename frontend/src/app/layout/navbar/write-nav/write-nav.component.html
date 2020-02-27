@@ -1,16 +1,33 @@
 <div class="write-nav">
     <button mat-button (click)="cancelConfirm()">
         <fa-icon [icon]="faArrowLeft" size="lg"></fa-icon>
-        <span class="menu-name">뒤로가기</span>
+        <span class="name">뒤로가기</span>
     </button>
-    <input class="input-file" type="file" accept="image/*" #postImage (change)=savePostImage(postImage.files)>
-    <button mat-button (click)=postImage.click() class="nav-small-hide">이미지</button>
-    <button mat-button class="nav-small-hide" (click)="publish()" [disabled]="disabled">{{ btnName }}</button>
+    <input type="file" accept="image/*" #postImage (change)=savePostImage(postImage.files)>
+    <button class="link"
+        mat-button 
+        (click)=postImage.click()>
+        이미지
+    </button>
+    <button class="link"
+        mat-button 
+        (click)="publish()" 
+        [disabled]="disabled">{{ btnName }}
+    </button>
     <div class="nav-spacer"></div>
     <app-user-nav></app-user-nav>
 </div>
-<div class="nav-small-show">
-    <button mat-button (click)=postImage.click() class="nav-link">이미지</button>
-    <button mat-button class="nav-link" (click)="publish()" [disabled]="disabled">{{ btnName }}</button>
+<div class="mobile-nav">
+    <button class="link"
+        mat-button 
+        (click)=postImage.click()>
+        이미지
+    </button>
+    <button class="link" 
+        mat-button 
+        (click)="publish()" 
+        [disabled]="disabled">
+        {{ btnName }}
+    </button>
 </div>
 

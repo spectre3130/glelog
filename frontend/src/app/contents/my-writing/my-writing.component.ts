@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TabsItem } from 'src/app/app.model';
+import { TabsItem, NavigationNode } from 'src/app/app.model';
 
 @Component({
   selector: 'app-my-writing',
@@ -8,11 +8,12 @@ import { TabsItem } from 'src/app/app.model';
 })
 export class MyWritingComponent implements OnInit {
 
-  tabsItems: TabsItem[] = [
-    { path: 'tempsave', name: '임시저장' },
-    { path: 'public', name: '공개' },
-    { path: 'private', name: '비공개' },
+  nodes: NavigationNode[] = [
+    { name: '임시저장', action: 'tempsave' },
+    { name: '공개', action: 'public' },
+    { name: '비공개', action: 'private' },
   ];
+
   activeLink: string;
 
   constructor() { }

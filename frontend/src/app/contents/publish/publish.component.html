@@ -1,14 +1,16 @@
 <div mat-dialog-content class="publish-content">
     <div class="content-left">
         <p class="title">포스트 미리보기</p>
-        <div *ngIf="!post.thumb" class="preview-image">
-            <div class="image-description">사진을 업로드 해주세요.</div>
+        <div class="preview-image">
+            <img class="thumb" 
+                *ngIf="post.thumb" [src]=post.thumb>
+            <div class="image-description" 
+                *ngIf="!post.thumb">사진을 업로드 해주세요.</div>
         </div>
-        <img *ngIf="post.thumb" class="thumb" [src]=post.thumb>
         <div class="post-thumb-submit">
             <input class="input-file" type="file" accept="image/*" #postImageInput (change)=saveThumb(postImageInput.files)>
-            <button mat-button color="primary" (click)=postImageInput.click() class="btn-upload">업로드</button>
-            <button mat-button class="btn-remove">제거</button>
+            <button class="btn-upload" mat-stroked-button color="primary" (click)=postImageInput.click()>업로드</button>
+            <button class="btn-remove" mat-stroked-button>제거</button>
         </div>
         <p class="post-title">{{ post.title }}</p>
         <p class="post-description">{{ post.description }}</p>
@@ -16,6 +18,7 @@
     <div class="content-right">
         <p class="title">
             태그
+            <span class="help">엔터키로 입력이 가능합니다.</span>
         </p>
         <div class="tag-input">
             <mat-chip-list #chipList aria-label="Tag selection">
@@ -23,7 +26,8 @@
                     {{ tag }}
                     <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
                 </mat-chip>
-                <input #inputRef type="text"
+                <input type="text"
+                    #tagBox
                     [matChipInputFor]="chipList"
                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                     [matChipInputAddOnBlur]="addOnBlur"
@@ -37,7 +41,11 @@
                 </mat-autocomplete> -->
             </mat-chip-list>
         </div>
-        <p class="title margin-top">포스트 공개여부</p>
+        <p class="title margin-top">
+            <mat-icon class="icon" *ngIf="post.open">lock_open</mat-icon>
+            <mat-icon class="icon" *ngIf="!post.open">lock</mat-icon>
+            <span>포스트 공개여부</span>
+        </p>
         <mat-radio-group color="primary" [value]=post.open aria-label="Select an option" (change)=onRadioChange($event)>
             <mat-radio-button [value]=true>공개</mat-radio-button>
             <mat-radio-button [value]=false>비공개</mat-radio-button>

@@ -18,7 +18,7 @@ export class PublishComponent implements OnInit {
   selectable: boolean = true;
   removable: boolean = true;
   addOnBlur: boolean = false;
-  readonly separatorKeysCodes: number[] = [ ENTER, COMMA ];
+  readonly separatorKeysCodes: number[] = [ ENTER ];
 
   filteredStates: Observable<any[]>;
   states: any[] = [
@@ -130,7 +130,6 @@ export class PublishComponent implements OnInit {
       });
       return false
     }
-    console.log("TCL: PublishComponent -> (value || '').trim()", (value || '').trim())
     if(!(value || '').trim()) {
       return false
     }

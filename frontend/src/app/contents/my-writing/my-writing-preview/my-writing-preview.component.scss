@@ -3,11 +3,13 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     .title {
         cursor: pointer;
-        margin: 0;    
+        margin: 0;   
+        word-break:break-all; 
     }
     .description {
         padding: 8px 0 8px 0;
         font-size: 14px;    
+        word-break:break-all;
     }
     .info {
         display: flex;

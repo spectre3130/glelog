@@ -1,6 +1,6 @@
 <article *ngIf="post" class="post-preview">
     <div class="post">
-        <a [routerLink]="['/post', post.slug]">
+        <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
             <div class="post-title-wrapper">
                 <fa-icon *ngIf="!post.open" [icon]="faLock" size="sm"></fa-icon>
                 <h1 class="post-title">
@@ -29,7 +29,7 @@
             </mat-chip-list>
         </div>
     </div>
-    <a *ngIf="post.thumb" [routerLink]="['/post', post.slug]" class="thumb-link">
+    <a *ngIf="post.thumb" [routerLink]="['/', post.user.username | at, 'post', post.slug]" class="thumb-link">
         <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
     </a>
 </article>

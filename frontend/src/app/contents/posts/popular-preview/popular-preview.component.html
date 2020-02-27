@@ -3,14 +3,16 @@
         {{ i + 1 }}.
     </span>
     <div class="popular-post">
-        <a [routerLink]="['/post', post.slug]">
-            <span class="post-title">
+        <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+            <p class="post-title">
                 {{ post.title }}
-            </span>
+            </p>
         </a>
         <div class="post-user">
             <div class=info>
-                <a [routerLink]="['/', post.user.username | at]"><div class="user-name">{{ post.user.username }}</div></a>
+                <a [routerLink]="['/', post.user.username | at]">
+                    <div class="user-name">{{ post.user.username }}</div>
+                </a>
                 <div class="post-time">{{ post.created_at | postDate }}</div>
             </div>
         </div>

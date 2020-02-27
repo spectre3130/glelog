@@ -14,8 +14,14 @@
 }
 
 .post-title {
+    margin: 0;
+    width: 300px;
     font-size:18px;
-    font-weight: 600;
+    font-weight: 500;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .post-user {

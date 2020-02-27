@@ -1,7 +1,12 @@
-<div *ngIf="post" class="my-writing-preview">
-    <h3 (click)="onEdit(post)" class="title">
-        {{ post.title }}
-    </h3>
+<div class="my-writing-preview">
+    <ng-container *ngIf="post.posted; else edit">
+        <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+            <h3 class="title">{{ post.title }}</h3>
+        </a>
+    </ng-container>
+    <ng-template #edit>
+        <h3 class="title" (click)="onEdit(post)">{{ post.title }}</h3>
+    </ng-template>
     <div class="description">
         {{ post.description }}
     </div>

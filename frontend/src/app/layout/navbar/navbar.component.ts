@@ -9,7 +9,7 @@ import { filter, map, tap } from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit {
   
-  isWrite: boolean;
+  isNotWrite: boolean;
 
   constructor(
     private router: Router,
@@ -20,8 +20,8 @@ export class NavbarComponent implements OnInit {
         filter(event => event instanceof ActivationEnd),
         map((event:ActivationEnd) => event.snapshot.routeConfig.path)
     ).subscribe(path => {
-      if(path === 'write') this.isWrite = true;
-      else this.isWrite = false;
+      if(path === 'write') this.isNotWrite = false;
+      else this.isNotWrite = true;
     });
   }
 

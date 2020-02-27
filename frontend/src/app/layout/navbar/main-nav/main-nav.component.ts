@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
+import { NavigationNode } from 'src/app/app.model';
 
 @Component({
   selector: 'app-main-nav',
@@ -8,7 +8,10 @@ import { faBookOpen } from '@fortawesome/free-solid-svg-icons';
 })
 export class MainNavComponent implements OnInit {
 
-  faBookOpen = faBookOpen;
+  nodes: NavigationNode[] = [
+    { name: '글목록', action: '/', class: 'link' },
+    { name: '태그', action: '/tags', class: 'link' },
+  ];
 
   constructor(
   ) { }
