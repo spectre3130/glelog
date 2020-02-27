@@ -85,7 +85,7 @@ exports.checkWriter = async(req, res, next) => {
     try {
         const { _id } = req.body;
         const post = await Post.findOne({ _id })
-                                .populate('user', 'email');
+                                .populate('user', 'email username avatar');
         if(req.user.email !== post.user.email) {    
             throw '해당글을 변경할 수 없습니다.';
         } else {

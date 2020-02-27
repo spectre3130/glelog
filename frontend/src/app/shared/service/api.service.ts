@@ -25,4 +25,12 @@ export class ApiService {
   delete<T>(path: string): Observable<T> {
     return this.http.delete<T>(`${environment.resource}/api/${path}`);
   }
+
+  generateQuery<T>(query: T): string {
+    return '?' + Object.keys(query).map((key) => {
+      return query[key] ? `${key}=${encodeURIComponent(query[key])}` : '';
+    }).reduce((acc, cur) => {
+      return acc + (cur ? '&' + cur : '');
+    });
+  }
 }

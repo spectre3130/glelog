@@ -40,8 +40,8 @@ export class PostService {
     return this.apiService.get<Post>(`${this.DOMAIN}?_id=${_id}`);
   }
 
-  getPostBySlug(slug: string): Observable<Post> {
-    const path = `${this.DOMAIN}/title/${encodeURIComponent(slug)}`;
+  getPostByUsernameAndSlug(username: string, slug: string): Observable<Post> {
+    const path = `${this.DOMAIN}/${username.replace('@', '')}/${encodeURIComponent(slug)}`;
     return this.apiService.get<Post>(path);
   }
 

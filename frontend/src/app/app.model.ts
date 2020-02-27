@@ -61,3 +61,17 @@ export interface TabsItem {
     path: string
     name: string
 }
+
+export interface PostQuery {
+    page: number
+    tag?: string
+    search?: string
+}
+
+export interface NavigationNode {
+    name: string
+    action?: string
+    class?: string
+    icon?: string
+    link?: string[]
+}

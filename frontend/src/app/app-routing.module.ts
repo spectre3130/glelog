@@ -11,10 +11,11 @@ import { PostResolverService } from './contents/post/post-resolver.service';
 const routes: Routes = [
   { path: '', component: PostsComponent },
   { 
-    path: 'post/:slug', component: PostComponent,
+    path: ':username/post/:slug', component: PostComponent,
     resolve: { post: PostResolverService }
   },
   { path: 'tag/:tag', component: PostsComponent },
+  { path: 'search/:search', component: PostsComponent },
   { path: 'tags', component: TagsComponent },
   { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
   { 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faLock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { PostService } from 'src/app/shared/service/post.service';
 import { Post } from 'src/app/app.model';
 import { ActivatedRoute } from '@angular/router';
@@ -11,9 +12,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
 
-  faInstagram = faInstagram;
-  faFacebook = faFacebook;
-  faGithub = faGithub;
+  faInstagram: IconDefinition = faInstagram;
+  faFacebook: IconDefinition = faFacebook;
+  faGithub: IconDefinition = faGithub;
+  faLock: IconDefinition = faLock;
   post: Post;
   isNotFound: boolean = false;
 

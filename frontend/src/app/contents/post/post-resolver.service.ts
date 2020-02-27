@@ -13,7 +13,11 @@ export class PostResolverService implements Resolve<Post> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
-    return this.postService.getPostBySlug(route.params.slug)
+    const { username, slug } = route.params;
+    if(username.indexOf('@') === -1) {
+      return of(false);
+    }
+    return this.postService.getPostByUsernameAndSlug(username, slug)
       .pipe(catchError(err => of(false)));
   }
 }

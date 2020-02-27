@@ -1,5 +1,6 @@
 .container {
     min-height: 1000px;
+    margin-top: 30px;
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
@@ -15,9 +16,17 @@ fa-icon {
     font-size: 1.2rem !important;
 }
 
+.private {
+    font-weight: 500;
+    color: gray;
+}
+
 .post-title {
+    display: flex;
+    align-items: center;
     font-family: 'Noto Serif KR', serif;
     font-size: 40px;
+    margin-top: 0;
 }
 
 .post-user {

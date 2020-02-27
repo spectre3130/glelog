@@ -12,7 +12,8 @@ export class PostsComponent implements OnInit {
 
   posts: Post[];
   page: number;
-  tagName: string;
+  tag: string;
+  search: string;
   isLoaded: boolean;
   placeholderNum: number = 6;
 
@@ -23,7 +24,8 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      if(params.tag) this.tagName = params.tag;
+      if(params.tag) this.tag = '#' + params.tag;
+      if(params.search) this.search = params.search;
       this.posts = [];
       this.page = 1;
       this.isLoaded = true;
@@ -35,7 +37,11 @@ export class PostsComponent implements OnInit {
   getPosts(): void {
     if(this.isLoaded) {
       this.isLoaded = false;
-      this.postsService.getPosts(this.page, this.tagName)
+      this.postsService.getPosts({
+        page: this.page,
+        tag: this.tag,
+        search: this.search,
+      })
       .subscribe(posts => { 
         this.isLoaded = true;
         this.posts = this.posts.concat(posts);

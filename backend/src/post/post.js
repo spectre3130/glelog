@@ -27,9 +27,10 @@ exports.checkPage = async (req, res, next) => {
 
 exports.getPosts = async (req, res, next) => {
     try {
-        const { page, tag } = req.query;
+        const { page, tag, search } = req.query;
         const match = { posted: true, open: true };
         if(tag) match.tags = tag;
+        if(search) match.title = new RegExp(search, 'i');
         const posts = await Post.findPostsWithUser(match, page);
         res.status(200).json(posts);
     } catch(e) {
@@ -139,11 +140,11 @@ exports.getPost = async (req, res, next) => {
     }
 };
 
-exports.getPostBySlug = async (req, res, next) => {
+exports.getPostByUsernameAndSlug = async (req, res, next) => {
     try {
-        const { slug } = req.params;
+        const { username, slug } = req.params;
         const post = await Post.findOne({ slug, posted: true })
-                                .populate('user', 'id email username name avatar description instagram facebook github')
+                                .populate('user', 'id email username name avatar description instagram facebook github', { username })
         if(!post) {
             throw '존재하지 않는 포스트입니다.';
         }
@@ -183,7 +184,6 @@ exports.doAutoSave = async (req, res, next) => {
         const { title, body, description } = req.body;
         const { post } = req;
         post.title = title ? title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
-        console.log("TCL: exports.doAutoSave -> post.title", post.title)
         post.body = body ? body : '';
         post.description = description ? description : '';
         post.slug = generateSlug(post.title);

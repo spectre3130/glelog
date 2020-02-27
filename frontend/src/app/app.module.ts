@@ -46,6 +46,8 @@ import { PublishComponent } from './contents/publish/publish.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './shared/service/user.service';
 import { PostResolverService } from './contents/post/post-resolver.service';
+import { SearchButtonComponent } from './layout/navbar/main-nav/search-button/search-button.component';
+import { AlarmButtonComponent } from './layout/navbar/main-nav/alarm-button/alarm-button.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { PostResolverService } from './contents/post/post-resolver.service';
     PopularPreviewComponent,
     SettingsUsernameComponent,
     PublishComponent,
+    SearchButtonComponent,
+    AlarmButtonComponent,
   ],
   entryComponents: [
     LoginComponent,

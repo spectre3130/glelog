@@ -1,0 +1,11 @@
+<label class="btn" (click)="openSearchBox($event)">
+    <mat-icon>search</mat-icon>
+    <input type="search"
+        #searchBox
+        aria-label="search"
+        placeholder="검색"
+        (keyup.enter) = "doSearch($event.target.value)"
+        (blur)="doBlur()">
+</label>
+
+    

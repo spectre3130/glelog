@@ -4,9 +4,10 @@
         [infiniteScrollDistance]="1"
         [infiniteScrollThrottle]="100"
         (scrolled)="getPosts()">
-        <ng-container *ngFor="let post of posts">
-            <app-preview [post]=post></app-preview>
-        </ng-container>
+        <app-preview *ngFor="let post of posts" [post]=post></app-preview>
+        <div class="empty"*ngIf="isLoaded && !posts.length">
+            글이 존재하지 않습니다.
+        </div>
         <app-ph-posts *ngIf="!isLoaded" [number]="placeholderNum"></app-ph-posts>
     </div>
     <app-popular-posts></app-popular-posts>

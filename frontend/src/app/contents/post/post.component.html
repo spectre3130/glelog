@@ -1,6 +1,9 @@
 <div *ngIf="!isNotFound" class="container">
     <div *ngIf="post" class="post">
-        <h1 class="post-title">{{ post.title }}</h1>
+        <span *ngIf="!post.open" class="private">비공개</span>
+        <h1 class="post-title"> 
+            {{ post.title }}
+        </h1>
         <div class="post-user">
             <a [routerLink]="['', post.user.username | at]">
                 <img class="post-user-avatar" src="{{ post.user.avatar }}">

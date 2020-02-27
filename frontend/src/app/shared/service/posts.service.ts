@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Post, PopularPost } from 'src/app/app.model';
+import { Post, PopularPost, PostQuery } from 'src/app/app.model';
 import { ApiService } from './api.service';
 
 @Injectable()
@@ -11,16 +11,14 @@ export class PostsService {
     private apiService: ApiService,
   ) { }
 
-  getPosts(page: number, tag: string): Observable<Post[]> {
-    let tagQuery = ''
-    if(tag) tagQuery = `&tag=${encodeURIComponent('#' + tag)}`;
-    return this.apiService.get<Post[]>(`posts?page=${page}${tagQuery}`);
+  getPosts(query: PostQuery): Observable<Post[]> {
+    const queryString = this.apiService.generateQuery<PostQuery>(query);
+    return this.apiService.get<Post[]>(`posts${queryString}`);
   }
 
-  getUserPosts(username: string, page: number, tag?: string): Observable<Post[]> {
-    let tagQuery = ''; 
-    if(tag) tagQuery = `&tag=${encodeURIComponent('#' + tag)}`;
-    return this.apiService.get<Post[]>(`posts/${encodeURIComponent(username.replace('@', ''))}?page=${page}${tagQuery}`);
+  getUserPosts(username: string, query: PostQuery): Observable<Post[]> {
+    const queryString = this.apiService.generateQuery<PostQuery>(query);
+    return this.apiService.get<Post[]>(`posts/${encodeURIComponent(username.replace('@', '')) + queryString}`);
   }
 
   getViewsPosts(): Observable<PopularPost[]> {
@@ -30,5 +28,6 @@ export class PostsService {
   getWritingPosts(path:string, page:number): Observable<Post[]> {
     return this.apiService.get(`posts/writing/${path}?page=${page}`);
   }
+
 
 }

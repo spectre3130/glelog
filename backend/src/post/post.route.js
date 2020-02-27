@@ -18,7 +18,7 @@ router.put('/',
 
 router.delete('/', auth.authenticate, post.delete);
 
-router.get('/title/:slug', post.getPostBySlug);
+router.get('/:username/:slug', post.getPostByUsernameAndSlug);
 
 router.post('/autosave', 
     auth.authenticate, 
