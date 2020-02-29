@@ -1,0 +1,11 @@
+.list {
+    padding: 15px 10px 15px 10px;
+    width: 700px;
+}
+
+@media(max-width: 1000px) {
+    .list {
+        padding: 5px 10px 5px 10px;
+        width: 90vw;
+    }
+}

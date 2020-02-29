@@ -4,35 +4,29 @@
     align-items: center;
     padding: 8px 16px;
     height: 38px;
+    .title {
+        font-family: 'Poor Story';
+        font-size: 26px;
+    }
+    .spacer {
+        flex-grow: 1;
+    }
 }
 
-.nav-title {
-    font-family: 'Poor Story';
-    font-size: 26px;
-}
-
-
-.nav-link {
-    flex: 1;
-}
-
-.nav-spacer {
-    flex-grow: 1;
-}
-
-.nav-small-show {
+.mobile-nav {
     display:none;
-}
-
-.menu-name { 
-    margin-left: 10px;
+    .link {
+        flex: 1;
+    }
 }
 
 @media (max-width: 1000px) {
-    .nav-small-show {
+    .mobile-nav {
         display:flex;
-    }   
-    .nav-small-hide {
-        display:none;
     }
+    .main-nav {
+        .link {
+            display:none;
+        }
+    }   
 }

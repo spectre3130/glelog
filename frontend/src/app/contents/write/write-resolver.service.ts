@@ -3,7 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@a
 import { Post } from 'src/app/app.model';
 import { Observable } from 'rxjs';
 import { PostService } from 'src/app/shared/service/post.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class WriteResolverService implements Resolve<Post> {
@@ -16,7 +16,7 @@ export class WriteResolverService implements Resolve<Post> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
     return this.postService.getPost(route.params.id)
       .pipe(
-        catchError(err => this.router.navigate(['write']))
+        catchError((err) => this.router.navigate(['write']))
       )
   }
 }

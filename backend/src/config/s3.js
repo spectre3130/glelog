@@ -10,11 +10,14 @@ const s3 = new AWS.S3({
 exports.avatar = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog/avatar',
+        bucket: 'glelog/user',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
-            cb(null, String(req.user._id));
+            const ext = file.originalname.split('.').pop();
+            if(this.deleteS3Dir(`user/${String(req.user._id)}`)) {
+                cb(null, `${String(req.user._id)}/${Date.now()}-avatar.${ext}`);
+            } 
         }
     }),
 });
@@ -27,7 +30,7 @@ exports.post = multer({
         acl: 'public-read',
         key: (req, file, cb) => {
             const { _id } = req.query;
-            cb(null, `${_id}/${file.originalname}`);
+            cb(null, `${_id}/${Date.now()}-${file.originalname}`);
         }
     }),
 });
@@ -40,15 +43,17 @@ exports.thumb = multer({
         acl: 'public-read',
         key: (req, file, cb) => {
             const { _id } = req.query;
-            cb(null, `${_id}/thumb`);
+            if(this.deleteS3Dir(`post/${_id}/thumb`)) {
+                cb(null, `${_id}/thumb/${Date.now()}-${file.originalname}`);
+            } 
         }
     }),
 });
 
-exports.deleteS3Dir = async (_id) => {
+exports.deleteS3Dir = async (path) => {
     const params = {
         Bucket: 'glelog',
-        Prefix: `post/${_id}`
+        Prefix: `${path}`
     }
     const s3Objects = await s3.listObjectsV2(params).promise();
 

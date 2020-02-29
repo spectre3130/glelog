@@ -5,10 +5,10 @@
                 <fa-icon [icon]="icon" size="lg"></fa-icon>
             </div>
             <span class="prepend">{{ prepend }}</span>
-            <input #inputRef class="settings-input" [value]=value disabled>
+            <input #inputRef class="input" [value]=value disabled>
         </div>
     </div>
     <div class="item-left">
-        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef (onSave)=save($event)></app-settings-base-btn>
+        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef (save)=onSave($event)></app-settings-base-btn>
     </div>
 </li>

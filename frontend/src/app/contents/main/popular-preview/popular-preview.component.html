@@ -1,0 +1,20 @@
+<div class="popuplar-preview">
+    <span class="rank">
+        {{ rank }}.
+    </span>
+    <div class="post">
+        <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+            <div class="title">
+                {{ post.title }}
+            </div>
+        </a>
+        <div class="user">
+            <div class=info>
+                <a [routerLink]="['/', post.user.username | at]">
+                    <div class="name">{{ post.user.username }}</div>
+                </a>
+                <div class="created">{{ post.created_at | postDate }}</div>
+            </div>
+        </div>
+    </div>
+</div>

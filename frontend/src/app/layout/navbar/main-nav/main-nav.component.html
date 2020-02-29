@@ -1,13 +1,23 @@
 <div class="main-nav">
-    <button routerLink="/" mat-button class="nav-title">
+    <button class="title" mat-button routerLink="/">
         글로그
     </button>
-    <button routerLink="/" mat-button class="nav-small-hide">글목록</button>
-    <button routerLink="/tags" mat-button class="nav-small-hide">태그목록</button>
-    <div class="nav-spacer"></div>
+    <button *ngFor="let node of nodes"
+        mat-button
+        [class]="node.class"
+        [routerLink]="node.action">
+        {{ node.name }}
+    </button>
+    <div class="spacer"></div>
+    <app-search-button></app-search-button>
+    <app-alarm-button></app-alarm-button>
     <app-user-nav></app-user-nav>
 </div>
-<div class="nav-small-show">
-    <button routerLink="/" mat-button class="nav-link">글목록</button>
-    <button routerLink="/tags" mat-button class="nav-link">태그목록</button>
+<div class="mobile-nav">
+    <button *ngFor="let node of nodes"
+        mat-button
+        [class]="node.class"
+        [routerLink]="node.action">
+        {{ node.name }}
+    </button>
 </div>

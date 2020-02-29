@@ -1,0 +1,11 @@
+<li class="list-item">
+    <div class="item-right">
+        <div class="item-title">
+            {{ title }}
+        </div>
+        <input #inputRef class="input" [value]=value (input)=checkUsername(inputRef.value) disabled>
+    </div>
+    <div class="item-left">
+        <app-settings-base-btn [prop]="'username'" [inputRef]=inputRef [isValid]=isValid (save)=onSave($event) (cancel)=onCancel()></app-settings-base-btn>
+    </div>
+</li>

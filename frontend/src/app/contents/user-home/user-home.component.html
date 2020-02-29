@@ -1,8 +1,11 @@
-<div *ngIf="!isNotFound" class="user-home">
+<div *ngIf="isFound; else notFound" class="user-home">
     <app-user-home-header [user]="user"></app-user-home-header>
     <div class="contents">
         <app-user-home-tags [tags]="tags" (selected)="onSelected($event)"></app-user-home-tags>
         <router-outlet></router-outlet>
     </div>
 </div>
-<app-page-not-found *ngIf="isNotFound"></app-page-not-found>
+<ng-template #notFound>
+    <app-page-not-found></app-page-not-found>
+</ng-template>
+

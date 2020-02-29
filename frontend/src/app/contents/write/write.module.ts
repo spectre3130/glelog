@@ -6,6 +6,7 @@ import { WritePreviewComponent } from './write-preview/write-preview.component';
 import { WriteRoutingModule } from './write-routing.module';
 import { WriteEditorComponent } from './write-editor/write-editor.component';
 import { WriteResolverService } from './write-resolver.service';
+import { CanDeactivateWriteService } from './can-deactivate-write.service';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { WriteResolverService } from './write-resolver.service';
     SharedModule
   ],
   providers: [
-    WriteResolverService
+    WriteResolverService,
+    CanDeactivateWriteService
   ]
 })
 export class WriteModule { }

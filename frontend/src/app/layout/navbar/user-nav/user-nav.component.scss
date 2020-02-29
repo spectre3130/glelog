@@ -1,40 +1,42 @@
-.user-info {
+.user-nav { min-width: 76px; }
+.authed {
     display:flex;
     align-items: center;
     cursor: pointer;
     margin-right: 1rem;
+    .avatar {
+        margin-right:10px;
+        margin-left:10px;
+        height: 32px;
+        width: 32px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+    .loading {
+        margin-right:10px;
+        margin-left:10px;
+    }
 }
+
+.user {
+    width: 180px;
+    padding: 10px 16px 20px 16px;
+    .username {
+        font-size: 18px;
+        font-weight: 500;
+    }
+    .greeting {
+        font-family: 'Poor Story';
+        font-size: 14px;
+        font-weight: 300;
+        color: #5d5d5d;
+    }
+}
+
 .login {
     margin-left: 10px;
 }
-.user-avatar {
-    margin-right:10px;
-    margin-left:10px;
-    height: 32px;
-    width: 32px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
-}
-
-.loading-avatar {
-    margin-right:10px;
-    margin-left:10px;
-}
 
 
 
-.wrapper {
-    padding: 10px 16px 20px 16px;
-}
-
-.aa {
-    font-size: 18px;
-    font-weight: 500;
-}
-
-.bb {
-    font-size: 14px;
-    font-weight: 300;
-    color: #5d5d5d;
-}

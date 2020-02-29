@@ -1,43 +1,44 @@
-<button *ngIf="!user" (click)="openDialog()" mat-button>
+<button *authenticated="false" mat-button (click)="openLoginDialog()">
     <mat-icon>account_circle</mat-icon>
     <span class="login">로그인</span>
 </button>
-<ng-container *ngIf="user">
-    <div class="user-info" [matMenuTriggerFor]="menu">
-        <img *ngIf="avatar" class="user-avatar" [src]=avatar [alt]=user.username>
-        <div *ngIf="!avatar" class="loading-avatar">
-            <mat-spinner
-                [color]="'accent'"
-                [diameter]=32>
-            </mat-spinner>
-        </div>
-        <mat-icon>arrow_drop_down</mat-icon>
+
+<div *authenticated="true" class="authed" [matMenuTriggerFor]="menu">
+    <img *ngIf="user.avatar; else loading" class="avatar" [src]="user.avatar" [alt]="user.username">
+    <mat-icon>arrow_drop_down</mat-icon>
+</div>
+<mat-menu #menu="matMenu">
+    <div class="user">
+        <div class="username">{{ user.username }}님 🙂</div>
+        <div class="greeting">오늘도 좋은 글과 함께해요</div>
     </div>
-    <mat-menu #menu="matMenu">
-        <div class="wrapper">
-            <div class="aa">{{ user.username }}님</div>
-            <div class="bb">오늘도 좋은 글과 함께해요</div>
-        </div>
-        <button mat-menu-item [routerLink]="['/', user.username | at]">
-            <mat-icon>home</mat-icon>
-            <span>내 블로그</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="/write">
-            <mat-icon>post_add</mat-icon>
-            <span>글쓰기</span>
-        </button>
-        <button mat-menu-item routerLink="/me/writing">
-            <mat-icon>list</mat-icon>
-            <span>내 글 모음</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item routerLink="/me/settings">
-            <mat-icon>settings</mat-icon>
-            <span>설정</span>
-        </button>
-        <button mat-menu-item (click)="logout()">
-            <span>로그아웃</span>
-        </button>
-    </mat-menu>
-</ng-container>
+    <button *ngFor="let node of homeNodes"
+        mat-menu-item
+        (click)="navigate(node.action, node.link)">
+        <mat-icon>{{ node.icon }}</mat-icon>
+        <span>{{ node.name }}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button *ngFor="let node of writeNodes"
+        mat-menu-item
+        (click)="navigate(node.action, node.link)">
+        <mat-icon>{{ node.icon }}</mat-icon>
+        <span>{{ node.name }}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button *ngFor="let node of userNodes"
+        mat-menu-item
+        (click)="navigate(node.action, node.link)">
+        <mat-icon>{{ node.icon }}</mat-icon>
+        <span>{{ node.name }}</span>
+    </button>
+</mat-menu>
+
+<ng-template #loading>
+    <div class="loading">
+        <mat-spinner
+            [color]="'accent'"
+            [diameter]=32>
+        </mat-spinner>
+    </div>
+</ng-template>

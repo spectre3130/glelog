@@ -18,7 +18,8 @@ export class UserHomePostsComponent implements OnInit {
   tags: Tag[];
   page: number;
   tag: string;
-  isLoaded: boolean = true;
+  isLoaded: boolean;
+  isLast: boolean;
   placeholderNum: number;
 
   constructor(
@@ -29,20 +30,26 @@ export class UserHomePostsComponent implements OnInit {
   ngOnInit(): void { 
     this.route.params.subscribe(({ username, tag }) => {
       this.username = username;
-      this.tag = tag;
+      if(tag) this.tag = '#' + tag;
       this.posts = [];
       this.page = 1;
+      this.isLoaded = true;
+      this.isLast = false;
       this.placeholderNum = 6;
       this.getUserPosts();
     });
   }
 
   getUserPosts(): void  {
-    if(this.isLoaded) {
+    if(this.isLoaded && !this.isLast) {
       this.isLoaded = false;
-      this.postsService.getUserPosts(this.username, this.page, this.tag)
-      .subscribe(posts => { 
+      this.postsService.getUserPosts(this.username, {
+        page: this.page,
+        tag: this.tag
+      })
+      .subscribe(({ posts, last }) => { 
         this.isLoaded = true;
+        this.isLast = last;
         this.posts = this.posts.concat(posts);
         if(this.page === 1) this.placeholderNum = 1;
         this.page++;

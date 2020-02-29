@@ -24,18 +24,29 @@ export interface Post {
     posted?: boolean
     open?: boolean
     description?: string
-    tags: string[],
-    slug?: string,
+    tags: string[]
+    slug?: string
     created_at?: Date
     updated_at?: Date
     user: User
+    changed?: boolean
 }
 
-export declare interface PopularPost {
+export interface Pageable {
+    posts: Post[]
+    last: boolean
+}
+
+export interface Content {
+    title?: string;
+    body?: string;
+}
+
+export interface PopularPost {
     seq?: Number
     title: string
     thumb?: string
-    slug?: string,
+    slug?: string
     created_at?: Date
     updated_at?: Date
     user: User
@@ -54,4 +65,18 @@ export interface UploadImage {
 export interface TabsItem {
     path: string
     name: string
+}
+
+export interface PostQuery {
+    page: number
+    tag?: string
+    search?: string
+}
+
+export interface NavigationNode {
+    name: string
+    action?: string
+    class?: string
+    icon?: string
+    link?: string[]
 }

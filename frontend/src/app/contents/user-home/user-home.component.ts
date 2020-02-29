@@ -11,7 +11,7 @@ export class UserHomeComponent implements OnInit {
 
   user: User;
   tags: Tag[];
-  isNotFound: boolean = false;
+  isFound: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,7 +25,7 @@ export class UserHomeComponent implements OnInit {
           this.user = data.user;
           this.tags = data.tags;
         } else {
-          this.isNotFound = true;
+          this.isFound = false;
         }
       }
     );

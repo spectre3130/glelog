@@ -25,7 +25,7 @@ export class UserHomeResolverService implements Resolve<any>{
       map(([user, tags]) => {
         return { user, tags };
       }),
-      catchError((err, caught) => of(false)) 
+      catchError((err) => of(false)) 
     )
   }
 }

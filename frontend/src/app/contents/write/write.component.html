@@ -1,8 +1,8 @@
 <div class="write">
     <div class="editor">
         <div class="editor-fixed">
-            <app-write-editor [post]="post"
-                (changePost)="onChangePost($event)">
+            <app-write-editor [post]="post" 
+                (changeContent)="onChangeContent($event)">
             </app-write-editor>
         </div>
     </div>

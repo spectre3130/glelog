@@ -1,6 +1,7 @@
 
 const createError = require('http-errors');
 const User = require('../user/user.model');
+const Post = require('../post/post.model');
 const jwtProvider = require('./jwt.provider');
 const prod = process.env.NODE_ENV === 'prod';
 
@@ -80,6 +81,23 @@ exports.authenticate = async (req, res, next) => {
     }
 };
 
+exports.checkWriter = async(req, res, next) => {
+    try {
+        const { _id } = req.body;
+        const post = await Post.findOne({ _id })
+                                .populate('user', 'email username avatar');
+        if(req.user.email !== post.user.email) {    
+            throw '해당글을 변경할 수 없습니다.';
+        } else {
+            req.post = post;
+            next();
+        }
+    } catch(e) {
+        console.error(e);
+        next(createError(401, e));
+    }
+}
+
 exports.isWriter = async(req, user) => {
     const token = req.cookies['gleid'];
     if(token) {
@@ -88,3 +106,4 @@ exports.isWriter = async(req, user) => {
     }
     return false;
 };
+

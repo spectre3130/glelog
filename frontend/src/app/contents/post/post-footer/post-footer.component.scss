@@ -1,0 +1,49 @@
+.post-footer {
+    .user {
+        display: flex;
+        margin-top: 30px;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        padding-top: 20px;
+
+        .avatar {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        
+        .info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .username {
+                font-size: 20px;
+                font-weight: 600;
+            }
+            
+            .description {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 300;
+                color: rgba(0, 0, 0, 0.54);
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .post-footer {
+        .user {
+            .avatar {
+                height: 60px;
+                width: 60px;
+            }
+            .info {
+                .username { font-size: 16px; }
+                .description { font-size: 14px; }
+            }
+        }
+    }
+}

@@ -1,0 +1,11 @@
+.posts {
+    display: flex;
+    flex-direction: row;
+    width:auto;
+}
+
+@media(max-width: 1000px) {
+    app-popular-posts {
+        display: none;
+    }
+}

@@ -1,48 +1,41 @@
-.settings-container {
-    display: flex;
-    justify-content: center;
-    color: rgba(0,0,0,.84);
+.settings {
+    width: 768px;
+    .header {
+        font-size: 26px;
+        font-weight: bold;
+        color: rgba(0,0,0,.84);
+        border-bottom: 1px solid rgba(0,0,0,.07);
+        padding: 40px 0 10px;
+    }
+    
+    .list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        list-style-image: none;
+    }
 }
 
-.user-settings {
-    width: 720px;
-}
-
-.settings-header {
-    font-size: 26px;
-    font-weight: bold;
-    border-bottom: 1px solid rgba(0,0,0,.05);
-    padding: 40px 0 10px;
-}
-
-.settings-list {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-    list-style-image: none;
-}
-
-:host ::ng-deep .list-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid rgba(0,0,0,.05);
-    list-style: none;
-    padding: 20px 0 20px;
-}
-
-:host ::ng-deep .item-right {
-    flex: 1 1 auto;
-}
-
-:host ::ng-deep .item-title {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
+:host::ng-deep {
+    .list-item {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(0,0,0,.07);
+        list-style: none;
+        padding: 20px 0 20px;
+    }
+    .item-right {
+        flex: 1 1 auto;
+    }
+    .item-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+} 
 
 @media(max-width:768px) {
-    .user-settings {
+    .settings {
         width:320px;
     }
 }

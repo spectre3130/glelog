@@ -1,0 +1,45 @@
+.popuplar-preview {
+    width: 350px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 15px 0 0 0;
+    .rank {
+        margin-top: -3px;
+        width: 34px;
+        font-size:30px;
+        color: rgba(0,0,0,.3);
+        fill: rgba(0,0,0,.3);
+    }
+    .title {
+        margin: 0;
+        width: 300px;
+        font-size:18px;
+        font-weight: 600;
+        line-height: 30px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: top;
+    }
+    .info {
+        display: flex;
+        flex-direction: row;
+        margin-left: 10px;
+        .user {
+            margin-top: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+        .name {
+            font-size: 14px;
+            font-weight: 400;
+        }
+        .created {
+            margin-left: 10px;
+            font-size: 14px;
+            color: #6f6f6f;
+        }
+    }
+}

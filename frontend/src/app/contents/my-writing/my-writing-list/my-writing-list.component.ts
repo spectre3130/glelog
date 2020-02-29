@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Post } from 'src/app/app.model';
+import { Post, Pageable } from 'src/app/app.model';
 import { PostsService } from 'src/app/shared/service/posts.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +13,8 @@ export class MyWritingListComponent implements OnInit {
   posts: Post[] = [];
   path: string;
   page: number = 1;
-  isLoaded: boolean = false;
+  isLoaded: boolean = true;
+  isLast: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -23,26 +24,28 @@ export class MyWritingListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ posts }) => this.nextPosts(posts));
+    this.route.data.subscribe(({ pageable }) => this.nextPosts(pageable));
   }
 
   getPosts(): void {
-    if(this.isLoaded) {
+    if(this.isLoaded && !this.isLast) {
       this.isLoaded = false;
       this.postsService.getWritingPosts(this.path, this.page)
-        .subscribe(posts => this.nextPosts(posts));
+        .subscribe(pageable => this.nextPosts(pageable));
     }
   }
 
-  nextPosts(posts: Post[]): void {
+  nextPosts(pageable: Pageable): void {
     this.isLoaded = true;
-    this.posts = this.posts.concat(posts);
+    this.isLast = pageable.last;
+    this.posts = this.posts.concat(pageable.posts);
     this.page++;
   }
 
   onDelete(): void {
     this.posts = [];
     this.isLoaded = true;
+    this.isLast = false;
     this.page = 1;
     this.getPosts();
   }

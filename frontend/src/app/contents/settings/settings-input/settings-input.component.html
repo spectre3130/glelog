@@ -6,6 +6,6 @@
         <input #inputRef class="settings-input" [value]=value disabled>
     </div>
     <div class="item-left">
-        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef (onSave)=save($event)></app-settings-base-btn>
+        <app-settings-base-btn [prop]="prop" [inputRef]=inputRef (save)=onSave($event)></app-settings-base-btn>
     </div>
 </li>

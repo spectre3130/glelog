@@ -9,26 +9,54 @@ import {
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { LoaderService } from 'src/app/shared/service/loader.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
 
+  private queue: HttpRequest<any>[] = [];
+  private currentUrl: string;
+
   constructor(
+    private router: Router,
     private loaderService: LoaderService)
   { }
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.loaderService.emit(request);
-    return next.handle(request).pipe(
+  intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+
+    if(this.currentUrl !== this.router.url) {
+      this.currentUrl = this.router.url;
+      this.clearQueue();
+    }
+
+    this.queue.push(req);
+    this.loaderService.emit(true);
+
+    return next.handle(req).pipe(
       tap(event => {
         if(event instanceof HttpResponse) {
-          this.loaderService.emit(event);
+          this.removeQueue(req);
         }
       }),
-      catchError(err => {
+      catchError((err) => {
+        this.clearQueue();
         this.loaderService.emit(false);
         throw err;
       })
     )
   }
+  private removeQueue(req: HttpRequest<any>): void {
+    const index = this.queue.indexOf(req);
+    if (index >= 0) {
+      this.queue.splice(index, 1);
+      if(!this.queue.length) {
+        this.loaderService.emit(false);
+      }
+    }
+  }
+
+  private clearQueue(): void {
+    this.queue = [];
+  }
 }
+

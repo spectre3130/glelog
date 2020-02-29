@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
+
+  private option = {
+    responseType: "blob", reportProgress: true, observe: "events", headers: new HttpHeaders(
+      { 'Content-Type': 'application/json' },
+    )
+  }
 
   constructor(
     private http: HttpClient
@@ -24,5 +32,13 @@ export class ApiService {
 
   delete<T>(path: string): Observable<T> {
     return this.http.delete<T>(`${environment.resource}/api/${path}`);
+  }
+
+  generateQuery<T>(query: T): string {
+    return '?' + Object.keys(query).map((key) => {
+      return query[key] ? `${key}=${encodeURIComponent(query[key])}` : '';
+    }).reduce((acc, cur) => {
+      return acc + (cur ? '&' + cur : '');
+    });
   }
 }
