@@ -1,62 +1,60 @@
 .input-group {
     display: flex;
     flex-direction: row;
-}
+    
+    input {
+        background: #ffffff !important;
+        outline: 0;
+        cursor: default;
+        font-size: 16px;
+        border: none;
+        padding: 0;
+        letter-spacing: 0;
+        font-weight: 400;
+        font-style: normal;
+    }
+    
+    .sns-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px 5px 5px 5px;
+    }
 
-.sns-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px 5px 5px 5px;
-}
+    .instagram {
+        background: #d6249f;
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    }
 
-.instagram {
-    background: #d6249f;
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
-}
+    .facebook {
+        background: #4267B2;
+    }
 
-.facebook {
-    background: #4267B2;
-}
+    .github {
+        background: black;
+    }
 
-.github {
-    background: black;
+    .prepend {
+        display: flex;
+        align-items: center;
+        margin-left:10px;
+        font-size: 16px;
+        font-weight: 400;
+    }
 }
-
-.prepend {
-    display: flex;
-    align-items: center;
-    margin-left:10px;
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.settings-input {
-    background: #ffffff !important;
-    outline: 0;
-    cursor: default;
-    font-size: 16px;
-    border: none;
-    padding: 0;
-    letter-spacing: 0;
-    font-weight: 400;
-    font-style: normal;
-}
-
 
 
 @media(max-width:768px) {
-    .settings-input {
+    input {
         margin-left: 10px;
-        width:160px;
+        width:130px;
     }
-    .input-group .settings-input{
-        width:100px;
-    }
-    .prepend {
-        display:none;
+    .input-group{
+        .prepend {
+            display:none;
+        }
     }
 }

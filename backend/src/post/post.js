@@ -31,8 +31,8 @@ exports.getPosts = async (req, res, next) => {
         const match = { posted: true, open: true };
         if(tag) match.tags = tag;
         if(search) match.title = new RegExp(search, 'i');
-        const posts = await Post.findPostsWithUser(match, page);
-        res.status(200).json(posts);
+        const pageable = await Post.findPostsWithUser(match, page);
+        res.status(200).json(pageable);
     } catch(e) {
         console.error(e);
         next(createError(404, e));
@@ -52,8 +52,8 @@ exports.getUserPosts = async (req, res, next) => {
             delete match.open;
         }
         if(tag) match.tags = tag;
-        const posts = await Post.findPostsWithUser(match, page);
-        res.status(200).json(posts);
+        const pageable = await Post.findPostsWithUser(match, page);
+        res.status(200).json(pageable);
     } catch(e) {
         console.error(e);
         next(createError(404, e));
@@ -84,8 +84,8 @@ exports.getTempsavePosts = async (req, res, next) => {
             const { page } = req.query;
             const match = { user: req.user._id, posted: false };
             const sort = { updated_at: -1 }
-            const posts = await Post.findPostsWithUser(match, page, sort);
-            res.status(200).json(posts);
+            const pageable = await Post.findPostsWithUser(match, page, sort);
+            res.status(200).json(pageable);
         } catch(e) {
             console.error(e);
             next(createError(404, e));
@@ -100,8 +100,8 @@ exports.getPublicPosts = async (req, res, next) => {
     try {
         const { page } = req.query;
         const match = { user: req.user._id, posted: true, open: true };
-        const posts = await Post.findPostsWithUser(match, page);
-        res.status(200).json(posts);
+        const pageable = await Post.findPostsWithUser(match, page);
+        res.status(200).json(pageable);
     } catch (e) {
         console.error(e);
         next(createError(500, e));
@@ -112,8 +112,8 @@ exports.getPrivatePosts = async (req, res, next) => {
     try {
         const { page } = req.query;
         const match = { user: req.user._id, posted: true, open: false };
-        const posts = await Post.findPostsWithUser(match, page);
-        res.status(200).json(posts);
+        const pageable = await Post.findPostsWithUser(match, page);
+        res.status(200).json(pageable);
     } catch (e) {
         console.error(e);
         next(createError(500, e));
@@ -210,7 +210,7 @@ exports.doPublising = async (req, res, next) => {
         post.created_at = Date.now();
         post.updated_at = Date.now();
         await post.save();
-        res.status(200).json(post.slug);
+        res.status(200).json(post);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
@@ -227,7 +227,7 @@ exports.update = async (req, res, next) => {
         post.open = open;
         post.updated_at = Date.now();
         await post.save();
-        res.status(200).json(post.slug);
+        res.status(200).json(post);
     } catch(e) {
         console.error(e);
         next(createError(400, e));

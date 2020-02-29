@@ -9,7 +9,7 @@ import { PostsService } from 'src/app/shared/service/posts.service';
 })
 export class PopularPostsComponent implements OnInit {
 
-  posts: Array<PopularPost>;
+  posts: PopularPost[];
 
   constructor(
     private postsService: PostsService

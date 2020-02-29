@@ -1,5 +1,10 @@
-<div *ngIf="user; else login" class="user-nav" [matMenuTriggerFor]="menu">
-    <img *ngIf="avatar; else loading" class="avatar" [src]="avatar" [alt]="user.username">
+<button *authenticated="false" mat-button (click)="openLoginDialog()">
+    <mat-icon>account_circle</mat-icon>
+    <span class="login">로그인</span>
+</button>
+
+<div *authenticated="true" class="authed" [matMenuTriggerFor]="menu">
+    <img *ngIf="user.avatar; else loading" class="avatar" [src]="user.avatar" [alt]="user.username">
     <mat-icon>arrow_drop_down</mat-icon>
 </div>
 <mat-menu #menu="matMenu">
@@ -36,11 +41,4 @@
             [diameter]=32>
         </mat-spinner>
     </div>
-</ng-template>
-
-<ng-template #login>
-    <button (click)="openLoginDialog()" mat-button>
-        <mat-icon>account_circle</mat-icon>
-        <span class="login">로그인</span>
-    </button>
 </ng-template>

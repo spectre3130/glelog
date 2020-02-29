@@ -18,6 +18,6 @@ export class PostResolverService implements Resolve<Post> {
       return of(false);
     }
     return this.postService.getPostByUsernameAndSlug(username, slug)
-      .pipe(catchError(err => of(false)));
+      .pipe(catchError((err) => of(false)));
   }
 }

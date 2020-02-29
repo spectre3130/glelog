@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { Subscription, Observable } from 'rxjs';
-import { ActivatedRoute, CanDeactivate } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/shared/service/post.service';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from 'src/app/layout/confirm/confirm.component';
 
@@ -25,12 +24,10 @@ export class WriteComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.data.subscribe(({ post }) => {
-      if(post) {
-        this.postService.changePost(post);
-      } else {
-        this.postService.changePost(this.postService.initPost());
-      }
+      if(post) this.postService.changePost(post);
+      else this.postService.changePost(this.postService.initPost());
     });
+    
     this.currentPost = this.postService.currentPost.subscribe(post => {
       this.post = post;
     });

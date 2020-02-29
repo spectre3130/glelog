@@ -7,45 +7,39 @@
     color: #3D3D3D;
     padding: 20px;
     background-color: #F5F5F5; 
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    
+    .user {
+        width: 600px;
+        justify-content: start;
+    }
 
-.user-home-info {
-    width: 600px;
-    justify-content: start;
-}
+    .username {
+        font-size: 30px;
+        font-weight: 600;
+    }
 
-.username {
-    font-size: 30px;
-    font-weight: 600;
-}
+    .description {
+        margin-top: 10px;
+        max-width: 600px;
+    }
 
-.description {
-    margin-top: 10px;
-    max-width: 600px;
-}
+    .sns {
+        margin-top: 20px;
+    }
 
-.sns {
-    margin-top: 20px;
-}
-
-.user-home-avatar {
-    margin-right:10px;
-    margin-left:10px;
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
-}
-
-fa-icon {
-    margin-right: 0.6rem;
-}
-
-@media(max-width: 1000px) {
-    /* .user-home-avatar {
+    .avatar {
+        margin-right:10px;
+        margin-left:10px;
         height: 100px;
         width: 100px;
-    } */
+        border-radius: 50%;
+        flex-shrink: 0;
+        object-fit: cover;
+    }
+
+    fa-icon {
+        margin-right: 0.8rem;
+    }
+
 }

@@ -1,40 +1,30 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/auth/auth.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from 'src/app/shared/service/settings.service';
-import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-settings-base-btn',
   templateUrl: './settings-base-btn.component.html',
   styleUrls: ['./settings-base-btn.component.scss']
 })
-export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
+export class SettingsBaseBtnComponent implements OnInit {
 
   @Input() inputRef: HTMLInputElement;
   @Input() prop: string;
-  @Output() onSave: EventEmitter<User> = new EventEmitter<User>();
-  @Output() onCancel: EventEmitter<any> = new EventEmitter<any>();
+  @Input() isValid: boolean = true;
+  @Output() save: EventEmitter<User> = new EventEmitter<User>();
+  @Output() cancel: EventEmitter<any> = new EventEmitter<any>();
   cache: string;
   editMode: boolean = false;
-  @Input() isValid: boolean = true;
-  afterChangeEvent: Subscription;
 
   constructor(
-    private settingsService: SettingsService,
-    private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
   }
 
-  ngOnDestroy(): void {
-    if(this.afterChangeEvent) {
-      this.afterChangeEvent.unsubscribe();
-    }
-  }
-
-  edit(): void {
+  onEdit(): void {
     if(this.prop === 'username') this.isValid = false;
     this.inputRef.disabled = false;
     this.cache = this.inputRef.value;
@@ -46,18 +36,18 @@ export class SettingsBaseBtnComponent implements OnInit, OnDestroy {
     this.inputRef.focus();
   }
 
-  save(): void {
-    const user = this.authService.loadedUser();
+  onSave(): void {
+    const user: User = this.userService.user;
     user[this.prop] = this.inputRef.value;
-    this.onSave.emit(user);
-    this.afterChangeEvent = this.settingsService.changeUserEvent.subscribe(() => this.editMode = false);
+    this.editMode = false;
+    this.save.emit(user);
   }
 
-  cancel(): void {
+  onCancel(): void {
     this.inputRef.disabled = true;
     this.inputRef.value = this.cache;
     this.editMode = false;
-    this.onCancel.emit();
+    this.cancel.emit();
   }
 
 }

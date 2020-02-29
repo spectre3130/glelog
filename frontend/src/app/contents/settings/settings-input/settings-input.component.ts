@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from 'src/app/shared/service/settings.service';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-settings-input',
@@ -15,16 +15,15 @@ export class SettingsInputComponent implements OnInit {
   @ViewChild('inputRef') inputRef: ElementRef<HTMLInputElement>;
 
   constructor(
-    private settingsService: SettingsService
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
   }
 
-  save(user: User): void {
-    this.settingsService.updateUser(user)
-    .subscribe((user: User) => {
-      this.value = user[this.prop];
+  onSave(user: User): void {
+    this.userService.updateUser(user).subscribe((user: User) => {
+      this.userService.next(user);
       this.inputRef.nativeElement.disabled = true;
     });
   }

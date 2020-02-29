@@ -42,6 +42,6 @@ exports.aggregateUserTags = async (req, res, next) => {
         res.status(200).json(tags);
     } catch(e) {
         console.error(e);
-        next(createError(400, e));
+        next(createError(404, e));
     }
 }

@@ -15,6 +15,7 @@ export class PostsComponent implements OnInit {
   tag: string;
   search: string;
   isLoaded: boolean;
+  isLast: boolean;
   placeholderNum: number = 6;
 
   constructor(
@@ -29,21 +30,23 @@ export class PostsComponent implements OnInit {
       this.posts = [];
       this.page = 1;
       this.isLoaded = true;
+      this.isLast = false;
       this.placeholderNum = 6;
       this.getPosts();
     });
   }
 
   getPosts(): void {
-    if(this.isLoaded) {
+    if(this.isLoaded && !this.isLast) {
       this.isLoaded = false;
       this.postsService.getPosts({
         page: this.page,
         tag: this.tag,
         search: this.search,
       })
-      .subscribe(posts => { 
+      .subscribe(({ posts, last }) => { 
         this.isLoaded = true;
+        this.isLast = last;
         this.posts = this.posts.concat(posts);
         if(this.page === 1) this.placeholderNum = 1;
         this.page++;

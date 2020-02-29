@@ -4,12 +4,12 @@ import { faUser, faCaretDown, IconDefinition } from '@fortawesome/free-solid-svg
 import { LoginComponent } from 'src/app/contents/login/login.component';
 import { User, NavigationNode } from '../../../app.model';
 import { AuthService } from 'src/app/auth/auth.service';
-import { take } from 'rxjs/operators';
+import { take, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, pipe } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { SettingsService } from 'src/app/shared/service/settings.service';
-import { AtPipe } from 'src/app/shared/pipe/at.pipe';
+import { UserService } from 'src/app/shared/service/user.service';
 
 
 @Component({
@@ -26,6 +26,7 @@ export class UserNavComponent implements OnInit, OnDestroy {
   avatar: string;
   changedUserEvent: Subscription;
   changeAvatarEvent: Subscription;
+  currentUser: Subscription;
   
   homeNodes: NavigationNode[] = [
     { name: '내 블로그', action: 'home', icon: 'home'},
@@ -45,27 +46,16 @@ export class UserNavComponent implements OnInit, OnDestroy {
     private router: Router,
     private dialog: MatDialog,
     private authService: AuthService,
-    private settingsService: SettingsService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    
-    this.changedUser();
-    
-    this.changeAvatarEvent = this.settingsService.changeAvatarEvent
-      .subscribe((avatar) => this.avatar = avatar);
-
-    this.user = this.authService.loadedUser();
-    this.avatar = this.user.avatar;
-
-    if(!this.user) {
-      this.login();
-    }
+    this.currentUser = this.userService.currentUser
+    .subscribe( user => this.user = user)
   }
 
   ngOnDestroy(): void {
-    this.changedUserEvent.unsubscribe();
-    this.changeAvatarEvent.unsubscribe();
+    this.currentUser.unsubscribe();
   }
 
   navigate(action: string, link: string[]) {
@@ -76,19 +66,8 @@ export class UserNavComponent implements OnInit, OnDestroy {
     }
   }
 
-  login(): void {
-    this.authService.loginEvent
-    .pipe(take(1))
-    .subscribe((user:User) => {
-      this.user = user;
-      this.avatar = user.avatar;
-      this.router.navigate(['']);
-    });
-  }
-
   logout(): void {
     this.authService.logout()
-      .subscribe(() => window.location.replace(environment.root));
   }
 
   changedUser(): void {

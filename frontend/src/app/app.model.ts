@@ -32,6 +32,11 @@ export interface Post {
     changed?: boolean
 }
 
+export interface Pageable {
+    posts: Post[]
+    last: boolean
+}
+
 export interface Content {
     title?: string;
     body?: string;

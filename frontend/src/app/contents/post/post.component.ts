@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faLock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
-import { PostService } from 'src/app/shared/service/post.service';
 import { Post } from 'src/app/app.model';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,25 +9,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
 
-  faInstagram: IconDefinition = faInstagram;
-  faFacebook: IconDefinition = faFacebook;
-  faGithub: IconDefinition = faGithub;
-  faLock: IconDefinition = faLock;
   post: Post;
-  isNotFound: boolean = false;
+  isFound: boolean = true;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(
       ({ post }) => {
         if(post) this.post = post;
-        else this.isNotFound = true;
+        else this.isFound = false;
       }
-    )
+    );
   }
-
-
 }

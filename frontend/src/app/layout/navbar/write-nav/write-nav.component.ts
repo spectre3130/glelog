@@ -8,7 +8,7 @@ import { Post } from 'src/app/app.model';
 import { PublishComponent } from 'src/app/contents/publish/publish.component';
 import { Router } from '@angular/router';
 import { PostService } from 'src/app/shared/service/post.service';
-import { Subscription, SubscriptionLike } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import * as removeMd from 'remove-markdown';
 
 @Component({
@@ -25,8 +25,8 @@ export class WriteNavComponent implements OnInit, OnDestroy {
 
   @ViewChild('postImage') postImage: ElementRef;
   post: Post;
+  currentPost: Subscription;
   currentEditPost: Subscription;
-  currentLocation: SubscriptionLike;
   disabled: boolean = false;
   fetchingTimer: any;
 
@@ -39,11 +39,12 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    //처음 로딩을 위한...
-    this.postService.currentPost.pipe(
-      take(1),
-    ).subscribe(post => this.post = post);
-    //이후 내용 변경점은 다른 옵저버블에서...
+
+    this.currentPost = this.postService.currentPost.pipe(
+    ).subscribe(post => {
+      this.post = post
+    });
+
     this.currentEditPost = this.postService.currentEditPost
       .pipe(
         tap(() => this.changeBtnWhenSaving(true)),
@@ -56,13 +57,13 @@ export class WriteNavComponent implements OnInit, OnDestroy {
         })
       ).subscribe(post => {
         this.changeBtnWhenSaving(false);
-        this.post = Object.assign(this.post, post);
-        this.postService.changePost(this.post);
+        this.postService.changePost(this.mergePost(post));
       });
 
   }
 
   ngOnDestroy(): void {
+    this.currentPost.unsubscribe();
     this.currentEditPost.unsubscribe();
   }
 
@@ -119,20 +120,23 @@ export class WriteNavComponent implements OnInit, OnDestroy {
       data: post
     });
     dialogRef.afterClosed().subscribe(({ post, next }) => {
-      if (next) {
-        this.afterClosedAction(post);
+
+      if(!next) return;
+
+      if (post.posted) {
+        this.afterClosedAction(this.postService.updatePost(post));
+      } else {
+        this.afterClosedAction(this.postService.publishPost(post));
       }
+
     });
   }
 
-  afterClosedAction(post: Post): void {
-    if(post.posted) {
-      this.postService.updatePost(post)
-        .subscribe(slug => this.router.navigate(['@' + post.user.username, 'post', slug]));
-    } else {
-      this.postService.publishPost(post)
-        .subscribe(slug => this.router.navigate(['@' + post.user.username, 'post', slug]));
-    }
+  afterClosedAction(observable: Observable<Post>): void {
+    observable.subscribe(post => {
+      this.postService.changePost({} as Post);
+      this.router.navigate(['@' + post.user.username, 'post', post.slug])
+    });
   }
 
   savePostImage(files: FileList):void {
@@ -160,8 +164,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     .subscribe(
       post => {
         this.postImage.nativeElement.value = null;
-        this.post = Object.assign(this.post, post);
-        this.postService.changePost(this.post)
+        this.postService.changePost(this.mergePost(post));
       },
       err => this._snackBar.open(err, '닫기', {
         duration: 5000,
@@ -178,18 +181,23 @@ export class WriteNavComponent implements OnInit, OnDestroy {
         post.body += markdownImage;
         return this.postService.doAutoSave(post);
       }),
-      catchError(err => { throw '잠시 후에 시도해주세요.' })
+      catchError((err) => { throw err })
     )
     .subscribe(
       post => {
         this.postImage.nativeElement.value = null;
-        this.post = Object.assign(this.post, post);
-        this.postService.changePost(this.post)
+        this.postService.changePost(this.mergePost(post));
       },
-      err => this._snackBar.open(err, '닫기', {
+      err => this._snackBar.open('잠시 후에 시도해주세요.', '닫기', {
         duration: 5000,
       })
     );
+  }
+
+  mergePost(post: Post): Post {
+    post.tags = this.post.tags;
+    post.open = this.post.open;
+    return Object.assign(this.post, post);
   }
 
   cancelConfirm(): void {

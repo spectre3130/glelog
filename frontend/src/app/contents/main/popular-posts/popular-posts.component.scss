@@ -1,0 +1,28 @@
+.popular-posts {
+    width: 300px;
+    margin-left: 30px;
+    &-fixed {
+        padding-top: 5px;
+        position: fixed;
+        .title {
+            font-family: 'Poor Story';
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 0.05rem;
+            width:330px;
+            padding: 20px 0 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,.15);
+        }
+        .subject {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 0.05rem;
+            padding: 15px 0px 0px 0px;
+        }
+        .contents {
+            padding: 0 5px 0 10px;
+        }
+    }
+}
+
+

@@ -1,4 +1,4 @@
-import { trigger, transition, query, style, group, animateChild, animate, state } from '@angular/animations';
+import { trigger, transition, query, style, animate } from '@angular/animations';
 
 export const fadeAnimation = trigger('fadeAnimation', [
 
@@ -14,7 +14,7 @@ export const fadeAnimation = trigger('fadeAnimation', [
     query(':leave',
       [
         style({ opacity: 1 }),
-        animate('0.2s', style({ opacity: 0 }))
+        animate('0.3s', style({ opacity: 0 }))
       ],
       { optional: true }
     ),
@@ -22,7 +22,7 @@ export const fadeAnimation = trigger('fadeAnimation', [
     query(':enter',
       [
         style({ opacity: 0 }),
-        animate('0.2s', style({ opacity: 1 }))
+        animate('0.5s', style({ opacity: 1 }))
       ],
       { optional: true }
     )

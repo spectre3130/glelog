@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ApiService {
+
+  private option = {
+    responseType: "blob", reportProgress: true, observe: "events", headers: new HttpHeaders(
+      { 'Content-Type': 'application/json' },
+    )
+  }
 
   constructor(
     private http: HttpClient

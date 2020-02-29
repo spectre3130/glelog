@@ -9,14 +9,15 @@ import { TagsService } from 'src/app/shared/service/tags.service';
 })
 export class TagsComponent implements OnInit {
 
-  tags: Array<Tag> = [];
+  tags: Tag[];
+
   constructor(
     private tagsService: TagsService
   ) { }
 
   ngOnInit(): void {
     this.tagsService.getTags()
-    .subscribe((tags: Array<Tag>) => this.tags = tags);
+      .subscribe((tags: Tag[]) => this.tags = tags);
   }
 
 }

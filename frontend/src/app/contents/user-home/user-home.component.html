@@ -1,4 +1,4 @@
-<div *ngIf="!isNotFound; else notFound" class="user-home">
+<div *ngIf="isFound; else notFound" class="user-home">
     <app-user-home-header [user]="user"></app-user-home-header>
     <div class="contents">
         <app-user-home-tags [tags]="tags" (selected)="onSelected($event)"></app-user-home-tags>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingsService } from 'src/app/shared/service/settings.service';
 import { User } from 'src/app/app.model';
-import { AuthService } from 'src/app/auth/auth.service';
-import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram, faFacebook, faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,17 +10,20 @@ import { faInstagram, faFacebook, faGithub } from '@fortawesome/free-brands-svg-
 })
 export class SettingsComponent implements OnInit {
 
-  faInstagram = faInstagram;
-  faFacebook = faFacebook;
-  faGithub = faGithub;
+  faInstagram: IconDefinition = faInstagram;
+  faFacebook: IconDefinition = faFacebook;
+  faGithub: IconDefinition = faGithub;
+
   user: User;
 
   constructor(
-    private authService: AuthService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
-    this.user = this.authService.loadedUser();
+    this.userService.currentUser.subscribe(user => {
+      this.user = user;
+    });
   }
 
 }

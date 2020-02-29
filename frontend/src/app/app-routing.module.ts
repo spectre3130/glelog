@@ -1,23 +1,30 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PostComponent } from './contents/post/post.component';
-import { PostsComponent } from './contents/posts/posts.component';
 import { TagsComponent } from './contents/tags/tags.component';
-import { SettingsComponent } from './contents/settings/settings.component';
-import { AuthGardService } from './auth/auth-gard.service';
 import { PageNotFoundComponent } from './layout/page-not-found/page-not-found.component';
 import { PostResolverService } from './contents/post/post-resolver.service';
+import { MainComponent } from './contents/main/main.component';
+import { PostsComponent } from './contents/main/posts/posts.component';
 
 const routes: Routes = [
-  { path: '', component: PostsComponent },
   { 
-    path: ':username/post/:slug', component: PostComponent,
-    resolve: { post: PostResolverService }
+    path: '', component: MainComponent,
+    children: [
+      { path: '', component: PostsComponent },
+      { path: 'tag/:tag', component: PostsComponent },
+      { path: 'search/:search', component: PostsComponent },
+    ]
   },
-  { path: 'tag/:tag', component: PostsComponent },
-  { path: 'search/:search', component: PostsComponent },
+  { 
+    path: ':username/post/:slug',
+    loadChildren: () => import('./contents/post/post.module').then(m => m.PostModule)
+  },
   { path: 'tags', component: TagsComponent },
-  { path: 'me/settings', canActivate: [ AuthGardService ], component: SettingsComponent },
+  { 
+    path: 'me/settings',
+    loadChildren: () => import('./contents/settings/settings.module').then(m => m.SettingsModule)
+  },
   { 
     path: 'write', 
     loadChildren: () => import('./contents/write/write.module').then(m => m.WriteModule)
@@ -38,6 +45,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
+      scrollOffset: [0, 64],
       relativeLinkResolution: 'corrected',
       paramsInheritanceStrategy: 'always'
     })

@@ -6,7 +6,9 @@ import { environment } from 'src/environments/environment';
 import { tap } from 'rxjs/operators';
 import * as axios from 'axios';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SettingsService {
 
   changeUserEvent: EventEmitter<User> = new EventEmitter<User>();
@@ -31,15 +33,6 @@ export class SettingsService {
     this.changeAvatarEvent.emit(avatar);
   }
 
-  updateAvatar(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${environment.resource}/api/upload/avatar`, formData)
-    .pipe(
-      tap((user: User) => {
-          this.changeUserEvent.emit(user)
-        }
-      ),
-    )
-  }
 
   checkUsername(username: string): Observable<any> {
     return this.http.get<any>(`${environment.resource}/api/user/check?username=${encodeURIComponent(username)}`);

@@ -16,12 +16,13 @@ export class ProgressBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loaderService.fetchEvent.subscribe(isStartFetch => {
-      if(isStartFetch) {
+    this.loaderService.isFetching.subscribe(isFetching => {
+      if(isFetching) {
         clearTimeout(this.fetchingTimer);
         this.fetchingTimer = setTimeout(() => this.isFetching = true, 200);
       } else {
-        this.fetchingTimer = setTimeout(() => this.isFetching = false, 300);
+        clearTimeout(this.fetchingTimer);
+        setTimeout(() => this.isFetching = false, 300);
       }
     });
   }

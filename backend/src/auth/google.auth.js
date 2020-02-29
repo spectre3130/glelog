@@ -20,7 +20,7 @@ passport.use(new GoogleStrategy({
                 const newUser = await User.create({
                     seq,
                     email,
-                    username: 'anonymous#'+seq,
+                    username: 'anonymous-'+seq,
                     name: profile.displayName,
                     avatar: profile.photos[0].value,
                 });

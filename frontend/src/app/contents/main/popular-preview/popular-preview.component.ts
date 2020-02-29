@@ -8,8 +8,9 @@ import { PopularPost } from 'src/app/app.model';
 })
 export class PopularPreviewComponent implements OnInit {
 
-  @Input() posts: Array<PopularPost>;
-
+  @Input() post: PopularPost;
+  @Input() rank: number;
+   
   constructor() { }
 
   ngOnInit(): void {

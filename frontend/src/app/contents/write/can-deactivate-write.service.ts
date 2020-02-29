@@ -12,7 +12,7 @@ export class CanDeactivateWriteService implements CanDeactivate<WriteComponent> 
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot
     ): Observable<boolean|UrlTree>|Promise<boolean|UrlTree>|boolean|UrlTree {
-      // return true;
-    return component.canDeactivate ? component.canDeactivate() : true;
+    return true;
+    // return component.canDeactivate ? component.canDeactivate() : true;
   }
 }

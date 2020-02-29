@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGardService } from 'src/app/auth/auth-gard.service';
+import { AuthGuardService } from 'src/app/auth/auth-guard.service';
 import { MyWritingComponent } from './my-writing.component';
 import { MyWritingListComponent } from './my-writing-list/my-writing-list.component';
 import { MyWritingListResolverService } from './my-writing-list/my-writing-list-resolver.service';
@@ -8,25 +8,25 @@ import { MyWritingListResolverService } from './my-writing-list/my-writing-list-
 const routes: Routes = [
   {
     path: '', 
-    canActivate: [ AuthGardService ], 
+    canActivate: [ AuthGuardService ], 
     component: MyWritingComponent,
     children: [
-        { path: '', redirectTo: 'tempsave', pathMatch: 'full' },
-        { 
-          path: 'tempsave', 
-          component: MyWritingListComponent,
-          resolve: { posts: MyWritingListResolverService },
-        },
-        { 
-          path: 'public', 
-          component: MyWritingListComponent,
-          resolve: { posts: MyWritingListResolverService },
-        },
-        { 
-          path: 'private', 
-          component: MyWritingListComponent,
-          resolve: { posts: MyWritingListResolverService },
-        },
+      { path: '', redirectTo: 'tempsave', pathMatch: 'full' },
+      { 
+        path: 'tempsave', 
+        component: MyWritingListComponent,
+        resolve: { pageable: MyWritingListResolverService },
+      },
+      { 
+        path: 'public', 
+        component: MyWritingListComponent,
+        resolve: { pageable: MyWritingListResolverService },
+      },
+      { 
+        path: 'private', 
+        component: MyWritingListComponent,
+        resolve: { pageable: MyWritingListResolverService },
+      },
     ]
   },
 ];

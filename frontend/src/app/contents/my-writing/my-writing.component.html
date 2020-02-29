@@ -12,5 +12,7 @@
             {{ node.name }}
         </a>
     </nav>  
-    <router-outlet (activate)=onActivate($event)></router-outlet>
+    <router-outlet #outlet="outlet"
+        (activate)=onActivate($event)>
+    </router-outlet>
 </div>

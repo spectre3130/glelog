@@ -1,21 +1,39 @@
-<div *ngIf="user" class="settings-container">
-    <div class="user-settings">
-        <div class="settings-header">
-            프로필 설정
-        </div>
-        <ul class="settings-list">
-            <app-settings-avatar [avatar]=user.avatar></app-settings-avatar>
-            <app-settings-username [title]="'별명'" [username]=user.username></app-settings-username>
-            <app-settings-input [title]="'이름'" [value]=user.name [prop]="'name'"></app-settings-input>
-            <app-settings-input [title]="'소개'" [value]=user.description [prop]="'description'"></app-settings-input>
-        </ul>
-        <div class="settings-header">
-            소셜 정보
-        </div>
-        <ul class="settings-list">
-            <app-settings-social-input [prepend]="'instagram.com/'" [icon]=faInstagram [value]=user.instagram [prop]="'instagram'"></app-settings-social-input>
-            <app-settings-social-input [prepend]="'facebook.com/'" [icon]=faFacebook [value]=user.facebook [prop]="'facebook'"></app-settings-social-input>
-            <app-settings-social-input [prepend]="'github.com/'" [icon]=faGithub [value]=user.github [prop]="'github'"></app-settings-social-input>
-        </ul>
+<div class="settings">
+    <div class="header">
+        프로필 설정
     </div>
+    <ul class="list">
+        <app-settings-avatar [avatar]=user.avatar></app-settings-avatar>
+        <app-settings-username-input [title]="'별명'" 
+            [value]=user.username>
+        </app-settings-username-input>
+        <app-settings-input [title]="'이름'" 
+            [prop]="'name'"
+            [value]=user.name>
+        </app-settings-input>
+        <app-settings-input [title]="'소개'" 
+            [prop]="'description'"
+            [value]=user.description>
+        </app-settings-input>
+    </ul>
+    <div class="header">
+        소셜 정보
+    </div>
+    <ul class="list">
+        <app-settings-social-input [prepend]="'instagram.com/'" 
+            [icon]=faInstagram 
+            [prop]="'instagram'"
+            [value]=user.instagram >
+        </app-settings-social-input>
+        <app-settings-social-input [prepend]="'facebook.com/'" 
+            [icon]=faFacebook 
+            [value]=user.facebook 
+            [prop]="'facebook'">
+        </app-settings-social-input>
+        <app-settings-social-input [prepend]="'github.com/'" 
+            [icon]=faGithub 
+            [value]=user.github 
+            [prop]="'github'">
+        </app-settings-social-input>
+    </ul>
 </div>

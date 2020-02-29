@@ -1,4 +1,5 @@
-.user-nav {
+.user-nav { min-width: 76px; }
+.authed {
     display:flex;
     align-items: center;
     cursor: pointer;

@@ -1,4 +1,4 @@
-.settings-input {
+input {
     background: #ffffff !important;
     display: block;
     outline: 0;
@@ -13,7 +13,7 @@
 }
 
 @media(max-width:768px) {
-    .settings-input {
+    input {
         width:160px;
     }
 }

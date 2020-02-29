@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, Subject, ReplaySubject } from 'rxjs';
 import { Post } from 'src/app/app.model';
 import { ApiService } from './api.service';
-import { AuthService } from 'src/app/auth/auth.service';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { UserService } from './user.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class PostService {
 
   private DOMAIN = 'post';
-  private postSubject = new BehaviorSubject<Post>(this.initPost());
-  private editPostSubject = new Subject<Post>();
+  
+  private postSubject = new ReplaySubject<Post>(1);
   currentPost = this.postSubject.asObservable();
+
+  private editPostSubject = new Subject<Post>();
   currentEditPost = this.editPostSubject.asObservable();
 
   constructor(
-    private authService: AuthService,
     private apiService: ApiService,
+    private userService: UserService,
   ) { }
   
   initPost(): Post {
@@ -24,7 +27,8 @@ export class PostService {
       title: '',
       body: '',
       tags: [],
-      user: this.authService.loadedUser(),
+      open: true,
+      user: this.userService.user
     }
   }
 

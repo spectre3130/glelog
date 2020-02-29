@@ -1,6 +1,5 @@
 <div class="write-title">
     <input type="text" 
-        class="write-title-input" 
         placeholder="제목"
         maxlength="40"
         [ngModel]="post.title"
@@ -10,5 +9,6 @@
     [autoFocus]="true"
     [options]="codeMirrorOptions"
     [ngModel]="post.body"
-    (ngModelChange)="onChangeBody($event)">
+    (ngModelChange)="onChangeBody($event)"
+    (cursorActivity)="onFocus($event)">
 </ngx-codemirror>
