@@ -19,11 +19,11 @@ export class SettingsService {
   ) { }
 
   getUser(): Observable<User> {
-    return this.http.get<User>(`${environment.resource}/api/user`);
+    return this.http.get<User>(`${environment.api}/api/user`);
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${environment.resource}/api/user`, user)
+    return this.http.put<User>(`${environment.api}/api/user`, user)
     .pipe(
       tap((user: User) => this.changeUserEvent.emit(user))
     )
@@ -35,7 +35,7 @@ export class SettingsService {
 
 
   checkUsername(username: string): Observable<any> {
-    return this.http.get<any>(`${environment.resource}/api/user/check?username=${encodeURIComponent(username)}`);
+    return this.http.get<any>(`${environment.api}/api/user/check?username=${encodeURIComponent(username)}`);
   }
 
 

@@ -1,35 +1,42 @@
-<article *ngIf="post" class="post-preview">
-    <div class="post">
-        <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
-            <div class="post-title-wrapper">
-                <fa-icon *ngIf="!post.open" [icon]="faLock" size="sm"></fa-icon>
-                <h1 class="post-title">
-                    {{ post.title }}
-                </h1>
+<article class="post-preview">
+    <div class="preview">
+        <div class="preview-top">
+            <div class="left">
+                <a [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+                    <div class="title">
+                        <fa-icon *ngIf="!post.open" [icon]="faLock" size="sm"></fa-icon>
+                        <h1>{{ post.title }}</h1>
+                    </div>
+                </a>
+                <div class="user">
+                    <a [routerLink]="['/', post.user.username | at]">
+                        <img class="avatar" src="{{ post.user.avatar }}">
+                    </a>
+                    <div class=info>
+                        <a [routerLink]="['/', post.user.username | at]">
+                            <div class="username">{{ post.user.username }}</div>
+                        </a>
+                        <div class="created">{{ post.created_at | postDate }}</div>
+                    </div>
+                </div>
             </div>
-        </a>
-        <div class="post-user">
-            <a [routerLink]="['/', post.user.username | at]">
-                <img class="avatar" src="{{ post.user.avatar }}">
+            <a *ngIf="post.thumb" class="thumb-link-small"
+                [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+                <img class="post-thumb" [src]=post.thumb>
             </a>
-            <div class=info>
-                <a [routerLink]="['/', post.user.username | at]">
-                    <div class="user-name">{{ post.user.username }}</div>
-                </a>
-                <div class="post-time">{{ post.created_at | postDate }}</div>
-            </div>
         </div>
-        <div class="post-description">{{ post.description }}</div>
-        <div class="post-tags">
-            <mat-chip-list>
-                <a mat-chip *ngFor="let tag of post.tags" 
-                    [routerLink]="['/tag', tag | removeHash]">
-                    <span class="tag-name">{{ tag }}</span>
-                </a>
-            </mat-chip-list>
+        <div class="preview-bottom">
+            <div class="description">{{ post.description }}</div>
+            <div class="tags">
+                <mat-chip-list>
+                    <a mat-chip *ngFor="let tag of post.tags" [routerLink]="['/tag', tag | removeHash]">
+                        <span class="name">{{ tag }}</span>
+                    </a>
+                </mat-chip-list>
+            </div>
         </div>
     </div>
-    <a *ngIf="post.thumb" [routerLink]="['/', post.user.username | at, 'post', post.slug]" class="thumb-link">
-        <img *ngIf="post.thumb" class="post-thumb" [src]=post.thumb>
+    <a *ngIf="post.thumb" class="thumb-link" [routerLink]="['/', post.user.username | at, 'post', post.slug]">
+        <img class="post-thumb" [src]=post.thumb>
     </a>
 </article>

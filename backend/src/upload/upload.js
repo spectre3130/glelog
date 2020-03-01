@@ -3,8 +3,8 @@ const Post = require('../post/post.model');
 
 exports.changeAvatar = async (req, res, next) => {
     try {
-        const avatar = req.file.location;
-        req.user.avatar = avatar;
+        const avatar = req.file.key;
+        req.user.avatar = `${process.env.IMAGES}/${avatar}`;
         await req.user.save();
         res.status(200).json(req.user);
     } catch(e) {
@@ -15,8 +15,8 @@ exports.changeAvatar = async (req, res, next) => {
 
 exports.savePostImage = async (req, res, next) => {
     try {
-        const postImage = req.file.location;
-        res.status(200).json(`![](${postImage})`);
+        const postImage = req.file.key;
+        res.status(200).json(`![](${process.env.IMAGES}/${postImage})`);
     } catch(e) {
         console.error(e);
         next(createError(400, e));
@@ -26,11 +26,11 @@ exports.savePostImage = async (req, res, next) => {
 exports.saveThumb = async (req, res, next) => {
     try {
         const { _id } = req.query;
-        const thumb = req.file.location;
+        const thumb = req.file.key;
         const post = await Post.findOne({ _id });
-        post.thumb = thumb;
+        post.thumb = `${process.env.IMAGES}/${thumb}`;
         await post.save();
-        res.status(200).json(thumb);
+        res.status(200).json(post.thumb);
     } catch(e) {
         console.error(e);
         next(createError(400, e));

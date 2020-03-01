@@ -19,19 +19,19 @@ export class ApiService {
   ) { }
 
   get<T>(path: string): Observable<T> {
-    return this.http.get<T>(`${environment.resource}/api/${path}`);
+    return this.http.get<T>(`${environment.api}/api/${path}`);
   }
 
   post<T, S = T>(path: string, payload: S): Observable<T> {
-    return this.http.post<T>(`${environment.resource}/api/${path}`, payload);
+    return this.http.post<T>(`${environment.api}/api/${path}`, payload);
   }
 
   put<T, S = T>(path: string, payload: S): Observable<T> {
-    return this.http.put<T>(`${environment.resource}/api/${path}`, payload);
+    return this.http.put<T>(`${environment.api}/api/${path}`, payload);
   }
 
   delete<T>(path: string): Observable<T> {
-    return this.http.delete<T>(`${environment.resource}/api/${path}`);
+    return this.http.delete<T>(`${environment.api}/api/${path}`);
   }
 
   generateQuery<T>(query: T): string {

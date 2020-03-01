@@ -47,10 +47,15 @@
 }
 
 .post-description {
+    display: -webkit-box;
     margin: 5px 0 0 0;
     font-size: 14px;
     line-height: 20px;
     word-break: break-all;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
 .btn-upload,
@@ -76,7 +81,7 @@
     object-fit: cover;
 }
 
-.image-description {
+.not-thumb {
     letter-spacing: 0;
     font-size: 14px;
     line-height: 20px;

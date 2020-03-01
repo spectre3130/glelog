@@ -40,23 +40,22 @@ export class WriteNavComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.currentPost = this.postService.currentPost.pipe(
-    ).subscribe(post => {
-      this.post = post
-    });
+    this.currentPost = this.postService.currentPost.subscribe(
+      post => this.post = post
+    );
 
     this.currentEditPost = this.postService.currentEditPost
       .pipe(
-        tap(() => this.changeBtnWhenSaving(true)),
+        tap(() => this.changeBtnNameWhenSaving(true)),
         debounceTime(1200),
         switchMap(post => {
           post.description = this.removeMarkdown(post.body);
-          return post._id 
+          return (post._id)
             ? this.postService.doAutoSave(post)
             : this.postService.doTempSave(post)
         })
       ).subscribe(post => {
-        this.changeBtnWhenSaving(false);
+        this.changeBtnNameWhenSaving(false);
         this.postService.changePost(this.mergePost(post));
       });
 
@@ -67,7 +66,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     this.currentEditPost.unsubscribe();
   }
 
-  changeBtnWhenSaving(isStart): void {
+  changeBtnNameWhenSaving(isStart): void {
     if(isStart) {
       clearTimeout(this.fetchingTimer);
       this.btnName = '저장중...';
@@ -82,7 +81,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
 
   removeMarkdown(body: string): string {
     return removeMd(body)
-            .substr(0, 170)
+            .substr(0, 200)
             .replace(/\r?\n|\r/g, ' ')
             .replace(/<|>/g, '');
   }
@@ -97,16 +96,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
 
   checkValidation(): boolean {
     if(!this.post.title) {
-      this._snackBar.open('제목을 입력해주세요.', '닫기',{
-        duration: 5000,
-        verticalPosition: 'top'
-      });
+      this.writeNavSnackBar('제목을 입력해주세요.');
       return false;
     } else if(!this.post.body) {
-      this._snackBar.open('본문을 입력해주세요.', '닫기', {
-        duration: 5000,
-        verticalPosition: 'top'
-      });
+      this.writeNavSnackBar('본문을 입력해주세요.');
       return false;
     } 
     return true;
@@ -128,7 +121,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
       } else {
         this.afterClosedAction(this.postService.publishPost(post));
       }
-
+      
     });
   }
 
@@ -153,30 +146,20 @@ export class WriteNavComponent implements OnInit, OnDestroy {
   }
 
   startSavePostImage(post:Post, formData: FormData): void {
-    this.postService.savePostImage(post._id, formData)
-    .pipe(
-      switchMap(markdownImage => {
-        post.body += markdownImage
-        return this.postService.doAutoSave(post)
-      }),
-      catchError(err => { throw '잠시 후에 시도해주세요.' })
-    )
-    .subscribe(
-      post => {
-        this.postImage.nativeElement.value = null;
-        this.postService.changePost(this.mergePost(post));
-      },
-      err => this._snackBar.open(err, '닫기', {
-        duration: 5000,
-      })
-    );
+    const observable = this.postService.savePostImage(post._id, formData);
+    this.composeBody(post, observable);
   }
 
   startTempSave(post:Post, formData: FormData): void {
-    this.postService.doTempSave(post)
-    .pipe(
+    const observable = this.postService.doTempSave(post).pipe(
       tap(tempsave => post = Object.assign(post, tempsave)),
       switchMap(tempsave => this.postService.savePostImage(tempsave._id, formData)),
+    );
+    this.composeBody(post, observable);
+  }
+
+  composeBody(post: Post, observable: Observable<string>): void {
+    observable.pipe(
       switchMap(markdownImage => {
         post.body += markdownImage;
         return this.postService.doAutoSave(post);
@@ -188,9 +171,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
         this.postImage.nativeElement.value = null;
         this.postService.changePost(this.mergePost(post));
       },
-      err => this._snackBar.open('잠시 후에 시도해주세요.', '닫기', {
-        duration: 5000,
-      })
+      err => this.writeNavSnackBar('잠시 후에 시도해주세요.'),
     );
   }
 
@@ -198,6 +179,13 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     post.tags = this.post.tags;
     post.open = this.post.open;
     return Object.assign(this.post, post);
+  }
+  
+  writeNavSnackBar(message: string): void {
+    this._snackBar.open(message, '닫기', {
+      duration: 5000,
+      verticalPosition: 'top'
+    });
   }
 
   cancelConfirm(): void {

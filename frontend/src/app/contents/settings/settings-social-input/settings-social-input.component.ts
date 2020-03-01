@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { User } from 'src/app/app.model';
-import { SettingsService } from 'src/app/shared/service/settings.service';
 import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({

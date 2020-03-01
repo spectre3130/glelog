@@ -7,6 +7,7 @@
     <img *ngIf="user.avatar; else loading" class="avatar" [src]="user.avatar" [alt]="user.username">
     <mat-icon>arrow_drop_down</mat-icon>
 </div>
+
 <mat-menu #menu="matMenu">
     <div class="user">
         <div class="username">{{ user.username }}님 🙂</div>

@@ -4,11 +4,8 @@ import { faUser, faCaretDown, IconDefinition } from '@fortawesome/free-solid-svg
 import { LoginComponent } from 'src/app/contents/login/login.component';
 import { User, NavigationNode } from '../../../app.model';
 import { AuthService } from 'src/app/auth/auth.service';
-import { take, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Subscription, pipe } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { SettingsService } from 'src/app/shared/service/settings.service';
+import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/shared/service/user.service';
 
 

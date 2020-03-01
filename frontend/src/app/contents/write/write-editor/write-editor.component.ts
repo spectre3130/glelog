@@ -29,18 +29,14 @@ export class WriteEditorComponent implements OnInit {
   }
 
   onChangeBody(body: string) {
-    // console.log("TCL: WriteEditorComponent -> onChangeBody -> body", body)
     this.post.body = body;
     this.changeContent.emit(this.post);
   }
 
-  onFocus(event): void {
-  console.log("TCL: WriteEditorComponent -> constructor -> event", event)
-  console.log("TCL: WriteEditorComponent -> constructor -> event", event.getSelection())
+  cursorActivity(event): void {
     // const test: HTMLTextAreaElement = event.toTextArea();
   // console.log("TCL: WriteEditorComponent -> constructor -> event", event)
-    // console.log(test);
-    
+    // console.log(test);    
   }
 
 }

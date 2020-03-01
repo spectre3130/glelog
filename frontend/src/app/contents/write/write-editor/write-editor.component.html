@@ -10,5 +10,5 @@
     [options]="codeMirrorOptions"
     [ngModel]="post.body"
     (ngModelChange)="onChangeBody($event)"
-    (cursorActivity)="onFocus($event)">
+    (cursorActivity)="cursorActivity($event)">
 </ngx-codemirror>

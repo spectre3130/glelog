@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  resource: 'https://resource.glelog.dev',
+  api: 'https://api.glelog.dev',
   root: 'https://www.glelog.dev',
 };

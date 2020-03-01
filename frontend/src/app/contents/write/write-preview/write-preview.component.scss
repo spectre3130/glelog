@@ -1,4 +1,14 @@
-.title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 34px;
+.write-preview {
+    width: 768px;
+    .title {
+        font-family: 'Noto Serif KR', serif;
+        font-size: 34px;
+    }
+}
+
+@media(max-width: 1680px) {
+    .write-preview {
+        width: 100%;
+        // max-width: 768px;
+    }
 }
