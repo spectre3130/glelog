@@ -1,12 +1,10 @@
 <div mat-dialog-content class="publish-content">
+
     <div class="content-left">
 
         <p class="title">포스트 미리보기</p>
         <div class="preview-image">
-            <img class="thumb" 
-                *ngIf="post.thumb" [src]=post.thumb>
-            <div class="image-description" 
-                *ngIf="!post.thumb">사진을 업로드 해주세요.</div>
+            <img class="thumb"  *ngIf="post.thumb; else notThumb" [src]=post.thumb>
         </div>
         <div class="post-thumb-submit">
             <input class="input-file" type="file" accept="image/*" #postImageInput (change)=saveThumb(postImageInput.files)>
@@ -15,15 +13,12 @@
         </div>
         <p class="post-title">{{ post.title }}</p>
         <p class="post-description">{{ post.description }}</p>
-        
+
     </div>
 
     <div class="content-right">
 
-        <p class="title">
-            태그
-            <span class="help">엔터키로 입력이 가능합니다.</span>
-        </p>
+        <p class="title">태그<span class="help">엔터키로 입력이 가능합니다.</span></p>
         <div class="tag-input">
             <mat-chip-list #chipList aria-label="Tag selection">
                 <mat-chip *ngFor="let tag of post.tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
@@ -53,5 +48,11 @@
             <button mat-flat-button color="primary" [disabled]=disabled (click)="onSubmit()">작성하기</button>
             <button mat-flat-button (click)="onNoClick()">취소</button>
         </div>
+
     </div>
+
 </div>
+
+<ng-template #notThumb>
+    <div class="not-thumb" *ngIf="!post.thumb">사진을 업로드 해주세요.</div>
+</ng-template>

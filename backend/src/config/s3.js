@@ -10,13 +10,13 @@ const s3 = new AWS.S3({
 exports.avatar = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog/user',
+        bucket: 'glelog',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
             const ext = file.originalname.split('.').pop();
             if(this.deleteS3Dir(`user/${String(req.user._id)}`)) {
-                cb(null, `${String(req.user._id)}/${Date.now()}-avatar.${ext}`);
+                cb(null, `user/${String(req.user._id)}/${Date.now()}-avatar.${ext}`);
             } 
         }
     }),
@@ -25,12 +25,12 @@ exports.avatar = multer({
 exports.post = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog/post',
+        bucket: 'glelog',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
             const { _id } = req.query;
-            cb(null, `${_id}/${Date.now()}-${file.originalname}`);
+            cb(null, `post/${_id}/${Date.now()}-${file.originalname}`);
         }
     }),
 });
@@ -38,13 +38,13 @@ exports.post = multer({
 exports.thumb = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog/post',
+        bucket: 'glelog',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
             const { _id } = req.query;
             if(this.deleteS3Dir(`post/${_id}/thumb`)) {
-                cb(null, `${_id}/thumb/${Date.now()}-${file.originalname}`);
+                cb(null, `post${_id}/thumb/${Date.now()}-${file.originalname}`);
             } 
         }
     }),

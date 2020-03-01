@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SettingsService } from 'src/app/shared/service/settings.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/shared/service/user.service';

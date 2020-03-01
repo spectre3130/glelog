@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(provider): void {
-    window.location.replace(`${environment.resource}/auth/${provider}`);
+    window.location.replace(`${environment.api}/auth/${provider}`);
   }
 
   onClose(): void {

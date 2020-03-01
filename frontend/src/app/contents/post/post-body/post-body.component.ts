@@ -6,14 +6,14 @@ import { Post } from 'src/app/app.model';
   template: `
   <div class="post-body">
     <markdown ngPreserveWhitespaces [data]="post.body"></markdown>
-    <div class="post-tags">
+  </div>
+  <div class="post-tags">
       <mat-chip-list>
           <a mat-chip *ngFor="let tag of post.tags" [routerLink]="['/tag', tag | removeHash]">
               <span class="tag-name">{{ tag }}</span>
           </a>
       </mat-chip-list>
-    </div>
-  </div>`,
+    </div>`,
   styleUrls: ['./post-body.component.scss']
 })
 export class PostBodyComponent implements OnInit {

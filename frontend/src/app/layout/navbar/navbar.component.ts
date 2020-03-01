@@ -9,7 +9,7 @@ import { filter, map, tap } from 'rxjs/operators';
 })
 export class NavbarComponent implements OnInit {
   
-  isNotWrite: boolean;
+  isNotWrite: boolean = true;
 
   constructor(
     private router: Router,

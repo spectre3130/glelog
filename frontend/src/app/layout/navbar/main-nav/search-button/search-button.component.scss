@@ -1,3 +1,18 @@
+input {
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::-webkit-search-decoration,
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-results-button,
+    &::-webkit-search-results-decoration {
+        display: none; 
+    }
+}
+
 .btn {
     display: flex;
     align-items: center;
@@ -5,6 +20,7 @@
     cursor: pointer;
 
     input {
+        @extend input;
         font-size: 16px;
         display: inline-block;
         vertical-align: middle;
@@ -13,22 +29,10 @@
         border: none;
         -webkit-transition: width .2s,padding .2s;
         transition: width .2s,padding .2s;
-        cursor: pointer;
-        padding-left: 1px;
-        padding-right: 0;
-
-        &:focus {
-            outline: none;
-        }
-
-        &::-webkit-search-decoration,
-        &::-webkit-search-cancel-button,
-        &::-webkit-search-results-button,
-        &::-webkit-search-results-decoration {
-            display: none; 
-        }
     }
 }
+
+
 
 @media(max-width: 1000px) {
     .btn {

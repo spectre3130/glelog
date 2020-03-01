@@ -1,3 +1,9 @@
-<label class="btn">
+<label class="btn" mat-button [matMenuTriggerFor]="menu">
     <mat-icon>notifications_none</mat-icon>
 </label>
+
+<mat-menu #menu="matMenu" xPosition="before">
+   <mat-list>
+        <app-feed></app-feed>
+    </mat-list>
+</mat-menu>

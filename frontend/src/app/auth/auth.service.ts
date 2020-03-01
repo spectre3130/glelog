@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   check(): void {
-    this.http.get<User>(`${environment.resource}/auth/check`)
+    this.http.get<User>(`${environment.api}/auth/check`)
     .pipe(catchError((err) => { throw err }))
     .subscribe(
       (user) => {
@@ -43,7 +43,7 @@ export class AuthService {
 
   
   login(token: string): void {
-    this.http.post<any>(`${environment.resource}/auth/login`, { token })
+    this.http.post<any>(`${environment.api}/auth/login`, { token })
     .pipe(catchError((err) => { throw err }))
     .subscribe(
       (user) => this.router.navigate(['/']),
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.get<User>(`${environment.resource}/auth/logout`)
+    this.http.get<User>(`${environment.api}/auth/logout`)
     .subscribe(() => {
       window.location.replace(environment.root);
     });

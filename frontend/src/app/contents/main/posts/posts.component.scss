@@ -3,9 +3,18 @@
     width: 700px;
 }
 
+@media (max-width: 1366px) {
+    .list{
+        width:500px;
+    }
+}
+
 @media(max-width: 1000px) {
     .list {
+        // width: 350px;
         padding: 5px 10px 5px 10px;
         width: 90vw;
     }
 }
+
+

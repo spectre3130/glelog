@@ -16,17 +16,25 @@
       }
     }
 
-
     .preview {
       @extend .editor;
+      display: flex;
+      justify-content: center;
       box-sizing: border-box;
       padding: 0 20px 0 20px;
     }
   }
 }
 
-  
-@media (max-width: 1000px) {  
+@media(max-width: 1680px) {
+  .write {
+    .preview {
+      display: block !important;
+    }
+  }
+}
+
+@media(max-width: 1000px) {  
   .write {
     .editor { 
       width:100%; 

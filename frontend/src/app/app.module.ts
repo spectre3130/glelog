@@ -31,6 +31,7 @@ import { AuthenticatedDirective } from './auth/authenticated.directive';
 import { AnchorService } from './shared/service/anchor.service';
 import { markedOptionsFactory } from './shared/factory/factory';
 import { MainModule } from './contents/main/main.module';
+import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MainModule } from './contents/main/main.module';
     AuthenticatedDirective,
     LoginComponent,
     TagsComponent,
+    FeedComponent,
   ],
   entryComponents: [
     LoginComponent,

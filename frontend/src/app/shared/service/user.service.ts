@@ -34,6 +34,10 @@ export class UserService {
     return this.apiService.post<User, FormData>('upload/avatar', formData);
   }
 
+  checkUsername(username: string): Observable<any> {
+    return this.apiService.get<User>(`${this.DOMAIN}/check?username=${encodeURIComponent(username)}`);
+  }
+
   get user(): User {
     return this.userSubject.value;
   }

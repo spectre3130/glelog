@@ -20,7 +20,7 @@ exports.update = async (req, res, next) => {
         if(req.user.email !== email) {
             throw '회원정보를 변경할 수 없습니다.';
         }
-        req.user.username = username;
+        req.user.username = username.replace(/[ \{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi, '');
         req.user.description = description;
         req.user.name = name;
         req.user.instagram = instagram;
@@ -88,7 +88,7 @@ exports.checkUsername = async (req, res, next) => {
         if(await User.findOne({ username })) {
             res.status(200).json({
                 result: false,
-                message: '이미 사용중인 별명입니다.'
+                message: '사용 불가능한 별명입니다.'
             });
         } else {
             res.status(200).json({
