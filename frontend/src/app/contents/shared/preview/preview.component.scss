@@ -65,7 +65,7 @@
             .post-thumb {
                 width:80px;
                 height:75px;
-                object-fit: cover;
+                object-fit: contain;
             }
         }
     }
@@ -94,7 +94,7 @@
         .post-thumb {
             width: 140px;
             height: 135px;
-            object-fit: cover;
+            object-fit: contain;
         }
     }
 }

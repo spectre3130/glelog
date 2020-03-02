@@ -45,6 +45,7 @@ export class LoaderInterceptor implements HttpInterceptor {
       })
     )
   }
+  
   private removeQueue(req: HttpRequest<any>): void {
     const index = this.queue.indexOf(req);
     if (index >= 0) {

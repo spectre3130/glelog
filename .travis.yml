@@ -10,10 +10,10 @@ env:
   BUILDROOT="/home/travis/build/spectre3130/gleLog"
 
 cache:
-    directories:
-     - /usr/lib/node_modules
-     - $BUILDROOT/backend/node_modules
-     - $BUILDROOT/frontend/node_modules 
+  directories:
+    - /usr/lib/node_modules
+    - $BUILDROOT/backend/node_modules
+    - $BUILDROOT/frontend/node_modules 
 
 install:
   - npm install -g @angular/cli
@@ -43,7 +43,7 @@ deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: glelog
+    bucket: $AWS_S3_BUCKET
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
@@ -57,7 +57,7 @@ deploy:
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
-    bucket: glelog
+    bucket: $AWS_S3_BUCKET
     key: build/glelog.zip
     bundle_type: zip
     application: glelog-deploy
