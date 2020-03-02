@@ -10,7 +10,7 @@ const s3 = new AWS.S3({
 exports.avatar = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog',
+        bucket: process.env.AWS_S3_BUCKET,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
@@ -25,7 +25,7 @@ exports.avatar = multer({
 exports.post = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog',
+        bucket: process.env.AWS_S3_BUCKET,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
@@ -38,13 +38,13 @@ exports.post = multer({
 exports.thumb = multer({
     storage: multerS3({
         s3: s3,
-        bucket: 'glelog',
+        bucket: process.env.AWS_S3_BUCKET,
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: (req, file, cb) => {
             const { _id } = req.query;
             if(this.deleteS3Dir(`post/${_id}/thumb`)) {
-                cb(null, `post${_id}/thumb/${Date.now()}-${file.originalname}`);
+                cb(null, `post/${_id}/thumb/${Date.now()}-${file.originalname}`);
             } 
         }
     }),
@@ -52,7 +52,7 @@ exports.thumb = multer({
 
 exports.deleteS3Dir = async (path) => {
     const params = {
-        Bucket: 'glelog',
+        Bucket: process.env.AWS_S3_BUCKET,
         Prefix: `${path}`
     }
     const s3Objects = await s3.listObjectsV2(params).promise();

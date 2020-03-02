@@ -76,35 +76,33 @@ export class PublishComponent implements OnInit {
     }
   }
 
-  private checkTags() {
+  checkTags() {
     if(!this.post.tags.length) {
-      this._snackBar.open('태그를 입력해주세요.', '닫기', {
-        duration: 3000,
-        verticalPosition: 'top'
-      });
+      this.publicshSnackBar('태그를 입력해주세요.');
       return false
     }
     return true;
   }
 
-  private checkValidation(value: string): boolean {
+  checkValidation(value: string): boolean {
     if(this.post.tags.length === 5) {
-      this._snackBar.open('태그는 최대 5개 입니다.', '닫기', {
-        duration: 3000,
-        verticalPosition: 'top'
-      });
+      this.publicshSnackBar('태그는 최대 5개 입니다.');
       return false
     }
     if(this.post.tags.indexOf('#' + value) !== -1) {
-      this._snackBar.open('동일한 태그는 입력할 수 없습니다.', '닫기', {
-        duration: 3000,
-        verticalPosition: 'top'
-      });
+      this.publicshSnackBar('동일한 태그는 입력할 수 없습니다.');
       return false
     }
     if(!(value || '').trim()) {
       return false
     }
     return true;
+  }
+
+  publicshSnackBar(message: string): void {
+    this._snackBar.open(message, '닫기', {
+      duration: 3000,
+      verticalPosition: 'top'
+    });
   }
 }

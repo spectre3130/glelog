@@ -31,7 +31,7 @@ const pipes = [
   PostDatePipe,
   AtPipe,
   RemoveHashPipe,
-]
+];
 
 const modules = [
   RouterModule,
@@ -42,7 +42,7 @@ const modules = [
   InfiniteScrollModule,
   CodemirrorModule,
   MarkdownModule,
-]
+];
 
 @NgModule({
   declarations: [

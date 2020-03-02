@@ -1,10 +1,9 @@
 {
-  "name": "glelog",
+  "name": "glelog-backend",
   "version": "2.0.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon",
-    "start": "node bin/www"
+    "dev": "nodemon"
   },
   "dependencies": {
     "aws-sdk": "^2.615.0",
@@ -13,7 +12,6 @@
     "cross-env": "^6.0.3",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
-    "ejs": "~2.6.1",
     "express": "~4.17.1",
     "express-session": "^1.17.0",
     "helmet": "^3.21.2",
@@ -28,8 +26,6 @@
     "multer-s3": "^2.9.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "passport-local-mongoose": "^6.0.1",
-    "sharp": "^0.24.1",
     "validator": "^12.1.0"
   },
   "devDependencies": {

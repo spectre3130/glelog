@@ -8,30 +8,24 @@ import { environment } from 'src/environments/environment';
 })
 export class ApiService {
 
-  private option = {
-    responseType: "blob", reportProgress: true, observe: "events", headers: new HttpHeaders(
-      { 'Content-Type': 'application/json' },
-    )
-  }
-
   constructor(
     private http: HttpClient
   ) { }
 
   get<T>(path: string): Observable<T> {
-    return this.http.get<T>(`${environment.api}/api/${path}`);
+    return this.http.get<T>(`${environment.api}/${path}`);
   }
 
   post<T, S = T>(path: string, payload: S): Observable<T> {
-    return this.http.post<T>(`${environment.api}/api/${path}`, payload);
+    return this.http.post<T>(`${environment.api}/${path}`, payload);
   }
 
   put<T, S = T>(path: string, payload: S): Observable<T> {
-    return this.http.put<T>(`${environment.api}/api/${path}`, payload);
+    return this.http.put<T>(`${environment.api}/${path}`, payload);
   }
 
   delete<T>(path: string): Observable<T> {
-    return this.http.delete<T>(`${environment.api}/api/${path}`);
+    return this.http.delete<T>(`${environment.api}/${path}`);
   }
 
   generateQuery<T>(query: T): string {

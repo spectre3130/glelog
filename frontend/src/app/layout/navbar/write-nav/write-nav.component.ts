@@ -114,15 +114,12 @@ export class WriteNavComponent implements OnInit, OnDestroy {
       data: post
     });
     dialogRef.afterClosed().subscribe(({ post, next }) => {
-
       if(!next) return;
-
       if (post.posted) {
         this.afterClosedAction(this.postService.updatePost(post));
       } else {
         this.afterClosedAction(this.postService.publishPost(post));
       }
-      
     });
   }
 

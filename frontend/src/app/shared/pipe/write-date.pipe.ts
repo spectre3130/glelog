@@ -14,7 +14,7 @@ export class PostDatePipe implements PipeTransform {
     const hourDiff = now.diff(date, 'hours');
     if(minuteDiff < 60) return `${minuteDiff}분 전`;
     else if(hourDiff < 24) return `${hourDiff}시간 전`;
-    else return date.format("YYYY년 MM월 DD일");
+    else return date.format('YYYY년 MM월 DD일');
   }
 
 }

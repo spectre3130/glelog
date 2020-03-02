@@ -6,14 +6,12 @@ const logger = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const dotenv = require('dotenv');
-const moment = require('./src/config/moment');
 
 if(prod) dotenv.config({ path: '/home/ubuntu/application/config/.env' });
 else dotenv.config();
 
 const app = express();
 const db = require('./src/config/db');
-const authRouter = require('./src/auth/auth.route');
 const apiRouter = require('./src/route');
 
 app.disabled('x-powered-by');
@@ -27,8 +25,7 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use('/api', apiRouter);
-app.use('/auth', authRouter);
+app.use('/', apiRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
