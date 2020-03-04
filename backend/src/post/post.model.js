@@ -20,6 +20,7 @@ const Post = new Schema({
         default: true
     },
     tags: [String],
+    images: [String],
     slug: String,
     created_at: {
         type: Date,

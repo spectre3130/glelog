@@ -5,7 +5,7 @@ import { Post } from 'src/app/app.model';
   selector: 'app-post-body',
   template: `
   <div class="post-body">
-    <markdown ngPreserveWhitespaces [data]="post.body"></markdown>
+    <markdown ngPreserveWhitespaces [data]="post.body | imageOptimizer: 768 : true"></markdown>
   </div>
   <div class="post-tags">
       <mat-chip-list>

@@ -134,8 +134,18 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     if(!files.length) {
       return;
     }
+
+    const file = files[0];
+    if(!(/image\/([a-zA-Z]*)/).test(file.type)) {
+      this._snackBar.open('사진파일만 가능합니다.', '닫기', {
+        duration: 5000,
+        verticalPosition: 'top'
+      });
+      return;
+    }
+
     const formData:FormData = new FormData();
-    formData.append('postImage', files[0]);
+    formData.append('postImage', file);
     if(this.post._id) {
       this.startSavePostImage(this.post, formData);
     } else {

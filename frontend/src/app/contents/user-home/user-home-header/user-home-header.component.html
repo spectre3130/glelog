@@ -18,6 +18,6 @@
             </a>
         </div>
     </div>
-    <img class="avatar" [src]=user.avatar [alt]=user.username>
+    <img class="avatar" [src]="user.avatar | imageOptimizer: 300" [alt]="user.username">
 </div>
 

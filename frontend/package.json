@@ -33,6 +33,7 @@
     "marked": "^0.8.0",
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.28",
+    "ngx-image-compress": "^8.0.4",
     "ngx-infinite-scroll": "^8.0.1",
     "ngx-markdown": "^9.0.0",
     "prismjs": "^1.19.0",

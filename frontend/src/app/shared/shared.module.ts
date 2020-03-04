@@ -17,6 +17,8 @@ import { PlaceholderTagsComponent } from '../layout/placeholder/placeholder-tags
 import { PlaceholderPopularComponent } from '../layout/placeholder/placeholder-popular/placeholder-popular.component';
 import { AtPipe } from './pipe/at.pipe';
 import { RemoveHashPipe } from './pipe/remove-hash.pipe';
+import { ImageCompressorDirective } from './directive/image-compressor.directive';
+import { ImageOptimizerPipe } from './pipe/image-optimizer.pipe';
 
 const components = [
   PreviewComponent,
@@ -27,10 +29,15 @@ const components = [
   PageNotFoundComponent
 ];
 
+const directives = [
+  ImageCompressorDirective,
+];
+
 const pipes = [
   PostDatePipe,
   AtPipe,
   RemoveHashPipe,
+  ImageOptimizerPipe,
 ];
 
 const modules = [
@@ -48,6 +55,7 @@ const modules = [
   declarations: [
     ...components,
     ...pipes,
+    ...directives,
   ],
   imports: [
     CommonModule,
@@ -56,7 +64,8 @@ const modules = [
   exports: [
     ...modules,
     ...components,
-    ...pipes
+    ...pipes,
+    ...directives,
   ],
 })
 export class SharedModule { }

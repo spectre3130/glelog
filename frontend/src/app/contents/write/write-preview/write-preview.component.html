@@ -4,7 +4,7 @@
     </h1>
     <markdown class="body"
         ngPreserveWhitespaces 
-        [data]="post.body">
+        [data]="post.body | imageOptimizer: 768 : true">
     </markdown>
 </div>
 

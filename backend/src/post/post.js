@@ -13,6 +13,11 @@ function generateSlug(slug) {
     return `${slug.replace(/\s/g , "-")}-${Date.now()}`
 }
 
+function findImages(value) {
+    return value.match(/(?<=\!\[(.*?)\]\(https:\/\/images.glelog.dev\/)(.*?)+(?=\))/g);
+}
+
+
 exports.checkPage = async (req, res, next) => {
     try {
         if(req.query.page < 1) {
@@ -242,9 +247,11 @@ exports.delete = async (req, res, next) => {
             throw '해당글을 삭제할 수 없습니다.';
         }
         if(await s3.deleteS3Dir(`post/${post._id}`)) {
+
             await Views.deleteMany({ post_id: _id })
             await post.remove();
             res.status(204).json(true);
+
         } else {
             throw '해당글을 삭제할 수 없습니다.';
         }
