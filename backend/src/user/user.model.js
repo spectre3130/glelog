@@ -54,7 +54,7 @@ const User = new Schema({
     }
 });
 
-User.plugin(passportLocalMongoose)
+User.plugin(passportLocalMongoose);
 
 User.statics.findOneElseThrow = async function(model) {
     const user = await this.findOne(model);

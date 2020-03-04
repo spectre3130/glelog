@@ -4,7 +4,7 @@
 </button>
 
 <div *authenticated="true" class="authed" [matMenuTriggerFor]="menu">
-    <img *ngIf="user.avatar; else loading" class="avatar" [src]="user.avatar" [alt]="user.username">
+    <img *ngIf="user.avatar; else loading" class="avatar" [src]="user.avatar | imageOptimizer: 140" [alt]="user.username">
     <mat-icon>arrow_drop_down</mat-icon>
 </div>
 

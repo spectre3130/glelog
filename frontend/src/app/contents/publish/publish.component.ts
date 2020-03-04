@@ -54,10 +54,19 @@ export class PublishComponent implements OnInit {
     if(!files.length) {
       return;
     }
+    const file = files[0];
+    if(!(/image\/([a-zA-Z]*)/).test(file.type)) {
+      this._snackBar.open('사진파일만 가능합니다.', '닫기', {
+        duration: 5000,
+        verticalPosition: 'top'
+      });
+      return;
+    }
+    
     const formData:FormData = new FormData();
-    formData.append('thumb', files[0]);
+    formData.append('thumb', file);
     this.postService.saveThumb(this.post._id, formData)
-    .subscribe(thumb => this.post.thumb = thumb);
+      .subscribe(thumb => this.post.thumb = thumb);
   }
 
   add(event: MatChipInputEvent): void {

@@ -4,12 +4,16 @@
             프로필 사진
         </div>
         <div>
-            <img *ngIf="avatar; else loading" class="avatar" [src]=avatar>
+            <img *ngIf="avatar; else loading" class="avatar" [src]="avatar | imageOptimizer: 300">
         </div>
     </div>
     <div class="item-left">
-        <input type="file" accept="image/*" #avatarInput (change)=onChangeAvatar(avatarInput.files)>
-        <button mat-flat-button (click)=avatarInput.click()>수정</button>
+        <input type="file" accept="image/*" #avatarInput (change)="onChangeAvatar(avatarInput.files)">
+        <button mat-flat-button (click)="avatarInput.click()">수정</button>
+        <!-- 압축이 필요할때... 
+            <button mat-flat-button 
+            imageCompressor
+            (compressed)="onCompressed($event)">수정</button> -->
     </div>
 </li>
 

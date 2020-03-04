@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, SecurityContext } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,7 +20,6 @@ import { WriteNavComponent } from './layout/navbar/write-nav/write-nav.component
 import { ConfirmComponent } from './layout/confirm/confirm.component';
 import { SearchButtonComponent } from './layout/navbar/main-nav/search-button/search-button.component';
 import { AlarmButtonComponent } from './layout/navbar/main-nav/alarm-button/alarm-button.component';
-
 import { TagsComponent } from './contents/tags/tags.component';
 
 import { CorsInterceptor } from './shared/interceptor/cors.interceptor'
@@ -74,6 +74,7 @@ import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
+    NgxImageCompressService
   ],
   bootstrap: [AppComponent]
 })

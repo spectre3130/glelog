@@ -10,7 +10,7 @@
                 </a>
                 <div class="user">
                     <a [routerLink]="['/', post.user.username | at]">
-                        <img class="avatar" src="{{ post.user.avatar }}">
+                        <img class="avatar" src="{{ post.user.avatar | imageOptimizer: 140 }}">
                     </a>
                     <div class=info>
                         <a [routerLink]="['/', post.user.username | at]">
@@ -22,7 +22,7 @@
             </div>
             <a *ngIf="post.thumb" class="thumb-link-small"
                 [routerLink]="['/', post.user.username | at, 'post', post.slug]">
-                <img class="post-thumb" [src]=post.thumb>
+                <img class="post-thumb" [src]="post.thumb | imageOptimizer: 150">
             </a>
         </div>
         <div class="preview-bottom">
@@ -37,6 +37,6 @@
         </div>
     </div>
     <a *ngIf="post.thumb" class="thumb-link" [routerLink]="['/', post.user.username | at, 'post', post.slug]">
-        <img class="post-thumb" [src]=post.thumb>
+        <img class="post-thumb" [src]="post.thumb | imageOptimizer: 150">
     </a>
 </article>
