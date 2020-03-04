@@ -5,20 +5,31 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ImageOptimizerPipe implements PipeTransform {
 
-  transform(value: string, ...args: unknown[]): unknown {
-    if(value) {
+  transform(origin: string, ...args: unknown[]): unknown {
+    if(origin) {
       const [ width, isMarkdown = false] = args;
-      if(isMarkdown) {
-        const regex = /(?<=\!\[(.*?)\]\()https:\/\/images.glelog.dev\/(.*?)(?=\))/g;
-        const images = value.match(regex);
-        images.forEach(image => {
-          value = value.replace(image, image + `?s=${width}`);
-        });
-      } else {
-        value = value + `?s=${width}`;
-      }
+      origin = this.optimize(origin, width, isMarkdown);
     }
-    return value;
+    return origin;
+  }
+
+  optimize(origin, width, isMarkdown): string {
+    if(isMarkdown) {
+      const regex = /(?<=\!\[(.*?)\]\()https:\/\/images.glelog.dev\/(.*?)(?=\))/g;
+      const images = origin.match(regex);
+      return this.replaceMarkdownImage(origin, images, width);
+    } else {
+      return origin + `?s=${width}`;
+    }
+  }
+
+  replaceMarkdownImage(origin, images, width): string {
+    if(images) {
+      images.forEach(image => {
+        origin = origin.replace(image, image + `?s=${width}`);
+      });
+    }
+    return origin;
   }
 
 }
