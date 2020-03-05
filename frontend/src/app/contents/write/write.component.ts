@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, OnDestroy, DoCheck, ChangeDetectionStrategy } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { Subscription, Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -23,14 +23,13 @@ export class WriteComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ post }) => {
-      if(post) this.postService.changePost(post);
-      else this.postService.changePost(this.postService.initPost());
-    });
+    const post = this.route.snapshot.data.post;
+    if(post) this.postService.changePost(post);
+    else this.postService.changePost(this.postService.initPost());
     
-    this.currentPost = this.postService.currentPost.subscribe(post => {
-      this.post = post;
-    });
+    this.currentPost = this.postService.currentPost.subscribe(
+      post => this.post = post
+    );
   }
 
   canDeactivate(): Observable<boolean> {

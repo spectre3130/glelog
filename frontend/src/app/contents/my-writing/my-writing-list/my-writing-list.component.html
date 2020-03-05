@@ -10,5 +10,10 @@
     <div class="empty"*ngIf="isLoaded && !posts.length">
         글이 존재하지 않습니다.
     </div>
-    <app-ph-my-writing *ngIf="!isLoaded"></app-ph-my-writing>
+    <div class="loading" *ngIf="!isLoaded">
+        <mat-spinner
+            [color]="'primary'"
+            [diameter]=50>
+        </mat-spinner>
+    </div>
 </div>

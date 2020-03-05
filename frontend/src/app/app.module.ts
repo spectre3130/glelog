@@ -29,7 +29,7 @@ import { AuthenticatedDirective } from './auth/authenticated.directive';
 
 //ngx-markdown anchor issue #125
 import { AnchorService } from './shared/service/anchor.service';
-import { markedOptionsFactory } from './shared/factory/factory';
+import { markedOptionsFactory } from './shared/factory/marked-option.factory';
 import { MainModule } from './contents/main/main.module';
 import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
 

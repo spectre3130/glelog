@@ -24,7 +24,8 @@ export class MyWritingListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.data.subscribe(({ pageable }) => this.nextPosts(pageable));
+    const { pageable } = this.route.snapshot.data;
+    this.nextPosts(pageable);
   }
 
   getPosts(): void {

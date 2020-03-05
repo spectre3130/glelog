@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Post } from 'src/app/app.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  styleUrls: ['./post.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
 
@@ -17,11 +18,8 @@ export class PostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      ({ post }) => {
-        if(post) this.post = post;
-        else this.isFound = false;
-      }
-    );
+    const { post } = this.route.snapshot.data;
+    if(post) this.post = post;
+    else this.isFound = false;
   }
 }

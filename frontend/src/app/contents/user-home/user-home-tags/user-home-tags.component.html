@@ -5,11 +5,11 @@
             태그 목록
         </div>
         <mat-action-list>
-            <a mat-list-item (click)="onSelected($event, '')">
+            <a mat-list-item [routerLink]="['/', '@'+username]">
                 <span class="name">전체보기</span> 
             </a>
             <a mat-list-item *ngFor="let tag of tags" [title]="tag.name"
-                (click)="onSelected($event, tag.value)">
+                [routerLink]="['tag', tag.name.replace('#', '')]">
                 <span class="name"># {{ tag.name | removeHash }}</span> 
                 <span class="count">({{ tag.count }})</span>
             </a>

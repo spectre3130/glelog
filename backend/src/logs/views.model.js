@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Views = new Schema({
-    post_id: String,
-    post_seq: Number,
+    post: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+    },
+    identifier: String,
     created_at: {
         type: Date,
         default: Date.now,

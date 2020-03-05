@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User, Tag } from 'src/app/app.model';
 
@@ -19,16 +19,13 @@ export class UserHomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.data.subscribe(
-      ({ data }) => {
-        if(data) {
-          this.user = data.user;
-          this.tags = data.tags;
-        } else {
-          this.isFound = false;
-        }
-      }
-    );
+    const { data } = this.route.snapshot.data;
+    if(data) {
+      this.user = data.user;
+      this.tags = data.tags;
+    } else {
+      this.isFound = false;
+    }
   }
 
   onSelected(tag: string): void {

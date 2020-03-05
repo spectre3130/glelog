@@ -68,14 +68,17 @@ exports.getUserPosts = async (req, res, next) => {
 exports.getTodayPosts = async (req, res, next) => {
     try {
         const views = await logs.findTodayTopFiveViews();
-        const posts = await Promise.all(
-            views.map(async(_id) => {
-                return await Post.findOne({ _id, open: true })
-                    .select('seq title thumb user slug created_at updated_at')
-                    .populate('user', 'username avatar');
-            })
-        ).then(posts => posts.filter(post => post !== null));
-        // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)} });
+        // const posts = await Promise.all(
+        //     views.map(async(_id) => {
+        //         return await Post.findOne({ _id, posted: true, open: true })
+        //             .select('seq title thumb user slug created_at updated_at')
+        //             .populate('user', 'username avatar');
+        //     })
+        // ).then(posts => posts.filter(post => post !== null));
+        const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)}, posted: true, open: true })
+                                .limit(5)
+                                .select('seq title thumb user slug created_at updated_at')
+                                .populate('user', 'username avatar');    
         res.status(200).json(posts);
     } catch (e) {
         console.error(e);
@@ -155,7 +158,7 @@ exports.getPostByUsernameAndSlug = async (req, res, next) => {
         }
 
         if(await auth.isWriter(req, post.user) || post.open) {
-            await Views.create({ post_id: post._id, post_seq: post.seq });
+            await Views.create({ post });
             res.status(200).json(post);
         } else {
             throw '존재하지 않는 포스트입니다.';

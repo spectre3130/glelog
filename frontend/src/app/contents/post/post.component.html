@@ -1,5 +1,5 @@
 <div *ngIf="isFound; else notFound" class="post-container">
-    <div class="post">
+    <div *ngIf="post;" class="post">
         <app-post-header [post]="post"></app-post-header>
         <app-post-body [post]="post"></app-post-body>
         <app-post-footer [post]="post"></app-post-footer>
@@ -7,5 +7,5 @@
 </div>
 
 <ng-template #notFound>
-    <app-page-not-found *ngIf="!isFound"></app-page-not-found>
+    <app-page-not-found></app-page-not-found>
 </ng-template>
