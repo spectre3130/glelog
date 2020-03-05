@@ -8,10 +8,12 @@ exports.findTodayTopFiveViews = async () => {
     end.setHours(23,59,59,999);
     const views = await Views.aggregate([ 
         { $match: { created_at: { $gte: start, $lt: end } } },
-        { $group: { _id: '$post_id', count: { $sum: 1 } } },
-        { $sort: { count: -1, post_id: -1 } },
-        { $limit : 5 }
+        { $project : { post : "$post" } },
+        { $group: { _id: '$post', count: { $sum: 1 } } },
+        { $sort: { count: -1 } },
+        { $limit : 10 }
     ]);
+    console.log("TCL: exports.findTodayTopFiveViews -> views", views)
     
     return views;
 }

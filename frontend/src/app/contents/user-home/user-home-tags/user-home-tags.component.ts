@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 })
 export class UserHomeTagsComponent implements OnInit, OnDestroy {
 
+  @Input() username: string;
   @Input() tags: Tag[];
-  @Output() selected = new EventEmitter<string>();
   @ViewChild('userTags') userTags: ElementRef;
   onScroll: Subscription;
   
@@ -41,10 +41,5 @@ export class UserHomeTagsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.onScroll.unsubscribe();
   }
-
-  onSelected(event, tag): void {
-    this.selected.emit(tag);
-  }
-
 
 }

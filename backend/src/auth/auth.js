@@ -31,6 +31,7 @@ exports.login = async (req, res, next) => {
             domain: prod ? '.glelog.dev' : '',
             httpOnly: true,
             secure: prod ? true : false,
+            sameSite: prod ? 'secure': 'none',
             maxAge: 1000 * 60 * 60 * 24 * 3,
         });
         res.status(200).json(user);

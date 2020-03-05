@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { filter, map, tap } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -10,6 +11,7 @@ import { filter, map, tap } from 'rxjs/operators';
 export class NavbarComponent implements OnInit {
   
   isNotWrite: boolean = true;
+  currentPath: string;
 
   constructor(
     private router: Router,
@@ -20,6 +22,7 @@ export class NavbarComponent implements OnInit {
         filter(event => event instanceof ActivationEnd),
         map((event:ActivationEnd) => event.snapshot.routeConfig.path)
     ).subscribe(path => {
+      this.currentPath = path;
       if(path === 'write') this.isNotWrite = false;
       else this.isNotWrite = true;
     });
