@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Post } from 'src/app/app.model';
 
 @Component({
   selector: 'app-write-editor',
   templateUrl: './write-editor.component.html',
-  styleUrls: ['./write-editor.component.scss']
+  styleUrls: ['./write-editor.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WriteEditorComponent implements OnInit {
 

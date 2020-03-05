@@ -47,7 +47,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     this.currentEditPost = this.postService.currentEditPost
       .pipe(
         tap(() => this.changeBtnNameWhenSaving(true)),
-        debounceTime(1200),
+        debounceTime(1500),
         switchMap(post => {
           post.description = this.removeMarkdown(post.body);
           return (post._id)

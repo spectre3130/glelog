@@ -11,7 +11,7 @@ export function markedOptionsFactory(anchorService: AnchorService): MarkedOption
     };
 
     renderer.heading = (text: string, level: number): string => {
-        if(text[0] === '<') return `<h${level}>${text}</h${level}>`;
+        // if(text[0] === '<') return `<h${level}>${text}</h${level}>`;
         const escapedText = text.toLowerCase().replace(/[^\S]+/g, '-');
         return `<h${level} id="${escapedText}">${text}</h${level}>`;
     };
