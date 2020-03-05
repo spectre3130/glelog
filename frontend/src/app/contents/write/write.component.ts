@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/shared/service/post.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from 'src/app/layout/confirm/confirm.component';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-write',
@@ -27,7 +28,10 @@ export class WriteComponent implements OnInit, OnDestroy {
     if(post) this.postService.changePost(post);
     else this.postService.changePost(this.postService.initPost());
     
-    this.currentPost = this.postService.currentPost.subscribe(
+    this.currentPost = this.postService.currentPost.pipe(
+      take(1)
+    )
+    .subscribe(
       post => this.post = post
     );
   }
