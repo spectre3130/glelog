@@ -3,14 +3,14 @@
     [infiniteScrollDistance]="1"
     [infiniteScrollThrottle]="100"
     (scrolled)="getPosts()">
-    <!-- <app-my-writing-preview *ngFor="let post of posts" 
+    <app-my-writing-preview *ngFor="let post of posts" 
         [post]="post" 
         (delete)="onDelete()">
     </app-my-writing-preview>
     <div class="empty"*ngIf="isLoaded && !posts.length">
         글이 존재하지 않습니다.
-    </div> -->
-    <div class="loading" *ngIf="isLoaded">
+    </div>
+    <div class="loading" *ngIf="!isLoaded">
         <mat-spinner
             [color]="'primary'"
             [diameter]=50>
