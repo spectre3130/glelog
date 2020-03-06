@@ -15,7 +15,7 @@ export class ImageOptimizerPipe implements PipeTransform {
 
   optimize(origin, width, isMarkdown): string {
     if(isMarkdown) {
-      const regex = /(?<=\!\[(.*?)\]\()https:\/\/images.glelog.dev\/(.*?)(?=\))/g;
+      const regex = /https:\/\/images.glelog.dev\/(.*?)(?=\))/g;
       const images = origin.match(regex);
       return this.replaceMarkdownImage(origin, images, width);
     } else {
