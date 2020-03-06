@@ -20,10 +20,6 @@
                 font-size: 24px;
                 margin: 0;
                 line-height: 26px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                word-break: break-all;
             }
             fa-icon {
                 margin: 0 10px 0 10px;
@@ -116,7 +112,6 @@
         width:100%;
         flex-direction: column;
         .preview-top {
-            height: 75px;
             .title {
                 h1 {
                     font-size: 20px;
