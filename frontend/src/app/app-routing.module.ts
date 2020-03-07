@@ -14,11 +14,11 @@ const routes: Routes = [
       { path: 'search/:search', component: PostsComponent },
     ]
   },
+  { path: 'tags', component: TagsComponent },
   {
     path: ':username/post/:slug',
     loadChildren: () => import('./contents/post/post.module').then(m => m.PostModule)
   },
-  { path: 'tags', component: TagsComponent },
   {
     path: 'me/settings',
     loadChildren: () => import('./contents/settings/settings.module').then(m => m.SettingsModule)
