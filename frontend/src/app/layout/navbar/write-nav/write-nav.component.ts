@@ -47,7 +47,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     this.currentEditPost = this.postService.currentEditPost
       .pipe(
         tap(() => this.changeBtnNameWhenSaving(true)),
-        debounceTime(2000),
+        debounceTime(1500),
         switchMap(post => {
           post.description = this.removeMarkdown(post.body);
           return (post._id)
@@ -55,8 +55,10 @@ export class WriteNavComponent implements OnInit, OnDestroy {
             : this.postService.doTempSave(post)
         })
       ).subscribe(post => {
+        this.post._id = post._id;
+        this.post.title = post.title;
+        this.post.slug = post.slug;
         this.changeBtnNameWhenSaving(false);
-        this.postService.changePost(this.mergePost(post));
       });
 
   }
