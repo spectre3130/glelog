@@ -28,12 +28,9 @@ export class WriteComponent implements OnInit, OnDestroy {
     if(post) this.postService.changePost(post);
     else this.postService.changePost(this.postService.initPost());
     
-    this.currentPost = this.postService.currentPost.pipe(
-      take(1)
-    )
-    .subscribe(
-      post => this.post = post
-    );
+    this.currentPost = this.postService.currentPost
+    .pipe(take(1))
+    .subscribe(post => this.post = post);
   }
 
   canDeactivate(): Observable<boolean> {

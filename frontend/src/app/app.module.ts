@@ -22,7 +22,6 @@ import { SearchButtonComponent } from './layout/navbar/main-nav/search-button/se
 import { AlarmButtonComponent } from './layout/navbar/main-nav/alarm-button/alarm-button.component';
 import { TagsComponent } from './contents/tags/tags.component';
 
-import { CorsInterceptor } from './shared/interceptor/cors.interceptor'
 import { LoaderInterceptor } from './shared/interceptor/loader.interceptor';
 
 import { AuthenticatedDirective } from './auth/authenticated.directive';
@@ -72,7 +71,6 @@ import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
     }),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     NgxImageCompressService
   ],

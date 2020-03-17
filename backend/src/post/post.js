@@ -191,10 +191,11 @@ exports.doAutoSave = async (req, res, next) => {
     try {
         const { title, body, description } = req.body;
         const { post } = req;
+        const prevTitle = post.title;
         post.title = title ? title : moment().format('YYYY-MM-DD HH:mm:ss') + ' 저장됨';
         post.body = body ? body : '';
         post.description = description ? description : '';
-        post.slug = generateSlug(post.title);
+        post.slug = prevTitle !== title ? generateSlug(post.title) : post.slug;
         post.updated_at = Date.now();
         await post.save();
         res.status(200).json(post);
