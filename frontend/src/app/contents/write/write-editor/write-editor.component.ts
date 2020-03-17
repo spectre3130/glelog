@@ -26,19 +26,13 @@ export class WriteEditorComponent implements OnInit {
   }
 
   onChangeTitle(title: string): void {
-    if(this.prevTitle !== title) {
-      this.post.title = title;
-      this.prevTitle = title;
-      this.changeContent.emit(this.post);
-    }
+    this.post.title = title;
+    this.changeContent.emit(this.post);
   }
 
   onChangeBody(body: string) {
-    if(this.prevBody !== body) {
-      this.post.body = body;
-      this.prevBody = body;
-      this.changeContent.emit(this.post);
-    }
+    this.post.body = body;
+    this.changeContent.emit(this.post);
   }
 
   cursorActivity(event): void {

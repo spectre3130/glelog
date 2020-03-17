@@ -55,9 +55,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
             : this.postService.doTempSave(post)
         })
       ).subscribe(post => {
-        this.post._id = post._id;
-        this.post.title = post.title;
-        this.post.slug = post.slug;
+        this.mergePost(post);
         this.changeBtnNameWhenSaving(false);
       });
 
@@ -178,16 +176,16 @@ export class WriteNavComponent implements OnInit, OnDestroy {
     .subscribe(
       post => {
         this.postImage.nativeElement.value = null;
-        this.postService.changePost(this.mergePost(post));
+        this.mergePost(post);
       },
       err => this.writeNavSnackBar('잠시 후에 시도해주세요.'),
     );
   }
 
-  mergePost(post: Post): Post {
+  mergePost(post: Post) {
     post.tags = this.post.tags;
     post.open = this.post.open;
-    return Object.assign(this.post, post);
+    Object.assign(this.post, post);
   }
   
   writeNavSnackBar(message: string): void {

@@ -13,7 +13,7 @@ import { faLock, IconDefinition } from '@fortawesome/free-solid-svg-icons';
     </h1>
     <div class="user">
         <a [routerLink]="['', post.user.username | at]">
-            <img class="avatar" src="{{ post.user.avatar }}">
+            <img class="avatar" src="{{ post.user.avatar | imageOptimizer: 140 }}">
         </a>
         <div class="info">
             <a [routerLink]="['', post.user.username | at]" class="username">{{ post.user.username }}</a>
