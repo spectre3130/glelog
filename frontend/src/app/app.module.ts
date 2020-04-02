@@ -23,6 +23,7 @@ import { AlarmButtonComponent } from './layout/navbar/main-nav/alarm-button/alar
 import { TagsComponent } from './contents/tags/tags.component';
 
 import { LoaderInterceptor } from './shared/interceptor/loader.interceptor';
+import { CorsInterceptor } from './shared/interceptor/cors.interceptor';
 
 import { AuthenticatedDirective } from './auth/authenticated.directive';
 
@@ -31,6 +32,7 @@ import { AnchorService } from './shared/service/anchor.service';
 import { markedOptionsFactory } from './shared/factory/marked-option.factory';
 import { MainModule } from './contents/main/main.module';
 import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
+
 
 @NgModule({
   declarations: [
@@ -71,6 +73,7 @@ import { FeedComponent } from './layout/navbar/main-nav/feed/feed.component';
     }),
   ],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: CorsInterceptor, multi: true, },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true, },
     NgxImageCompressService
   ],
