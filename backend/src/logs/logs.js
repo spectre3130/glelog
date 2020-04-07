@@ -13,7 +13,7 @@ exports.findTodayTopFiveViews = async () => {
         { $sort: { count: -1 } },
         { $limit : 10 }
     ]);
-    console.log("TCL: exports.findTodayTopFiveViews -> views", views)
+    // console.log("exports.findTodayTopFiveViews -> views", views)
     
     return views;
 }
