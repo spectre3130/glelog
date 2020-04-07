@@ -19,6 +19,7 @@ function findImages(value) {
 
 Array.prototype.limit = function(count) {
     const arr = [];
+    count = this.length < 5 ? this.length : count;
     for(let i = 0; i < count; i++) {
         arr.push(this[i]);
     }
