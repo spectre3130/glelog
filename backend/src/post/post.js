@@ -82,15 +82,14 @@ exports.getTodayPosts = async (req, res, next) => {
                 .select('seq title thumb user slug created_at updated_at')
                 .populate('user', 'username avatar');
             })
-            ).then(
-                posts => posts.filter(post => post !== null)
-                                .limit(5)
-            );
+        );
         // const posts = await Post.find({ _id: { "$in":  views.map(post => post._id)}, posted: true, open: true })
         //                         .limit(5)
         //                         .select('seq title thumb user slug created_at updated_at')
         //                         .populate('user', 'username avatar');    
-        res.status(200).json(posts);
+        res.status(200).json(
+            posts.filter(post => post !== null).limit(5)
+        );
     } catch (e) {
         console.error(e);
         next(createError(500, e));
