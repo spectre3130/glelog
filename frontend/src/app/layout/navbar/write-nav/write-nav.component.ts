@@ -55,7 +55,7 @@ export class WriteNavComponent implements OnInit, OnDestroy {
             : this.postService.doTempSave(post)
         })
       ).subscribe(post => {
-        this.mergePost(post);
+        // this.mergePost(post);
         this.changeBtnNameWhenSaving(false);
       });
 
