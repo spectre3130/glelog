@@ -27,7 +27,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.12.1",
     "@fortawesome/free-regular-svg-icons": "^5.12.1",
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "codemirror": "^5.52.0",
     "hammerjs": "^2.0.8",
     "marked": "^0.8.0",
